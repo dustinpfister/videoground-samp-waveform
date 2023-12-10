@@ -7,7 +7,6 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
-  '../../../js/samp_create/r0/waveforms/seedednoise.js',
   '../../../js/samp_create/r0/samp_draw.js'
 ];
 //-------- ----------
@@ -20,17 +19,16 @@ VIDEO.init = function(sm, scene, camera){
 
     const sound = sud.sound = CS.create_sound({
         waveform : (samp, a_wave) => {
-
             samp.amplitude = samp.amplitude === undefined ? 0.5: samp.amplitude;
             samp.frequency = samp.frequency === undefined ? 80: samp.frequency;
             samp.a_note = samp.a_note === undefined ? samp.a_wave : samp.a_note
-
             const a = Math.sin( Math.PI * samp.frequency * a_wave );
             const b = a * Math.sin( Math.PI * samp.a_note );
             const c = b * samp.amplitude;
             return c;
         },
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+            fs.notes_per_sec = 2;
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -41,9 +39,9 @@ VIDEO.init = function(sm, scene, camera){
             const a_frame = (i % spf) / spf;
 
             samp.a_wave = ST.get_wave_alpha_totalsecs(a_sound, opt.secs);
-            samp.a_note = samp.a_wave * (1 + 3 * a_sound ) % 1;
-            samp.amplitude = 0.5;
-            samp.frequency = 100;
+            samp.a_note = samp.a_wave * fs.notes_per_sec % 1;
+            samp.amplitude = 0.75;
+            samp.frequency = ST.notefreq_by_indices(3, 0);
             return samp;
         },
         secs: 10
