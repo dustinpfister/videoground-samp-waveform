@@ -38,7 +38,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         secs: 10
     });
-    sud.opt_frame = { w: 1200, h: 400, sy: 180, sx: 40, mode: sound.mode };
+    sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
     sm.frameMax = sound.frames;
 };
 //-------- ----------

@@ -32,7 +32,7 @@
             index_step = Math.floor( sample_count / w );
         }
         ctx.strokeStyle = 'lime';
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 8;
         ctx.beginPath();
         let i = 0, c = 0;
         while(i < sample_count){
