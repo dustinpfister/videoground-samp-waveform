@@ -1,4 +1,4 @@
-/*    videoxx-01-draft-waveform - form bass_basic in videoground-samp-waveform 
+/*    video01-01-bassbasic-2xbeat - form bass_basic in videoground-samp-waveform 
           * just get the basic idea of the waveform working
  */
 //-------- ----------
@@ -7,7 +7,8 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
-  '../../../js/samp_create/r0/samp_draw.js'
+  '../../../js/samp_create/r0/samp_draw.js',
+  '../js/waveform_bass_basic.js'
 ];
 //-------- ----------
 // INIT
@@ -18,16 +19,9 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const sound = sud.sound = CS.create_sound({
-        waveform : (samp, a_wave) => {
-            samp.amplitude = samp.amplitude === undefined ? 0.5: samp.amplitude;
-            samp.frequency = samp.frequency === undefined ? 80: samp.frequency;
-            samp.a_note = samp.a_note === undefined ? samp.a_wave : samp.a_note
-            const a = Math.sin( Math.PI * samp.frequency * a_wave );
-            const b = a * Math.sin( Math.PI * samp.a_note );
-            const c = b * samp.amplitude;
-            return c;
-        },
+        waveform : 'bass_basic',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+            fs.freq = ST.notefreq_by_indices(3, 0);
             fs.notes_per_sec = 2;
             return fs;
         },
@@ -41,7 +35,7 @@ VIDEO.init = function(sm, scene, camera){
             samp.a_wave = ST.get_wave_alpha_totalsecs(a_sound, opt.secs);
             samp.a_note = samp.a_wave * fs.notes_per_sec % 1;
             samp.amplitude = 0.75;
-            samp.frequency = ST.notefreq_by_indices(3, 0);
+            samp.frequency = fs.freq;
             return samp;
         },
         secs: 10
