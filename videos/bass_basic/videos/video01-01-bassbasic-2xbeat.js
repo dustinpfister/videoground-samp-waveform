@@ -26,12 +26,10 @@ VIDEO.init = function(sm, scene, camera){
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-
             const spf = opt.sound.samples_per_frame;
             const frame = Math.floor(i / spf);
             const a_sound2 = frame / (opt.secs * 30);
             const a_frame = (i % spf) / spf;
-
             samp.a_wave = ST.get_wave_alpha_totalsecs(a_sound, opt.secs);
             samp.a_note = samp.a_wave * fs.notes_per_sec % 1;
             samp.amplitude = 0.75;
@@ -40,7 +38,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         secs: 10
     });
-    sud.opt_frame = { w: 1200, h: 200, sy: 480, sx: 40, mode: sound.mode };
+    sud.opt_frame = { w: 1200, h: 400, sy: 180, sx: 40, mode: sound.mode };
     sm.frameMax = sound.frames;
 };
 //-------- ----------
