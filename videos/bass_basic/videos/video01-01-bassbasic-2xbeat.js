@@ -21,8 +21,20 @@ VIDEO.init = function(sm, scene, camera){
     const sound = sud.sound = CS.create_sound({
         waveform : 'bass_basic',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-            fs.freq = ST.notefreq_by_indices(3, 0);
+
             fs.notes_per_sec = 2;
+
+const note_total = opt.secs * fs.notes_per_sec;
+const note_ct = Math.floor( note_total * a_sound2);
+
+
+
+const ni = 4 + Math.floor( 19 * note_ct / note_total );
+
+console.log( note_ct, ni );
+
+            fs.freq = ST.notefreq_by_indices(2, ni);
+
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -31,12 +43,14 @@ VIDEO.init = function(sm, scene, camera){
             const a_sound2 = frame / (opt.secs * 30);
             const a_frame = (i % spf) / spf;
             samp.a_wave = ST.get_wave_alpha_totalsecs(a_sound, opt.secs);
+
             samp.a_note = samp.a_wave * fs.notes_per_sec % 1;
+
             samp.amplitude = 0.75;
             samp.frequency = fs.freq;
             return samp;
         },
-        secs: 10
+        secs: 30
     });
     sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
     sm.frameMax = sound.frames;
