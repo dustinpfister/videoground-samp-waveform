@@ -18,16 +18,28 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    const ARRAY_ORGAN = [];
+    const MAGS = [1.00, 0.70, 0.40, -0.30];
+    const LEN = MAGS.length;
+    const RES = 256;
+
+    let i = 0;
+    while(i < RES ){
+
+        const a = i / RES;
+        const b = a * LEN % 1;
+        const d = Math.sin( Math.PI *  b );
+        const mi = Math.floor(a * LEN);
+        const n = d * MAGS[mi];
+
+        ARRAY_ORGAN.push(n);
+        i += 1;
+    }
 
     const sound = sud.sound = CS.create_sound({
         waveform : (samp, a_wave) => {
 
-            samp.array = [
-                0, 0.30, 0.40, 0.55, 0.86, 0.55, 0.40, 0.30,
-                0, 0.11, 0.22, 0.40, 0.22, 0.11,
-                0, 0.07, 0.14, 0.21, 0.21, 0.14,
-                0,-0.30,-0.40,-0.55,-0.86,-0.55,-0.40,-0.30
-            ];
+            samp.array = ARRAY_ORGAN;
 
             return CS.WAVE_FORM_FUNCTIONS.array(samp, a_wave);
  
@@ -43,8 +55,8 @@ VIDEO.init = function(sm, scene, camera){
             const a_sound2 = frame / (opt.secs * 30);
             const a_frame = (i % spf) / spf;
 
-            samp.amplitude = 0.75;
-            samp.frequency = 120;
+            samp.amplitude = 0.80;
+            samp.frequency = 70;
 
 
 
