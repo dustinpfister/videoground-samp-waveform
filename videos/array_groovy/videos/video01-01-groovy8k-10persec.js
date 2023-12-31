@@ -22,16 +22,11 @@ VIDEO.init = function(sm, scene, camera){
     const MAX_PER_SEC = 10;
     const SECS_PER_STEP = 5;
 
-    //const arr1 = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45];
-
-    
-    const arr1 = [0, 5, 15, 30, 50, 75, 105, 140, 180, 205]
-
 
     const arr2 = [];
     let bi = 0, acc = 0;;
     while(bi < MAX_PER_SEC){
-        let n = 5 * bi;
+        let n = SECS_PER_STEP * bi;
         acc += n;
         arr2.push(acc);
         bi += 1;
