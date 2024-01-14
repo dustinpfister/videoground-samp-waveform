@@ -16,20 +16,36 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    const V3_DEFAULT = new THREE.Vector3( 0, 0, 1);
+
     const sound = sud.sound = CS.create_sound({
         waveform : (samp, a_wave)=>{
-			
-			return 0;
-			
-		},
+            const freq_min = samp.freq_min === undefined ? 40 : samp.freq_min;
+            const freq_max = samp.freq_max === undefined ? 1000 : samp.freq_max;
+            let v = samp.v3 || V3_DEFAULT;
+            const amp = v.length();
+            const pitch = ( v.y + 1 ) / 2;
+            const freq = freq_min + ( freq_max - freq_min ) * pitch;
+            return Math.sin(Math.PI * freq * a_wave) * amp * 0.75;
+        },
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+
+            const e = new THREE.Euler();
+            e.x = Math.PI * 2 * a_sound2;
+
+            const s = -1 + 2 * ( a_sound2 * 2 % 1 );
+
+            fs.v3 = V3_DEFAULT.clone().applyEuler(e).normalize().multiplyScalar(s);
 
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
+
+            samp.v3 = fs.v3;
+
             return samp;
         },
-        secs: 1
+        secs: 5
     });
     sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
     sm.frameMax = sound.frames;
