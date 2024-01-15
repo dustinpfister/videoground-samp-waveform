@@ -16,38 +16,66 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-    const V3_DEFAULT = new THREE.Vector3( 0, 0, 1);
+
+    camera.position.set( 2, 2, 2 );
+    camera.lookAt( 0, 0, 0 );
+
+    const grid = new THREE.GridHelper(2, 10);
+    scene.add(grid);
+
+
+    const geometry1 = new THREE.SphereGeometry(0.1, 20, 20);
+    const material1 = new THREE.MeshNormalMaterial();
+    const mesh1 = new THREE.Mesh( geometry1, material1  );
+    scene.add(mesh1);
+
+    const V3_DEFAULT = new THREE.Vector3( 0, 0, 0.75);
+
+    sud.v3 = V3_DEFAULT.clone();
 
     const sound = sud.sound = CS.create_sound({
         waveform : (samp, a_wave)=>{
-            const freq_min = samp.freq_min === undefined ? 40 : samp.freq_min;
-            const freq_max = samp.freq_max === undefined ? 1000 : samp.freq_max;
+            const freq_min = samp.freq_min === undefined ? 160 : samp.freq_min;
+            const freq_max = samp.freq_max === undefined ? 500 : samp.freq_max;
             let v = samp.v3 || V3_DEFAULT;
             const amp = v.length();
             const pitch = ( v.y + 1 ) / 2;
             const freq = freq_min + ( freq_max - freq_min ) * pitch;
-            return Math.sin(Math.PI * freq * a_wave) * amp * 0.75;
+            return Math.sin( Math.PI * 2 * freq * a_wave  ) * amp * 0.75;
         },
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            const e = new THREE.Euler();
-            e.x = Math.PI * 2 * a_sound2;
 
-            const s = -1 + 2 * ( a_sound2 * 2 % 1 );
 
-            fs.v3 = V3_DEFAULT.clone().applyEuler(e).normalize().multiplyScalar(s);
+
+
+            sud.v3 = fs.v3;
+
+
 
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
+
+            const e = new THREE.Euler();
+            e.x = Math.PI * 2 * a_sound;
+
+            const s = 1;
+
+            fs.v3 = V3_DEFAULT.clone().applyEuler(e).normalize().multiplyScalar(s);
+
+            mesh1.position.copy(fs.v3);
+
+
+            
             samp.v3 = fs.v3;
 
             return samp;
         },
         secs: 5
     });
-    sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
+    sud.opt_frame = { w: 500, h: 220, sy: 250, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
     sm.frameMax = sound.frames;
 };
 //-------- ----------
@@ -70,14 +98,16 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
+
+    renderer.render(scene, camera)
+    ctx.drawImage( renderer.domElement, 500, 80, 16 * 50, 9 * 50 );
+
+
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'sample data ( current frame )' );
     DSD.draw_info(ctx, sound, sm);
 
-    ctx.fillStyle = 'white';
-    ctx.font = '30px courier';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
+
 
 };
 
