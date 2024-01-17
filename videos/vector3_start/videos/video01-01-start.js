@@ -60,7 +60,7 @@ VIDEO.init = function(sm, scene, camera){
 
             samp.saw_effect = ( fs.v3.x + 1 ) / 2;
 
-            samp.values_per_wave = 5 + 45 * ( ( fs.v3.z + 1 ) / 2 );
+            samp.values_per_wave = 5 + 95 * ( ( fs.v3.z + 1 ) / 2 );
 
             // y dir effects pitch
             const pitch = ( fs.v3.y + 1 ) / 2;
@@ -72,7 +72,7 @@ VIDEO.init = function(sm, scene, camera){
 
             return samp;
         },
-        secs: 20
+        secs: 60
     });
     sud.opt_frame = { w: 500, h: 220, sy: 250, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
     sm.frameMax = sound.frames;
