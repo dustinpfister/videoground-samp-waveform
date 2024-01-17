@@ -7,7 +7,8 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
-  '../../../js/samp_create/r0/samp_draw.js'
+  '../../../js/samp_create/r0/samp_draw.js',
+  '../../../js/samp_create/r0/waveforms/seededsaw.js'
 ];
 //-------- ----------
 // INIT
@@ -34,74 +35,44 @@ VIDEO.init = function(sm, scene, camera){
     sud.v3 = V3_DEFAULT.clone();
 
     const sound = sud.sound = CS.create_sound({
-        waveform : (samp, a_wave)=>{
-            const freq_min = samp.freq_min === undefined ? 160 : samp.freq_min;
-            const freq_max = samp.freq_max === undefined ? 500 : samp.freq_max;
-            let v = samp.v3 || V3_DEFAULT;
-            const amp = v.length();
-            const pitch = ( v.y + 1 ) / 2;
 
+        waveform : 'seededsaw',
 
-
-            const freq = freq_min + ( freq_max - freq_min ) * pitch;
-
-const n = Math.sin( Math.PI * 2 * freq ) * amp * 0.75;
-
-            //const n = Math.sin( Math.PI * 2 * (freq * a_wave) ) * amp * 0.75;
-
-            //const n = Math.sin( Math.PI * freq * a_wave ) * amp * 0.75;
-
-if(  samp.i % 100 === 0 ){
-console.log( Math.PI * 2 * (pitch))
-}
-
-            return n;
-        },
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
+            const e = new THREE.Euler();
+            e.y = Math.PI * 2 * ( 8 * a_sound2 );
+            e.x = Math.PI * 2 * ( 2 * a_sound2 );
 
-
- 
-
-
-            return fs;
-        },
-        for_sampset: ( samp, i, a_sound, fs, opt ) => {
-
-samp.i = i;
-
-  
-         const e = new THREE.Euler();
-            e.x = Math.PI * 2 * ( 2 * a_sound );
-
-            const s = 1;
+            const a1 = 2 * a_sound2 % 1;
+            const a2 = Math.abs(0.5 - a1) / 0.5
+            const s = 0.10 + 0.80 * a2;
 
             fs.v3 = V3_DEFAULT.clone().applyEuler(e).normalize().multiplyScalar(s);
 
             mesh1.position.copy(fs.v3);
+ 
+            return fs;
+        },
+        for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
-if(i % 5000 === 0){
-//            const pitch = ( fs.v3.y + 1 ) / 2;
-//console.log(pitch)
+            samp.i = i;
 
-}
+            samp.saw_effect = ( fs.v3.x + 1 ) / 2;
 
+            samp.values_per_wave = 5 + 45 * ( ( fs.v3.z + 1 ) / 2 );
 
-sud.v3 = fs.v3;
+            // y dir effects pitch
+            const pitch = ( fs.v3.y + 1 ) / 2;
+            samp.frequency = 40 + 30 * pitch;
 
-
-            
-            samp.v3 = fs.v3;
-            samp.freq_min = 80 * 1;
-            samp.freq_max = 500 * 1;
-
-
-
+            // vector unit length effects amplitude
+            samp.amplitude = fs.v3.length();
             samp.a_wave = a_sound * opt.secs % 1;
 
             return samp;
         },
-        secs: 5
+        secs: 20
     });
     sud.opt_frame = { w: 500, h: 220, sy: 250, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
     sm.frameMax = sound.frames;
