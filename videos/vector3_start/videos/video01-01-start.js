@@ -40,26 +40,39 @@ VIDEO.init = function(sm, scene, camera){
             let v = samp.v3 || V3_DEFAULT;
             const amp = v.length();
             const pitch = ( v.y + 1 ) / 2;
+
+
+
             const freq = freq_min + ( freq_max - freq_min ) * pitch;
-            return Math.sin( Math.PI * 2 * freq * a_wave  ) * amp * 0.75;
+
+const n = Math.sin( Math.PI * 2 * freq ) * amp * 0.75;
+
+            //const n = Math.sin( Math.PI * 2 * (freq * a_wave) ) * amp * 0.75;
+
+            //const n = Math.sin( Math.PI * freq * a_wave ) * amp * 0.75;
+
+if(  samp.i % 100 === 0 ){
+console.log( Math.PI * 2 * (pitch))
+}
+
+            return n;
         },
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
 
 
-
-
-            sud.v3 = fs.v3;
-
+ 
 
 
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
+samp.i = i;
 
-            const e = new THREE.Euler();
-            e.x = Math.PI * 2 * a_sound;
+  
+         const e = new THREE.Euler();
+            e.x = Math.PI * 2 * ( 2 * a_sound );
 
             const s = 1;
 
@@ -67,9 +80,24 @@ VIDEO.init = function(sm, scene, camera){
 
             mesh1.position.copy(fs.v3);
 
+if(i % 5000 === 0){
+//            const pitch = ( fs.v3.y + 1 ) / 2;
+//console.log(pitch)
+
+}
+
+
+sud.v3 = fs.v3;
+
 
             
             samp.v3 = fs.v3;
+            samp.freq_min = 80 * 1;
+            samp.freq_max = 500 * 1;
+
+
+
+            samp.a_wave = a_sound * opt.secs % 1;
 
             return samp;
         },
