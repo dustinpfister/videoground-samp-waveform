@@ -22,6 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     camera.lookAt( 0, 0, 0 );
 
     const grid = new THREE.GridHelper(2, 10);
+    grid.material.linewidth = 6;
     scene.add(grid);
 
 
