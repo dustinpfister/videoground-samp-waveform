@@ -75,7 +75,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         secs: 60
     });
-    sud.opt_frame = { w: 500, h: 220, sy: 250, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
+    sud.opt_frame = { w: 500, h: 220, sy: 250, sx: 40, mode: sound.mode, overlay_alpha: 0.5, lineWidth: 3 };
     sm.frameMax = sound.frames;
 };
 //-------- ----------

@@ -1,4 +1,4 @@
-// samp-draw - r0 - from videoground-beta-world
+// samp-draw - r0 - from videoground-samp-waveform
 (function(){
     const DSD = {};
     DSD.getsamp_lossy_random = (sample_array, i, index_step, c) => {
@@ -31,8 +31,8 @@
         if( sample_count >= w ){
             index_step = Math.floor( sample_count / w );
         }
-        ctx.strokeStyle = 'lime';
-        ctx.lineWidth = 8;
+        ctx.strokeStyle = opt.lineStyle || 'lime';
+        ctx.lineWidth = opt.lineWidth || 8;
         ctx.beginPath();
         let i = 0, c = 0;
         while(i < sample_count){
@@ -91,8 +91,8 @@
 
     DSD.draw_box = (ctx, opt, alpha=0 ) => {
         set_box_opt(opt);
-        ctx.strokeStyle = 'lime';
-        ctx.lineWidth = 6;
+        ctx.strokeStyle = opt.boxStyle ||'lime';
+        ctx.lineWidth = opt.boxLineWidth || 6;
         ctx.strokeRect(opt.sx, opt.sy, opt.w, opt.h);
         if(alpha){
             ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
