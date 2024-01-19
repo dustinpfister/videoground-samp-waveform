@@ -1,5 +1,8 @@
 /*    video01-01-start - form vector3_start in videoground-samp-waveform 
-          * Just want to work out what the basic idea of this is.
+          * (done) Just want to work out what the basic idea of this is.
+          * () work out style effect for the mesh used to show the current state of the v3
+          * () Arrows to show which ways are y, x, and z
+          * () adjust pos of sample data disp text, simplify data to current frame
  */
 //-------- ----------
 // SCRIPTS
