@@ -1,8 +1,9 @@
 /*    video01-01-start - form vector3_start in videoground-samp-waveform 
           * (done) Just want to work out what the basic idea of this is.
-          * () work out style effect for the mesh used to show the current state of the v3
+          * (done) start style effect for the mesh used to show the current state of the v3
           * () Arrows to show which ways are y, x, and z
           * () adjust pos of sample data disp text, simplify data to current frame
+          * () update vertex colors of mesh over time
  */
 //-------- ----------
 // SCRIPTS
@@ -30,9 +31,23 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const geometry1 = new THREE.SphereGeometry(0.1, 20, 20);
-    const material1 = new THREE.MeshNormalMaterial();
+
+    // adding a color attribute
+    const len = geometry1.getAttribute('position').count;
+    const color_array = [];
+    let i = 0;
+    while(i < len){
+        const a1 = i / len;
+        const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
+        color_array.push(0, a2, 1 - a2);
+        i += 1;
+    }
+    const color_attribute = new THREE.BufferAttribute( new Float32Array(color_array), 3 );
+    geometry1.setAttribute('color', color_attribute);
+    const material1 = new THREE.MeshBasicMaterial({ vertexColors: true });
     const mesh1 = new THREE.Mesh( geometry1, material1  );
     scene.add(mesh1);
+
 
     const V3_DEFAULT = new THREE.Vector3( 0, 0, 0.75);
 
