@@ -1,6 +1,7 @@
 /*    video01-02-start-mix - form vector3_start in videoground-samp-waveform
-          * () use a table waveform in place of just seededsaw
-          * () have more than one vector3 object
+          * (done) use a table waveform in place of just seededsaw
+          * (done) have more than one vector3 object
+          * () get scale effect to work with all mesh objects of group
  */
 //-------- ----------
 // SCRIPTS
@@ -48,11 +49,17 @@ VIDEO.init = function(sm, scene, camera){
     const group = new THREE.Group();
     scene.add(group);
 
-    const mesh1 = sud.mesh1 = new THREE.Mesh( geometry1, material1  );
-    group.add(mesh1);
+    let gi = 0;
+    while(gi < 8){
 
-    const mesh2 = sud.mesh2 = new THREE.Mesh( geometry1, material1  );
-    group.add(mesh2);
+        const mesh = new THREE.Mesh( geometry1, material1  );
+        group.add(mesh);
+        gi += 1;
+
+    }
+
+    //const mesh2 = sud.mesh2 = new THREE.Mesh( geometry1, material1  );
+    //group.add(mesh2);
 
     // arrows
     const ARROW_ORIGIN = new THREE.Vector3(0,0,0);
@@ -81,7 +88,7 @@ VIDEO.init = function(sm, scene, camera){
                 let e = new THREE.Euler();
                 e.y = Math.PI * 2 * ( (8 + 8 * gi ) * a_sound2 );
                 e.x = Math.PI * 2 * ( (2 + 2 * gi ) * a_sound2 );
-                let a1 = 2 * a_sound2 % 1;
+                let a1 = ( 4 + gi ) * a_sound2 % 1;
                 let a2 = Math.abs(0.5 - a1) / 0.5
                 let s = 0.10 + 0.80 * a2;
 
@@ -130,10 +137,10 @@ VIDEO.init = function(sm, scene, camera){
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
     // mesh effect
-    const a1 = per * 60 % 1;
-    const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
-    const s = 0.75 + 0.5 * a2;
-    sud.mesh1.scale.set(s,s,s)
+    //const a1 = per * 60 % 1;
+    //const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
+    //const s = 0.75 + 0.5 * a2;
+    //sud.mesh1.scale.set(s,s,s)
     // create the data samples
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
