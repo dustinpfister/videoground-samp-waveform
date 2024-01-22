@@ -2,7 +2,7 @@
           * (done) Just want to work out what the basic idea of this is.
           * (done) start style effect for the mesh used to show the current state of the v3
           * () Arrows to show which ways are y, x, and z
-          * () adjust pos of sample data disp text, simplify data to current frame
+          * () adjust pos of sample data disp text
           * () update vertex colors of mesh over time
  */
 //-------- ----------
@@ -21,15 +21,16 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-
+    // fixed camera pos
     camera.position.set( 2, 2, 2 );
     camera.lookAt( 0, 0, 0 );
 
+    // grid
     const grid = new THREE.GridHelper(2, 10);
     grid.material.linewidth = 6;
     scene.add(grid);
 
-
+    // geomety
     const geometry1 = new THREE.SphereGeometry(0.1, 20, 20);
 
     // adding a color attribute
@@ -48,47 +49,35 @@ VIDEO.init = function(sm, scene, camera){
     const mesh1 = new THREE.Mesh( geometry1, material1  );
     scene.add(mesh1);
 
-
+    // DEFAULT V3 Location
     const V3_DEFAULT = new THREE.Vector3( 0, 0, 0.75);
 
-    sud.v3 = V3_DEFAULT.clone();
-
+    // the sound object
     const sound = sud.sound = CS.create_sound({
-
         waveform : 'seededsaw',
-
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-
             const e = new THREE.Euler();
             e.y = Math.PI * 2 * ( 8 * a_sound2 );
             e.x = Math.PI * 2 * ( 2 * a_sound2 );
-
             const a1 = 2 * a_sound2 % 1;
             const a2 = Math.abs(0.5 - a1) / 0.5
             const s = 0.10 + 0.80 * a2;
-
             fs.v3 = V3_DEFAULT.clone().applyEuler(e).normalize().multiplyScalar(s);
-
             mesh1.position.copy(fs.v3);
- 
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-
             samp.i = i;
-
+            // x for saw effect param
             samp.saw_effect = ( fs.v3.x + 1 ) / 2;
-
-            samp.values_per_wave = 5 + 95 * ( ( fs.v3.z + 1 ) / 2 );
-
             // y dir effects pitch
             const pitch = ( fs.v3.y + 1 ) / 2;
             samp.frequency = 40 + 30 * pitch;
-
+            // z for values per second
+            samp.values_per_wave = 5 + 95 * ( ( fs.v3.z + 1 ) / 2 );
             // vector unit length effects amplitude
             samp.amplitude = fs.v3.length();
             samp.a_wave = a_sound * opt.secs % 1;
-
             return samp;
         },
         secs: 60
