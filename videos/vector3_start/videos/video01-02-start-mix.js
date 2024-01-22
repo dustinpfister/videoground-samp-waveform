@@ -120,7 +120,7 @@ VIDEO.init = function(sm, scene, camera){
             };
 
         },
-        secs: 20
+        secs: 90
     });
     // frame disp options
     sud.opt_frame = {
