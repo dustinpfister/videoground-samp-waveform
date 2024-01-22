@@ -2,8 +2,8 @@
           * (done) Just want to work out what the basic idea of this is.
           * (done) start style effect for the mesh used to show the current state of the v3
           * (done) Arrows to show which ways are y, x, and z
-          * () adjust pos of sample data disp text
-          * () update vertex colors of mesh over time
+          * (done) adjust pos of sample data disp text
+          * (done) scale effect of mesh1
  */
 //-------- ----------
 // SCRIPTS
@@ -40,13 +40,13 @@ VIDEO.init = function(sm, scene, camera){
     while(i < len){
         const a1 = i / len;
         const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
-        color_array.push(0, a2, 1 - a2);
+        color_array.push(a1, a2, 1 - a2);
         i += 1;
     }
     const color_attribute = new THREE.BufferAttribute( new Float32Array(color_array), 3 );
     geometry1.setAttribute('color', color_attribute);
     const material1 = new THREE.MeshBasicMaterial({ vertexColors: true });
-    const mesh1 = new THREE.Mesh( geometry1, material1  );
+    const mesh1 = sud.mesh1 = new THREE.Mesh( geometry1, material1  );
     scene.add(mesh1);
 
     // arrows
@@ -96,7 +96,13 @@ VIDEO.init = function(sm, scene, camera){
         },
         secs: 60
     });
-    sud.opt_frame = { w: 500, h: 220, sy: 250, sx: 40, mode: sound.mode, overlay_alpha: 0.5, lineWidth: 3 };
+    // frame disp options
+    sud.opt_frame = {
+        w: 500, h: 220, sy: 250, sx: 40,
+        padx: 0, pady: -35, 
+        mode: sound.mode,
+        overlay_alpha: 0.5, lineWidth: 3
+    };
     sm.frameMax = sound.frames;
 };
 //-------- ----------
@@ -104,6 +110,11 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
+    // mesh effect
+    const a1 = per * 60 % 1;
+    const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
+    const s = 0.75 + 0.5 * a2;
+    sud.mesh1.scale.set(s,s,s)
     // create the data samples
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
@@ -119,13 +130,11 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
-
     renderer.render(scene, camera)
     ctx.drawImage( renderer.domElement, 500, 80, 16 * 50, 9 * 50 );
 
-
     // draw frame disp, and info
-    DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'sample data ( current frame )' );
+    DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'frame sample data ' );
     DSD.draw_info(ctx, sound, sm);
 
 
