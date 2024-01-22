@@ -67,12 +67,9 @@ VIDEO.init = function(sm, scene, camera){
 
     scene.add(arrow_x, arrow_y, arrow_z);
 
-    // DEFAULT V3 Location
-    //const V3_DEFAULT = new THREE.Vector3( 0, 0, 0.75);
 
     // the sound object
     const sound = sud.sound = CS.create_sound({
-        //waveform : 'seededsaw',
         waveform : 'table_maxch',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
@@ -93,8 +90,8 @@ VIDEO.init = function(sm, scene, camera){
 
                 const pitch = ( v3.y + 1 ) / 2;
                 table.push({
-                    waveform: gi === 0 ? 'sin' : 'seededsaw',
-                    frequency: 40 + 30 * pitch,
+                    waveform: 'seededsaw', //gi === 0 ? 'sin' : 'seededsaw',
+                    frequency: 80 + 420 * pitch,
                     amplitude: v3.length(),
                     saw_effect : ( v3.x + 1 ) / 2,
                     values_per_wave : 5 + 95 * ( ( v3.z + 1 ) / 2 )
@@ -106,32 +103,7 @@ VIDEO.init = function(sm, scene, camera){
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-/*
-            samp.i = i;
 
-            const v3 = mesh1.position;
-
-            // x for saw effect param
-            samp.saw_effect = ( v3.x + 1 ) / 2;
-            // y dir effects pitch
-            const pitch = ( v3.y + 1 ) / 2;
-            samp.frequency = 40 + 30 * pitch;
-            // z for values per second
-            samp.values_per_wave = 5 + 95 * ( ( v3.z + 1 ) / 2 );
-            // vector unit length effects amplitude
-            samp.amplitude = v3.length();
-            samp.a_wave = a_sound * opt.secs % 1;
-*/
-            //return samp;
-
-/*
-            const table = [];
-            let gi = 0;
-            let g_len = group.children.length;
-            while(gi < g_len){
-                table.push({  waveform: 'sin', frequency: 100, amplitude: 1});
-            }
-*/
             return {
                 amplitude: 1,
                 frequency: 1,
@@ -141,7 +113,7 @@ VIDEO.init = function(sm, scene, camera){
             };
 
         },
-        secs: 60
+        secs: 20
     });
     // frame disp options
     sud.opt_frame = {
