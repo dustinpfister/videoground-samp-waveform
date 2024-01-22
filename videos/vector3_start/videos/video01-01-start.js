@@ -1,7 +1,7 @@
 /*    video01-01-start - form vector3_start in videoground-samp-waveform 
           * (done) Just want to work out what the basic idea of this is.
           * (done) start style effect for the mesh used to show the current state of the v3
-          * () Arrows to show which ways are y, x, and z
+          * (done) Arrows to show which ways are y, x, and z
           * () adjust pos of sample data disp text
           * () update vertex colors of mesh over time
  */
@@ -27,11 +27,11 @@ VIDEO.init = function(sm, scene, camera){
 
     // grid
     const grid = new THREE.GridHelper(2, 10);
-    grid.material.linewidth = 6;
+    grid.material.linewidth = 4;
     scene.add(grid);
 
     // geomety
-    const geometry1 = new THREE.SphereGeometry(0.1, 20, 20);
+    const geometry1 = new THREE.SphereGeometry(0.10, 20, 20);
 
     // adding a color attribute
     const len = geometry1.getAttribute('position').count;
@@ -48,6 +48,20 @@ VIDEO.init = function(sm, scene, camera){
     const material1 = new THREE.MeshBasicMaterial({ vertexColors: true });
     const mesh1 = new THREE.Mesh( geometry1, material1  );
     scene.add(mesh1);
+
+    // arrows
+    const ARROW_ORIGIN = new THREE.Vector3(0,0,0);
+    const ARROW_LINEWIDTH = 6;
+    const ARROW_LENGTH = 1.2;
+    const arrow_x = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), ARROW_ORIGIN, ARROW_LENGTH, 0xff0000 );
+    const arrow_y = new THREE.ArrowHelper( new THREE.Vector3(0,1,0), ARROW_ORIGIN, ARROW_LENGTH, 0x00ff00 );
+    const arrow_z = new THREE.ArrowHelper( new THREE.Vector3(0,0,1), ARROW_ORIGIN, ARROW_LENGTH, 0x0000ff );
+
+    arrow_x.children[0].material.linewidth = ARROW_LINEWIDTH;
+    arrow_y.children[0].material.linewidth = ARROW_LINEWIDTH;
+    arrow_z.children[0].material.linewidth = ARROW_LINEWIDTH;
+
+    scene.add(arrow_x, arrow_y, arrow_z);
 
     // DEFAULT V3 Location
     const V3_DEFAULT = new THREE.Vector3( 0, 0, 0.75);
