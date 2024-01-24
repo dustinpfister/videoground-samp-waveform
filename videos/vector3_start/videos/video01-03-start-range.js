@@ -103,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
 
                 let a3 = ( 4 + gi ) * a_sound2 % 1;
 
-                let s = 0.5;
+                let s = 0.85;
 
                 const v3 = mesh.position.set(0,0,1).applyEuler(e).normalize().multiplyScalar(s);
 
