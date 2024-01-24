@@ -1,7 +1,7 @@
 /*    video01-02-start-mix - form vector3_start in videoground-samp-waveform
           * (done) use a table waveform in place of just seededsaw
           * (done) have more than one vector3 object
-          * () get scale effect to work with all mesh objects of group
+          * (done) get scale effect to work with all mesh objects of group
  */
 //-------- ----------
 // SCRIPTS

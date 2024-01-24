@@ -28,6 +28,10 @@ Some other variations of this can be done that will changed things up a little f
 
 I am sure there is a lot to be done with just a single vector3 object, but I will of course want to work out at least one if not many more videos that involve an array of vector3 objects. For now I will not get to much in depth with this as I think it will be best to have a whole other project folder for this one, but there is still starting out with this to say the least. This allows for some interesting things that might help a whole lot and to free up things when it comes to the four values I have to work with for each vector. 
 
+### Fixed table of pitch range values, y dir value used to set amplidue values for them
+
+Another idea I would like to try is to have a set number of waveforms for a table, and then use the y values of Vector3 objects to find out what waveforms the vectors amplitude in terms of unilt length as ushual will apply to. This will then preserve the use of the y dir for pitch, and then also unit length for amplitude as well.
+
 ### Use Vector Index value to set pitch
 
 One interesting thing I can do with this is to use the vector3 index value as a way to represent pitch, freeing up the y value of each vector3 object for some other value. What I mean bu this is that I can have vector0 represent say c2 in terms of pitch, then vector1 represent c#2, and so forth. It is then just a matter of setting all vectors to a unit length of 0 that are not currently being used. The length from the origin will then increase amplitude for each pitch vector that is moved from the origin just as before with the first few videos here. However now all three direction values are free to be used to set all kinds of other interesting waveform parameter values.
