@@ -85,12 +85,18 @@ VIDEO.init = function(sm, scene, camera){
             const table = fs.table = [];
             while(gi < g_len){
                 const mesh = group.children[gi];
+
+                const a1 = (a_sound2 + (gi / g_len)) * 60 % 1;
+                const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
+                const n = 0.75 + 0.5 * a2;
+                mesh.scale.set( n, n, n );
+
                 let e = new THREE.Euler();
                 e.y = Math.PI * 2 * ( (8 + 8 * gi ) * a_sound2 );
                 e.x = Math.PI * 2 * ( (2 + 2 * gi ) * a_sound2 );
-                let a1 = ( 4 + gi ) * a_sound2 % 1;
-                let a2 = Math.abs(0.5 - a1) / 0.5
-                let s = 0.10 + 0.80 * a2;
+                let a3 = ( 4 + gi ) * a_sound2 % 1;
+                let a4 = Math.abs(0.5 - a3) / 0.5
+                let s = 0.10 + 0.80 * a4;
 
                 const v3 = mesh.position.set(0,0,1).applyEuler(e).normalize().multiplyScalar(s);
 
@@ -136,11 +142,6 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
-    // mesh effect
-    //const a1 = per * 60 % 1;
-    //const a2 = 1 - Math.abs(0.5 - a1) / 0.5;
-    //const s = 0.75 + 0.5 * a2;
-    //sud.mesh1.scale.set(s,s,s)
     // create the data samples
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
