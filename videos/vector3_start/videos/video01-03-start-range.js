@@ -84,7 +84,7 @@ VIDEO.init = function(sm, scene, camera){
         waveform : 'table_maxch',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            fs.array_notes = [0,0,0,0,0];
+            fs.array_notes = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 
             let gi = 0;
             let g_len = group.children.length;
@@ -103,7 +103,7 @@ VIDEO.init = function(sm, scene, camera){
 
                 let a3 = ( 4 + gi ) * a_sound2 % 1;
 
-                let s = 0.85;
+                let s = 0.95;
 
                 const v3 = mesh.position.set(0,0,1).applyEuler(e).normalize().multiplyScalar(s);
 
@@ -137,16 +137,23 @@ const a_note = i_note  / (NOTE_RANGE - 1);
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
             return {
-                amplitude: 2, //??? Just set to 2? why?
+                amplitude: 4, //??? Just set to 2, 4? why?
                 frequency: 1,
                 a_wave: a_sound * opt.secs % 1,
-                maxch: 5,
+                maxch: 12,
                 table: [
                     { waveform: 'sin', frequency: 80, amplitude: fs.array_notes[0] / V3_COUNT },
-                    { waveform: 'sin', frequency: 200, amplitude: fs.array_notes[1] / V3_COUNT },
-                    { waveform: 'sin', frequency: 400, amplitude: fs.array_notes[2] / V3_COUNT },
-                    { waveform: 'sin', frequency: 800, amplitude: fs.array_notes[3] / V3_COUNT },
-                    { waveform: 'sin', frequency: 1600, amplitude: fs.array_notes[4] / V3_COUNT },
+                    { waveform: 'sin', frequency: 100, amplitude: fs.array_notes[1] / V3_COUNT },
+                    { waveform: 'sin', frequency: 200, amplitude: fs.array_notes[2] / V3_COUNT },
+                    { waveform: 'sin', frequency: 300, amplitude: fs.array_notes[3] / V3_COUNT },
+                    { waveform: 'sin', frequency: 400, amplitude: fs.array_notes[4] / V3_COUNT },
+                    { waveform: 'sin', frequency: 500, amplitude: fs.array_notes[5] / V3_COUNT },
+                    { waveform: 'sin', frequency: 600, amplitude: fs.array_notes[6] / V3_COUNT },
+                    { waveform: 'sin', frequency: 700, amplitude: fs.array_notes[7] / V3_COUNT },
+                    { waveform: 'sin', frequency: 800, amplitude: fs.array_notes[8] / V3_COUNT },
+                    { waveform: 'sin', frequency: 900, amplitude: fs.array_notes[9] / V3_COUNT },
+                    { waveform: 'sin', frequency: 1000, amplitude: fs.array_notes[10] / V3_COUNT },
+                    { waveform: 'sin', frequency: 1100, amplitude: fs.array_notes[11] / V3_COUNT }
                 ]
             };
 
