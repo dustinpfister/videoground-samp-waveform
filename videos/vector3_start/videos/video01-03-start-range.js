@@ -1,6 +1,5 @@
 /*    video01-03-start-range - form vector3_start in videoground-samp-waveform
           * (done) have a fixed range of waveforms each with a fixed pitch
-          * (done) use sin in place of seededsaw waveform
           * (done) the unit length of the vector will still set amplitude, but y dir will be used to find out how to apply it.
  */
 //-------- ----------
@@ -11,6 +10,7 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_create.js',
   '../../../js/samp_create/r0/samp_draw.js',
   '../../../js/samp_create/r0/waveforms/table_maxch.js',
+  '../../../js/samp_create/r0/waveforms/tri.js',
   '../../../js/samp_create/r0/waveforms/seededsaw.js'
 ];
 //-------- ----------
@@ -19,7 +19,7 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
 
     const NOTE_RANGE = 12;
-    const V3_COUNT = 4;
+    const V3_COUNT = 3;
 
     const int_array_notes = (note_range = 12) => {
         return new Array(note_range).fill(0);
@@ -106,7 +106,7 @@ VIDEO.init = function(sm, scene, camera){
 
                 let a3 = ( 4 + gi ) * a_sound2 % 1;
 
-                let s = 0.75;
+                let s = 0.5;
 
                 const v3 = mesh.position.set(0,0,1).applyEuler(e).normalize().multiplyScalar(s);
 
@@ -114,7 +114,7 @@ VIDEO.init = function(sm, scene, camera){
                 const pitch = ( v3.y + 1 ) / 2;
                 let i_note = 0;
                 while(i_note < NOTE_RANGE){
-                    const a_note = i_note  / (NOTE_RANGE - 1);
+                    const a_note = i_note  / (NOTE_RANGE - 1 );
                     const v2_note = new THREE.Vector2(a_note, 0);
                     const v2_pitch = new THREE.Vector2(pitch, 0); 
                     const d = v2_note.distanceTo(v2_pitch);
@@ -130,27 +130,27 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
             return {
-                amplitude: 2, //??? Just set to 2, 4? why?
+                amplitude: 1, //??? Just set to 2, 4? why?
                 frequency: 1,
                 a_wave: a_sound * opt.secs % 1,
                 maxch: 12,
                 table: [
-                    { waveform: 'sin', frequency: 80, amplitude: fs.array_notes[0] / V3_COUNT },
-                    { waveform: 'sin', frequency: 100, amplitude: fs.array_notes[1] / V3_COUNT },
-                    { waveform: 'sin', frequency: 200, amplitude: fs.array_notes[2] / V3_COUNT },
-                    { waveform: 'sin', frequency: 300, amplitude: fs.array_notes[3] / V3_COUNT },
-                    { waveform: 'sin', frequency: 400, amplitude: fs.array_notes[4] / V3_COUNT },
-                    { waveform: 'sin', frequency: 500, amplitude: fs.array_notes[5] / V3_COUNT },
-                    { waveform: 'sin', frequency: 600, amplitude: fs.array_notes[6] / V3_COUNT },
-                    { waveform: 'sin', frequency: 700, amplitude: fs.array_notes[7] / V3_COUNT },
-                    { waveform: 'sin', frequency: 800, amplitude: fs.array_notes[8] / V3_COUNT },
-                    { waveform: 'sin', frequency: 900, amplitude: fs.array_notes[9] / V3_COUNT },
-                    { waveform: 'sin', frequency: 1000, amplitude: fs.array_notes[10] / V3_COUNT },
-                    { waveform: 'sin', frequency: 1100, amplitude: fs.array_notes[11] / V3_COUNT }
+                    { waveform: 'seededsaw', frequency: 80, amplitude: fs.array_notes[0] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 100, amplitude: fs.array_notes[1] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 200, amplitude: fs.array_notes[2] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 300, amplitude: fs.array_notes[3] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 400, amplitude: fs.array_notes[4] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 500, amplitude: fs.array_notes[5] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 600, amplitude: fs.array_notes[6] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 700, amplitude: fs.array_notes[7] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 800, amplitude: fs.array_notes[8] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 900, amplitude: fs.array_notes[9] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 1000, amplitude: fs.array_notes[10] / V3_COUNT },
+                    { waveform: 'seededsaw', frequency: 1100, amplitude: fs.array_notes[11] / V3_COUNT }
                 ]
             };
         },
-        secs: 10
+        secs: 5
     });
     // frame disp options
     sud.opt_frame = {
