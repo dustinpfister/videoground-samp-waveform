@@ -1,7 +1,7 @@
 /*    video01-03-start-range - form vector3_start in videoground-samp-waveform
-          * () have a fixed range of waveforms each with a fixed pitch
-          * () use sin in place of seededsaw waveform
-          * () the unit length of the vector will still set amplitude, but y dir will be used to find out how to apply it.
+          * (done) have a fixed range of waveforms each with a fixed pitch
+          * (done) use sin in place of seededsaw waveform
+          * (done) the unit length of the vector will still set amplitude, but y dir will be used to find out how to apply it.
  */
 //-------- ----------
 // SCRIPTS
@@ -18,8 +18,12 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
 
-    const NOTE_RANGE = 5;
-    const V3_COUNT = 1;
+    const NOTE_RANGE = 12;
+    const V3_COUNT = 4;
+
+    const int_array_notes = (note_range = 12) => {
+        return new Array(note_range).fill(0);
+    };
 
 
     const sud = scene.userData;
@@ -78,13 +82,12 @@ VIDEO.init = function(sm, scene, camera){
 
     scene.add(arrow_x, arrow_y, arrow_z);
 
-
     // the sound object
     const sound = sud.sound = CS.create_sound({
         waveform : 'table_maxch',
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            fs.array_notes = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+            fs.array_notes = int_array_notes(NOTE_RANGE);
 
             let gi = 0;
             let g_len = group.children.length;
@@ -103,41 +106,31 @@ VIDEO.init = function(sm, scene, camera){
 
                 let a3 = ( 4 + gi ) * a_sound2 % 1;
 
-                let s = 0.95;
+                let s = 0.75;
 
                 const v3 = mesh.position.set(0,0,1).applyEuler(e).normalize().multiplyScalar(s);
 
+                // Y is used for pitch
                 const pitch = ( v3.y + 1 ) / 2;
-
-let i_note = 0;
-while(i_note < NOTE_RANGE){
-
-const a_note = i_note  / (NOTE_RANGE - 1);
-
-    const v2_note = new THREE.Vector2(a_note, 0);
-    const v2_pitch = new THREE.Vector2(pitch, 0); 
-    const d = v2_note.distanceTo(v2_pitch);
-
-//console.log(1 - d);
-
-    fs.array_notes[i_note] += ( 1 - d ) * v3.length();
-
-    i_note += 1;
-}
-
-
+                let i_note = 0;
+                while(i_note < NOTE_RANGE){
+                    const a_note = i_note  / (NOTE_RANGE - 1);
+                    const v2_note = new THREE.Vector2(a_note, 0);
+                    const v2_pitch = new THREE.Vector2(pitch, 0); 
+                    const d = v2_note.distanceTo(v2_pitch);
+                    fs.array_notes[i_note] += ( 1 - d ) * v3.length();
+                    i_note += 1;
+                }
 
                 gi += 1;
             }
-
-//console.log(fs.array_notes);
 
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
             return {
-                amplitude: 4, //??? Just set to 2, 4? why?
+                amplitude: 2, //??? Just set to 2, 4? why?
                 frequency: 1,
                 a_wave: a_sound * opt.secs % 1,
                 maxch: 12,
@@ -156,7 +149,6 @@ const a_note = i_note  / (NOTE_RANGE - 1);
                     { waveform: 'sin', frequency: 1100, amplitude: fs.array_notes[11] / V3_COUNT }
                 ]
             };
-
         },
         secs: 10
     });
