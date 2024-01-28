@@ -23,17 +23,17 @@ VIDEO.init = function(sm, scene, camera){
 
     // helper functions
     const int_array_notes = (note_range = 12) => {
-        return new Array(note_range).fill(0);
+        return new Array(note_range).fill( [0,0,0] );
     };
 
+    // make a single object for the table array of a table waveform
     const make_table_waveform = (index=0, array=[]) => {
         return {
             waveform: 'seededsaw',
             frequency: 80 + 100 * index,
-            amplitude: array[index] / V3_COUNT
+            amplitude: array[index][0] / array.length
         }
     };
-
 
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
@@ -47,7 +47,7 @@ VIDEO.init = function(sm, scene, camera){
     grid.material.linewidth = 4;
     scene.add(grid);
 
-    // geomety
+    // geometry
     const geometry1 = new THREE.SphereGeometry(0.10, 20, 20);
 
     // adding a color attribute
@@ -115,7 +115,7 @@ VIDEO.init = function(sm, scene, camera){
 
                 let a3 = ( 4 + gi ) * a_sound2 % 1;
 
-                let s = 0.5;
+                let s = 1.00;
 
                 const v3 = mesh.position.set(0,0,1).applyEuler(e).normalize().multiplyScalar(s);
 
@@ -123,26 +123,28 @@ VIDEO.init = function(sm, scene, camera){
                 const pitch = ( v3.y + 1 ) / 2;
                 let i_note = 0;
                 while(i_note < NOTE_RANGE){
-                    const a_note = i_note  / (NOTE_RANGE - 1 );
+                    const a_note = i_note  / ( NOTE_RANGE - 1 );
                     const v2_note = new THREE.Vector2(a_note, 0);
                     const v2_pitch = new THREE.Vector2(pitch, 0); 
                     const d = v2_note.distanceTo(v2_pitch);
-                    fs.array_notes[i_note] += ( 1 - d ) * v3.length();
+                    fs.array_notes[i_note][0] += ( 1 - d ) * v3.length();
                     i_note += 1;
                 }
 
                 gi += 1;
             }
 
+console.log( fs.array_notes[0] )
+
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
             return {
-                amplitude: 2, //??? Just set to 2, 4? why?
+                amplitude: 0.75, //??? Maybe it is not so bad to treat this as a kind of master volume
                 frequency: 1,
                 a_wave: a_sound * opt.secs % 1,
-                maxch: 12,
+                maxch: NOTE_RANGE,
                 table: [
                     make_table_waveform(0, fs.array_notes),
                     make_table_waveform(1, fs.array_notes),
