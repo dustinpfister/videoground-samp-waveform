@@ -19,7 +19,7 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
 
     const NOTE_RANGE = 12;
-    const V3_COUNT = 3;
+    const V3_COUNT = 6;
 
     // helper functions
     const int_array_notes = (note_range = 12) => {
@@ -31,7 +31,9 @@ VIDEO.init = function(sm, scene, camera){
         return {
             waveform: 'seededsaw',
             frequency: 80 + 100 * index,
-            amplitude: array[index][0] / array.length
+            amplitude: array[index][0] / array.length,
+            values_per_wave: Math.floor(array[index][1] / V3_COUNT / array.length),
+            saw_effect: Math.floor(array[index][2] / V3_COUNT / array.length)
         }
     };
 
@@ -110,8 +112,8 @@ VIDEO.init = function(sm, scene, camera){
                 mesh.scale.set( n, n, n );
 
                 let e = new THREE.Euler();
-                e.y = 0;
-                e.x = Math.PI * (2 * (gi / g_len)) + Math.PI * 8 * a_sound2;
+                e.y = Math.PI * (2 * (gi / g_len)) + Math.PI * 8 * a_sound2;
+                e.x = Math.PI * ((2 * a_sound2) * (gi / g_len)) + Math.PI * 16 * a_sound2;
 
                 let a3 = ( 4 + gi ) * a_sound2 % 1;
 
@@ -127,7 +129,13 @@ VIDEO.init = function(sm, scene, camera){
                     const v2_note = new THREE.Vector2(a_note, 0);
                     const v2_pitch = new THREE.Vector2(pitch, 0); 
                     const d = v2_note.distanceTo(v2_pitch);
+
                     fs.array_notes[i_note][0] += ( 1 - d ) * v3.length();
+
+fs.array_notes[i_note][1] += (20 + 40 * ( (v3.x + 1) / 2)  );
+
+fs.array_notes[i_note][2] += (v3.z + 1) / 2
+
                     i_note += 1;
                 }
 
@@ -141,26 +149,26 @@ console.log( fs.array_notes[0] )
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
             return {
-                amplitude: 0.75, //??? Maybe it is not so bad to treat this as a kind of master volume
+                amplitude: 0.30, //??? Maybe it is not so bad to treat this as a kind of master volume
                 frequency: 1,
                 a_wave: a_sound * opt.secs % 1,
                 maxch: NOTE_RANGE,
                 table: [
-                    make_table_waveform(0, fs.array_notes),
-                    make_table_waveform(1, fs.array_notes),
-                    make_table_waveform(2, fs.array_notes),
-                    make_table_waveform(3, fs.array_notes),
-                    make_table_waveform(4, fs.array_notes),
-                    make_table_waveform(5, fs.array_notes),
-                    make_table_waveform(6, fs.array_notes),
-                    make_table_waveform(7, fs.array_notes),
-                    make_table_waveform(8, fs.array_notes),
-                    make_table_waveform(9, fs.array_notes),
-                    make_table_waveform(10, fs.array_notes),
-                    make_table_waveform(11, fs.array_notes)                ]
+                    make_table_waveform(0, fs.array_notes, a_sound),
+                    make_table_waveform(1, fs.array_notes, a_sound),
+                    make_table_waveform(2, fs.array_notes, a_sound),
+                    make_table_waveform(3, fs.array_notes, a_sound),
+                    make_table_waveform(4, fs.array_notes, a_sound),
+                    make_table_waveform(5, fs.array_notes, a_sound),
+                    make_table_waveform(6, fs.array_notes, a_sound),
+                    make_table_waveform(7, fs.array_notes, a_sound),
+                    make_table_waveform(8, fs.array_notes, a_sound),
+                    make_table_waveform(9, fs.array_notes, a_sound),
+                    make_table_waveform(10, fs.array_notes, a_sound),
+                    make_table_waveform(11, fs.array_notes, a_sound)                ]
             };
         },
-        secs: 5
+        secs: 30
     });
     // frame disp options
     sud.opt_frame = {
