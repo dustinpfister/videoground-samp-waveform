@@ -21,8 +21,17 @@ VIDEO.init = function(sm, scene, camera){
     const NOTE_RANGE = 12;
     const V3_COUNT = 3;
 
+    // helper functions
     const int_array_notes = (note_range = 12) => {
         return new Array(note_range).fill(0);
+    };
+
+    const make_table_waveform = (index=0, array=[]) => {
+        return {
+            waveform: 'seededsaw',
+            frequency: 80 + 100 * index,
+            amplitude: array[index] / V3_COUNT
+        }
     };
 
 
@@ -130,24 +139,23 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
             return {
-                amplitude: 1, //??? Just set to 2, 4? why?
+                amplitude: 2, //??? Just set to 2, 4? why?
                 frequency: 1,
                 a_wave: a_sound * opt.secs % 1,
                 maxch: 12,
                 table: [
-                    { waveform: 'seededsaw', frequency: 80, amplitude: fs.array_notes[0] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 100, amplitude: fs.array_notes[1] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 200, amplitude: fs.array_notes[2] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 300, amplitude: fs.array_notes[3] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 400, amplitude: fs.array_notes[4] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 500, amplitude: fs.array_notes[5] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 600, amplitude: fs.array_notes[6] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 700, amplitude: fs.array_notes[7] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 800, amplitude: fs.array_notes[8] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 900, amplitude: fs.array_notes[9] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 1000, amplitude: fs.array_notes[10] / V3_COUNT },
-                    { waveform: 'seededsaw', frequency: 1100, amplitude: fs.array_notes[11] / V3_COUNT }
-                ]
+                    make_table_waveform(0, fs.array_notes),
+                    make_table_waveform(1, fs.array_notes),
+                    make_table_waveform(2, fs.array_notes),
+                    make_table_waveform(3, fs.array_notes),
+                    make_table_waveform(4, fs.array_notes),
+                    make_table_waveform(5, fs.array_notes),
+                    make_table_waveform(6, fs.array_notes),
+                    make_table_waveform(7, fs.array_notes),
+                    make_table_waveform(8, fs.array_notes),
+                    make_table_waveform(9, fs.array_notes),
+                    make_table_waveform(10, fs.array_notes),
+                    make_table_waveform(11, fs.array_notes)                ]
             };
         },
         secs: 5
