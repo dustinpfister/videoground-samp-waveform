@@ -11,9 +11,7 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_create.js',
   '../../../js/samp_create/r0/samp_draw.js',
   '../../../js/samp_create/r0/waveforms/table_maxch.js',
-  '../../../js/samp_create/r0/waveforms/array.js',
   '../../../js/samp_create/r0/waveforms/tri.js',
-  '../../../js/samp_create/r0/waveforms/seededsaw.js'
 ];
 //-------- ----------
 // INIT
@@ -24,13 +22,18 @@ VIDEO.init = function(sm, scene, camera){
     const V3_COUNT = 6;
 
 
-CS.WAVE_FORM_FUNCTIONS.sin_tri_lerp = (samp, a_wave) => {
+    CS.WAVE_FORM_FUNCTIONS.sin_tri_lerp = (samp, a_wave) => {
+        samp.lerp = samp.lerp === undefined ? 0.75 : samp.lerp;
+        samp.res = 300;
 
-    samp.array = [0,0,1,1,0,0,-1,-1,0];
-
-    return CS.WAVE_FORM_FUNCTIONS.array(samp, a_wave) 
-
-};
+        let n1 = CS.WAVE_FORM_FUNCTIONS.sin({ frequency: samp.frequency, amplitude: samp.amplitude }, a_wave);
+        let n2 = CS.WAVE_FORM_FUNCTIONS.tri({ frequency: samp.frequency, amplitude: samp.amplitude, step_count: 1000 }, a_wave);
+        let n3 = ( new THREE.Vector2( 0, n1 ).lerp( new THREE.Vector2( 0, n2 ), samp.lerp ) ).y;
+        let n4 = ( n3 + 1) / 2;
+        let n5 = Math.round(samp.res * n4);
+        let n6 = -1 + n5 / samp.res * 2;
+        return n6;
+    };
 
     
 
@@ -46,7 +49,7 @@ CS.WAVE_FORM_FUNCTIONS.sin_tri_lerp = (samp, a_wave) => {
 
 
             waveform: 'sin_tri_lerp',
-            frequency: 80 + 100 * index,
+            frequency: 80 + 160 * index,
             amplitude: array[index][0] / array.length,
 
 
@@ -150,9 +153,9 @@ CS.WAVE_FORM_FUNCTIONS.sin_tri_lerp = (samp, a_wave) => {
 
                     fs.array_notes[i_note][0] += ( 1 - d ) * v3.length();
 
-fs.array_notes[i_note][1] += (20 + 40 * ( (v3.x + 1) / 2)  );
+                    fs.array_notes[i_note][1] += (20 + 40 * ( (v3.x + 1) / 2)  );
 
-fs.array_notes[i_note][2] += (v3.z + 1) / 2
+                    fs.array_notes[i_note][2] += (v3.z + 1) / 2
 
                     i_note += 1;
                 }
@@ -160,7 +163,6 @@ fs.array_notes[i_note][2] += (v3.z + 1) / 2
                 gi += 1;
             }
 
-console.log( fs.array_notes[0] )
 
             return fs;
         },
@@ -186,7 +188,7 @@ console.log( fs.array_notes[0] )
                     make_table_waveform(11, fs.array_notes, a_sound)                ]
             };
         },
-        secs: 5
+        secs: 3
     });
     // frame disp options
     sud.opt_frame = {
