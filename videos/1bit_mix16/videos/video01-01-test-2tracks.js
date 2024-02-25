@@ -1,5 +1,8 @@
 /*    video01-01-test-2tracks - form 1bit_mix16 in videoground-samp-waveform 
-          * I just want to get the basic idea working
+          * (done) I just want to get the basic idea working
+          * () I will still want to have a vishual idea of what is going on with each 1bit track
+          * () have objects for each track
+          * ()
  */
 //-------- ----------
 // SCRIPTS
@@ -34,12 +37,20 @@ VIDEO.init = function(sm, scene, camera){
     ];
 
     TRACKS[1] = [
+        1,1,1,1,1,1,1,1,
+        2,2,2,2,2,2,2,2,
+        1,1,1,1,1,1,1,1,
+        2,2,2,2,2,2,2,2,
+        3,3,0,0,3,3,0,0,
+        4,4,0,0,4,4,0,0
+/*
         1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,
         2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,
         1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,
         1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,
         2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,
         1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1
+*/
     ];
 
     const sound = sud.sound = CS.create_sound({
