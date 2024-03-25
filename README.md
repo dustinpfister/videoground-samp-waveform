@@ -1,6 +1,6 @@
 # videoground-samp-waveform
 
-With this project the main focus is to create, and expand a collection of video files that have to do with waveform functions, as well as other waveform related topics in general. In a way this is just a continuation of what I have all ready started with my many video projects that I started in my beta world collection, however I now think I should have a whole other collection that is dedicated for this sort of thing if I am to keep moving forward with sound.
+With this project the main focus is to create, and expand a collection of video files that have to do with waveform functions, as well as other waveform related topics in general. In a way this is just a continuation of what I have all ready started with in my beta world collection, however I now think I should have a whole other collection that is dedicated for this sort of thing if I am to keep moving forward with sound. In time what I work out here will result in even more collections like this, but for now I would just like to work out some general ideas for content.
 
 ## Getting started with a waveform function
 
