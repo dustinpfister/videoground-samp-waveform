@@ -1,8 +1,7 @@
 /*    video01-01-test-2tracks - form 1bit_mix16 in videoground-samp-waveform 
           * (done) I just want to get the basic idea working
-          * () I will still want to have a vishual idea of what is going on with each 1bit track
-          * () have objects for each track
-          * ()
+          * () I will still want to have a sample data disp each 1bit track
+
  */
 //-------- ----------
 // SCRIPTS
@@ -11,8 +10,7 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
   '../../../js/samp_create/r0/samp_draw.js',
-  '../../../js/samp_create/r0/waveforms/pulse.js',
-  '../../../js/samp_create/r0/waveforms/table_maxch.js'
+  '../../../js/samp_create/r0/waveforms/pulse.js'
 ];
 //-------- ----------
 // INIT
@@ -43,18 +41,20 @@ VIDEO.init = function(sm, scene, camera){
         2,2,2,2,2,2,2,2,
         3,3,0,0,3,3,0,0,
         4,4,0,0,4,4,0,0
-/*
-        1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,
-        2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,
-        1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,
-        1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,
-        2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2, 2,2,2,2,2,2,2,2,
-        1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1
-*/
+
     ];
 
     const sound = sud.sound = CS.create_sound({
-        waveform : 'table_maxch',
+
+        //waveform : 'table_maxch',
+
+        waveform: (samp, a_wave) => {
+            samp.tracks = samp.tracks || [];
+            samp.amplitude = samp.amplitude === undefined ? 0.75 : samp.amplitude; 
+            let n = 0;
+            return ( samp.tracks[0] + samp.tracks[1] ) * (1 / 2) * samp.amplitude;
+        },
+
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
 
@@ -71,15 +71,15 @@ VIDEO.init = function(sm, scene, camera){
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
+
+            const a_wave = a_sound * opt.secs % 1;
+
+            const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq0, amplitude: fs.amp0 }, a_wave );
+            const s1 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq1, amplitude: fs.amp1 }, a_wave );
             return {
-                frequency: 1,
-                amplitude: 1,
-                maxch: 2,
-                table: [
-                    { waveform: 'pulse', frequency: fs.freq0, amplitude: fs.amp0 },
-                    { waveform: 'pulse', frequency: fs.freq1, amplitude: fs.amp1 }
-                ]
-            }
+                tracks: [ s0, s1 ]
+            };
+
 
         },
         secs: 6
