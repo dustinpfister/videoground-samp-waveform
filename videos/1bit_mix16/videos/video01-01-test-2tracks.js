@@ -85,7 +85,7 @@ VIDEO.init = function(sm, scene, camera){
         secs: 6
     });
 
-    sud.opt_frame = { w: 1200, h: 200, sy: 500, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
+    sud.opt_frame = { w: 1200, h: 200, sy: 500, sx: 40, mode: sound.mode, overlay_alpha: 0.4, boxStyle: '#880000', lineStyle: '#ff4400' };
     sm.frameMax = sound.frames;
 
 };
@@ -111,6 +111,14 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
 
     // draw frame disp, and info
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'final 16-bit mix' );
-    DSD.draw_info(ctx, sound, sm);
+
+
+    const alpha = sm.frame / ( sm.frameMax - 1);
+    ctx.fillStyle = 'white';
+    ctx.font = '25px courier';
+    ctx.textBaseline = 'top';
+    const disp_frame = sm.frame + '/' + sm.frameMax;
+    const disp_time =  (sound.secs * alpha).toFixed(2) + ' / ' + sound.secs;
+    ctx.fillText('frame: ' + disp_frame + ', seconds: ' + disp_time, 10, 10);
 };
 
