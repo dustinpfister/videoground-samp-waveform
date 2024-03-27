@@ -1,6 +1,10 @@
 /*    video01-01-test-2tracks - form 1bit_mix16 in videoground-samp-waveform 
           * (done) I just want to get the basic idea working
-          * () I will still want to have a sample data disp each 1bit track
+          * (done) started working out a new waveform function for mixing
+          * (done) I will still want to have a sample data disp each 1bit track
+
+          * () start a main draw.js file for the 1bit_mix16 project
+          * () I will want descriptions for the 1bit tracks
 
  */
 //-------- ----------
@@ -44,6 +48,10 @@ VIDEO.init = function(sm, scene, camera){
 
     ];
 
+
+    // 1 bit track sample data arrays used for display
+    sud.array_frame_tracks = [];
+
     const sound = sud.sound = CS.create_sound({
 
         //waveform : 'table_maxch',
@@ -60,11 +68,14 @@ VIDEO.init = function(sm, scene, camera){
 
             const ni0 = TRACKS[0][ Math.floor( TRACKS[0].length * a_sound2) ];
             fs.freq0 = ST.notefreq_by_indices(3, ni0);
-            fs.amp0 = ni0 === 0 ? 0 : 0.5;
+            fs.amp0 = ni0 === 0 ? 0 : 1.0;
 
             const ni1 = TRACKS[1][ Math.floor( TRACKS[1].length * a_sound2) ];
             fs.freq1 = ST.notefreq_by_indices(1, ni1);
-            fs.amp1 = ni1 === 0 ? 0 : 0.5; 
+            fs.amp1 = ni1 === 0 ? 0 : 1.0;
+
+            // set array frame tracks back to empty array
+            sud.array_frame_tracks = [ [], [] ];
 
             return fs;
 
@@ -76,6 +87,10 @@ VIDEO.init = function(sm, scene, camera){
 
             const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq0, amplitude: fs.amp0 }, a_wave );
             const s1 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq1, amplitude: fs.amp1 }, a_wave );
+
+            sud.array_frame_tracks[0].push(s0);
+            sud.array_frame_tracks[1].push(s1);
+
             return {
                 tracks: [ s0, s1 ]
             };
@@ -84,6 +99,18 @@ VIDEO.init = function(sm, scene, camera){
         },
         secs: 6
     });
+
+
+    sud.opt_frame_track0 = {
+        w: 1200, h: 100, sy: 100, sx: 40, mode: 'raw', overlay_alpha: 0.4,
+        boxStyle: '#444444', lineStyle: '#ffffff'
+    };
+
+    sud.opt_frame_track1 = {
+        w: 1200, h: 100, sy: 250, sx: 40, mode: 'raw', overlay_alpha: 0.4,
+        boxStyle: '#444444', lineStyle: '#ffffff'
+    };
+
 
     sud.opt_frame = { w: 1200, h: 200, sy: 500, sx: 40, mode: sound.mode, overlay_alpha: 0.4, boxStyle: '#880000', lineStyle: '#ff4400' };
     sm.frameMax = sound.frames;
@@ -105,13 +132,30 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sud = scene.userData;
     const sound = sud.sound;
 
+
+
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
-    // draw frame disp, and info
+    //
+    // draw sample data for 1bit tracks
+
+
+    DSD.draw_box(ctx, sud.opt_frame_track0, 0);
+    DSD.draw_sample_data( ctx, sud.array_frame_tracks[0], sud.opt_frame_track0);
+
+
+
+    DSD.draw_box(ctx, sud.opt_frame_track1, 0);
+    DSD.draw_sample_data( ctx, sud.array_frame_tracks[1], sud.opt_frame_track1);
+
+
+    // draw frame disp, for final 16bit mix
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'final 16-bit mix' );
 
+
+console.log(sound.array_frame, sud.array_frame_tracks[0]);
 
     const alpha = sm.frame / ( sm.frameMax - 1);
     ctx.fillStyle = 'white';
