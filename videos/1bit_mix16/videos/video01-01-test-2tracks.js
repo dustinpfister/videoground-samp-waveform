@@ -39,6 +39,7 @@ VIDEO.init = function(sm, scene, camera){
     ];
 
     TRACKS[1] = [
+
         1,1,1,1,1,1,1,1,
         2,2,2,2,2,2,2,2,
         1,1,1,1,1,1,1,1,
@@ -48,13 +49,11 @@ VIDEO.init = function(sm, scene, camera){
 
     ];
 
-
     // 1 bit track sample data arrays used for display
     sud.array_frame_tracks = [];
 
+    // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
-
-        //waveform : 'table_maxch',
 
         waveform: (samp, a_wave) => {
             samp.tracks = samp.tracks || [];
@@ -95,24 +94,24 @@ VIDEO.init = function(sm, scene, camera){
                 tracks: [ s0, s1 ]
             };
 
-
         },
         secs: 6
     });
 
 
+    // display objects for audio sample arrays for tracks and main final display
     sud.opt_frame_track0 = {
         w: 1200, h: 100, sy: 100, sx: 40, mode: 'raw', overlay_alpha: 0.4,
         boxStyle: '#444444', lineStyle: '#ffffff'
     };
-
     sud.opt_frame_track1 = {
         w: 1200, h: 100, sy: 250, sx: 40, mode: 'raw', overlay_alpha: 0.4,
         boxStyle: '#444444', lineStyle: '#ffffff'
     };
-
-
     sud.opt_frame = { w: 1200, h: 200, sy: 500, sx: 40, mode: sound.mode, overlay_alpha: 0.4, boxStyle: '#880000', lineStyle: '#ff4400' };
+
+
+    // set vg sm.frameMax to frames value of sound object
     sm.frameMax = sound.frames;
 
 };
@@ -120,33 +119,32 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
+
     const sud = scene.userData;
+
     // create the data samples
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
+
 };
 //-------- ----------
 // RENDER
 //-------- ----------
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
+
     const sud = scene.userData;
     const sound = sud.sound;
-
-
 
     // background
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
-    //
     // draw sample data for 1bit tracks
-
-
+    // track 0
     DSD.draw_box(ctx, sud.opt_frame_track0, 0);
     DSD.draw_sample_data( ctx, sud.array_frame_tracks[0], sud.opt_frame_track0);
 
-
-
+    // track 1
     DSD.draw_box(ctx, sud.opt_frame_track1, 0);
     DSD.draw_sample_data( ctx, sud.array_frame_tracks[1], sud.opt_frame_track1);
 
@@ -155,8 +153,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'final 16-bit mix' );
 
 
-console.log(sound.array_frame, sud.array_frame_tracks[0]);
-
+    // top display info
     const alpha = sm.frame / ( sm.frameMax - 1);
     ctx.fillStyle = 'white';
     ctx.font = '25px courier';
@@ -164,5 +161,6 @@ console.log(sound.array_frame, sud.array_frame_tracks[0]);
     const disp_frame = sm.frame + '/' + sm.frameMax;
     const disp_time =  (sound.secs * alpha).toFixed(2) + ' / ' + sound.secs;
     ctx.fillText('frame: ' + disp_frame + ', seconds: ' + disp_time, 10, 10);
+
 };
 
