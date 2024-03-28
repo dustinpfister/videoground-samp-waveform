@@ -3,7 +3,7 @@
           * (done) started working out a new waveform function for mixing
           * (done) I will still want to have a sample data disp each 1bit track
 
-          * () start a bit_tracks.js file for the 1bit_mix16 project
+          * (done) start a bit_tracks.js file for the 1bit_mix16 project
           * () bit_tracks can be used to set up, and update tracks
           * () bit_tracks has custom pulse, noise, ect waveform functions
           * () bit_tracks contains code for defining music notation
@@ -19,8 +19,13 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
+
   '../../../js/samp_create/r0/samp_draw.js',
-  '../../../js/samp_create/r0/waveforms/pulse.js'
+
+  '../../../js/samp_create/r0/waveforms/pulse.js',
+
+  '../js/bit_tracks.js'
+
 ];
 //-------- ----------
 // INIT
@@ -29,6 +34,10 @@ VIDEO.init = function(sm, scene, camera){
 
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
+
+
+// testing out new Bit_tracks js file
+console.log( Bit_tracks.create() );
 
     const TRACKS = [];
 
@@ -54,6 +63,7 @@ VIDEO.init = function(sm, scene, camera){
         4,4,0,0,4,4,0,0
 
     ];
+
 
     // 1 bit track sample data arrays used for display
     sud.array_frame_tracks = [];
