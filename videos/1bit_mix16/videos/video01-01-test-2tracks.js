@@ -3,8 +3,14 @@
           * (done) started working out a new waveform function for mixing
           * (done) I will still want to have a sample data disp each 1bit track
 
-          * () start a main draw.js file for the 1bit_mix16 project
-          * () I will want descriptions for the 1bit tracks
+          * () start a bit_tracks.js file for the 1bit_mix16 project
+          * () bit_tracks can be used to set up, and update tracks
+          * () bit_tracks has custom pulse, noise, ect waveform functions
+          * () bit_tracks contains code for defining music notation
+
+          * () start a bit_tracks_mix.js file for the 1bit_mix16 project
+
+          * () start a bit_tracks_draw.js file for the 1bit_mix16 project
 
  */
 //-------- ----------
