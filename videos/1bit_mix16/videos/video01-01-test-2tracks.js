@@ -2,15 +2,12 @@
           * (done) I just want to get the basic idea working
           * (done) started working out a new waveform function for mixing
           * (done) I will still want to have a sample data disp each 1bit track
-
           * (done) start a bit_tracks.js file for the 1bit_mix16 project
           * (done) bit_tracks can be used to set up a new tracks object
           * (done) notes arrays for tracks objects
+          * (done) bit_tracks has a function to create a sampset object
 
-          * () bit_tracks has custom pulse, noise, ect waveform functions
-          * () bit_tracks contains code for defining music notation
-
-          * () start a bit_tracks_mix.js file for the 1bit_mix16 project
+          * () have a Bit_tracks.waveform.mix waveform function
 
           * () start a bit_tracks_draw.js file for the 1bit_mix16 project
 
@@ -78,12 +75,14 @@ VIDEO.init = function(sm, scene, camera){
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
 
+
         waveform: (samp, a_wave) => {
             samp.tracks = samp.tracks || [];
             samp.amplitude = samp.amplitude === undefined ? 0.75 : samp.amplitude; 
             let n = 0;
             return ( samp.tracks[0] + samp.tracks[1] ) * (1 / 2) * samp.amplitude;
         },
+
 
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
@@ -94,21 +93,7 @@ VIDEO.init = function(sm, scene, camera){
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
-
-            const a_wave = a_sound * opt.secs % 1;
-
-            //const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq0, amplitude: fs.amp0 }, a_wave );
-            //const s1 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq1, amplitude: fs.amp1 }, a_wave );
-            
-            const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: sud.tracks.current[0].freq, amplitude: sud.tracks.current[0].amp }, a_wave );
-            const s1 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: sud.tracks.current[1].freq, amplitude: sud.tracks.current[1].amp }, a_wave );
-
-            sud.tracks.samples[0].push(s0);
-            sud.tracks.samples[1].push(s1);
-
-            return {
-                tracks: [ s0, s1 ]
-            };
+            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs);
 
         },
         secs: 6
