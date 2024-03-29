@@ -5,7 +5,7 @@
 
           * (done) start a bit_tracks.js file for the 1bit_mix16 project
           * (done) bit_tracks can be used to set up a new tracks object
-          * () notes arrays for tracks objects
+          * (done) notes arrays for tracks objects
 
           * () bit_tracks has custom pulse, noise, ect waveform functions
           * () bit_tracks contains code for defining music notation
@@ -38,7 +38,8 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     sud.tracks = Bit_tracks.create({
-        count: 2
+        count: 2,
+        octives: [3, 1]
     });
 
     console.log( sud.tracks );
@@ -86,19 +87,7 @@ VIDEO.init = function(sm, scene, camera){
 
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            const NOTES = sud.tracks.notes;
-
-            const ni0 = NOTES[0][ Math.floor( NOTES[0].length * a_sound2) ];
-            fs.freq0 = ST.notefreq_by_indices(3, ni0);
-            fs.amp0 = ni0 === 0 ? 0 : 1.0;
-
-            const ni1 = NOTES[1][ Math.floor( NOTES[1].length * a_sound2) ];
-            fs.freq1 = ST.notefreq_by_indices(1, ni1);
-            fs.amp1 = ni1 === 0 ? 0 : 1.0;
-
-
             Bit_tracks.new_frame(sud.tracks, a_sound2);
-
 
             return fs;
 
@@ -108,9 +97,11 @@ VIDEO.init = function(sm, scene, camera){
 
             const a_wave = a_sound * opt.secs % 1;
 
-            const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq0, amplitude: fs.amp0 }, a_wave );
-            const s1 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq1, amplitude: fs.amp1 }, a_wave );
-
+            //const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq0, amplitude: fs.amp0 }, a_wave );
+            //const s1 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq1, amplitude: fs.amp1 }, a_wave );
+            
+            const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: sud.tracks.current[0].freq, amplitude: sud.tracks.current[0].amp }, a_wave );
+            const s1 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: sud.tracks.current[1].freq, amplitude: sud.tracks.current[1].amp }, a_wave );
 
             sud.tracks.samples[0].push(s0);
             sud.tracks.samples[1].push(s1);
