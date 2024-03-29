@@ -4,7 +4,8 @@
           * (done) I will still want to have a sample data disp each 1bit track
 
           * (done) start a bit_tracks.js file for the 1bit_mix16 project
-          * () bit_tracks can be used to set up, and update tracks
+          * (done) bit_tracks can be used to set up a new tracks object
+
           * () bit_tracks has custom pulse, noise, ect waveform functions
           * () bit_tracks contains code for defining music notation
 
@@ -35,9 +36,11 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
+    sud.tracks = Bit_tracks.create({
+        count: 2
+    });
 
-// testing out new Bit_tracks js file
-console.log( Bit_tracks.create() );
+    console.log( sud.tracks );
 
     const TRACKS = [];
 
@@ -89,8 +92,9 @@ console.log( Bit_tracks.create() );
             fs.freq1 = ST.notefreq_by_indices(1, ni1);
             fs.amp1 = ni1 === 0 ? 0 : 1.0;
 
-            // set array frame tracks back to empty array
-            sud.array_frame_tracks = [ [], [] ];
+
+            Bit_tracks.new_frame(sud.tracks);
+
 
             return fs;
 
@@ -103,8 +107,9 @@ console.log( Bit_tracks.create() );
             const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq0, amplitude: fs.amp0 }, a_wave );
             const s1 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: fs.freq1, amplitude: fs.amp1 }, a_wave );
 
-            sud.array_frame_tracks[0].push(s0);
-            sud.array_frame_tracks[1].push(s1);
+
+            sud.tracks.samples[0].push(s0);
+            sud.tracks.samples[1].push(s1);
 
             return {
                 tracks: [ s0, s1 ]
@@ -158,11 +163,11 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // draw sample data for 1bit tracks
     // track 0
     DSD.draw_box(ctx, sud.opt_frame_track0, 0);
-    DSD.draw_sample_data( ctx, sud.array_frame_tracks[0], sud.opt_frame_track0);
+    DSD.draw_sample_data( ctx, sud.tracks.samples[0], sud.opt_frame_track0);
 
     // track 1
     DSD.draw_box(ctx, sud.opt_frame_track1, 0);
-    DSD.draw_sample_data( ctx, sud.array_frame_tracks[1], sud.opt_frame_track1);
+    DSD.draw_sample_data( ctx, sud.tracks.samples[1], sud.opt_frame_track1);
 
 
     // draw frame disp, for final 16bit mix
