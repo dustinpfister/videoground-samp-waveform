@@ -6,10 +6,10 @@
           * (done) bit_tracks can be used to set up a new tracks object
           * (done) notes arrays for tracks objects
           * (done) bit_tracks has a function to create a sampset object
-
-          * () have a Bit_tracks.waveform.mix waveform function
+          * (done) have a Bit_tracks.waveform.mix waveform function
 
           * () start a bit_tracks_draw.js file for the 1bit_mix16 project
+          * () I will want lables for tracks
 
  */
 //-------- ----------
@@ -74,27 +74,13 @@ VIDEO.init = function(sm, scene, camera){
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
-
-
-        waveform: (samp, a_wave) => {
-            samp.tracks = samp.tracks || [];
-            samp.amplitude = samp.amplitude === undefined ? 0.75 : samp.amplitude; 
-            let n = 0;
-            return ( samp.tracks[0] + samp.tracks[1] ) * (1 / 2) * samp.amplitude;
-        },
-
-
+        waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-
             Bit_tracks.new_frame(sud.tracks, a_sound2);
-
             return fs;
-
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs);
-
         },
         secs: 6
     });

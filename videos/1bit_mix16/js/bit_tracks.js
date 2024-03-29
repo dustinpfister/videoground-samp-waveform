@@ -3,6 +3,20 @@
 
     const Bit_tracks = {};
     
+    // create a bit tracks object
+    Bit_tracks.create = (opt) => {
+        opt = opt || {};
+        const tracks = {
+            count: opt.count === undefined ? 1 : opt.count,
+            octives: opt.octives || [1],
+            notes: [],
+            current: [],
+            samples: []
+        };
+        Bit_tracks.new_frame(tracks);
+        return tracks;
+    };
+    
     // set up a tracks object to work with a new frame
     Bit_tracks.new_frame = (tracks, a_sound) => {
         tracks.samples = [];
@@ -26,11 +40,8 @@
     
     // create a sampset object for the final waveform function that will be used
     Bit_tracks.for_sampset = (tracks, a_sound=0, secs=1 ) => {
-
         const t = [];
-        
         const a_wave = a_sound * secs % 1;
-
         let ti = 0;
         const len = tracks.count;
         while(ti < len){
@@ -39,26 +50,21 @@
             t.push(s0);
             ti += 1;
         }
-
         return {
+            amplitude: 0.75,
             tracks: t
         };
     };
     
-    // create a bit tracks object
-    Bit_tracks.create = (opt) => {
-        opt = opt || {};
-        const tracks = {
-            count: opt.count === undefined ? 1 : opt.count,
-            octives: opt.octives || [1],
-            notes: [],
-            current: [],
-            samples: []
-        };
-        Bit_tracks.new_frame(tracks);
-        return tracks;
+    Bit_tracks.waveforms = {
+       mix: (samp, a_wave) => {
+            samp.tracks = samp.tracks || [];
+            const count = samp.tracks.length;
+            samp.amplitude = samp.amplitude === undefined ? 0.75 : samp.amplitude; 
+            let n = 0;
+            return ( samp.tracks[0] + samp.tracks[1] ) * (1 / count) * samp.amplitude;
+        }
     };
-
 
     window.Bit_tracks = Bit_tracks;
 
