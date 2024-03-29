@@ -4,9 +4,10 @@
     const Bit_tracks = {};
     
     // set up a tracks object to work with a new frame
-    Bit_tracks.new_frame = (tracks) => {
+    Bit_tracks.new_frame = (tracks, a_sound) => {
     
         tracks.samples = [];
+        tracks.freq = [];
         const c = tracks.count;
         let i = 0;
         while(i < c){
@@ -23,6 +24,8 @@
         
         const tracks = {
             count: opt.count === undefined ? 1 : opt.count,
+            notes: [],
+            freq: [],
             samples: []
         };
         

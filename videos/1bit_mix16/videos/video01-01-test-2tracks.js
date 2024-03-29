@@ -5,6 +5,7 @@
 
           * (done) start a bit_tracks.js file for the 1bit_mix16 project
           * (done) bit_tracks can be used to set up a new tracks object
+          * () notes arrays for tracks objects
 
           * () bit_tracks has custom pulse, noise, ect waveform functions
           * () bit_tracks contains code for defining music notation
@@ -44,7 +45,9 @@ VIDEO.init = function(sm, scene, camera){
 
     const TRACKS = [];
 
-    TRACKS[0] = [
+    sud.tracks.notes = [[],[]]
+
+    sud.tracks.notes[0] = [
 
         0,0,1,0,2,0,3,0, 4,0,5,0,6,0,7,0, 8,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,
         0,0,1,0,2,0,3,0, 4,0,5,0,6,0,7,0, 8,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,
@@ -56,7 +59,7 @@ VIDEO.init = function(sm, scene, camera){
 
     ];
 
-    TRACKS[1] = [
+    sud.tracks.notes[1] = [
 
         1,1,1,1,1,1,1,1,
         2,2,2,2,2,2,2,2,
@@ -83,17 +86,18 @@ VIDEO.init = function(sm, scene, camera){
 
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
+            const NOTES = sud.tracks.notes;
 
-            const ni0 = TRACKS[0][ Math.floor( TRACKS[0].length * a_sound2) ];
+            const ni0 = NOTES[0][ Math.floor( NOTES[0].length * a_sound2) ];
             fs.freq0 = ST.notefreq_by_indices(3, ni0);
             fs.amp0 = ni0 === 0 ? 0 : 1.0;
 
-            const ni1 = TRACKS[1][ Math.floor( TRACKS[1].length * a_sound2) ];
+            const ni1 = NOTES[1][ Math.floor( NOTES[1].length * a_sound2) ];
             fs.freq1 = ST.notefreq_by_indices(1, ni1);
             fs.amp1 = ni1 === 0 ? 0 : 1.0;
 
 
-            Bit_tracks.new_frame(sud.tracks);
+            Bit_tracks.new_frame(sud.tracks, a_sound2);
 
 
             return fs;
