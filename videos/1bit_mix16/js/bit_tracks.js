@@ -1,7 +1,33 @@
-
+/*
+ *  bit_tracks.js for the 1bit_mix16 project of videoground-samp-waveform
+ *
+ */
+ 
 (function(){
 
     const Bit_tracks = {};
+    
+    // waveform functions inclduing the final 16bit mix of 1bit tracks
+    Bit_tracks.waveforms = {
+        // pulse wave
+        pulse_1bit : (samp, a_wave ) => {
+            const duty = samp.duty === undefined ? 0.5 : samp.duty;
+            const a = samp.frequency * a_wave % 1;
+            const ni = samp.ni || 0;
+            if(a < duty || ni === 0){
+                return  -1; 
+            }
+            return 1;
+        },
+        // mix the 1bit tracks
+        mix: (samp, a_wave) => {
+            samp.tracks = samp.tracks || [];
+            const count = samp.tracks.length;
+            samp.amplitude = samp.amplitude === undefined ? 0.75 : samp.amplitude; 
+            let n = 0;
+            return ( samp.tracks[0] + samp.tracks[1] ) * (1 / count) * samp.amplitude;
+        }
+    };
     
     // create a bit tracks object
     Bit_tracks.create = (opt) => {
@@ -31,7 +57,8 @@
             }
             tracks.current.push({
                 freq: ST.notefreq_by_indices(tracks.octives[i], ni),
-                amp: ni === 0 ? 0 : 1.0
+                ni: ni,
+                amp: ni === 0 ? 0 : 1
             });  
             tracks.samples.push([]);
             i += 1;
@@ -45,7 +72,8 @@
         let ti = 0;
         const len = tracks.count;
         while(ti < len){
-            const s0 = CS.WAVE_FORM_FUNCTIONS.pulse({ duty: 0.5, frequency: tracks.current[ti].freq, amplitude: tracks.current[ti].amp }, a_wave );
+            const cur = tracks.current[ti]; 
+            const s0 = Bit_tracks.waveforms.pulse_1bit({ duty: 0.5, frequency: cur.freq, ni: cur.ni  }, a_wave );
             tracks.samples[ti].push(s0);
             t.push(s0);
             ti += 1;
@@ -56,16 +84,6 @@
         };
     };
     
-    Bit_tracks.waveforms = {
-       mix: (samp, a_wave) => {
-            samp.tracks = samp.tracks || [];
-            const count = samp.tracks.length;
-            samp.amplitude = samp.amplitude === undefined ? 0.75 : samp.amplitude; 
-            let n = 0;
-            return ( samp.tracks[0] + samp.tracks[1] ) * (1 / count) * samp.amplitude;
-        }
-    };
-
     window.Bit_tracks = Bit_tracks;
 
 }());
