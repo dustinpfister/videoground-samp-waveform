@@ -9,12 +9,18 @@
           * (done) have a Bit_tracks.waveform.mix waveform function
           * (done) new 1bit pulse waveform function for bit tracks
           * (done) start a bit_samo_draw.js file for the 1bit_mix16 project
+          * (done) I will want version numbers for project js files as I will be making more videos
+
+          * () I will want descriptions for tracks
+          * () single draw tracks function
+
+
 
           
           * () noise_1bit waveform function for bit tracks
           * () can set/change what waveform function to use on track by track basis
 
-          * () I will want descriptions for tracks
+
 
  */
 //-------- ----------
@@ -23,8 +29,8 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
-  '../js/bit_tracks.js',
-  '../js/bit_samp_draw.js',
+  '../js/bit_tracks/r0/bit_tracks.js',
+  '../js/bit_tracks/r0/bit_samp_draw.js',
 
 ];
 //-------- ----------
