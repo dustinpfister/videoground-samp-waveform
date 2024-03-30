@@ -10,9 +10,12 @@
           * (done) new 1bit pulse waveform function for bit tracks
           * (done) start a bit_samo_draw.js file for the 1bit_mix16 project
           * (done) I will want version numbers for project js files as I will be making more videos
+          * (done) I will want descriptions for tracks
 
-          * () I will want descriptions for tracks
+          * () create draw options helper function for tracks and main 16bit track
           * () single draw tracks function
+
+          * () will need better track objects that allow for description properties along with other values
 
 
 
@@ -94,12 +97,13 @@ VIDEO.init = function(sm, scene, camera){
 
 
     // display objects for audio sample arrays for tracks and main final display
+
     sud.opt_frame_track0 = {
-        w: 1200, h: 100, sy: 100, sx: 40, padx: 0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
+        w: 1200, h: 170, sy: 100, sx: 40, padx: 0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
         boxStyle: '#444444', lineStyle: '#ffffff'
     };
     sud.opt_frame_track1 = {
-        w: 1200, h: 100, sy: 250, sx: 40, padx:0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
+        w: 1200, h: 170, sy: 330, sx: 40, padx:0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
         boxStyle: '#444444', lineStyle: '#ffffff'
     };
     sud.opt_frame = {
