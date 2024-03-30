@@ -8,12 +8,13 @@
           * (done) bit_tracks has a function to create a sampset object
           * (done) have a Bit_tracks.waveform.mix waveform function
           * (done) new 1bit pulse waveform function for bit tracks
+          * (done) start a bit_samo_draw.js file for the 1bit_mix16 project
 
+          
           * () noise_1bit waveform function for bit tracks
           * () can set/change what waveform function to use on track by track basis
 
-          * () start a bit_tracks_draw.js file for the 1bit_mix16 project
-          * () I will want lables for tracks
+          * () I will want descriptions for tracks
 
  */
 //-------- ----------
@@ -22,12 +23,8 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
-
-  '../../../js/samp_create/r0/samp_draw.js',
-
-  //'../../../js/samp_create/r0/waveforms/pulse.js',
-
-  '../js/bit_tracks.js'
+  '../js/bit_tracks.js',
+  '../js/bit_samp_draw.js',
 
 ];
 //-------- ----------
