@@ -100,12 +100,7 @@
         }
     };
 
-    DSD.draw = (ctx, sample_array, opt = {}, alpha = 0, desc='') => {
-        draw_midline(ctx, opt.sx, opt.sy, opt.w, opt.h);
-        DSD.draw_sample_data(ctx, sample_array, opt );
-        DSD.draw_box(ctx, opt, alpha );
-        draw_desc(ctx, desc, opt);
-    };
+
 
     DSD.draw_curve = (ctx, curve, alpha=0, desc='', opt={}) => {
         DSD.draw_box(ctx, opt, 0);
@@ -156,6 +151,13 @@
         const disp_frame = sm.frame + '/' + sm.frameMax;
         const disp_time =  (sound.secs * alpha).toFixed(2) + ' / ' + sound.secs;
         ctx.fillText('frame: ' + disp_frame + ', seconds: ' + disp_time, 10, 10);
+    };
+    
+    DSD.draw = (ctx, sample_array, opt = {}, alpha = 0, desc='') => {
+        draw_midline(ctx, opt.sx, opt.sy, opt.w, opt.h);
+        DSD.draw_box(ctx, opt, alpha );
+        DSD.draw_sample_data(ctx, sample_array, opt );
+        draw_desc(ctx, desc, opt);
     };
 
     window.DSD = DSD;

@@ -95,14 +95,17 @@ VIDEO.init = function(sm, scene, camera){
 
     // display objects for audio sample arrays for tracks and main final display
     sud.opt_frame_track0 = {
-        w: 1200, h: 100, sy: 100, sx: 40, mode: 'raw', overlay_alpha: 0.4,
+        w: 1200, h: 100, sy: 100, sx: 40, padx: 0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
         boxStyle: '#444444', lineStyle: '#ffffff'
     };
     sud.opt_frame_track1 = {
-        w: 1200, h: 100, sy: 250, sx: 40, mode: 'raw', overlay_alpha: 0.4,
+        w: 1200, h: 100, sy: 250, sx: 40, padx:0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
         boxStyle: '#444444', lineStyle: '#ffffff'
     };
-    sud.opt_frame = { w: 1200, h: 200, sy: 500, sx: 40, mode: sound.mode, overlay_alpha: 0.4, boxStyle: '#880000', lineStyle: '#ff4400' };
+    sud.opt_frame = {
+       w: 1200, h: 150, sy: 550, sx: 40, padx: 0, pady: -30, mode: sound.mode, overlay_alpha: 0.4, 
+       boxStyle: '#880000', lineStyle: '#ff4400'
+    };
 
 
     // set vg sm.frameMax to frames value of sound object
@@ -134,17 +137,11 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
     // draw sample data for 1bit tracks
-    // track 0
-    DSD.draw_box(ctx, sud.opt_frame_track0, 0);
-    DSD.draw_sample_data( ctx, sud.tracks.samples[0], sud.opt_frame_track0);
-
-    // track 1
-    DSD.draw_box(ctx, sud.opt_frame_track1, 0);
-    DSD.draw_sample_data( ctx, sud.tracks.samples[1], sud.opt_frame_track1);
-
+    DSD.draw( ctx, sud.tracks.samples[0], sud.opt_frame_track0, 0, 'track 0' );
+    DSD.draw( ctx, sud.tracks.samples[1], sud.opt_frame_track1, 0, 'track 1' );
 
     // draw frame disp, for final 16bit mix
-    DSD.draw( ctx, sound.array_frame, sud.opt_frame, 0, 'final 16-bit mix' );
+    DSD.draw( ctx, sound.array_frame, sud.opt_frame, sm.per, 'final 16-bit mix' );
 
 
     // top display info
