@@ -16,9 +16,11 @@
           * () single draw tracks function
 
           * () will need better track objects that allow for description properties along with other values
+          * () can set an octave value for a track object
 
           * () noise_1bit waveform function for bit tracks
           * () can set/change what waveform function to use on track by track basis
+          * () updated note notation for tracks
 
 
 
