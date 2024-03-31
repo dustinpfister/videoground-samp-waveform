@@ -17,9 +17,6 @@
 
           * () will need better track objects that allow for description properties along with other values
 
-
-
-          
           * () noise_1bit waveform function for bit tracks
           * () can set/change what waveform function to use on track by track basis
 
@@ -98,15 +95,20 @@ VIDEO.init = function(sm, scene, camera){
 
     // display objects for audio sample arrays for tracks and main final display
 
-    sud.opt_frame_track0 = {
+    sud.track_disp_opt = {
+       tracks: [],
+       mix: {}
+    };
+
+    sud.track_disp_opt.tracks[0] = {
         w: 1200, h: 170, sy: 100, sx: 40, padx: 0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
         boxStyle: '#444444', lineStyle: '#ffffff'
     };
-    sud.opt_frame_track1 = {
+    sud.track_disp_opt.tracks[1] = {
         w: 1200, h: 170, sy: 330, sx: 40, padx:0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
         boxStyle: '#444444', lineStyle: '#ffffff'
     };
-    sud.opt_frame = {
+    sud.track_disp_opt.mix = {
        w: 1200, h: 150, sy: 550, sx: 40, padx: 0, pady: -30, mode: sound.mode, overlay_alpha: 0.4, 
        boxStyle: '#880000', lineStyle: '#ff4400'
     };
@@ -140,12 +142,18 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
-    // draw sample data for 1bit tracks
-    DSD.draw( ctx, sud.tracks.samples[0], sud.opt_frame_track0, 0, 'track 0' );
-    DSD.draw( ctx, sud.tracks.samples[1], sud.opt_frame_track1, 0, 'track 1' );
+    // draw sample data for 1bit tracks, and 16bit mix
 
-    // draw frame disp, for final 16bit mix
-    DSD.draw( ctx, sound.array_frame, sud.opt_frame, sm.per, 'final 16-bit mix' );
+    const tracks = sud.tracks;
+    let i_track = 0;
+    const len_track = tracks.samples.length;
+
+    while(i_track < len_track ){
+        DSD.draw( ctx, tracks.samples[i_track], sud.track_disp_opt.tracks[i_track], 0, 'track ' + i_track );
+        i_track += 1;
+    }
+
+    DSD.draw( ctx, sound.array_frame, sud.track_disp_opt.mix, sm.per, 'final 16-bit mix' );
 
 
     // top display info
