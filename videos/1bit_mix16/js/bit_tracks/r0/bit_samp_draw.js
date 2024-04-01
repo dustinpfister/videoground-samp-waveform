@@ -59,6 +59,35 @@
         }
         return samp;
     };
+    
+    
+    DSD.create_disp_options = (tracks, sound) => {
+    
+        const track_disp_opt = {
+            tracks: [],
+            mix: {}
+        };
+
+        let i_track = 0;
+        while(i_track < tracks.count){
+
+            track_disp_opt.tracks[i_track] = {
+                w: 1200, h: 170, sy: 100 + 230 * i_track, sx: 40, padx: 0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
+                boxStyle: '#444444', lineStyle: '#ffffff'
+            };
+        
+            i_track += 1;
+        }
+    
+        track_disp_opt.mix = {
+            w: 1200, h: 150, sy: 550, sx: 40, padx: 0, pady: -30, mode: sound.mode, overlay_alpha: 0.4, 
+            boxStyle: '#880000', lineStyle: '#ff4400'
+        };
+        
+        return track_disp_opt;
+    
+    };
+    
     /********* **********
     PUBLIC DRAW METHODS
     ********** *********/

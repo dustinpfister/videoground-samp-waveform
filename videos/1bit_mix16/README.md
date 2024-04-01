@@ -10,7 +10,7 @@ The goal is to just get started with a general idea of what I want to do when it
 
 The first and formost goal here is to just work out what the core idea of the project is of course. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
 
-## Updated Look with bit_samp_draw.js file in place of main samp_draw.js ( done in video01-01-test-2tracks.js )
+### Updated Look with bit_samp_draw.js file in place of main samp_draw.js ( done in video01-01-test-2tracks.js )
 
 For this project I started a new samp_draw.js file starting with the code that I all ready have in place for this. Functions that are not beging usesd for this project where removed, and addtional code that will be used for this was added to this copy of the file. This might be soemhting that I should concider doing on a project by project basis anyway as each time I start a new project that is a chance to start a whole new look and over all feel of the video content after all.
 

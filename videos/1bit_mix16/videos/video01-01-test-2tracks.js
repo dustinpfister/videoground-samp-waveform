@@ -12,16 +12,21 @@
           * (done) I will want version numbers for project js files as I will be making more videos
           * (done) I will want descriptions for tracks
           * (done) single draw tracks function
+          * (done) start a create_disp_options function for tracks and main 16bit track
 
-          * () create draw options helper function for tracks and main 16bit track
-
+          * () DSD.create_disp_options should adjust height of each disp object based on count of tracks
+          * () height and width arguments for DSD.create_disp_options
 
           * () will need better track objects that allow for description properties along with other values
           * () can set an octave value for a track object
+          
+          * () can set a waveform value for a track
+          * () can set fixed waveform values for tracks such as duty cycle
+          * () updated note notation for tracks
 
           * () noise_1bit waveform function for bit tracks
           * () can set/change what waveform function to use on track by track basis
-          * () updated note notation for tracks
+
 
 
 
@@ -51,7 +56,7 @@ VIDEO.init = function(sm, scene, camera){
 
     console.log( sud.tracks );
 
-    const TRACKS = [];
+    //const TRACKS = [];
 
     sud.tracks.notes = [[],[]]
 
@@ -98,24 +103,7 @@ VIDEO.init = function(sm, scene, camera){
 
     // display objects for audio sample arrays for tracks and main final display
 
-    sud.track_disp_opt = {
-       tracks: [],
-       mix: {}
-    };
-
-    sud.track_disp_opt.tracks[0] = {
-        w: 1200, h: 170, sy: 100, sx: 40, padx: 0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
-        boxStyle: '#444444', lineStyle: '#ffffff'
-    };
-    sud.track_disp_opt.tracks[1] = {
-        w: 1200, h: 170, sy: 330, sx: 40, padx:0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
-        boxStyle: '#444444', lineStyle: '#ffffff'
-    };
-    sud.track_disp_opt.mix = {
-       w: 1200, h: 150, sy: 550, sx: 40, padx: 0, pady: -30, mode: sound.mode, overlay_alpha: 0.4, 
-       boxStyle: '#880000', lineStyle: '#ff4400'
-    };
-
+    sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound);
 
     // set vg sm.frameMax to frames value of sound object
     sm.frameMax = sound.frames;
