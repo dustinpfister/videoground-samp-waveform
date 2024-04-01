@@ -8,7 +8,7 @@
           * (done) bit_tracks has a function to create a sampset object
           * (done) have a Bit_tracks.waveform.mix waveform function
           * (done) new 1bit pulse waveform function for bit tracks
-          * (done) start a bit_samo_draw.js file for the 1bit_mix16 project
+          * (done) start a bit_samp_draw.js file for the 1bit_mix16 project
           * (done) I will want version numbers for project js files as I will be making more videos
           * (done) I will want descriptions for tracks
           * (done) single draw tracks function
