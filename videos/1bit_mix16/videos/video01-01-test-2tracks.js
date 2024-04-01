@@ -11,9 +11,10 @@
           * (done) start a bit_samo_draw.js file for the 1bit_mix16 project
           * (done) I will want version numbers for project js files as I will be making more videos
           * (done) I will want descriptions for tracks
+          * (done) single draw tracks function
 
           * () create draw options helper function for tracks and main 16bit track
-          * () single draw tracks function
+
 
           * () will need better track objects that allow for description properties along with other values
           * () can set an octave value for a track object
@@ -145,16 +146,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
     // draw sample data for 1bit tracks, and 16bit mix
-
-    const tracks = sud.tracks;
-    let i_track = 0;
-    const len_track = tracks.samples.length;
-
-    while(i_track < len_track ){
-        DSD.draw( ctx, tracks.samples[i_track], sud.track_disp_opt.tracks[i_track], 0, 'track ' + i_track );
-        i_track += 1;
-    }
-
+    DSD.draw_tracks(ctx, sud.tracks, sud.track_disp_opt);
     DSD.draw( ctx, sound.array_frame, sud.track_disp_opt.mix, sm.per, 'final 16-bit mix' );
 
 
