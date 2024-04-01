@@ -17,11 +17,13 @@
           * () DSD.create_disp_options should adjust height of each disp object based on count of tracks
           * () height and width arguments for DSD.create_disp_options
 
+          * () update DSD.draw_info function for 1bit_mix16 project
+
           * () will need better track objects that allow for description properties along with other values
           * () can set an octave value for a track object
-          
           * () can set a waveform value for a track
           * () can set fixed waveform values for tracks such as duty cycle
+
           * () updated note notation for tracks
 
           * () noise_1bit waveform function for bit tracks
