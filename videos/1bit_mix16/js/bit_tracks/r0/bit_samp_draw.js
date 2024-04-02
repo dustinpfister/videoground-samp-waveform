@@ -61,31 +61,29 @@
     };
     
     
-    DSD.create_disp_options = (tracks, sound) => {
-    
+    DSD.create_disp_options = (tracks, sound, width=1200, height=640, sx=40, sy=80, text_space=70, text_pad=35) => {  
         const track_disp_opt = {
             tracks: [],
             mix: {}
         };
-
+        const h = Math.floor( (height - text_space * ( tracks.count + 1 ) ) / ( tracks.count + 1) );
         let i_track = 0;
         while(i_track < tracks.count){
-
             track_disp_opt.tracks[i_track] = {
-                w: 1200, h: 170, sy: 100 + 230 * i_track, sx: 40, padx: 0, pady: -30, mode: 'raw', overlay_alpha: 0.4,
+                w: width, h: h, 
+                sy: sy + h * i_track + text_space * i_track,  sx: sx,
+                padx: 0, pady: text_pad * -1, mode: 'raw', overlay_alpha: 0.4,
                 boxStyle: '#444444', lineStyle: '#ffffff'
-            };
-        
+            };       
             i_track += 1;
-        }
-    
+        }  
         track_disp_opt.mix = {
-            w: 1200, h: 150, sy: 550, sx: 40, padx: 0, pady: -30, mode: sound.mode, overlay_alpha: 0.4, 
+            w: width, h: h,
+            sy: sy + h * tracks.count + text_space * tracks.count, sx: 40,
+            padx: 0, pady: text_pad * -1, mode: sound.mode, overlay_alpha: 0.4, 
             boxStyle: '#880000', lineStyle: '#ff4400'
-        };
-        
-        return track_disp_opt;
-    
+        };      
+        return track_disp_opt;  
     };
     
     /********* **********

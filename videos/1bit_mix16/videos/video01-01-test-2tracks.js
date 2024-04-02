@@ -13,9 +13,8 @@
           * (done) I will want descriptions for tracks
           * (done) single draw tracks function
           * (done) start a create_disp_options function for tracks and main 16bit track
-
-          * () DSD.create_disp_options should adjust height of each disp object based on count of tracks
-          * () height and width arguments for DSD.create_disp_options
+          * (done) DSD.create_disp_options should adjust height of each disp object based on count of tracks
+          * (done) height and width arguments for DSD.create_disp_options
 
           * () update DSD.draw_info function for 1bit_mix16 project
 
@@ -55,10 +54,6 @@ VIDEO.init = function(sm, scene, camera){
         count: 2,
         octives: [3, 1]
     });
-
-    console.log( sud.tracks );
-
-    //const TRACKS = [];
 
     sud.tracks.notes = [[],[]]
 
