@@ -61,28 +61,40 @@
     };
     
     
-    DSD.create_disp_options = (tracks, sound, width=1200, height=640, sx=40, sy=80, text_space=70, text_pad=35, line_width=12, overlay_alpha=0) => {  
+    DSD.create_disp_options = (tracks, sound, opt={} ) => {  
+        opt = Object.assign({}, {
+            width: 1200,
+            height: 640,
+            sx: 40,
+            sy: 80,
+            text_space:70,
+            text_pad:35,
+            line_width: 12,
+            overlay_alpha: 0,
+            track_styles: ['#ffffff', '#444444'],
+            mix_styles: ['#ff0000', '#880000'],
+        }, opt); 
         const track_disp_opt = {
             tracks: [],
             mix: {}
         };
-        const h = Math.floor( (height - text_space * ( tracks.count + 1 ) ) / ( tracks.count + 1) );
+        const h = Math.floor( (opt.height - opt.text_space * ( tracks.count + 1 ) ) / ( tracks.count + 1) );
         let i_track = 0;
         while(i_track < tracks.count){
             track_disp_opt.tracks[i_track] = {
-                w: width, h: h, 
-                sx: sx, sy: sy + h * i_track + text_space * i_track,  
-                padx: 0, pady: text_pad * -1, mode: 'raw', overlay_alpha: overlay_alpha,
-                lineWidth: line_width, boxLineWidth: line_width,
-                boxStyle: '#444444', lineStyle: '#ffffff'
+                w: opt.width, h: h, 
+                sx: opt.sx, sy: opt.sy + h * i_track + opt.text_space * i_track,  
+                padx: 0, pady: opt.text_pad * -1, mode: 'raw', overlay_alpha: opt.overlay_alpha,
+                lineWidth: opt.line_width, boxLineWidth: opt.line_width,
+                boxStyle: opt.track_styles[1], lineStyle: opt.track_styles[0]
             };       
             i_track += 1;
         }  
         track_disp_opt.mix = {
-            w: width, h: h,
-            sx: sx, sy: sy + h * tracks.count + text_space * tracks.count, 
-            padx: 0, pady: text_pad * -1, mode: sound.mode, overlay_alpha: overlay_alpha, 
-            lineWidth: line_width, boxLineWidth: line_width, boxStyle: '#880000', lineStyle: '#ff0000'
+            w: opt.width, h: h,
+            sx: opt.sx, sy: opt.sy + h * tracks.count + opt.text_space * tracks.count, 
+            padx: 0, pady: opt.text_pad * -1, mode: sound.mode, overlay_alpha: opt.overlay_alpha, 
+            lineWidth: opt.line_width, boxLineWidth: opt.line_width, boxStyle: opt.mix_styles[1], lineStyle: opt.mix_styles[0]
         };      
         return track_disp_opt;  
     };

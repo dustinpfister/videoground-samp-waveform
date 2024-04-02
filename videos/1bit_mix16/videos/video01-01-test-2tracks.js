@@ -16,6 +16,8 @@
           * (done) DSD.create_disp_options should adjust height of each disp object based on count of tracks
           * (done) height and width arguments for DSD.create_disp_options
           * (done) update DSD.draw_info function for 1bit_mix16 project
+          * (done) options object for DSD.create_disp_options
+          * (done) style options for track and mix objects for DSD.create_disp_options
 
           * () will need better track objects that allow for description properties along with other values
           * () can set an octave value for a track object
@@ -97,7 +99,7 @@ VIDEO.init = function(sm, scene, camera){
     });
 
     // display objects for audio sample arrays for tracks and main final display
-    sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, 1200, 650, 40, 100);
+    sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, { });
 
     // set vg sm.frameMax to frames value of sound object
     sm.frameMax = sound.frames;
