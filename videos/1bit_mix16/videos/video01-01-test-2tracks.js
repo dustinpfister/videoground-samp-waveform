@@ -15,8 +15,7 @@
           * (done) start a create_disp_options function for tracks and main 16bit track
           * (done) DSD.create_disp_options should adjust height of each disp object based on count of tracks
           * (done) height and width arguments for DSD.create_disp_options
-
-          * () update DSD.draw_info function for 1bit_mix16 project
+          * (done) update DSD.draw_info function for 1bit_mix16 project
 
           * () will need better track objects that allow for description properties along with other values
           * () can set an octave value for a track object
@@ -97,10 +96,8 @@ VIDEO.init = function(sm, scene, camera){
         secs: 6
     });
 
-
     // display objects for audio sample arrays for tracks and main final display
-
-    sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound);
+    sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, 1200, 650, 40, 100);
 
     // set vg sm.frameMax to frames value of sound object
     sm.frameMax = sound.frames;
@@ -134,15 +131,8 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     DSD.draw_tracks(ctx, sud.tracks, sud.track_disp_opt);
     DSD.draw( ctx, sound.array_frame, sud.track_disp_opt.mix, sm.per, 'final 16-bit mix' );
 
-
     // top display info
-    const alpha = sm.frame / ( sm.frameMax - 1);
-    ctx.fillStyle = 'white';
-    ctx.font = '25px courier';
-    ctx.textBaseline = 'top';
-    const disp_frame = sm.frame + '/' + sm.frameMax;
-    const disp_time =  (sound.secs * alpha).toFixed(2) + ' / ' + sound.secs;
-    ctx.fillText('frame: ' + disp_frame + ', seconds: ' + disp_time, 10, 10);
+    DSD.draw_info(ctx, sound, sm, '#ffffff', 30);
 
 };
 

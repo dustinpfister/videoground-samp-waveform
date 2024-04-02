@@ -61,7 +61,7 @@
     };
     
     
-    DSD.create_disp_options = (tracks, sound, width=1200, height=640, sx=40, sy=80, text_space=70, text_pad=35) => {  
+    DSD.create_disp_options = (tracks, sound, width=1200, height=640, sx=40, sy=80, text_space=70, text_pad=35, line_width=12, overlay_alpha=0) => {  
         const track_disp_opt = {
             tracks: [],
             mix: {}
@@ -71,17 +71,18 @@
         while(i_track < tracks.count){
             track_disp_opt.tracks[i_track] = {
                 w: width, h: h, 
-                sy: sy + h * i_track + text_space * i_track,  sx: sx,
-                padx: 0, pady: text_pad * -1, mode: 'raw', overlay_alpha: 0.4,
+                sx: sx, sy: sy + h * i_track + text_space * i_track,  
+                padx: 0, pady: text_pad * -1, mode: 'raw', overlay_alpha: overlay_alpha,
+                lineWidth: line_width, boxLineWidth: line_width,
                 boxStyle: '#444444', lineStyle: '#ffffff'
             };       
             i_track += 1;
         }  
         track_disp_opt.mix = {
             w: width, h: h,
-            sy: sy + h * tracks.count + text_space * tracks.count, sx: 40,
-            padx: 0, pady: text_pad * -1, mode: sound.mode, overlay_alpha: 0.4, 
-            boxStyle: '#880000', lineStyle: '#ff4400'
+            sx: sx, sy: sy + h * tracks.count + text_space * tracks.count, 
+            padx: 0, pady: text_pad * -1, mode: sound.mode, overlay_alpha: overlay_alpha, 
+            lineWidth: line_width, boxLineWidth: line_width, boxStyle: '#880000', lineStyle: '#ff0000'
         };      
         return track_disp_opt;  
     };
@@ -141,10 +142,10 @@
         }
     };
 
-    DSD.draw_info = (ctx, sound, sm) => {
+    DSD.draw_info = (ctx, sound, sm, fill='white', size=25) => {
         const alpha = sm.frame / ( sm.frameMax - 1);
-        ctx.fillStyle = 'lime';
-        ctx.font = '25px courier';
+        ctx.fillStyle = fill;
+        ctx.font = size + 'px courier';
         ctx.textBaseline = 'top';
         const disp_frame = sm.frame + '/' + sm.frameMax;
         const disp_time =  (sound.secs * alpha).toFixed(2) + ' / ' + sound.secs;
