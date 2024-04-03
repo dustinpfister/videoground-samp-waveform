@@ -23,4 +23,4 @@ CS.WAVE_FORM_FUNCTIONS.pulse = (sampeset, a_wave ) => {
 
 ## Videoground
 
-This repo is one of several projects that work on top of my electionjs project that I call videoground.
+This repo is one of several projects that work on top of my electionjs project that I call [videoground](https://github.com/dustinpfister/videoground). This is my own tool that I have made for cretaing any kind of video project that involves generating a whole bunch of image files for each frame, and also any addtional assets such as a wave file that can then be used to create a final video project with ffmpeg. Getting into this project in detail is outside the scope of this readme file of course, but if you are trying to get this working on your end you will also need videoground to run the content here.
