@@ -18,10 +18,8 @@
           * (done) update DSD.draw_info function for 1bit_mix16 project
           * (done) options object for DSD.create_disp_options
           * (done) style options for track and mix objects for DSD.create_disp_options
-          * (done) track objects that allow for description arrays
-          
+          * (done) track objects that allow for description arrays      
           * () updated note notation for tracks
-
  */
 //-------- ----------
 // SCRIPTS
@@ -38,6 +36,10 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
 
+
+console.log( ST.notefreq_by_indices(6,4) );
+
+
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
@@ -52,25 +54,13 @@ VIDEO.init = function(sm, scene, camera){
 
     sud.tracks.notes[0] = [
 
-        0,0,1,0,2,0,3,0, 4,0,5,0,6,0,7,0, 8,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,
-        0,0,1,0,2,0,3,0, 4,0,5,0,6,0,7,0, 8,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,
-        0,0,1,0,2,0,3,0, 4,0,5,0,6,0,7,0, 8,0,0,0,0,0,0,0, 8,0,0,0,0,0,0,0,
-
-        0,0,2,0,3,0,4,0, 5,0,6,0,7,0,8,0, 9,0,0,0,0,0,0,0, 10,0,0,0,0,0,0,0,
-        0,0,2,0,3,0,4,0, 5,0,6,0,7,0,8,0, 9,0,0,0,0,0,0,0, 10,0,0,0,0,0,0,0,
-        0,0,2,0,3,0,4,0, 5,0,6,0,7,0,8,0, 9,0,0,0,0,0,0,0, 10,0,0,0,0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0
 
     ];
 
     sud.tracks.notes[1] = [
 
-        1,1,1,1,1,1,1,1,
-        2,2,2,2,2,2,2,2,
-        1,1,1,1,1,1,1,1,
-        2,2,2,2,2,2,2,2,
-        3,3,0,0,3,3,0,0,
-        4,4,0,0,4,4,0,0
-
+        0,0,0,0, 1,1,1,1, 2,2,2,2, 3,3,3,3, 4,4,4,4
     ];
 
 
