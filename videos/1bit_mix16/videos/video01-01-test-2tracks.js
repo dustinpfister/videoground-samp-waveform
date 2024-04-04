@@ -18,19 +18,9 @@
           * (done) update DSD.draw_info function for 1bit_mix16 project
           * (done) options object for DSD.create_disp_options
           * (done) style options for track and mix objects for DSD.create_disp_options
-
-          * () will need better track objects that allow for description properties along with other values
-          * () can set an octave value for a track object
-          * () can set a waveform value for a track
-          * () can set fixed waveform values for tracks such as duty cycle
-
+          * (done) track objects that allow for description arrays
+          
           * () updated note notation for tracks
-
-          * () noise_1bit waveform function for bit tracks
-          * () can set/change what waveform function to use on track by track basis
-
-
-
 
  */
 //-------- ----------
@@ -56,7 +46,9 @@ VIDEO.init = function(sm, scene, camera){
         octives: [3, 1]
     });
 
-    sud.tracks.notes = [[],[]]
+    sud.tracks.notes = [[],[]];
+    
+    sud.tracks.desc = ['highs', 'lows'],
 
     sud.tracks.notes[0] = [
 

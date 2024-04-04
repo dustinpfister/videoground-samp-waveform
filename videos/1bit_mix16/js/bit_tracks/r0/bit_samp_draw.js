@@ -169,7 +169,8 @@
         let i_track = 0;
         const len_track = tracks.samples.length;
         while(i_track < len_track ){
-            DSD.draw( ctx, tracks.samples[i_track], track_disp_opt.tracks[i_track], 0, 'track ' + i_track );
+            const desc = tracks.desc[i_track] || 'track ' + i_track;
+            DSD.draw( ctx, tracks.samples[i_track], track_disp_opt.tracks[i_track], 0, desc );
             i_track += 1;
         }
     };

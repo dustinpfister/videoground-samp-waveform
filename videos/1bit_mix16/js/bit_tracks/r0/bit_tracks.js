@@ -35,6 +35,7 @@
         const tracks = {
             count: opt.count === undefined ? 1 : opt.count,
             octives: opt.octives || [1],
+            desc: [],
             notes: [],
             current: [],
             samples: []
@@ -73,8 +74,8 @@
         const len = tracks.count;
         while(ti < len){
             const cur = tracks.current[ti]; 
-            const s0 = Bit_tracks.waveforms.pulse_1bit({ duty: 0.5, frequency: cur.freq, ni: cur.ni  }, a_wave );
-            tracks.samples[ti].push(s0);
+            const s0 = Bit_tracks.waveforms.pulse_1bit( { duty: 0.5, frequency: cur.freq, ni: cur.ni  }, a_wave );
+            tracks.samples[ti].push( s0 );
             t.push(s0);
             ti += 1;
         }
