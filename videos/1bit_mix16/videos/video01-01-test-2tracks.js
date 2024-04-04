@@ -19,7 +19,8 @@
           * (done) options object for DSD.create_disp_options
           * (done) style options for track and mix objects for DSD.create_disp_options
           * (done) track objects that allow for description arrays      
-          * () updated note notation for tracks
+          * (done) updated note notation for tracks
+          * (done) duty cycle arrays
  */
 //-------- ----------
 // SCRIPTS
@@ -45,7 +46,8 @@ console.log( ST.notefreq_by_indices(6,4) );
 
     sud.tracks = Bit_tracks.create({
         count: 2,
-        octives: [2, 1]
+        octives: [2, 1],
+        duty: [0.85, 0.30 ]
     });
 
     sud.tracks.notes = [[],[]];
