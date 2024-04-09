@@ -46,8 +46,8 @@ console.log( ST.notefreq_by_indices(6,4) );
 
     sud.tracks = Bit_tracks.create({
         count: 2,
-        octives: [2, 1],
-        duty: [0.85, 0.30 ]
+        octives: [3, 1],
+        duty: [0.50, 0.30 ]
     });
 
     sud.tracks.notes = [[],[]];
@@ -98,7 +98,7 @@ console.log( ST.notefreq_by_indices(6,4) );
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs);
+            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
         },
         secs: 32
     });

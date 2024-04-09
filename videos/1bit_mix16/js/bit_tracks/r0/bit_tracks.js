@@ -68,7 +68,7 @@
     };
     
     // create a sampset object for the final waveform function that will be used
-    Bit_tracks.for_sampset = (tracks, a_sound=0, secs=1 ) => {
+    Bit_tracks.for_sampset = (tracks, a_sound=0, secs=1, amp=0.75 ) => {
         const t = [];
         const a_wave = a_sound * secs % 1;
         let ti = 0;
@@ -82,7 +82,7 @@
             ti += 1;
         }
         return {
-            amplitude: 0.75,
+            amplitude: amp,
             tracks: t
         };
     };
