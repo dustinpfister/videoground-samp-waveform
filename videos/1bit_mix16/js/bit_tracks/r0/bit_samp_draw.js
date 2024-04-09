@@ -7,10 +7,10 @@
     INTERNAL HELPER FUNCTIONS
     ********** *********/
     // draw a midline
-    const draw_midline = (ctx, sx, sy, w, h) => {
+    const draw_midline = (ctx, sx, sy, w, h, style) => {
         // mid line
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = style || 'white';
+        ctx.lineWidth = 4;
         const y = sy + h / 2;
         ctx.beginPath();
         ctx.moveTo(sx, y);
@@ -71,6 +71,7 @@
             text_pad:35,
             line_width: 12,
             overlay_alpha: 0,
+            midline_style: '#ff0000',
             track_styles: ['#ffffff', '#444444'],
             mix_styles: ['#ff0000', '#880000'],
         }, opt); 
@@ -86,7 +87,8 @@
                 sx: opt.sx, sy: opt.sy + h * i_track + opt.text_space * i_track,  
                 padx: 0, pady: opt.text_pad * -1, mode: 'raw', overlay_alpha: opt.overlay_alpha,
                 lineWidth: opt.line_width, boxLineWidth: opt.line_width,
-                boxStyle: opt.track_styles[1], lineStyle: opt.track_styles[0]
+                boxStyle: opt.track_styles[1], lineStyle: opt.track_styles[0],
+                midline_style: opt.midline_style
             };       
             i_track += 1;
         }  
@@ -94,7 +96,8 @@
             w: opt.width, h: h,
             sx: opt.sx, sy: opt.sy + h * tracks.count + opt.text_space * tracks.count, 
             padx: 0, pady: opt.text_pad * -1, mode: sound.mode, overlay_alpha: opt.overlay_alpha, 
-            lineWidth: opt.line_width, boxLineWidth: opt.line_width, boxStyle: opt.mix_styles[1], lineStyle: opt.mix_styles[0]
+            lineWidth: opt.line_width, boxLineWidth: opt.line_width, boxStyle: opt.mix_styles[1], lineStyle: opt.mix_styles[0],
+                midline_style: opt.midline_style
         };      
         return track_disp_opt;  
     };
@@ -177,7 +180,7 @@
     
     // updated main draw function that will draw a given sample array
     DSD.draw = (ctx, sample_array, opt = {}, alpha = 0, desc='') => {
-        draw_midline(ctx, opt.sx, opt.sy, opt.w, opt.h);
+        draw_midline(ctx, opt.sx, opt.sy, opt.w, opt.h, opt.midline_style);
         DSD.draw_box(ctx, opt, alpha );
         DSD.draw_sample_data(ctx, sample_array, opt );
         draw_desc(ctx, desc, opt);

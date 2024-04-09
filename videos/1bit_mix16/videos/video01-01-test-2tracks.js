@@ -101,7 +101,7 @@ console.log( ST.notefreq_by_indices(6,4) );
     });
 
     // display objects for audio sample arrays for tracks and main final display
-    sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, { });
+    sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, { line_width: 3, midline_style: '#444400' });
 
     // set vg sm.frameMax to frames value of sound object
     sm.frameMax = sound.frames;
