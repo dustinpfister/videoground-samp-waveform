@@ -6,6 +6,11 @@ The general idea here is to have more than one 1-bit track, however when it come
 
 The goal is to just get started with a general idea of what I want to do when it comes to 1bit sound and music. As of this writing I all ready have the core idea of what I want working, and now it is just a question of how many videos I want to make, and if this will result in some kind of long term project or not. Apart from just mixing upscaled 1bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that migth result in an improved javascript code that is used for createing sample data to begin with.
 
+  * ( done in video01-01 ) Core Idea of the project working
+  * ( done in video01-01 ) New look started for the project with custom draw.js file
+  * ( done in video01-01 ) start a bit\_tracks.js R0 file that will contain reusable code for this project and any others based on what I start here
+  
+
 ### Core idea of project working ( done in video01-01-test-2tracks )
 
 The first and formost goal here is to just work out what the core idea of the project is of course. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
@@ -16,11 +21,19 @@ For this project I started a new samp_draw.js file starting with the code that I
 
 ### Custom 1-bit Waveform Funcitons ()
 
-I will want to work out a few custom waveform functions for this project. As of this writing I have all ready started a custom pulse waveform function. I will want to expand this by making a noise waveform as well that will also work with 1-bit, but might also what to work out one that will read raw 1-bit data also.
+I will want to work out a few custom waveform functions for this project. As of this writing I have all ready started a custom pulse waveform function. I will want to expand this by making a noise waveform as well that will also work with 1-bit, but might also what to work out one that will read raw 1-bit data also. The raw data tool will then be used as a way to playback any kind of binary data including sound samples that are converted to 1 bit sample depth.
+
+## IDEAS FOR ADDITIONAL PROJECTS BASED ON WHAT I HAVE STARTED IN 1BIT_MIX16
+
+Once I have the general idea of what I want to do working okay here I can move on to starting some additional projects.
+
+### Merge down project
+
+The merge down project might just need to be the same code I worked out here, just with a whole other function for creating the final 16bit mix.
 
 ### Better Standards for Storing Music ()
 
-I would like to have one or more standards for working out what the music should be for each track in terms of at least pitch and timing. I might want to just import from a standard such as MIDI, which will be fine for pitch and timing, however there is also things like changing the duty cycle when using the pule waveform, and other waveform spicific values. So maybe for this project alone I will want to work out some kind of custom format that is just a plain text file format of some kind that allows for setting pitch, timing, and waveform values. 
+I would like to have one or more standards for working out what the music should be for each track in terms of at least pitch and timing. I might want to just import from a standard such as MIDI, which will be fine for pitch and timing, however there is also things like changing the duty cycle when using the pule waveform, and other waveform spicific values. I might be able to do this by just extending JSON exports from MIDI files, in any case I think it would be best to have both MIDI files and JSON exports where I can do any werid custom stuff I might need to do.
 
 ### 24-bit/16-bit to 1-bit conversion tools
 
