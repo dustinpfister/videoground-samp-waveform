@@ -1,6 +1,7 @@
 /*    video01-02-test-notehelper - form 1bit_mix16 in videoground-samp-waveform
  *        * (done) start R1 of bit_tracks.js
  *        * (done) fix sum of tracks bug with mix waveform method in bit_tracks.js
+ *        * (done) not rounding in Bit_tracks.new_frame
  *        * () make create_note a method of bit_tracks.js R1
  *        * () simple string format for songs
  *        * () create_track_notes method for bit_tracks.js R1
@@ -21,6 +22,9 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
 
+
+    console.log(  ST.notefreq_by_indices(1, 1) );
+
     const create_note = ( nums_per_sec=8, pitch=1, secs=1 ) => {
         const nums = [];
         let i = 0;
@@ -33,22 +37,16 @@ VIDEO.init = function(sm, scene, camera){
     };
     
     const song = [
-        [1, 1],
-        [2, 1],
-        [3, 1],
-        [4, 1],
-        [5, 1],
-        [6, 1]       
+        [1, 1]     
     ];
     
     let track = [];
     song.forEach( (params) => {
-        const arr = create_note(8, params[0], params[1]);
+        const arr = create_note(32, params[0], params[1]);
         track.push(arr)
     });
     
     track = track.flat();
-    console.log(track.flat())
     
 
     const sud = scene.userData;
@@ -56,8 +54,8 @@ VIDEO.init = function(sm, scene, camera){
 
     sud.tracks = Bit_tracks.create({
         count: 1,
-        octives: [3, 3],
-        duty: [0.50, 0.5]
+        octives: [ 1 ],
+        duty: [0.50 ]
     });
 
     sud.tracks.notes = [[], []];
@@ -80,7 +78,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
         },
-        secs: 6
+        secs: 1
     });
 
     // display objects for audio sample arrays for tracks and main final display

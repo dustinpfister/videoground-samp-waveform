@@ -62,8 +62,9 @@
             if(NOTES){
                 ni = NOTES[ Math.floor( NOTES.length * a_sound) ];
             }
+            const freq = ST.notefreq_by_indices(tracks.octives[i], ni);
             tracks.current.push({
-                freq: Math.round( ST.notefreq_by_indices(tracks.octives[i], ni) ),
+                freq: freq,
                 ni: ni,
                 amp: ni === 0 ? 0 : 1
             });  
