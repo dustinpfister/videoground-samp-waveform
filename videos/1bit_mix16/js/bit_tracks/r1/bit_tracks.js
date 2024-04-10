@@ -65,7 +65,6 @@
             }
             if(ni >= 1){
                 freq = Math.floor( ST.notefreq_by_indices(tracks.octives[i], ni - 1) );
-                console.log(freq);
             }
             tracks.current.push({
                 freq: freq,

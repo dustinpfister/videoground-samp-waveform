@@ -27,33 +27,36 @@ VIDEO.init = function(sm, scene, camera){
 
     console.log(  ST.notefreq_by_indices(1, 1) );
 
-    const create_note = ( nums_per_sec=8, pitch=1, secs=1 ) => {
+    const create_note = ( nums_per_sec=8, pitch=1, secs=1, fade=0 ) => {
         const nums = [];
         let i = 0;
-        const len= Math.ceil( nums_per_sec * secs );
+        const len = Math.ceil( nums_per_sec * secs );
         while(i < len ){
-            nums.push( pitch );
+            const a_secs = i / len;
+            const a_half = 1 - (Math.abs(0.5 - a_secs) / 0.5);
+            const m = a_half < fade ? a_half / fade : 1;
+            nums.push( Math.round( pitch  * m) );
             i += 1;
         }
         return nums;
     };
     
     const song = [
-        [1, 1],
-        [2, 1],
-        [3, 1],
-        [4, 1],
-        [5, 1],
-        [6, 1],
-        [7, 1],
-        [8, 1],
-        [9, 1],
-        [10, 1]
+        [1, 0.25],
+        [2, 0.25],
+        [3, 0.25],
+        [4, 0.25],
+        [5, 0.25],
+        [6, 0.25],
+        [7, 0.25],
+        [8, 0.25],
+        [9, 0.25],
+        [10, 0.25]
     ];
     
     let track = [];
     song.forEach( (params) => {
-        const arr = create_note(32, params[0], params[1]);
+        const arr = create_note(64, params[0], params[1]);
         track.push(arr)
     });
     
@@ -89,7 +92,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
         },
-        secs: 10
+        secs: 2.5
     });
 
     // display objects for audio sample arrays for tracks and main final display
