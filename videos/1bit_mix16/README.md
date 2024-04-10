@@ -10,7 +10,7 @@ The goal is to just get started with a general idea of what I want to do when it
   * ( done in video01-01 ) New look started for the project with custom draw.js file
   * ( done in video01-01 ) start a bit\_tracks.js R0 file that will contain reusable code for this project and any others based on what I start here
   
-  * () start an R1 of bit\_tracks.js that I will contain improvements as I work out more video01-xx-text videos
+  * ( done in video01-02 ) start an R1 of bit\_tracks.js that I will contain improvements as I work out more video01-xx-text videos
   * () video01-02-test-notehelper - helper function for cretaing notes arrays
   * () video01-03-test-noise - work out a noise waveform
   * () video01-04-test-raw - work out a raw data waveform

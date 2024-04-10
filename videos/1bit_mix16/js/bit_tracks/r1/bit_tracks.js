@@ -1,5 +1,5 @@
 /*
- *  bit_tracks.js r0 - for the 1bit_mix16 project of videoground-samp-waveform
+ *  bit_tracks.js r1 - for the 1bit_mix16 project of videoground-samp-waveform
  *
  */
  
@@ -24,8 +24,13 @@
             samp.tracks = samp.tracks || [];
             const count = samp.tracks.length;
             samp.amplitude = samp.amplitude === undefined ? 0.75 : samp.amplitude; 
-            let n = 0;
-            return ( samp.tracks[0] + samp.tracks[1] ) * (1 / count) * samp.amplitude;
+            let sum = 0;
+            let i = 0;
+            while( i < count ){
+                sum += samp.tracks[i];
+                i += 1;
+            }
+            return sum * (1 / count) * samp.amplitude;
         }
     };
     
@@ -52,7 +57,7 @@
         const c = tracks.count;
         let i = 0;
         while(i < c){
-            const NOTES = tracks.notes[i]
+            const NOTES = tracks.notes[i];
             let ni = 0;
             if(NOTES){
                 ni = NOTES[ Math.floor( NOTES.length * a_sound) ];

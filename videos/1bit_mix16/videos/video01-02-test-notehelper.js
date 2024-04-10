@@ -1,4 +1,10 @@
-/*    video01-02-test-notehelper - form 1bit_mix16 in videoground-samp-waveform 
+/*    video01-02-test-notehelper - form 1bit_mix16 in videoground-samp-waveform
+ *        * (done) start R1 of bit_tracks.js
+ *        * (done) fix sum of tracks bug with mix waveform method in bit_tracks.js
+ *        * () make create_note a method of bit_tracks.js R1
+ *        * () simple string format for songs
+ *        * () create_track_notes method for bit_tracks.js R1
+ *        * () make a tune with 2 tracks
  */
 //-------- ----------
 // SCRIPTS
@@ -6,8 +12,8 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
-  '../js/bit_tracks/r0/bit_tracks.js',
-  '../js/bit_tracks/r0/bit_samp_draw.js',
+  '../js/bit_tracks/r1/bit_tracks.js',
+  '../js/bit_tracks/r1/bit_samp_draw.js',
 
 ];
 //-------- ----------
@@ -15,7 +21,7 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
 
-    const create_track_note = ( nums_per_sec=8, pitch=1, secs=1 ) => {
+    const create_note = ( nums_per_sec=8, pitch=1, secs=1 ) => {
         const nums = [];
         let i = 0;
         const len= Math.ceil( nums_per_sec * secs );
@@ -27,24 +33,18 @@ VIDEO.init = function(sm, scene, camera){
     };
     
     const song = [
-        [0, 1],
-        [1, 3],
-        [0, 1],
         [1, 1],
         [2, 1],
-        [3, 1],       
+        [3, 1],
+        [4, 1],
+        [5, 1],
+        [6, 1]       
     ];
     
-   let track = [];
+    let track = [];
     song.forEach( (params) => {
-    
-    
-        
-        const arr = create_track_note(8, params[0], params[1]);
-    
+        const arr = create_note(8, params[0], params[1]);
         track.push(arr)
-        
-    
     });
     
     track = track.flat();
@@ -56,19 +56,19 @@ VIDEO.init = function(sm, scene, camera){
 
     sud.tracks = Bit_tracks.create({
         count: 1,
-        octives: [3, 1],
-        duty: [0.50, 0.30 ]
+        octives: [3, 3],
+        duty: [0.50, 0.5]
     });
 
-    sud.tracks.notes = [[],[]];
+    sud.tracks.notes = [[], []];
     
-    sud.tracks.desc = ['highs', 'lows'],
+    sud.tracks.desc = ['highs'],
 
     sud.tracks.notes[0] = track.flat();
 
 
     // 1 bit track sample data arrays used for display
-    sud.array_frame_tracks = [];
+    sud.array_frame_tracks = [ ];
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
@@ -80,7 +80,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
         },
-        secs: 5
+        secs: 6
     });
 
     // display objects for audio sample arrays for tracks and main final display
