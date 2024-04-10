@@ -2,6 +2,8 @@
  *        * (done) start R1 of bit_tracks.js
  *        * (done) fix sum of tracks bug with mix waveform method in bit_tracks.js
  *        * (done) not rounding in Bit_tracks.new_frame
+ *        * (done) turns out the distoration has to do with ffmpeg
+ 
  *        * () make create_note a method of bit_tracks.js R1
  *        * () simple string format for songs
  *        * () create_track_notes method for bit_tracks.js R1
@@ -37,7 +39,16 @@ VIDEO.init = function(sm, scene, camera){
     };
     
     const song = [
-        [1, 1]     
+        [1, 1],
+        [2, 1],
+        [3, 1],
+        [4, 1],
+        [5, 1],
+        [6, 1],
+        [7, 1],
+        [8, 1],
+        [9, 1],
+        [10, 1]
     ];
     
     let track = [];
@@ -54,11 +65,11 @@ VIDEO.init = function(sm, scene, camera){
 
     sud.tracks = Bit_tracks.create({
         count: 1,
-        octives: [ 1 ],
+        octives: [ 3 ],
         duty: [0.50 ]
     });
 
-    sud.tracks.notes = [[], []];
+    sud.tracks.notes = [ [] ];
     
     sud.tracks.desc = ['highs'],
 
@@ -78,7 +89,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
         },
-        secs: 1
+        secs: 10
     });
 
     // display objects for audio sample arrays for tracks and main final display
@@ -97,6 +108,8 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 
     // create the data samples
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
+    
+    
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
 
 };

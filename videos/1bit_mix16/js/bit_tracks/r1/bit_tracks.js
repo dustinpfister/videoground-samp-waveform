@@ -30,7 +30,8 @@
                 sum += samp.tracks[i];
                 i += 1;
             }
-            return sum * (1 / count) * samp.amplitude;
+            const n = sum * (1 / count) * samp.amplitude;
+            return n;
         }
     };
     
@@ -58,11 +59,14 @@
         let i = 0;
         while(i < c){
             const NOTES = tracks.notes[i];
-            let ni = 0;
+            let ni = 0, freq = 0;
             if(NOTES){
                 ni = NOTES[ Math.floor( NOTES.length * a_sound) ];
             }
-            const freq = ST.notefreq_by_indices(tracks.octives[i], ni);
+            if(ni >= 1){
+                freq = Math.floor( ST.notefreq_by_indices(tracks.octives[i], ni - 1) );
+                console.log(freq);
+            }
             tracks.current.push({
                 freq: freq,
                 ni: ni,
