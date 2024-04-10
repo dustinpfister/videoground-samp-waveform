@@ -1,19 +1,35 @@
 # 1bit_mix16
 
-The general idea here is to have more than one 1-bit track, however when it comes to creating a 16-bit mix I am not merging down and then scaling up. Alliteratively I am scaling up to 16bit for each track, then sense I have 16bit tracks I can then mix as usual. As such this results in having more then one 1bit track that is played in parallel without having to prioritize one track over that of another. This might not be true 1-bit sound then, but nothing uploaded to YouTube truly is to begin with as sound must a minimum of at least 16bit sample depth.
+The general idea here is to have more than one 1-bit track, however when it comes to creating a 16-bit mix I am not merging down and then scaling up. Alliteratively I am scaling up to 16bit for each track, then sense I have 16bit tracks I can then mix as usual. As such this results in having more then one 1bit track that is played in parallel without having to prioritize one track over that of another. This might not be true 1-bit sound then, but nothing uploaded to YouTube truly is to begin with as sound must be a minimum of at least 16bit sample depth.
 
 ## Goals for the project
 
-The goal is to just get started with a general idea of what I want to do when it comes to 1bit sound and music. As of this writing I all ready have the core idea of what I want working, and now it is just a question of how many videos I want to make, and if this will result in some kind of long term project or not. Apart from just mixing upscaled 1bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that migth result in an improved javascript code that is used for createing sample data to begin with.
+The goal is to just get started with a general idea of what I want to do when it comes to 1-bit sound and music. As of this writing I all ready have the core idea of what I want working, and now it is just a question of how many videos I want to make, and if this will result in some kind of long term project or not. Apart from just mixing upscaled 1-bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that migth result in improved javascript code that is used for createing sample data to begin with.
 
   * ( done in video01-01 ) Core Idea of the project working
   * ( done in video01-01 ) New look started for the project with custom draw.js file
   * ( done in video01-01 ) start a bit\_tracks.js R0 file that will contain reusable code for this project and any others based on what I start here
   
+  * () start an R1 of bit\_tracks.js that I will contain improvements as I work out more video01-xx-text videos
+  * () video01-02-test-notehelper - helper function for cretaing notes arrays
+  * () video01-03-test-noise - work out a noise waveform
+  * () video01-04-test-raw - work out a raw data waveform
+  
 
 ### Core idea of project working ( done in video01-01-test-2tracks )
 
 The first and formost goal here is to just work out what the core idea of the project is of course. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
+
+
+<div align="center">
+      <a href="https://www.youtube.com/watch?v=0Jsbznfcudc">
+         <img src="https://img.youtube.com/vi/0Jsbznfcudc/0.jpg" style="width:50%;">
+      </a>
+    <p>
+video01-01-test-2tracks.
+    </p>
+</div>
+
 
 ### Updated Look with bit_samp_draw.js file in place of main samp_draw.js ( done in video01-01-test-2tracks.js )
 
