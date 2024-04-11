@@ -1,5 +1,6 @@
 /*
  *  bit_tracks.js r1 - for the 1bit_mix16 project of videoground-samp-waveform
+ *      * 
  *
  */
  
@@ -94,6 +95,21 @@
             amplitude: amp,
             tracks: t
         };
+    };
+    
+    // create a note for a notes array of a tracks object
+    Bit_tracks.create_note = ( nums_per_sec=8, pitch=1, secs=1, fade=0 ) => {
+        const nums = [];
+        let i = 0;
+        const len = Math.ceil( nums_per_sec * secs );
+        while(i < len ){
+            const a_secs = i / len;
+            const a_half = 1 - (Math.abs(0.5 - a_secs) / 0.5);
+            const m = a_half < fade ? a_half / fade : 1;
+            nums.push( Math.round( pitch  * m) );
+            i += 1;
+        }
+        return nums;
     };
     
     window.Bit_tracks = Bit_tracks;

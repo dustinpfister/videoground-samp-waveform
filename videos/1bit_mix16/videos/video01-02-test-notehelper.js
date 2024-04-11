@@ -2,9 +2,9 @@
  *        * (done) start R1 of bit_tracks.js
  *        * (done) fix sum of tracks bug with mix waveform method in bit_tracks.js
  *        * (done) not rounding in Bit_tracks.new_frame
- *        * (done) turns out the distoration has to do with ffmpeg
- 
- *        * () make create_note a method of bit_tracks.js R1
+ *        * (done) turns out the distoration has to do with ffmpeg, was fixed by setting audio quality ( -b:a 192k )
+ *        * (done) make create_note a method of bit_tracks.js R1
+ *
  *        * () simple string format for songs
  *        * () create_track_notes method for bit_tracks.js R1
  *        * () make a tune with 2 tracks
@@ -23,24 +23,7 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
-
-
-    console.log(  ST.notefreq_by_indices(1, 1) );
-
-    const create_note = ( nums_per_sec=8, pitch=1, secs=1, fade=0 ) => {
-        const nums = [];
-        let i = 0;
-        const len = Math.ceil( nums_per_sec * secs );
-        while(i < len ){
-            const a_secs = i / len;
-            const a_half = 1 - (Math.abs(0.5 - a_secs) / 0.5);
-            const m = a_half < fade ? a_half / fade : 1;
-            nums.push( Math.round( pitch  * m) );
-            i += 1;
-        }
-        return nums;
-    };
-    
+  
     const song = [
         [1, 0.25],
         [2, 0.25],
@@ -56,12 +39,10 @@ VIDEO.init = function(sm, scene, camera){
     
     let track = [];
     song.forEach( (params) => {
-        const arr = create_note(64, params[0], params[1]);
+        const arr = Bit_tracks.create_note(64, params[0], params[1]);
         track.push(arr)
     });
-    
     track = track.flat();
-    
 
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
