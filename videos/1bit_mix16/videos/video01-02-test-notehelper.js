@@ -35,7 +35,13 @@ VIDEO.init = function(sm, scene, camera){
 
   
     const song_0 = [
-        [1, 3]
+        [4, 1.00],
+
+        [3, 0.50],
+        [2, 0.50],
+        [2, 0.25],
+        [2, 0.25],
+
     ];
     
     const song_1 = [
@@ -71,7 +77,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
         },
-        secs: 3
+        secs: 2
     });
 
     // display objects for audio sample arrays for tracks and main final display
