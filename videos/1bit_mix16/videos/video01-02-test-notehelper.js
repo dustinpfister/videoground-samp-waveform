@@ -23,42 +23,40 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
+
+    const song_to_notenums = ( song=[], nums_per_sec=64 ) => {
+        let notenums = [];
+        song.forEach( (params) => {
+            const arr = Bit_tracks.create_note(64, params[0], params[1]);
+            notenums.push(arr)
+        });
+        return notenums.flat();
+    };
+
   
-    const song = [
-        [1, 0.25],
-        [2, 0.25],
-        [3, 0.25],
-        [4, 0.25],
-        [5, 0.25],
-        [6, 0.25],
-        [7, 0.25],
-        [8, 0.25],
-        [9, 0.25],
-        [10, 0.25]
+    const song_0 = [
+        [1, 3]
     ];
     
-    let track = [];
-    song.forEach( (params) => {
-        const arr = Bit_tracks.create_note(64, params[0], params[1]);
-        track.push(arr)
-    });
-    track = track.flat();
-
+    const song_1 = [
+        [0, 0]
+    ];
+    
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
     sud.tracks = Bit_tracks.create({
-        count: 1,
-        octives: [ 3 ],
-        duty: [0.50 ]
+        count: 2,
+        octives: [ 1, 4 ],
+        duty: [0.50, 0.50 ]
     });
 
-    sud.tracks.notes = [ [] ];
+    sud.tracks.notes = [ [], [] ];
     
-    sud.tracks.desc = ['highs'],
+    sud.tracks.desc = ['lows', 'highs'],
 
-    sud.tracks.notes[0] = track.flat();
-
+    sud.tracks.notes[0] = song_to_notenums(song_0, 64);
+    sud.tracks.notes[1] = song_to_notenums(song_1, 64);
 
     // 1 bit track sample data arrays used for display
     sud.array_frame_tracks = [ ];
@@ -73,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
         },
-        secs: 2.5
+        secs: 3
     });
 
     // display objects for audio sample arrays for tracks and main final display
