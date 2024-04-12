@@ -113,7 +113,7 @@
     };
     
     // parse a song string into an array
-    Bit_tracks.parse_song_string = (str) => { 
+    const parse_song_string = (str) => { 
         return str
             .replace(/\n|\r|\r\n/g, '')
             .split(';')
@@ -136,7 +136,7 @@
     Bit_tracks.song_to_notenums = ( song=[], nums_per_sec=64 ) => {
         let notenums = [];
         if(typeof song === 'string'){
-            song = Bit_tracks.parse_song_string(song);
+            song = parse_song_string(song);
         }
         song.forEach( (params) => {
             const arr = Bit_tracks.create_note(64, params[0], params[1]);
