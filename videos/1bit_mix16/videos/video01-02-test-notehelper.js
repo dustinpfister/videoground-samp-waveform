@@ -26,39 +26,6 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
 
-    // parse a song string into an array
-    const parse_song_string = (str) => { 
-        return str
-            .replace(/\n|\r|\r\n/g, '')
-            .split(';')
-            .map( (str) => {
-                return str.trim().split(',');
-            })
-            .filter( (arr) => {
-               return !!arr[0];
-            })
-            .map( (arr) => {        
-                return [
-                    parseInt( arr[0] || 0 ),
-                    parseFloat( arr[1] || 0 )
-                ];
-            
-            });    
-    };
-
-    // song string or array into note numbers
-    const song_to_notenums = ( song=[], nums_per_sec=64 ) => {
-        let notenums = [];
-        if(typeof song === 'string'){
-            song = parse_song_string(song);
-        }
-        song.forEach( (params) => {
-            const arr = Bit_tracks.create_note(64, params[0], params[1]);
-            notenums.push(arr)
-        });
-        return notenums.flat();
-    };
-    
     const song_0 = `
 
         4, 1.00;
@@ -101,8 +68,8 @@ VIDEO.init = function(sm, scene, camera){
     
     sud.tracks.desc = ['lows', 'highs'],
 
-    sud.tracks.notes[0] = song_to_notenums(song_0, 64);
-    sud.tracks.notes[1] = song_to_notenums(song_1, 64);
+    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 64);
+    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 64);
 
     // 1 bit track sample data arrays used for display
     sud.array_frame_tracks = [ ];
@@ -131,15 +98,9 @@ VIDEO.init = function(sm, scene, camera){
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
-
     const sud = scene.userData;
-
-    // create the data samples
-    const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
-    
-    
+    const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax ); 
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
-
 };
 //-------- ----------
 // RENDER

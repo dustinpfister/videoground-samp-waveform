@@ -112,6 +112,39 @@
         return nums;
     };
     
+    // parse a song string into an array
+    Bit_tracks.parse_song_string = (str) => { 
+        return str
+            .replace(/\n|\r|\r\n/g, '')
+            .split(';')
+            .map( (str) => {
+                return str.trim().split(',');
+            })
+            .filter( (arr) => {
+               return !!arr[0];
+            })
+            .map( (arr) => {        
+                return [
+                    parseInt( arr[0] || 0 ),
+                    parseFloat( arr[1] || 0 )
+                ];
+            
+            });    
+    };
+
+    // song string or array into note numbers
+    Bit_tracks.song_to_notenums = ( song=[], nums_per_sec=64 ) => {
+        let notenums = [];
+        if(typeof song === 'string'){
+            song = Bit_tracks.parse_song_string(song);
+        }
+        song.forEach( (params) => {
+            const arr = Bit_tracks.create_note(64, params[0], params[1]);
+            notenums.push(arr)
+        });
+        return notenums.flat();
+    };
+    
     window.Bit_tracks = Bit_tracks;
 
 }());
