@@ -4,10 +4,12 @@
  *        * (done) not rounding in Bit_tracks.new_frame
  *        * (done) turns out the distoration has to do with ffmpeg, was fixed by setting audio quality ( -b:a 192k )
  *        * (done) make create_note a method of bit_tracks.js R1
- *
- *        * () simple string format for songs
- *        * () create_track_notes method for bit_tracks.js R1
+ *        * (done) simple string format for songs
+ 
+ *        * () song_to_notenums method for bit_tracks.js R1
  *        * () make a tune with 2 tracks
+ 
+ *
  */
 //-------- ----------
 // SCRIPTS
@@ -24,44 +26,67 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
 
+    // parse a song string into an array
+    const parse_song_string = (str) => { 
+        return str
+            .replace(/\n|\r|\r\n/g, '')
+            .split(';')
+            .map( (str) => {
+                return str.trim().split(',');
+            })
+            .filter( (arr) => {
+               return !!arr[0];
+            })
+            .map( (arr) => {        
+                return [
+                    parseInt( arr[0] || 0 ),
+                    parseFloat( arr[1] || 0 )
+                ];
+            
+            });    
+    };
+
+    // song string or array into note numbers
     const song_to_notenums = ( song=[], nums_per_sec=64 ) => {
         let notenums = [];
+        if(typeof song === 'string'){
+            song = parse_song_string(song);
+        }
         song.forEach( (params) => {
             const arr = Bit_tracks.create_note(64, params[0], params[1]);
             notenums.push(arr)
         });
         return notenums.flat();
     };
-
-  
-    const song_0 = [
-
-        [4, 1.00],
-        [3, 0.50],
-        [2, 0.50],
-        [1, 0.25],
-        [1, 0.25],
-
-        [4, 1.00],
-        [3, 0.50],
-        [2, 0.50],
-        [1, 0.25],
-        [1, 0.25],
-
-        [4, 0.25],
-        [4, 0.25],
-        [5, 0.25],
-        [6, 0.25],
-        [7, 0.25],
-        [3, 0.25],
-        [3, 0.25],
-        [2, 0.25]
-
-    ];
     
-    const song_1 = [
-        [0, 0]
-    ];
+    const song_0 = `
+
+        4, 1.00;
+        3, 0.50;
+        2, 0.50;
+        1, 0.25;
+        1, 0.25;
+
+        4, 1.00;
+        3, 0.50;
+        2, 0.50;
+        1, 0.25;
+        1, 0.25;
+
+        4, 0.25;
+        4, 0.25;
+        5, 0.25;
+        6, 0.25;
+        7, 0.25;
+        3, 0.25;
+        3, 0.25;
+        2, 0.25;
+
+    `;
+    
+    const song_1 = `
+        0, 0;
+    `;
     
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
