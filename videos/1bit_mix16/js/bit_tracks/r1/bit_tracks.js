@@ -98,15 +98,21 @@
     };
     
     // create a note for a notes array of a tracks object
-    Bit_tracks.create_note = ( nums_per_sec=8, pitch=1, secs=1, fade=0.15 ) => {
+    Bit_tracks.create_note = ( nums_per_sec=8, pitch=1, secs=1, fade=0.15, fade_mode='zero' ) => {
         const nums = [];
         let i = 0;
         const len = Math.ceil( nums_per_sec * secs );
         while(i < len ){
             const a_secs = i / len;
             const a_half = 1 - (Math.abs(0.5 - a_secs) / 0.5);
-            const m = a_half < fade ? 0 : 1;
-            nums.push( Math.round( pitch  * m) );
+            let m = 1;
+            if(fade_mode === 'zero'){
+                m = a_half < fade ? 0 : 1;
+            }
+            if(fade_mode === 'lat'){
+                m = a_half < fade ? a_half / fade : 1;
+            }
+            nums.push( Math.round( pitch  * m ) );
             i += 1;
         }
         return nums;
@@ -133,13 +139,13 @@
     };
 
     // song string or array into note numbers
-    Bit_tracks.song_to_notenums = ( song=[], nums_per_sec=64, fade=0.15 ) => {
+    Bit_tracks.song_to_notenums = ( song=[], nums_per_sec=64, fade=0.15, fade_mode='zero' ) => {
         let notenums = [];
         if(typeof song === 'string'){
             song = parse_song_string(song);
         }
         song.forEach( (params) => {
-            const arr = Bit_tracks.create_note(64, params[0], params[1], fade);
+            const arr = Bit_tracks.create_note(64, params[0], params[1], fade, fade_mode);
             notenums.push(arr)
         });
         return notenums.flat();

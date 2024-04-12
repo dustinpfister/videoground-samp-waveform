@@ -14,6 +14,7 @@ The goal is to just get started with a general idea of what I want to do when it
   * () video01-02-test-notehelper - helper function for cretaing notes arrays
   * () video01-03-test-noise - work out a noise waveform
   * () video01-04-test-raw - work out a raw data waveform
+  * () video01-05-test-samppitch - I might want to see about adjusting pitch bay way of sample by sample rather than frame by frame
   
 
 ### Core idea of project working ( done in video01-01-test-2tracks )

@@ -7,7 +7,7 @@
  *        * (done) simple string format for songs
  *        * (done) song_to_notenums method for bit_tracks.js R1
  *        * (done) should be able to adjust fade argumnet for song_to_notnums method
- *        * () fade mode for song_to_notnums and create_note, 'latpitch', and 'zerofill'
+ *        * (done) fade mode for song_to_notnums and create_note, 'latpitch', and 'zerofill'
  *        * () make a tune with 2 tracks
  *
  */
@@ -55,11 +55,8 @@ VIDEO.init = function(sm, scene, camera){
     
     const song_0 = `
 
-        4, 0.50;
-        4, 0.50;
-        4, 0.50;
-        4, 0.50;
-        4, 0.50;
+        4, 3.00;
+        4, 3.00;
 
     `;
     
@@ -80,8 +77,8 @@ VIDEO.init = function(sm, scene, camera){
     
     sud.tracks.desc = ['lows', 'highs'],
 
-    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 64, 0.10);
-    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 64, 0.10);
+    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 32, 0.5, 'lat');
+    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 32, 0.5, 'lat');
 
     // 1 bit track sample data arrays used for display
     sud.array_frame_tracks = [ ];
