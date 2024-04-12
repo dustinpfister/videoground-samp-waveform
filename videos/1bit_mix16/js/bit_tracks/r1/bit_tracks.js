@@ -133,13 +133,13 @@
     };
 
     // song string or array into note numbers
-    Bit_tracks.song_to_notenums = ( song=[], nums_per_sec=64 ) => {
+    Bit_tracks.song_to_notenums = ( song=[], nums_per_sec=64, fade=0.15 ) => {
         let notenums = [];
         if(typeof song === 'string'){
             song = parse_song_string(song);
         }
         song.forEach( (params) => {
-            const arr = Bit_tracks.create_note(64, params[0], params[1]);
+            const arr = Bit_tracks.create_note(64, params[0], params[1], fade);
             notenums.push(arr)
         });
         return notenums.flat();
