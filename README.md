@@ -1,6 +1,14 @@
 # videoground-samp-waveform
 
-With this project the main focus is to create a collection of video files that have to do with waveform functions. In a way this is just a continuation of what I have all ready started with in my [beta world collection](https://github.com/dustinpfister/videoground-beta-world), however I now think I should have a whole other collection that is dedicated for this sort of thing if I am to keep moving forward with sound. In time what I work out here will result in even more collections like this in which I niche down yet even farther.
+With this project the main focus is to create a collection of video files that have to do with waveform functions, as well as everything that branches off from that. This is a continuation of what I have all ready started with in my [beta world collection](https://github.com/dustinpfister/videoground-beta-world) when it comes to sound syntheses in which I am focusing on this topic alone when it comes to this kind of content.  In time what I work out here will result in even more collections like this in which I niche down yet even farther, or I will just have them all as project folders of this collection.
+
+## Note worthy projects thus far
+
+Thus far I am still trying to get a good idea of what ideas I should be focusing on over others when it comes to the logic of waveform functions as well as many other aspects of sound such as sample depth, mixing, filters, and so forth. For my own sake as well as anyone that might have interest in what I am doing here I think I should have a main list in this read me file that I update now and then with this.
+
+### [1bit\_mix16](https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/1bit_mix16)
+
+One major project that I have together thus far has to do with 1-bit sound and how a final 16-bit track will be mixed from two or more 1-bit tracks. There are two general ideas for mixing that come to mind with this, merge down the 1-bit tracks into a single 1-bit track and then scale up to 16-bit, or scale each 1-bit track to 16-bit and mix as usual allowing for all 1-bit tracks to play at once without loss. This 1bit\_mix16 project is then the latter rather than former with this which I think would be better when it comes to making content that will be uploaded to YouTube rather than something that needs to run on retro hardware.
 
 ## Getting started with a waveform function
 
@@ -23,4 +31,6 @@ CS.WAVE_FORM_FUNCTIONS.pulse = (sampeset, a_wave ) => {
 
 ## Videoground
 
-This repo is one of several projects that work on top of my electionjs project that I call [videoground](https://github.com/dustinpfister/videoground). This is my own tool that I have made for cretaing any kind of video project that involves generating a whole bunch of image files for each frame, and also any addtional assets such as a wave file that can then be used to create a final video project with ffmpeg. Getting into this project in detail is outside the scope of this readme file of course, but if you are trying to get this working on your end you will also need videoground to run the content here.
+This repo is one of several projects that work on top of my electionjs project that I call [videoground](https://github.com/dustinpfister/videoground). This is my own tool that I have made for creating any kind of video project that involves generating a whole bunch of image files for each frame, and also any additional assets such as a wave file that can then be used to create a final video project with ffmpeg. Getting into this project in detail is outside the scope of this read me file of course, but if you are trying to get this working on your end you will also need videoground to run the content here.
+
+
