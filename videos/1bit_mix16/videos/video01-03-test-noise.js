@@ -1,14 +1,7 @@
 /*    video01-02-test-notehelper - form 1bit_mix16 in videoground-samp-waveform
- *        * (done) start R1 of bit_tracks.js
- *        * (done) fix sum of tracks bug with mix waveform method in bit_tracks.js
- *        * (done) not rounding in Bit_tracks.new_frame
- *        * (done) turns out the distoration has to do with ffmpeg, was fixed by setting audio quality ( -b:a 192k )
- *        * (done) make create_note a method of bit_tracks.js R1
- *        * (done) simple string format for songs
- *        * (done) song_to_notenums method for bit_tracks.js R1
- *        * (done) should be able to adjust fade argumnet for song_to_notnums method
- *        * (done) fade mode for song_to_notnums and create_note, 'latpitch', and 'zerofill'
- *        * (done) make a tune with 2 tracks
+ *        * () work out a noise waveform function
+ *        * () I will want waveform arrays for tracks objects then
+ *        * () have three tracks for lows, highs and noise
  *
  */
 //-------- ----------
