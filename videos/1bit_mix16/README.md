@@ -6,11 +6,10 @@ The general idea here is to have more than one 1-bit track, however when it come
 
 The goal is to just get started with a general idea of what I want to do when it comes to 1-bit sound and music. As of this writing I all ready have the core idea of what I want working, and now it is just a question of how many videos I want to make, and if this will result in some kind of long term project or not. Apart from just mixing upscaled 1-bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that migth result in improved javascript code that is used for createing sample data to begin with.
 
-  * ( done in video01-01 ) Core Idea of the project working
-  * ( done in video01-01 ) New look started for the project with custom draw.js file
-  * ( done in video01-01 ) start a bit\_tracks.js R0 file that will contain reusable code for this project and any others based on what I start here
-  
-  * ( done in video01-02 ) start an R1 of bit\_tracks.js that I will contain improvements as I work out more video01-xx-text videos
+  * ( done ) Core Idea of the project working
+  * ( done ) New look started for the project with custom draw.js file
+  * ( done ) start a bit\_tracks.js R0 file that will contain reusable code for this project and any others based on what I start here
+  * ( done ) start an R1 of bit\_tracks.js that I will contain improvements as I work out more video01-xx-text videos
   * () video01-02-test-notehelper - helper function for cretaing notes arrays
   * () video01-03-test-noise - work out a noise waveform
   * () video01-04-test-raw - work out a raw data waveform

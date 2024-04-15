@@ -25,51 +25,82 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
-
-/*
-    const song_0 = `
-
-        4, 1.00;
-        3, 0.50;
-        2, 0.50;
-        1, 0.25;
-        1, 0.25;
-
-        4, 1.00;
-        3, 0.50;
-        2, 0.50;
-        1, 0.25;
-        1, 0.25;
-
-        4, 0.25;
-        4, 0.25;
-        5, 0.25;
-        6, 0.25;
-        7, 0.25;
-        3, 0.25;
-        3, 0.25;
-        2, 0.25;
-
-    `;
-    */
     
     const song_0 = `
-
-        4, 3.00;
-        4, 3.00;
-
+    
+        4, 2.00;
+        0, 0.25;
+        5, 0.25;
+        5, 0.25;
+        5, 0.25;
+        7, 0.25;
+        8, 0.25;
+        7, 0.25;
+        6, 0.25;
+        4, 2.00;
+        
+        4, 2.00;
+        0, 0.25;
+        5, 0.25;
+        5, 0.25;
+        5, 0.25;
+        7, 0.25;
+        8, 0.25;
+        7, 0.25;
+        6, 0.25;
+        4, 2.00;
+        
+        0,6;
+        
+        4, 2.00;
+        0, 0.25;
+        5, 0.25;
+        5, 0.25;
+        5, 0.25;
+        7, 0.25;
+        8, 0.25;
+        7, 0.25;
+        6, 0.25;
+        4, 2.00;
+        
     `;
     
     const song_1 = `
-        0, 0;
+        0, 12;
+        
+        4, 2.00;
+        0, 0.25;
+        5, 0.25;
+        5, 0.25;
+        5, 0.25;
+        7, 0.25;
+        8, 0.25;
+        7, 0.25;
+        6, 0.25;
+        4, 2.00;
+        
+        4, 2.00;
+        0, 0.25;
+        5, 0.25;
+        5, 0.25;
+        5, 0.25;
+        7, 0.25;
+        8, 0.25;
+        7, 0.25;
+        6, 0.25;
+        4, 2.00;
+        
     `;
+    
+    const total_secs = 24.0;
+    
     
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
     sud.tracks = Bit_tracks.create({
         count: 2,
-        octives: [ 1, 4 ],
+        octives: [ 1, 3 ],
         duty: [0.50, 0.50 ]
     });
 
@@ -77,8 +108,8 @@ VIDEO.init = function(sm, scene, camera){
     
     sud.tracks.desc = ['lows', 'highs'],
 
-    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 32, 0.5, 'lat');
-    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 32, 0.5, 'lat');
+    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 32, 0.2, 'zero');
+    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 32, 0.2, 'zero');
 
     // 1 bit track sample data arrays used for display
     sud.array_frame_tracks = [ ];
@@ -93,7 +124,7 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
         },
-        secs: 6
+        secs: total_secs
     });
 
     // display objects for audio sample arrays for tracks and main final display
