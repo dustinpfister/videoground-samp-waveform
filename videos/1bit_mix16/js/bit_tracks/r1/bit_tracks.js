@@ -23,8 +23,8 @@
         // noise wave
         noise_1bit : (samp, a_wave ) => {
             samp.seed_start = samp.seed_start || 0;
-            samp.seed_delta = samp.seed_delta || 100;
-            const seed = Math.round( samp.seed_start + seed_delta * a_wave );
+            samp.seed_delta = samp.seed_delta || 1470 * 10;
+            const seed = Math.round( samp.seed_start + samp.seed_delta * a_wave );
             const n = THREE.MathUtils.seededRandom( seed );
             if( n < 0.5 ){
                 return  -1; 
@@ -53,6 +53,7 @@
         const tracks = {
             count: opt.count === undefined ? 1 : opt.count,
             octives: opt.octives || [1],
+            waveforms: opt.waveforms || ['pulse_1bit', 'pulse_1bit', 'pulse_1bit'],
             duty: opt.duty || [],
             desc: [],
             notes: [],
@@ -97,7 +98,8 @@
         while(ti < len){
             const cur = tracks.current[ti];
             const duty = tracks.duty[ti] || 0.5;
-            const s0 = Bit_tracks.waveforms.pulse_1bit( { duty: duty, frequency: cur.freq, ni: cur.ni  }, a_wave );
+            const waveform = tracks.waveforms[ti] || 'pulse_1bit';
+            const s0 = Bit_tracks.waveforms[waveform]( { duty: duty, frequency: cur.freq, ni: cur.ni  }, a_wave );
             tracks.samples[ti].push( s0 );
             t.push(s0);
             ti += 1;

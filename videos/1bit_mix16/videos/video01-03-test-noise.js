@@ -1,7 +1,9 @@
 /*    video01-02-test-notehelper - form 1bit_mix16 in videoground-samp-waveform
- *        * () work out a noise waveform function
- *        * () I will want waveform arrays for tracks objects then
- *        * () have three tracks for lows, highs and noise
+ *        * (done) work out a noise waveform function in R1 of bit_tracks.js
+ *        * (done) I will want waveform arrays for tracks objects then
+ *        * (done) have three tracks for lows, highs and noise
+ *        * () I would like a single array of waveform objects in place of all these arrays
+ *        * () Bit_tracks.for_sampset should use a samp object that will change from one waveform to another
  *
  */
 //-------- ----------
@@ -31,6 +33,10 @@ VIDEO.init = function(sm, scene, camera){
         0, 1.00;
     `;
     
+    const song_2 = `
+        0, 1.00;
+    `;
+    
     const total_secs = 5.0;
     
     
@@ -38,17 +44,19 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
 
     sud.tracks = Bit_tracks.create({
-        count: 2,
-        octives: [ 1, 3 ],
-        duty: [0.50, 0.50 ]
+        count: 3,
+        waveforms: ['pulse_1bit', 'pulse_1bit', 'noise_1bit'],
+        octives: [ 1, 3, 1 ],
+        duty: [0.50, 0.50, 0 ]
     });
 
-    sud.tracks.notes = [ [], [] ];
+    sud.tracks.notes = [ [], [], [] ];
     
-    sud.tracks.desc = ['lows', 'highs'],
+    sud.tracks.desc = ['lows', 'highs', 'noise'],
 
-    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 32, 0.2, 'zero');
-    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 32, 0.2, 'zero');
+    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 32, 0, 'zero');
+    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero');
+    sud.tracks.notes[2] = Bit_tracks.song_to_notenums(song_2, 32, 0, 'zero');
 
     // 1 bit track sample data arrays used for display
     sud.array_frame_tracks = [ ];
