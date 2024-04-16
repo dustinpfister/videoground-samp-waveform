@@ -25,7 +25,14 @@
             samp.seed_start = samp.seed_start || 0;
             samp.seed_delta = samp.seed_delta || 1470 * 10;
             const seed = Math.round( samp.seed_start + samp.seed_delta * a_wave );
+            const a = samp.frequency * a_wave % 1;
             const n = THREE.MathUtils.seededRandom( seed );
+            const ni = samp.ni || 0;
+            
+            if( ni === 0 || a < 0.75){
+                return -1;
+            }
+            
             if( n < 0.5 ){
                 return  -1; 
             }

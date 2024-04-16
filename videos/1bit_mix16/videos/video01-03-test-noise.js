@@ -2,6 +2,11 @@
  *        * (done) work out a noise waveform function in R1 of bit_tracks.js
  *        * (done) I will want waveform arrays for tracks objects then
  *        * (done) have three tracks for lows, highs and noise
+ *        * (done) I would like to make use of ni in noise_1bit
+ *        * (done) I would like to make use of frequency in noise_1bit
+ 
+ *        * () need to figure out timing of the notes with noise_1bit
+ 
  *        * () I would like a single array of waveform objects in place of all these arrays
  *        * () Bit_tracks.for_sampset should use a samp object that will change from one waveform to another
  *
@@ -34,10 +39,21 @@ VIDEO.init = function(sm, scene, camera){
     `;
     
     const song_2 = `
-        0, 1.00;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
+        1, 0.25;
     `;
     
-    const total_secs = 5.0;
+    const total_secs = 3.0;
     
     
     const sud = scene.userData;
