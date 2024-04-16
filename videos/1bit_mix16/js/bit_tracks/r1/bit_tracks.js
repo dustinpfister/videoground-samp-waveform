@@ -20,6 +20,17 @@
             }
             return 1;
         },
+        // noise wave
+        noise_1bit : (samp, a_wave ) => {
+            samp.seed_start = samp.seed_start || 0;
+            samp.seed_delta = samp.seed_delta || 100;
+            const seed = Math.round( samp.seed_start + seed_delta * a_wave );
+            const n = THREE.MathUtils.seededRandom( seed );
+            if( n < 0.5 ){
+                return  -1; 
+            }
+            return 1;
+        },
         // mix the 1bit tracks
         mix: (samp, a_wave) => {
             samp.tracks = samp.tracks || [];
