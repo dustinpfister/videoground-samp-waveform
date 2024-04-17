@@ -4,8 +4,9 @@
  *        * (done) have three tracks for lows, highs and noise
  *        * (done) I would like to make use of ni in noise_1bit
  *        * (done) I would like to make use of frequency in noise_1bit
+ *        * (done) need to start a work new freq system for noise waveform
  
- *        * () need to figure out timing of the notes with noise_1bit
+ *        * () should have a new system for switching how freq is set when setting up a frame in bit tracks
  
  *        * () I would like a single array of waveform objects in place of all these arrays
  *        * () Bit_tracks.for_sampset should use a samp object that will change from one waveform to another
@@ -39,21 +40,15 @@ VIDEO.init = function(sm, scene, camera){
     `;
     
     const song_2 = `
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
-        1, 0.25;
+        1, 1.00;
+        1, 1.00;
+        2, 1.00;
+        2, 1.00;
+        4, 1.00;
+        4, 1.00;
     `;
     
-    const total_secs = 3.0;
+    const total_secs = 6.0;
     
     
     const sud = scene.userData;

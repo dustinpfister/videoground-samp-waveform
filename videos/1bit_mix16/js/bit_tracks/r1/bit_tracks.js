@@ -29,7 +29,7 @@
             const n = THREE.MathUtils.seededRandom( seed );
             const ni = samp.ni || 0;
             
-            if( ni === 0 || a < 0.75){
+            if( ni === 0 || a < 0.90){
                 return -1;
             }
             
@@ -82,8 +82,9 @@
             let ni = 0, freq = 0;
             if(NOTES){
                 ni = NOTES[ Math.floor( NOTES.length * a_sound) ];
+                freq = ni;
             }
-            if(ni >= 1){
+            if(ni >= 1 && tracks.waveforms[i] != 'noise_1bit'){
                 freq = Math.floor( ST.notefreq_by_indices(tracks.octives[i], ni - 1) );
             }
             tracks.current.push({
