@@ -7,8 +7,7 @@
  *        * (done) need to start a work new freq system for noise waveform
  *        * (done) addtional arguments for noise waveform that set the range in which the noise happens
  *        * (done) I would like a single array of waveform objects in place of all these arrays
- 
- *        * () should have a new system for switching how freq is set when setting up a frame in bit tracks
+ *        * (done) should have a new system for switching how freq is set when setting up a frame in bit tracks
  
 
  *        * () Bit_tracks.for_sampset should use a samp object that will change from one waveform to another
@@ -58,17 +57,22 @@ VIDEO.init = function(sm, scene, camera){
         objects: [
             {
                 waveform: 'pulse_1bit',
+                mode: 'notes',
                 desc: 'highs',
-                octive: 3
+                samp: {
+                    frequnecy: 80
+                },
+                octive: 3,
+                notes: Bit_tracks.song_to_notenums(song_0, 32, 0, 'zero')
             },
             {
                 waveform: 'noise_1bit',
-                desc: 'noise'
+                mode: 'notes',
+                desc: 'noise',
+                notes: Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero')
             }
         ],
     });
-    sud.tracks.objects[0].notes = Bit_tracks.song_to_notenums(song_0, 32, 0, 'zero');
-    sud.tracks.objects[1].notes = Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero');
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({

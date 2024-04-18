@@ -76,10 +76,11 @@
         
             const obj = Object.assign({
                 waveform: 'pulse_1bit',
+                mode: 'tone',
                 desc: 'track ' + i_obj,
                 samp: {
-                    duty: 0.5,
-                    frequency: 1
+                    frequency: 0,
+                    ni: 0
                 },
                 octive: 3,
                 notes: []
@@ -103,13 +104,22 @@
             const obj = tracks.objects[i_obj];
             
             let ni = 0, freq = 0;
-            if(obj.notes){
-                ni = obj.notes[ Math.floor( obj.notes.length * a_sound) ];
-                freq = ni;
+            
+            if(obj.mode === 'tone'){        
+                freq = obj.samp.frequnecy || 80;
+                ni = 1;                      
             }
-            if(ni >= 1 && obj.waveform != 'noise_1bit'){
-                freq = Math.floor( ST.notefreq_by_indices(obj.octive, ni - 1) );
+            
+            if(obj.mode === 'notes'){
+                if(obj.notes){
+                    ni = obj.notes[ Math.floor( obj.notes.length * a_sound) ];
+                    freq = ni;
+                }
+                if(ni >= 1 && obj.waveform != 'noise_1bit'){
+                    freq = Math.floor( ST.notefreq_by_indices(obj.octive, ni - 1) );
+                }
             }
+            
             tracks.current.push({
                 freq: freq,
                 ni: ni,
@@ -131,7 +141,20 @@
             const cur = tracks.current[ti];
                
             const obj = tracks.objects[ti];
-            const s0 = Bit_tracks.waveforms[obj.waveform]( { duty: 0.5, frequency: cur.freq, ni: cur.ni  }, a_wave );
+            
+            // figure out freq value to use
+            let freq = cur.freq; 
+            let ni = cur.ni;
+                 
+            // final samp object to use with waveform function
+            const samp = Object.assign({}, obj.samp, {
+                frequency: freq, ni: ni
+            });
+            
+            const s0 = Bit_tracks.waveforms[obj.waveform]( samp, a_wave );
+            
+            
+            //const s0 = Bit_tracks.waveforms[obj.waveform]( { duty: 0.5, frequency: cur.freq, ni: cur.ni  }, a_wave );
             
             tracks.samples[ti].push( s0 );
             t.push(s0);
