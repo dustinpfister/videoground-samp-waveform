@@ -5,12 +5,14 @@
  *        * (done) I would like to make use of ni in noise_1bit
  *        * (done) I would like to make use of frequency in noise_1bit
  *        * (done) need to start a work new freq system for noise waveform
- *        * (done) addtional arguments for noise waveform that set the range in which the noise happens
+ *        * (done) additional arguments for noise waveform that set the range in which the noise happens
  *        * (done) I would like a single array of waveform objects in place of all these arrays
  *        * (done) should have a new system for switching how freq is set when setting up a frame in bit tracks
- 
-
- *        * () Bit_tracks.for_sampset should use a samp object that will change from one waveform to another
+ *        * (done) can adjust samp object arguments for noise waveform
+ *        * (done) Bit_tracks.for_sampset should use a samp object that will change from one waveform to another
+ *
+ *        * () there seems to be a problem with timing, see about fixing it 
+ *        * () work out a nice three track tune for this video
  *
  */
 //-------- ----------
@@ -34,45 +36,66 @@ VIDEO.init = function(sm, scene, camera){
     // song tracks and total time
     const song_0 = `
         0, 1.00;
-        1, 3.00;
-        0, 1.00;
-        5, 3.00;
-        0, 1.00;
-        10, 3.00;
-        0, 3.00;
     `;
     
     const song_1 = `
-        1, 5.00;
-        2, 5.00;
-        4, 5.00;
+        0, 1.00;
     `;
     
-    const total_secs = 15.0;
+    const song_2 = `
+
+        1, 1.00;
+        2, 1.00;
+        1, 1.00;
+        2, 1.00;
+        3, 1.50;
+
+    `;
+    
+    const total_secs = 5.5;
     
     
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 2,
+        count: 3,
         objects: [
             {
                 waveform: 'pulse_1bit',
                 mode: 'notes',
                 desc: 'highs',
                 samp: {
+                    duty: 0.85,
                     frequnecy: 80
                 },
-                octive: 3,
+                octive: 4,
                 notes: Bit_tracks.song_to_notenums(song_0, 32, 0, 'zero')
+            },
+            {
+                waveform: 'pulse_1bit',
+                mode: 'notes',
+                desc: 'lows',
+                samp: {
+                    duty: 0.50,
+                    frequnecy: 80
+                },
+                octive: 2,
+                notes: Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero')
             },
             {
                 waveform: 'noise_1bit',
                 mode: 'notes',
                 desc: 'noise',
-                notes: Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero')
+                samp: {
+                    alow: 0.40,
+                    ahigh: 0.60
+                },
+                notes: Bit_tracks.song_to_notenums(song_2, 8, 0, 'zero')
             }
-        ],
+        ]
     });
+
+console.log( sud.tracks.objects[2] );
+
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({

@@ -214,7 +214,7 @@
             song = parse_song_string(song);
         }
         song.forEach( (params) => {
-            const arr = Bit_tracks.create_note(64, params[0], params[1], fade, fade_mode);
+            const arr = Bit_tracks.create_note(nums_per_sec, params[0], params[1], fade, fade_mode);
             notenums.push(arr)
         });
         return notenums.flat();
