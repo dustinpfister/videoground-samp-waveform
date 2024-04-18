@@ -17,7 +17,7 @@ The goal is to just get started with a general idea of what I want to do when it
   * () video01-05-test-samppitch - I might want to see about adjusting pitch bay way of sample by sample rather than frame by frame
   
 
-### Core idea of project working ( done in video01-01-test-2tracks )
+### Core idea of project working
 
 The first and formost goal here is to just work out what the core idea of the project is of course. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
 
@@ -43,7 +43,7 @@ I will want to work out a few custom waveform functions for this project. As of 
 
 ## IDEAS FOR ADDITIONAL PROJECTS BASED ON WHAT I HAVE STARTED IN 1BIT_MIX16
 
-Once I have the general idea of what I want to do working okay here I can move on to starting some additional projects.
+Once I have the general idea of what I want to do working okay here I can move on to starting some additional projects. There is working out more when it comes to waveform functions, other forms of mixing such as merging down the 1bit tracks. If I have a dectent set of tools there is also starting to just make a few project folders where the focus is just content.
 
 ### Merge down project
 
@@ -56,3 +56,5 @@ I would like to have one or more standards for working out what the music should
 ### 24-bit/16-bit to 1-bit conversion tools
 
 When it comes to the content of tracks the main idea that I have is to generate the 1bit sample data using javaScript code alone. However I would like to also create a few tracks that is created by way of raw 1-bit sample data. This raw 1-bit sample data can be in some kind of text format where each bit is actualy 1 byte, however if I work out some kind of binary format that might be a better option. In any case I will want to create some tools for generating whatever the format is from 24-bit and 16-bit mono wav files.
+
+
