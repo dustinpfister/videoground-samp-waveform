@@ -17,8 +17,8 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
-  '../js/bit_tracks/r1/bit_tracks.js',
-  '../js/bit_tracks/r1/bit_samp_draw.js',
+  '../../../js/bit_tracks/r1/bit_tracks.js',
+  '../../../js/bit_tracks/r1/bit_samp_draw.js',
 
 ];
 //-------- ----------
@@ -98,21 +98,24 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
+
     sud.tracks = Bit_tracks.create({
         count: 2,
-        octives: [ 1, 3 ],
-        duty: [0.50, 0.50 ]
+        objects: [
+            {
+                waveform: 'pulse_1bit',
+                octive: 1,
+                mode: 'notes',
+                notes: Bit_tracks.song_to_notenums(song_0, 32, 0.2, 'zero')
+            },
+            {
+                waveform: 'pulse_1bit',
+                octive: 3,
+                mode: 'notes',
+                notes: Bit_tracks.song_to_notenums(song_1, 32, 0.2, 'zero')
+            },
+        ]
     });
-
-    sud.tracks.notes = [ [], [] ];
-    
-    sud.tracks.desc = ['lows', 'highs'],
-
-    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 32, 0.2, 'zero');
-    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 32, 0.2, 'zero');
-
-    // 1 bit track sample data arrays used for display
-    sud.array_frame_tracks = [ ];
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({

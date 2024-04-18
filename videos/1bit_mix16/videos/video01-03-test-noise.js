@@ -21,8 +21,8 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
-  '../js/bit_tracks/r1/bit_tracks.js',
-  '../js/bit_tracks/r1/bit_samp_draw.js',
+  '../../../js/bit_tracks/r1/bit_tracks.js',
+  '../../../js/bit_tracks/r1/bit_samp_draw.js',
 
 ];
 //-------- ----------
