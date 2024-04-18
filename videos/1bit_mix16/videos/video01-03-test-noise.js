@@ -6,10 +6,11 @@
  *        * (done) I would like to make use of frequency in noise_1bit
  *        * (done) need to start a work new freq system for noise waveform
  *        * (done) addtional arguments for noise waveform that set the range in which the noise happens
+ *        * (done) I would like a single array of waveform objects in place of all these arrays
  
  *        * () should have a new system for switching how freq is set when setting up a frame in bit tracks
  
- *        * () I would like a single array of waveform objects in place of all these arrays
+
  *        * () Bit_tracks.for_sampset should use a samp object that will change from one waveform to another
  *
  */
@@ -27,20 +28,22 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
-    
-    console.log(  );
-    
-    
+   
+    const sud = scene.userData;
+    sm.renderer.setClearColor(0x000000, 0.25);
+   
+    // song tracks and total time
     const song_0 = `
         0, 1.00;
-        
+        1, 3.00;
+        0, 1.00;
+        5, 3.00;
+        0, 1.00;
+        10, 3.00;
+        0, 3.00;
     `;
     
     const song_1 = `
-        0, 1.00;
-    `;
-    
-    const song_2 = `
         1, 5.00;
         2, 5.00;
         4, 5.00;
@@ -49,26 +52,23 @@ VIDEO.init = function(sm, scene, camera){
     const total_secs = 15.0;
     
     
-    const sud = scene.userData;
-    sm.renderer.setClearColor(0x000000, 0.25);
-
+    // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 3,
-        waveforms: ['pulse_1bit', 'pulse_1bit', 'noise_1bit'],
-        octives: [ 1, 3, 1 ],
-        duty: [0.50, 0.50, 0 ]
+        count: 2,
+        objects: [
+            {
+                waveform: 'pulse_1bit',
+                desc: 'highs',
+                octive: 3
+            },
+            {
+                waveform: 'noise_1bit',
+                desc: 'noise'
+            }
+        ],
     });
-
-    sud.tracks.notes = [ [], [], [] ];
-    
-    sud.tracks.desc = ['lows', 'highs', 'noise'],
-
-    sud.tracks.notes[0] = Bit_tracks.song_to_notenums(song_0, 32, 0, 'zero');
-    sud.tracks.notes[1] = Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero');
-    sud.tracks.notes[2] = Bit_tracks.song_to_notenums(song_2, 32, 0, 'zero');
-
-    // 1 bit track sample data arrays used for display
-    sud.array_frame_tracks = [ ];
+    sud.tracks.objects[0].notes = Bit_tracks.song_to_notenums(song_0, 32, 0, 'zero');
+    sud.tracks.objects[1].notes = Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero');
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({

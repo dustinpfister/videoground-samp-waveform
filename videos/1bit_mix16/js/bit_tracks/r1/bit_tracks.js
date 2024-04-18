@@ -55,19 +55,40 @@
         }
     };
     
-    // create a bit tracks object
+    
+        // create a bit tracks object
     Bit_tracks.create = (opt) => {
         opt = opt || {};
+        
         const tracks = {
             count: opt.count === undefined ? 1 : opt.count,
-            octives: opt.octives || [1],
-            waveforms: opt.waveforms || ['pulse_1bit', 'pulse_1bit', 'pulse_1bit'],
-            duty: opt.duty || [],
-            desc: [],
-            notes: [],
+            objects: [],
             current: [],
             samples: []
         };
+        
+        const opt_objects = opt.objects || [];
+        
+        let i_obj = 0;
+        while( i_obj < tracks.count ){
+        
+            const opt_obj = opt_objects[i_obj] || {};
+        
+            const obj = Object.assign({
+                waveform: 'pulse_1bit',
+                desc: 'track ' + i_obj,
+                samp: {
+                    duty: 0.5,
+                    frequency: 1
+                },
+                octive: 3,
+                notes: []
+            }, opt_obj);
+            tracks.objects.push(obj);              
+            i_obj += 1;
+        }
+        
+        
         Bit_tracks.new_frame(tracks);
         return tracks;
     };
@@ -76,17 +97,18 @@
     Bit_tracks.new_frame = (tracks, a_sound) => {
         tracks.samples = [];
         tracks.current = [];
-        const c = tracks.count;
-        let i = 0;
-        while(i < c){
-            const NOTES = tracks.notes[i];
+        let i_obj = 0;
+        while(i_obj < tracks.count){
+        
+            const obj = tracks.objects[i_obj];
+            
             let ni = 0, freq = 0;
-            if(NOTES){
-                ni = NOTES[ Math.floor( NOTES.length * a_sound) ];
+            if(obj.notes){
+                ni = obj.notes[ Math.floor( obj.notes.length * a_sound) ];
                 freq = ni;
             }
-            if(ni >= 1 && tracks.waveforms[i] != 'noise_1bit'){
-                freq = Math.floor( ST.notefreq_by_indices(tracks.octives[i], ni - 1) );
+            if(ni >= 1 && obj.waveform != 'noise_1bit'){
+                freq = Math.floor( ST.notefreq_by_indices(obj.octive, ni - 1) );
             }
             tracks.current.push({
                 freq: freq,
@@ -94,7 +116,8 @@
                 amp: ni === 0 ? 0 : 1
             });  
             tracks.samples.push([]);
-            i += 1;
+            
+            i_obj += 1;
         }
     };
     
@@ -106,9 +129,10 @@
         const len = tracks.count;
         while(ti < len){
             const cur = tracks.current[ti];
-            const duty = tracks.duty[ti] || 0.5;
-            const waveform = tracks.waveforms[ti] || 'pulse_1bit';
-            const s0 = Bit_tracks.waveforms[waveform]( { duty: duty, frequency: cur.freq, ni: cur.ni  }, a_wave );
+               
+            const obj = tracks.objects[ti];
+            const s0 = Bit_tracks.waveforms[obj.waveform]( { duty: 0.5, frequency: cur.freq, ni: cur.ni  }, a_wave );
+            
             tracks.samples[ti].push( s0 );
             t.push(s0);
             ti += 1;

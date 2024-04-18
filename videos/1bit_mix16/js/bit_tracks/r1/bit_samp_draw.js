@@ -1,5 +1,8 @@
 /* bit_samp_draw.js r1 - from 1bit_mix16 project
  * github.com/dustinpfister/videoground-samp-waveform/blob/master/videos/1bit_mix16/
+ *
+ *    * (done) updated DSD.draw_tracks to work with R1 of bit_tracks.js
+ *
  */ 
 (function(){
     const DSD = {};
@@ -172,7 +175,8 @@
         let i_track = 0;
         const len_track = tracks.samples.length;
         while(i_track < len_track ){
-            const desc = tracks.desc[i_track] || 'track ' + i_track;
+            const obj = tracks.objects[i_track];
+            const desc = obj.desc || 'track ' + i_track;
             DSD.draw( ctx, tracks.samples[i_track], track_disp_opt.tracks[i_track], 0, desc );
             i_track += 1;
         }
