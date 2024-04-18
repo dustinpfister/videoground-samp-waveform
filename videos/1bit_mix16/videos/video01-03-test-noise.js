@@ -5,6 +5,7 @@
  *        * (done) I would like to make use of ni in noise_1bit
  *        * (done) I would like to make use of frequency in noise_1bit
  *        * (done) need to start a work new freq system for noise waveform
+ *        * (done) addtional arguments for noise waveform that set the range in which the noise happens
  
  *        * () should have a new system for switching how freq is set when setting up a frame in bit tracks
  
@@ -40,15 +41,12 @@ VIDEO.init = function(sm, scene, camera){
     `;
     
     const song_2 = `
-        1, 1.00;
-        1, 1.00;
-        2, 1.00;
-        2, 1.00;
-        4, 1.00;
-        4, 1.00;
+        1, 5.00;
+        2, 5.00;
+        4, 5.00;
     `;
     
-    const total_secs = 6.0;
+    const total_secs = 15.0;
     
     
     const sud = scene.userData;

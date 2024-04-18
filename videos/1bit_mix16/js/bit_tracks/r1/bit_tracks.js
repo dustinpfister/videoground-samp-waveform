@@ -1,6 +1,7 @@
 /*
  *  bit_tracks.js r1 - for the 1bit_mix16 project of videoground-samp-waveform
- *      * 
+ *      * song_to_notenums and create_note method
+ *      * noise_1bit waveform
  *
  */
  
@@ -24,17 +25,17 @@
         noise_1bit : (samp, a_wave ) => {
             samp.seed_start = samp.seed_start || 0;
             samp.seed_delta = samp.seed_delta || 1470 * 10;
+            samp.alow = samp.alow === undefined ? 0.25 : samp.alow;
+            samp.ahigh = samp.ahigh === undefined ? 0.75 : samp.ahigh;
             const seed = Math.round( samp.seed_start + samp.seed_delta * a_wave );
             const a = samp.frequency * a_wave % 1;
-            const n = THREE.MathUtils.seededRandom( seed );
             const ni = samp.ni || 0;
-            
-            if( ni === 0 || a < 0.90){
+            const n = THREE.MathUtils.seededRandom( seed );
+            if( ni === 0 || a < samp.alow || a > samp.ahigh ){        
                 return -1;
             }
-            
             if( n < 0.5 ){
-                return  -1; 
+                return -1; 
             }
             return 1;
         },
