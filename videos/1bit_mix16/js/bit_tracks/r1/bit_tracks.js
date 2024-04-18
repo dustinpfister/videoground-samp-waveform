@@ -2,6 +2,7 @@
  *  bit_tracks.js r1 - for the 1bit_mix16 project of videoground-samp-waveform
  *      * song_to_notenums and create_note method
  *      * noise_1bit waveform
+ *      * using an array of objects for waveform info over that of a bunch of arrays at root of tracks object
  *
  */
  
@@ -134,7 +135,7 @@
     // create a sampset object for the final waveform function that will be used
     Bit_tracks.for_sampset = (tracks, a_sound=0, secs=1, amp=0.75 ) => {
         const t = [];
-        const a_wave = a_sound * secs % 1;
+        let a_wave = a_sound * secs % 1;
         let ti = 0;
         const len = tracks.count;
         while(ti < len){

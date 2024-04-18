@@ -35,24 +35,85 @@ VIDEO.init = function(sm, scene, camera){
    
     // song tracks and total time
     const song_0 = `
-        0, 1.00;
+        0, 16.00;
+
+        1, 2.00;
+        3, 0.50;
+        3, 0.50;
+        4, 1.00; 
+
+        1, 2.00;
+        3, 0.50;
+        3, 0.50;
+        4, 1.00;
+
     `;
     
     const song_1 = `
-        0, 1.00;
+
+        0, 4.00;
+
+        1, 2.00;
+        3, 0.50;
+        3, 0.50;
+        4, 1.00;
+
+        1, 2.00;
+        3, 0.50;
+        3, 0.50;
+        4, 1.00;
+
+        2, 0.50;
+        2, 0.50;
+        2, 0.50;
+        2, 0.50;
+        2, 0.50;
+        2, 0.50;
+        2, 0.50;
+        2, 0.50;
+
+        1, 2.00;
+        3, 0.50;
+        3, 0.50;
+        4, 1.00;
+
     `;
     
     const song_2 = `
 
-        1, 1.00;
         2, 1.00;
-        1, 1.00;
+        3, 1.00;
         2, 1.00;
-        3, 1.50;
+        3, 1.00;
+
+        2, 1.00;
+        3, 1.00;
+        2, 1.00;
+        3, 1.00;
+
+        4, 1.00;
+        4, 1.00;
+        4, 1.00;
+        4, 1.00;
+
+        2, 1.00;
+        3, 1.00;
+        2, 1.00;
+        3, 1.00;
+
+        2, 1.00;
+        3, 1.00;
+        2, 1.00;
+        3, 1.00;
+
+        4, 1.00;
+        4, 1.00;
+        4, 1.00;
+        4, 1.00;
 
     `;
     
-    const total_secs = 5.5;
+    const total_secs = 24;
     
     
     // set up tracks object
@@ -89,13 +150,10 @@ VIDEO.init = function(sm, scene, camera){
                     alow: 0.40,
                     ahigh: 0.60
                 },
-                notes: Bit_tracks.song_to_notenums(song_2, 8, 0, 'zero')
+                notes: Bit_tracks.song_to_notenums(song_2, 32, 0, 'zero')
             }
         ]
     });
-
-console.log( sud.tracks.objects[2] );
-
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
