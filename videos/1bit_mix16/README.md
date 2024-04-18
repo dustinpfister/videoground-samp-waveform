@@ -10,14 +10,13 @@ The goal is to just get started with a general idea of what I want to do when it
   * ( done ) New look started for the project with custom draw.js file
   * ( done ) start a bit\_tracks.js R0 file that will contain reusable code for this project and any others based on what I start here
   * ( done ) Core Idea of the project working
-
   * ( done ) start an R1 of bit\_tracks.js that I will contain improvements as I work out more video01-xx-text videos
   * ( done ) helper function for cretaing notes arrays
   * ( done ) work out a noise waveform for R1 of bit_tracks.js
   
-  * () video01-04-test-samppitch - I might want to see about adjusting pitch bay way of sample by sample rather than frame by frame
-  
-  * () video01-05-test-raw - work out a raw data waveform
+  * () work out another system for music notation that can be used to set freq as well as the a_wave value to use set to the current note
+  * () I might want to see about adjusting pitch bay way of sample by sample rather than frame by frame
+  * () work out a raw data waveform for use with sample files
 
   
 

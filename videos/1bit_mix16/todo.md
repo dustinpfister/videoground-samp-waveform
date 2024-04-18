@@ -1,8 +1,17 @@
 # 1bit_mix16 todo list
 
-## () - video01-03-test-noise
-* () see about starting a noise waveform function for R1 of bit tracks
-* () have a three track tune for lows, highs, and noise
+## () - video01-05-test-note-params
+
+## () - video01-04-test-note-alphas
+* () work out a new mode for setting freq that will replace notes array
+* () this new system will not just set current frequency, but also an awave value to use set to the length of the note
+
+## ( done 04/18/2023 ) - video01-03-test-noise
+* (done) see about starting a noise waveform function for R1 of bit tracks
+* (done) have a three track tune for lows, highs, and noise
+* (done) track objects in R1 of bit\_tracks.js
+* (done) modes for setting how to get the current state of freq for a waveform
+* (done) work out a final tune for this video
 
 ## ( done 04/15/2024 ) - video01-02-test-notehelper
 * (done) new note format for making a song
