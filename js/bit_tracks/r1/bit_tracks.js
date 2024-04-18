@@ -152,13 +152,11 @@
                 frequency: freq, ni: ni
             });
             
+            // create and push sample value
             const s0 = Bit_tracks.waveforms[obj.waveform]( samp, a_wave );
-            
-            
-            //const s0 = Bit_tracks.waveforms[obj.waveform]( { duty: 0.5, frequency: cur.freq, ni: cur.ni  }, a_wave );
-            
             tracks.samples[ti].push( s0 );
             t.push(s0);
+            
             ti += 1;
         }
         return {
