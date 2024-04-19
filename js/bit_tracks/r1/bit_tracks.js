@@ -133,9 +133,13 @@
     };
     
     // create a sampset object for the final waveform function that will be used
-    Bit_tracks.for_sampset = (tracks, a_sound=0, secs=1, amp=0.75 ) => {
+    Bit_tracks.for_sampset = (tracks, a_sound=0, secs=1, amp=0.75, a_wave=undefined ) => {
         const t = [];
-        let a_wave = a_sound * secs % 1;
+        
+        if(a_wave === undefined){
+            a_wave = a_sound * secs % 1;
+        }
+        
         let ti = 0;
         const len = tracks.count;
         while(ti < len){

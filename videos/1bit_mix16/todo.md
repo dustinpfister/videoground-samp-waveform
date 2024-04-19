@@ -3,8 +3,9 @@
 ## () - video01-05-test-note-params
 
 ## () - video01-04-test-note-alphas
-* () work out a new mode for setting freq that will replace notes array
-* () this new system will not just set current frequency, but also an awave value to use set to the length of the note
+* () use 'tone' mode and adjust the freqency used over time
+* () test out new optional a_wave method when using Bit_tracks.for_sampset
+* () work out some helper functions for parsing new 'song' system
 
 ## ( done 04/18/2023 ) - video01-03-test-noise
 * (done) see about starting a noise waveform function for R1 of bit tracks

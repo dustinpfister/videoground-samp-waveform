@@ -1,18 +1,6 @@
-/*    video01-03-test-noise - form 1bit_mix16 in videoground-samp-waveform
- *        * (done) work out a noise waveform function in R1 of bit_tracks.js
- *        * (done) I will want waveform arrays for tracks objects then
- *        * (done) have three tracks for lows, highs and noise
- *        * (done) I would like to make use of ni in noise_1bit
- *        * (done) I would like to make use of frequency in noise_1bit
- *        * (done) need to start a work new freq system for noise waveform
- *        * (done) additional arguments for noise waveform that set the range in which the noise happens
- *        * (done) I would like a single array of waveform objects in place of all these arrays
- *        * (done) should have a new system for switching how freq is set when setting up a frame in bit tracks
- *        * (done) can adjust samp object arguments for noise waveform
- *        * (done) Bit_tracks.for_sampset should use a samp object that will change from one waveform to another
- *
- *        * () there seems to be a problem with timing, see about fixing it 
- *        * () work out a nice three track tune for this video
+/*    video01-04-test-note-alphas - form 1bit_mix16 in videoground-samp-waveform
+ *        * testing out new a_wave argument when calling for sampset bit tracks method
+ *        * testing out 'tone' mode
  *
  */
 //-------- ----------

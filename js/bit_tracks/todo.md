@@ -16,6 +16,7 @@
         * (done) - helper funcitons for working with notes
         * (done) - 1bit\_noise waveform function
         * (done) - modes for allowing for more than one way to set frequency
+        * (done) - an optional a\_wave argument can be given when calling Bit_tracks.for_sampset
         
         * () I think that a amp value should be used over ni in waveform funcitons
         * () the amp value should be used before even calling the 1bit waveform
