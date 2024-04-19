@@ -2,10 +2,13 @@
 
 ## () - video01-05-test-note-params
 
-## () - video01-04-test-note-alphas
-* () use 'tone' mode and adjust the freqency used over time
-* () test out new optional a_wave method when using Bit_tracks.for_sampset
+## () - video01-05-test-note-alphas
 * () work out some helper functions for parsing new 'song' system
+
+## () - video01-04-test-awave
+* (done) use 'tone' mode and adjust the freqency used over time
+* (done) test out new optional a_wave method when using Bit_tracks.for_sampset
+* () there seems to be a problem here when setting frequency, look into it
 
 ## ( done 04/18/2023 ) - video01-03-test-noise
 * (done) see about starting a noise waveform function for R1 of bit tracks

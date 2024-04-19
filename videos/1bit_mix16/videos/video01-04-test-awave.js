@@ -1,4 +1,4 @@
-/*    video01-04-test-note-alphas - form 1bit_mix16 in videoground-samp-waveform
+/*    video01-04-test-awave - form 1bit_mix16 in videoground-samp-waveform
  *        * testing out new a_wave argument when calling for sampset bit tracks method
  *        * testing out 'tone' mode
  *
@@ -21,124 +21,22 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
    
-    // song tracks and total time
-    const song_0 = `
-        0, 16.00;
-
-        1, 2.00;
-        3, 0.50;
-        3, 0.50;
-        4, 1.00; 
-
-        1, 2.00;
-        3, 0.50;
-        3, 0.50;
-        4, 1.00;
-
-    `;
-    
-    const song_1 = `
-
-        0, 4.00;
-
-        1, 2.00;
-        3, 0.50;
-        3, 0.50;
-        4, 1.00;
-
-        1, 2.00;
-        3, 0.50;
-        3, 0.50;
-        4, 1.00;
-
-        2, 0.50;
-        2, 0.50;
-        2, 0.50;
-        2, 0.50;
-        2, 0.50;
-        2, 0.50;
-        2, 0.50;
-        2, 0.50;
-
-        1, 2.00;
-        3, 0.50;
-        3, 0.50;
-        4, 1.00;
-
-    `;
-    
-    const song_2 = `
-
-        2, 1.00;
-        3, 1.00;
-        2, 1.00;
-        3, 1.00;
-
-        2, 1.00;
-        3, 1.00;
-        2, 1.00;
-        3, 1.00;
-
-        4, 1.00;
-        4, 1.00;
-        4, 1.00;
-        4, 1.00;
-
-        2, 1.00;
-        3, 1.00;
-        2, 1.00;
-        3, 1.00;
-
-        2, 1.00;
-        3, 1.00;
-        2, 1.00;
-        3, 1.00;
-
-        4, 1.00;
-        4, 1.00;
-        4, 1.00;
-        4, 1.00;
-
-    `;
-    
-    const total_secs = 24;
+   
+    const total_secs = 60;
     
     
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 3,
+        count: 1,
         objects: [
             {
                 waveform: 'pulse_1bit',
-                mode: 'notes',
+                mode: 'tone',
                 desc: 'highs',
                 samp: {
                     duty: 0.85,
                     frequnecy: 80
-                },
-                octive: 4,
-                notes: Bit_tracks.song_to_notenums(song_0, 32, 0, 'zero')
-            },
-            {
-                waveform: 'pulse_1bit',
-                mode: 'notes',
-                desc: 'lows',
-                samp: {
-                    duty: 0.50,
-                    frequnecy: 80
-                },
-                octive: 2,
-                notes: Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero')
-            },
-            {
-                waveform: 'noise_1bit',
-                mode: 'notes',
-                desc: 'noise',
-                samp: {
-                    alow: 0.40,
-                    ahigh: 0.60
-                },
-                notes: Bit_tracks.song_to_notenums(song_2, 32, 0, 'zero')
+                }
             }
         ]
     });
@@ -147,11 +45,15 @@ VIDEO.init = function(sm, scene, camera){
     const sound = sud.sound = CS.create_sound({
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+
+            sud.tracks.objects[0].samp.frequnecy = (40 + 19960 * a_sound2) * opt.secs;
+        
             Bit_tracks.new_frame(sud.tracks, a_sound2);
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50 );
+            const a_wave = a_sound;
+            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50, a_wave );
         },
         secs: total_secs
     });
