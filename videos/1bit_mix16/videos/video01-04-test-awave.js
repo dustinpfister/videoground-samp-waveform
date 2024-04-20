@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
    
    
-    const total_secs = 60 * 5;
+    const total_secs = 60;
     
     
     // set up tracks object
@@ -46,12 +46,19 @@ VIDEO.init = function(sm, scene, camera){
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            const freq = sud.tracks.objects[0].samp.frequnecy = 40 + ( 21960 * a_sound2 );
+            const freq = sud.tracks.objects[0].samp.frequnecy = ( 40 + 21960 * a_sound2);
+
         
+console.log(freq);
+
             Bit_tracks.new_frame(sud.tracks, a_sound2);
+
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
+
+            //!!! freq is good, what is not good is the a_wave value
+
             const a_wave = a_sound;
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50, a_wave );
         },

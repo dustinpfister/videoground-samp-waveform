@@ -8,7 +8,9 @@
 ## () - video01-04-test-awave
 * (done) use 'tone' mode and adjust the freqency used over time
 * (done) test out new optional a_wave method when using Bit_tracks.for_sampset
-* () there seems to be a problem here when setting frequency, look into it
+* (done) there seems to be a problem here when setting frequency, look into it
+* () frequnecy looks good, but I need an expression that will work well for the awave value used
+* () I would like to have better debug tools that will write out plain text sample data as many files
 
 ## ( done 04/18/2023 ) - video01-03-test-noise
 * (done) see about starting a noise waveform function for R1 of bit tracks
