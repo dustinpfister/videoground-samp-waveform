@@ -9,9 +9,9 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
+  '../../../js/samp_debug/r0/samp_debug.js',
   '../../../js/bit_tracks/r1/bit_tracks.js',
-  '../../../js/bit_tracks/r1/bit_samp_draw.js',
-
+  '../../../js/bit_tracks/r1/bit_samp_draw.js'
 ];
 //-------- ----------
 // INIT
@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
    
    
-    const total_secs = 60;
+    const total_secs = 1;
     
     
     // set up tracks object
@@ -46,16 +46,16 @@ VIDEO.init = function(sm, scene, camera){
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            const freq = sud.tracks.objects[0].samp.frequnecy = ( 40 + 21960 * a_sound2);
-
-        
-console.log(freq);
+            //sud.tracks.objects[0].samp.frequnecy = ( 40 + 21960 * a_sound2);
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
 
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
+        
+        
+            sud.tracks.objects[0].samp.frequnecy = ( 40 + 21960 * a_sound);
 
             //!!! freq is good, what is not good is the a_wave value
 
@@ -77,8 +77,19 @@ console.log(freq);
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
-    const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax ); 
-    return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
+    const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
+    
+    //console.log(  '' );
+    //console.log( sm.imageFolder );
+    
+    
+    //return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport)
+  
+    
+    
+    
+    return  CDB.write_text_samples(data_samples, sm.frame, sm.imageFolder);
+    
 };
 //-------- ----------
 // RENDER
