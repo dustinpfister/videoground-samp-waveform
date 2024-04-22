@@ -1,8 +1,12 @@
 # 1bit_mix16 todo list
 
-## () - video01-05-test-pitch
-* () I would like to demo another use of the 'tone' mode
-* () 
+## () - video01-06-test-note-alpha
+* () just work out a simple demo of note alphas
+* () use these note alphas to set pitch on sample by sample rate, and use plain old awave value
+
+## ( done 04/22/2024 ) - video01-05-test-pitch
+* (done) I would like to demo another use of the 'tone' mode
+* (done) This can also be a test of sample by sample change of frequency
 
 ## ( done 04/22/2024 ) - video01-04-test-awave
 * (done) use 'tone' mode and adjust the freqency used over time

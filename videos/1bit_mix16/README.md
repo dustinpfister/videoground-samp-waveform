@@ -15,7 +15,7 @@ The goal is to just get started with a general idea of what I want to do when it
   * ( done ) work out a noise waveform for R1 of bit_tracks.js
   
   * () work out another system for music notation that can be used to set freq as well as the a_wave value to use set to the current note
-  * () I might want to see about adjusting pitch bay way of sample by sample rather than frame by frame
+  * () I might want to see about adjusting pitch by way of sample by sample rather than frame by frame
   * () work out a raw data waveform for use with sample files
 
   
