@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
    
    
-    const total_secs = 1;
+    const total_secs = 60 * 10;
     
     
     // set up tracks object
@@ -46,20 +46,42 @@ VIDEO.init = function(sm, scene, camera){
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            //sud.tracks.objects[0].samp.frequnecy = ( 40 + 21960 * a_sound2);
+
+            fs.frame = frame;
+            fs.max_frame = max_frame;
+            fs.freq = sud.tracks.objects[0].samp.frequnecy = 60 + (21960 * a_sound2); 
+            fs.a_sound2 = a_sound2;
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
 
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-        
-        
-            sud.tracks.objects[0].samp.frequnecy = ( 40 + 21960 * a_sound);
 
             //!!! freq is good, what is not good is the a_wave value
 
-            const a_wave = a_sound;
+            const a_frame = (i % 1470) / 1470;
+            const a_sec = (i % 44100) / 44100;
+
+            //const a_wave = a_sound;
+            //const a_wave = a_sound * opt.secs % 1;
+            //const a_wave = ( (fs.frame + a_frame ) % fs.max_frame ) / fs.max_frame;
+
+
+const a_wave = a_sound * opt.secs % 1;
+
+if( i % 1470 === 0){
+
+    const spc = 1470 / ( fs.freq / 30)
+
+    console.log('');
+    console.log('frame: ' + fs.frame);
+    console.log('freq: ' + fs.freq);
+    console.log('samples per cycle: ' + spc);
+
+}
+
+        
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50, a_wave );
         },
         secs: total_secs
@@ -83,12 +105,12 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     //console.log( sm.imageFolder );
     
     
-    //return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport)
+    return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
   
     
     
     
-    return  CDB.write_text_samples(data_samples, sm.frame, sm.imageFolder);
+    //return  CDB.write_text_samples(data_samples, sm.frame, sm.imageFolder)
     
 };
 //-------- ----------

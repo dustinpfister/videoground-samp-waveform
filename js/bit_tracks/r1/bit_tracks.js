@@ -164,6 +164,7 @@
             ti += 1;
         }
         return {
+            a_wave: a_wave,
             amplitude: amp,
             tracks: t
         };
