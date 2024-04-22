@@ -107,7 +107,7 @@
             let ni = 0, freq = 0;
             
             if(obj.mode === 'tone'){        
-                freq = obj.samp.frequnecy || 80;
+                freq = obj.samp.frequency || 80;
                 ni = 1;                      
             }
             

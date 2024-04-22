@@ -126,7 +126,7 @@ VIDEO.init = function(sm, scene, camera){
                 desc: 'highs',
                 samp: {
                     duty: 0.85,
-                    frequnecy: 80
+                    frequency: 80
                 },
                 octive: 4,
                 notes: Bit_tracks.song_to_notenums(song_0, 32, 0, 'zero')
@@ -137,7 +137,7 @@ VIDEO.init = function(sm, scene, camera){
                 desc: 'lows',
                 samp: {
                     duty: 0.50,
-                    frequnecy: 80
+                    frequency: 80
                 },
                 octive: 2,
                 notes: Bit_tracks.song_to_notenums(song_1, 32, 0, 'zero')
