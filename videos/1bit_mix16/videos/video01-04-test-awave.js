@@ -74,10 +74,10 @@ if( i % 1470 === 0){
 
     const spc = 1470 / ( fs.freq / 30)
 
-    console.log('');
-    console.log('frame: ' + fs.frame);
-    console.log('freq: ' + fs.freq);
-    console.log('samples per cycle: ' + spc);
+    //console.log('');
+    //console.log('frame: ' + fs.frame);
+    //console.log('freq: ' + fs.freq);
+    //console.log('samples per cycle: ' + spc);
 
 }
 
