@@ -31,7 +31,7 @@ VIDEO.init = function(sm, scene, camera){
             {
                 waveform: 'pulse_1bit',
                 mode: 'tone',
-                desc: 'highs',
+                desc: 'lows',
                 samp: {
                     duty: 0.50,
                     frequency: 60
