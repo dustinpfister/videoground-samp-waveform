@@ -26,8 +26,17 @@ VIDEO.init = function(sm, scene, camera){
     
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 1,
+        count: 2,
         objects: [
+            {
+                waveform: 'pulse_1bit',
+                mode: 'tone',
+                desc: 'highs',
+                samp: {
+                    duty: 0.50,
+                    frequency: 120
+                }
+            },
             {
                 waveform: 'pulse_1bit',
                 mode: 'tone',
@@ -36,12 +45,59 @@ VIDEO.init = function(sm, scene, camera){
                     duty: 0.50,
                     frequency: 60
                 }
-            }
+            },
         ]
     });
 
+    const get_total_beats = (song) => {
+        return song.notes.reduce((acc, n) => {
+            let b = parseInt( n.beats );
+            b = String(b) === 'NaN' ? 0 : b;
+            return acc + b;
+        },0);
+    };
 
-    const song = {
+    const set_notes_alphas = (song) => {
+        if(!song.total_beats){
+            song.total_beats = get_total_beats(song);
+        } 
+        song.notes.forEach( (obj, i) => {
+            let b = parseInt( obj.beats );
+            b = String(b) === 'NaN' ? 0 : b;
+            let a = 0;
+            if(i > 0){
+                a = song.notes[i - 1].alpha;
+            }
+            song.notes[i].alpha = a + b / song.total_beats;
+        });
+    };
+
+    const create_song = (opt) => {
+        const song = Object.assign({}, opt);
+        set_notes_alphas(song);
+        song.total_secs = Math.ceil(song.total_beats / song.bps);   
+        return song;
+    };
+
+
+    const get_note = (song, a_sound, index ) => {
+        if(index != undefined){
+            song.index = index;
+        }
+        let i = song.index;
+        const len = song.notes.length;
+        while(i < len){
+            if(a_sound <= song.notes[i].alpha ){
+                song.index = i;
+                return song.notes[i];
+            }
+            i += 1;
+        }
+        return { pitch: 0, beats: 0 };
+    };
+
+
+    const song1 = create_song({
         bps: 8,
         total_beats: 0,
         index:0,
@@ -79,55 +135,18 @@ VIDEO.init = function(sm, scene, camera){
 
             {  pitch: 100, beats: 2  },
             {  pitch: 90, beats: 2  },
-            {  pitch: 80, beats: 2  },
-
+            {  pitch: 80, beats: 2  }
 
         ]
-    }
-
-    song.total_beats = song.notes.reduce((acc, n) => {
-        let b = parseInt( n.beats );
-        b = String(b) === 'NaN' ? 0 : b;
-        return acc + b;
-    },0);
-
-    const notes_alphas = song.notes.reduce( (acc, obj, i) => {
-        let b = parseInt( obj.beats );
-        b = String(b) === 'NaN' ? 0 : b;
-        let a = 0;
-        if(i > 0){
-            a = song.notes[i - 1].alpha;
-        }
-        song.notes[i].alpha = a + b / song.total_beats;
-        return acc;
-    }, [] );
-
-
-    const get_note = (song, a_sound, index ) => {
-        if(index != undefined){
-            song.index = index;
-        }
-        let i = song.index;
-        const len = song.notes.length;
-        while(i < len){
-            if(a_sound <= song.notes[i].alpha ){
-                song.index = i;
-                return song.notes[i];
-            }
-            i += 1;
-        }
-        return { pitch: 0, beats: 0 };
-    };
-
-
-    const total_secs = Math.ceil(song.total_beats / song.bps);
+    });
+ 
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            song.index = 0;
+            song1.index = 0;
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
 
@@ -136,16 +155,16 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
 
-            const obj = get_note( song, a_sound );
+            const obj = get_note( song1, a_sound );
 
-            sud.tracks.current[0].freq = obj.pitch;
+            sud.tracks.current[1].freq = obj.pitch;
             
 
          
             let a_wave = a_sound * opt.secs % 1;
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50, a_wave );
         },
-        secs: total_secs
+        secs: song1.total_secs
     });
 
     // display objects for audio sample arrays for tracks and main final display

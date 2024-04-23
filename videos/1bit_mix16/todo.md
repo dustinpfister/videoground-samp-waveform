@@ -1,11 +1,18 @@
 # 1bit_mix16 todo list
 
+## () - video01-08-test-music-objects
+* () start a new main js module called 'music\_objects' and start R0 of the module
+* () start with what I all ready have worked out in video01-06-note-alpha
+* () this video will be the first test video when working on this
+
 ## () - video01-07-test-custom-waveform
 * () I will want to have the option to give a custom 1-bit waveform function to use
 
 ## () - video01-06-test-note-alpha
 * (done) just work out a simple demo of note alphas
 * (done) use these note alphas to set pitch on sample by sample rate, and use plain old awave value
+* (done) more refined methods in line with the task of creating more than one song object
+* () work out note alphas, and use it to adjust pitch for each note
 * () work out two tracks for this
 
 ## ( done 04/22/2024 ) - video01-05-test-pitch
