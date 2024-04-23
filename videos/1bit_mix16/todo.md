@@ -1,8 +1,9 @@
 # 1bit_mix16 todo list
 
 ## () - video01-06-test-note-alpha
-* () just work out a simple demo of note alphas
-* () use these note alphas to set pitch on sample by sample rate, and use plain old awave value
+* (done) just work out a simple demo of note alphas
+* (done) use these note alphas to set pitch on sample by sample rate, and use plain old awave value
+* () work out two tracks for this
 
 ## ( done 04/22/2024 ) - video01-05-test-pitch
 * (done) I would like to demo another use of the 'tone' mode
