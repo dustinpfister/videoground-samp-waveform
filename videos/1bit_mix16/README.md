@@ -6,19 +6,12 @@ The general idea here is to have more than one 1-bit track, however when it come
 
 The goal is to just get started with a general idea of what I want to do when it comes to 1-bit sound and music. As of this writing I all ready have the core idea of what I want working, and now it is just a question of how many videos I want to make, and if this will result in some kind of long term project or not. Apart from just mixing upscaled 1-bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that migth result in improved javascript code that is used for createing sample data to begin with.
 
-
-  * ( done ) New look started for the project with custom draw.js file
-  * ( done ) start a bit\_tracks.js R0 file that will contain reusable code for this project and any others based on what I start here
   * ( done ) Core Idea of the project working
-  * ( done ) start an R1 of bit\_tracks.js that I will contain improvements as I work out more video01-xx-text videos
-  * ( done ) helper function for cretaing notes arrays
+  * ( done ) New look started for the project with custom draw.js file
   * ( done ) work out a noise waveform for R1 of bit_tracks.js
-  
-  * () work out another system for music notation that can be used to set freq as well as the a_wave value to use set to the current note
+  * () work out a system for music notation that can be used to set freq as well as the alpha value to use set to the current note
   * () I might want to see about adjusting pitch by way of sample by sample rather than frame by frame
   * () work out a raw data waveform for use with sample files
-
-  
 
 ### Core idea of project working
 
@@ -41,8 +34,7 @@ For this project I started a new samp_draw.js file starting with the code that I
 
 ### Custom 1-bit Waveform Funcitons
 
-I will want to work out a few custom waveform functions for this project. As of this writing I have all ready started a custom pulse waveform function. I will want to expand this by making a noise waveform as well that will also work with 1-bit, but might also what to work out one that will read raw 1-bit data also. The raw data tool will then be used as a way to playback any kind of binary data including sound samples that are converted to 1 bit sample depth.
-
+I will want a lot of options for 1-bit waveform functions actually. When I first started this project and the bit tracks module I had a pulse waveform, and after a few test videos I also started a noise waveform. In time I will likley want to have a lot of options for this kind of waveform actually, and like the core create samples module I might want to have the option to make custom ones on a video by video basis.
 
 ## IDEAS FOR ADDITIONAL PROJECTS BASED ON WHAT I HAVE STARTED IN 1BIT_MIX16
 

@@ -1,5 +1,8 @@
 # 1bit_mix16 todo list
 
+## () - video01-07-test-custom-waveform
+* () I will want to have the option to give a custom 1-bit waveform function to use
+
 ## () - video01-06-test-note-alpha
 * (done) just work out a simple demo of note alphas
 * (done) use these note alphas to set pitch on sample by sample rate, and use plain old awave value
