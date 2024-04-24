@@ -64,6 +64,7 @@ VIDEO.init = function(sm, scene, camera){
             if(i > 0){
                 a = song.notes[i - 1].alpha;
             }
+            song.notes[i].alpha_start = a;
             song.notes[i].alpha = a + b / song.total_beats;
         });
     };
@@ -97,7 +98,10 @@ VIDEO.init = function(sm, scene, camera){
         total_beats: 0,
         index:0,
         notes : [
-            {  pitch: 0, beats: 48  }
+            {  pitch: 80, beats: 4  },
+            {  pitch: 90, beats: 2  },
+            {  pitch: 60, beats: 2  },
+            {  pitch: 0, beats: 8}
 
         ]
     });
@@ -108,6 +112,12 @@ VIDEO.init = function(sm, scene, camera){
         total_beats: 0,
         index:0,
         notes : [
+            {  pitch: 0, beats: 8  },
+            {  pitch: 80, beats: 4  },
+            {  pitch: 90, beats: 2  },
+            {  pitch: 60, beats: 2  }
+
+/*
             {  pitch: 80, beats: 4  },
             {  pitch: 100, beats: 2  },
             {  pitch: 90, beats: 2  },
@@ -143,11 +153,13 @@ VIDEO.init = function(sm, scene, camera){
             {  pitch: 90, beats: 2  },
             {  pitch: 80, beats: 2  }
 
+*/
+
         ]
     });
 
-console.log(song0.total_beats); 
-console.log(song1.total_beats); 
+    console.log(song0.total_beats); 
+    console.log(song1.total_beats); 
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
@@ -168,7 +180,22 @@ console.log(song1.total_beats);
 
 
             const obj1 = get_note( song1, a_sound );
-            sud.tracks.current[1].freq = obj1.pitch;
+
+
+            const note_alpha = ( a_sound - obj1.alpha_start ) / ( obj1.alpha - obj1.alpha_start );
+            const na_sin = ST.get_alpha_sin(note_alpha, 1, 1);
+
+            sud.tracks.current[1].freq = obj1.pitch * na_sin;
+
+
+if(i % 100 === 0){
+
+
+
+//console.log(i, note_alpha);
+
+
+}
             
             let a_wave = a_sound * opt.secs % 1;
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50, a_wave );
