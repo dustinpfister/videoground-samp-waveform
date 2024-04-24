@@ -19,10 +19,6 @@ VIDEO.init = function(sm, scene, camera){
    
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
-   
-   
-    
-    
     
     // set up tracks object
     sud.tracks = Bit_tracks.create({
@@ -96,6 +92,16 @@ VIDEO.init = function(sm, scene, camera){
         return { pitch: 0, beats: 0 };
     };
 
+    const song0 = create_song({
+        bps: 8,
+        total_beats: 0,
+        index:0,
+        notes : [
+            {  pitch: 0, beats: 48  }
+
+        ]
+    });
+
 
     const song1 = create_song({
         bps: 8,
@@ -139,13 +145,16 @@ VIDEO.init = function(sm, scene, camera){
 
         ]
     });
- 
+
+console.log(song0.total_beats); 
+console.log(song1.total_beats); 
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
+            song0.index = 0;
             song1.index = 0;
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
@@ -154,13 +163,13 @@ VIDEO.init = function(sm, scene, camera){
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
+            const obj0 = get_note( song0, a_sound );
+            sud.tracks.current[0].freq = obj0.pitch;
 
-            const obj = get_note( song1, a_sound );
 
-            sud.tracks.current[1].freq = obj.pitch;
+            const obj1 = get_note( song1, a_sound );
+            sud.tracks.current[1].freq = obj1.pitch;
             
-
-         
             let a_wave = a_sound * opt.secs % 1;
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50, a_wave );
         },
@@ -181,9 +190,6 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
     
-    //console.log(  '' );
-    //console.log( sm.imageFolder );
-    
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
     
     //const result = CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport)
@@ -192,11 +198,7 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     //        return CDB.write_text_samples(data_samples, sm.frame, sm.imageFolder);
     //    })
     //}
-    
-    
-    
-    //return  CDB.write_text_samples(data_samples, sm.frame, sm.imageFolder)
-    
+     
 };
 //-------- ----------
 // RENDER
