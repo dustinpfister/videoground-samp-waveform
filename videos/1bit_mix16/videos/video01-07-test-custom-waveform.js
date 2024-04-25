@@ -35,7 +35,7 @@ VIDEO.init = function(sm, scene, camera){
                     return -1;
                 },
                 mode: 'tone',
-                desc: 'highs',
+                desc: 'custom think 1',
                 samp: {
                     alow: 0.25,
                     ahigh: 0.75,
@@ -59,7 +59,11 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
 
-sud.tracks.objects[0].samp.grain = 2 + 98 * a_sound;
+            const samp0 = sud.tracks.objects[0].samp;
+
+            samp0.grain = 2 + 98 * a_sound;
+
+            samp0.frequency = 80 - 60 * a_sound;
 
 
 if(i % 1470 === 0){
