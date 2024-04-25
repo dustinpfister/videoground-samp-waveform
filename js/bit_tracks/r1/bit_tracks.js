@@ -16,8 +16,9 @@
         pulse_1bit : (samp, a_wave ) => {
             const duty = samp.duty === undefined ? 0.5 : samp.duty;
             const a = samp.frequency * a_wave % 1;
-            const ni = samp.ni || 0;
-            if(a < duty || ni === 0){
+            //const ni = samp.ni || 0;
+            //if(a < duty || ni === 0){
+            if(a < duty){
                 return  -1; 
             }
             return 1;
@@ -30,9 +31,10 @@
             samp.ahigh = samp.ahigh === undefined ? 0.75 : samp.ahigh;
             const seed = Math.round( samp.seed_start + samp.seed_delta * a_wave );
             const a = samp.frequency * a_wave % 1;
-            const ni = samp.ni || 0;
+            //const ni = samp.ni || 0;
             const n = THREE.MathUtils.seededRandom( seed );
-            if( ni === 0 || a < samp.alow || a > samp.ahigh ){        
+            //if( ni === 0 || a < samp.alow || a > samp.ahigh ){
+            if( a < samp.alow || a > samp.ahigh ){        
                 return -1;
             }
             if( n < 0.5 ){
@@ -157,7 +159,10 @@
             });
             
             // create and push sample value
-            const s0 = Bit_tracks.waveforms[obj.waveform]( samp, a_wave );
+            let s0 = 0;
+            if( cur.amp === 1 ){
+                s0 = Bit_tracks.waveforms[ obj.waveform ]( samp, a_wave );    
+            }
             tracks.samples[ti].push( s0 );
             t.push(s0);
             

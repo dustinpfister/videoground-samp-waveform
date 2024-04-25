@@ -14,9 +14,9 @@
     * (done) - 1bit\_noise waveform function
     * (done) - modes for allowing for more than one way to set frequency
     * (done) - an optional a\_wave argument can be given when calling Bit_tracks.for_sampset         
-    * (done) - bit_samp_draw : change to main draw function to get it to work with objects.       
-        
-    * () - I think that a amp value should be used over ni in waveform funcitons
+    * (done) - bit_samp_draw : change to main draw function to get it to work with objects.     
+    * (done) - I think that a amp value should be used over ni in waveform funcitons
+    
     * () - the amp value should be used before even calling the 1bit waveform
     * () - allow for custom waveform functions
 
