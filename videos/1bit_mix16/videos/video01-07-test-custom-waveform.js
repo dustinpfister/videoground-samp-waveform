@@ -20,28 +20,43 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
     
+    const grain_1bit = (samp, a_wave ) => {
+        const a = samp.frequency * a_wave % 1;
+        if(a > samp.alow && a < samp.ahigh){
+            const a2 = (a - samp.alow) / ( 1 - ( 1 - samp.ahigh ) - samp.alow );
+            const a3 = Math.sin( Math.PI * 1 * a2 );
+            return Math.round(a3 * samp.grain) % samp.div === 0 ? 1 : -1;
+        }
+        return -1;
+    };
+
+
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 1,
+        count: 2,
         objects: [
             {
-                waveform: (samp, a_wave ) => {
-                    const a = samp.frequency * a_wave % 1;
-                    if(a > samp.alow && a < samp.ahigh){
-                        const a2 = (a - samp.alow) / ( 1 - ( 1 - samp.ahigh ) - samp.alow );
-                        const a3 = Math.sin( Math.PI * 1 * a2 );
-                        return Math.round(a3 * samp.grain) % samp.div === 0 ? 1 : -1;
-                    }
-                    return -1;
-                },
+                waveform: grain_1bit,
                 mode: 'tone',
-                desc: 'custom think 1',
+                desc: 'grain 2 to 60 - 30 hertz',
                 samp: {
-                    alow: 0.25,
-                    ahigh: 0.75,
-                    grain: 10,
+                    alow: 0,
+                    ahigh: 1,
+                    grain: 2,
                     div: 2,
                     frequency: 30
+                }
+            },
+            {
+                waveform: grain_1bit,
+                mode: 'tone',
+                desc: 'grain 20 - 30 to 120 hertz ',
+                samp: {
+                    alow: 0.20,
+                    ahigh: 0.80,
+                    grain: 20,
+                    div: 4,
+                    frequency: 1
                 }
             }
         ]
@@ -60,20 +75,16 @@ VIDEO.init = function(sm, scene, camera){
 
 
             const samp0 = sud.tracks.objects[0].samp;
+            samp0.grain = 2 + 58 * a_sound;
 
-            samp0.grain = 2 + 98 * a_sound;
-
-            samp0.frequency = 80 - 60 * a_sound;
-
-
-if(i % 1470 === 0){
-
-}
+            const samp1 = sud.tracks.objects[1].samp;
+            const a_freq = Math.sin( Math.PI * (a_sound * 8 % 1) );
+            samp1.frequency = 30 + 90 * a_freq;
             
             let a_wave = a_sound * opt.secs % 1;
-            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.50, a_wave );
+            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, a_wave );
         },
-        secs: 10
+        secs: 30
     });
 
     // display objects for audio sample arrays for tracks and main final display

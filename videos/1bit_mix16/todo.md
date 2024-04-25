@@ -9,8 +9,9 @@
 * () start with what I all ready have worked out in video01-06-note-alpha
 * () this video will be the first test video when working on this
 
-## () - video01-07-test-custom-waveform
-* () I will want to have the option to give a custom 1-bit waveform function to use
+## ( done 04/25/2023 ) - video01-07-test-custom-waveform
+* (done) I will want to have the option to give a custom 1-bit waveform function to use
+* (done) have two tracks in which I am testing out differing options for the custom waveform
 
 ## ( done 04/25/2024 ) - video01-06-test-note-alpha
 * (done) just work out a simple demo of note alphas
