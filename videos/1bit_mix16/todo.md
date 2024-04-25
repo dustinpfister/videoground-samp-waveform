@@ -1,17 +1,16 @@
 # 1bit_mix16 todo list
 
-
-## () - video01-xx-test-custom-waveform
-* () I will want to have the option to give a custom 1-bit waveform function to use
-
 ## () - video01-xx-test-sample-alphas
 * () I might want to start a main js project that has to do with 'sample alphas'.
 * () this will be the first 1bit_mix16 project that will use this project
 
-## () - video01-07-test-music-objects
+## () - video01-xx-test-music-objects
 * () start a new main js module called 'music\_objects' and start R0 of the module
 * () start with what I all ready have worked out in video01-06-note-alpha
 * () this video will be the first test video when working on this
+
+## () - video01-07-test-custom-waveform
+* () I will want to have the option to give a custom 1-bit waveform function to use
 
 ## ( done 04/25/2024 ) - video01-06-test-note-alpha
 * (done) just work out a simple demo of note alphas
