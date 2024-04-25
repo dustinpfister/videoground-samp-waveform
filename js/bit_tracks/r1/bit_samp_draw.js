@@ -1,7 +1,6 @@
 /* bit_samp_draw.js r1 - from 1bit_mix16 project
  * github.com/dustinpfister/videoground-samp-waveform/blob/master/videos/1bit_mix16/
- *
- *    * (done) updated DSD.draw_tracks to work with R1 of bit_tracks.js
+ *    * updated DSD.draw_tracks to work with R1 of bit_tracks.js
  *
  */ 
 (function(){
@@ -62,8 +61,9 @@
         }
         return samp;
     };
-    
-    
+    /********* **********
+    CREATE DISP OPTIONS - create draw_sample_data options objects to use with each track, and also the main mix
+    ********** *********/      
     DSD.create_disp_options = (tracks, sound, opt={} ) => {  
         opt = Object.assign({}, {
             width: 1200,
@@ -104,7 +104,6 @@
         };      
         return track_disp_opt;  
     };
-    
     /********* **********
     PUBLIC DRAW METHODS
     ********** *********/
@@ -148,7 +147,6 @@
         }
         ctx.stroke();
     };
-
     DSD.draw_box = (ctx, opt, alpha=0 ) => {
         set_box_opt(opt);
         ctx.strokeStyle = opt.boxStyle ||'lime';
@@ -159,7 +157,6 @@
             ctx.fillRect(opt.sx, opt.sy, opt.w * alpha, opt.h);
         }
     };
-
     DSD.draw_info = (ctx, sound, sm, fill='white', size=25) => {
         const alpha = sm.frame / ( sm.frameMax - 1);
         ctx.fillStyle = fill;
@@ -169,8 +166,6 @@
         const disp_time =  (sound.secs * alpha).toFixed(2) + ' / ' + sound.secs;
         ctx.fillText('frame: ' + disp_frame + ', seconds: ' + disp_time, 10, 10);
     };
-    
-    
     DSD.draw_tracks = (ctx, tracks, track_disp_opt) => {
         let i_track = 0;
         const len_track = tracks.samples.length;
@@ -181,7 +176,6 @@
             i_track += 1;
         }
     };
-    
     // updated main draw function that will draw a given sample array
     DSD.draw = (ctx, sample_array, opt = {}, alpha = 0, desc='') => {
         draw_midline(ctx, opt.sx, opt.sy, opt.w, opt.h, opt.midline_style);

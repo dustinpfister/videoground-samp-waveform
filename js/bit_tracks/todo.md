@@ -1,6 +1,8 @@
 # bit_tracks project todo list
 
 ## R2 - () - merge waveform, music-objects
+    * () - just have a w option for create_disp_options in bit_samp_draw.js
+    * () - have a common default object for tracks and mix options objects of create_disp_options in bit_samp_draw.js
     * () - 1-bit waveforms should return 0 or 1
     * () - remove code that has to do with notes, and place it in a music\_nums js file
     * () - merge waveform for cretaing a merge down final mix of the 1bit tracks
@@ -16,8 +18,7 @@
     * (done) - an optional a\_wave argument can be given when calling Bit_tracks.for_sampset         
     * (done) - bit_samp_draw : change to main draw function to get it to work with objects.     
     * (done) - I think that a amp value should be used over ni in waveform funcitons
-    
-    * () - the amp value should be used before even calling the 1bit waveform
+    * (done) - the amp value should be used before even calling the 1bit waveform
     * () - allow for custom waveform functions
 
 ## R0 - ( done 04/09/2024 ) - first revision done
