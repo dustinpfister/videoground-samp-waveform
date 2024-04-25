@@ -4,15 +4,15 @@ The general idea here is to have more than one 1-bit track, however when it come
 
 ## Goals for the project
 
-The goal is to just get started with a general idea of what I want to do when it comes to 1-bit sound and music. As of this writing I all ready have the core idea of what I want working, and now it is just a question of how many videos I want to make, and if this will result in some kind of long term project or not. Apart from just mixing upscaled 1-bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that migth result in improved javascript code that is used for createing sample data to begin with.
+The goal is to just get started with a general idea of what I want to do when it comes to 1-bit sound and music. As of this writing I all ready have the core idea of what I want working, so now it is just a question of where I want to go from there. Apart from just mixing upscaled 1-bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that migth result in improved javascript code that is used for creating sample data.
 
   * ( done ) Core Idea of the project working
   * ( done ) New look started for the project with custom draw.js file
-  * ( done ) work out a noise waveform for R1 of bit_tracks.js
-  * () work out a system for music notation that can be used to set freq as well as the alpha value to use set to the current note
-  * () I might want to see about adjusting pitch by way of sample by sample rather than frame by frame
-  * () work out a raw data waveform for use with sample files
-
+  * ( done ) work out a 1-bit noise waveform for R1 of bit_tracks.js
+  
+  * () test out a custom 1-bit noise waveform using R1 of bit_tracks.js
+  
+  
 ### Core idea of project working
 
 The first and formost goal here is to just work out what the core idea of the project is of course. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
@@ -26,15 +26,6 @@ The first and formost goal here is to just work out what the core idea of the pr
 video01-01-test-2tracks.
     </p>
 </div>
-
-
-### Updated Look with bit_samp_draw.js file in place of main samp_draw.js
-
-For this project I started a new samp_draw.js file starting with the code that I all ready have in place for this. Functions that are not beging usesd for this project where removed, and addtional code that will be used for this was added to this copy of the file. This might be soemhting that I should concider doing on a project by project basis anyway as each time I start a new project that is a chance to start a whole new look and over all feel of the video content after all.
-
-### Custom 1-bit Waveform Funcitons
-
-I will want a lot of options for 1-bit waveform functions actually. When I first started this project and the bit tracks module I had a pulse waveform, and after a few test videos I also started a noise waveform. In time I will likley want to have a lot of options for this kind of waveform actually, and like the core create samples module I might want to have the option to make custom ones on a video by video basis.
 
 ## IDEAS FOR ADDITIONAL PROJECTS BASED ON WHAT I HAVE STARTED IN 1BIT_MIX16
 

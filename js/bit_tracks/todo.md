@@ -1,10 +1,19 @@
 # bit_tracks project todo list
 
-## R2 - () - merge waveform, music-objects
-    * () - just have a w option for create_disp_options in bit_samp_draw.js
-    * () - have a common default object for tracks and mix options objects of create_disp_options in bit_samp_draw.js
+## RX - () - stereo
+    * () if I have a updated samp create module that can do stereo there is doing things with that
+
+## RX - () - saw filter
+    * () optional saw filter for each final mix option
+
+## R2 - () - merge and mix2 waveforms, note code removed
     * () - 1-bit waveforms should return 0 or 1
     * () - merge waveform for cretaing a merge down final mix of the 1bit tracks
+    * () - mix2 waveform that allows for adjusting ampliude percent between tracks
+    
+    * () - just have a w option for create_disp_options in bit_samp_draw.js
+    * () - have a common default object for tracks and mix options objects of create_disp_options in bit_samp_draw.js
+    * () - new look for when using mix2 that displays the ampliude for each 1-bit track
     
     * () - remove code that has to do with notes, and place it in a music\_nums js file
     * () - new music-nums js file that is the code from bit tracks that has to do with cretaing notes

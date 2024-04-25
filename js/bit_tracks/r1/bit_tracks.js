@@ -52,9 +52,8 @@
             while( i < count ){
                 sum += samp.tracks[i];
                 i += 1;
-            }
-            const n = sum * (1 / count) * samp.amplitude;
-            return n;
+            } 
+            return sum * (1 / count) * samp.amplitude;
         }
     };
     
