@@ -13,8 +13,25 @@
 * (done) use these note alphas to set pitch on sample by sample rate, and use plain old awave value
 * (done) more refined methods in line with the task of creating more than one song object
 * (done) work out note alphas, and use it to adjust pitch for each note
-* () adjust the amount of time for each note that pitch goes up from 0 to the note pitch
-* () work out helper functions for setting the note alphas on each for sampset call
+* (done) have a get note alpha helper function 
+
+<!-- 
+    sample by sample alphas?
+    
+    There seems to be all kinds of problems when adjusting frequnecy on a sample by sample basis
+    This must have something to do with the a_wave value used in conjunction with the frequnecy values
+    That is that 80 hertz over a second is indeed 80 over a second, but if I start at 0 hertz and go
+    up to 80 hertz, by then end of the the second a frequency of 80 would be much higher.
+    
+    The soultion to this would involve a new formula for a_wave values, or just stick to the same old
+    per second a_wave value and figure out how to adjust frequnecy to get the desired outcomes. In any case
+    At the time of this writing it would seem that my note alpha values are working just fine, and I have found
+    no problems in the bit_tracks.js file or any other code. It might be best to just wrap up this video
+    with a simple 0 freq pading function between notes for now, and explore this subject further in another video.
+
+-->
+
+* () just have a simple 0 frequnecy padding function for now
 * () work out two tracks for this
 
 ## ( done 04/22/2024 ) - video01-05-test-pitch

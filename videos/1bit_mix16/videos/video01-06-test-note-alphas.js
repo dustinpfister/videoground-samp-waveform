@@ -93,16 +93,23 @@ VIDEO.init = function(sm, scene, camera){
         return { pitch: 0, beats: 0 };
     };
 
+
+    const get_note_alpha = (a_sound, note) => {
+        return ( a_sound - note.alpha_start ) / ( note.alpha - note.alpha_start );
+    };
+
+    const get_note_alpha_pad = () => {
+
+
+    }
+
     const song0 = create_song({
         bps: 8,
         total_beats: 0,
         index:0,
         notes : [
-            {  pitch: 80, beats: 4  },
-            {  pitch: 90, beats: 2  },
-            {  pitch: 60, beats: 2  },
-            {  pitch: 0, beats: 8}
-
+            {  pitch: 240, beats: 4  },
+            {  pitch: 0, beats: 4  }
         ]
     });
 
@@ -112,10 +119,8 @@ VIDEO.init = function(sm, scene, camera){
         total_beats: 0,
         index:0,
         notes : [
-            {  pitch: 0, beats: 8  },
-            {  pitch: 80, beats: 4  },
-            {  pitch: 90, beats: 2  },
-            {  pitch: 60, beats: 2  }
+            {  pitch: 0, beats: 4  },
+            {  pitch: 240, beats: 4  }
 
 /*
             {  pitch: 80, beats: 4  },
@@ -161,6 +166,8 @@ VIDEO.init = function(sm, scene, camera){
     console.log(song0.total_beats); 
     console.log(song1.total_beats); 
 
+console.log( ST.get_alpha_sin(0.55, 1.0, 1) );
+
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
         waveform: Bit_tracks.waveforms.mix,
@@ -176,23 +183,50 @@ VIDEO.init = function(sm, scene, camera){
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
             const obj0 = get_note( song0, a_sound );
-            sud.tracks.current[0].freq = obj0.pitch;
+
+
+
+
+
+
+            const note_alpha = get_note_alpha(a_sound, obj0);
+
+            
+
+            sud.tracks.current[0].freq = (obj0.pitch / 2) * note_alpha;
+
 
 
             const obj1 = get_note( song1, a_sound );
 
 
-            const note_alpha = ( a_sound - obj1.alpha_start ) / ( obj1.alpha - obj1.alpha_start );
-            const na_sin = ST.get_alpha_sin(note_alpha, 1, 1);
+            //let a2 = 1 - Math.abs(note_alpha - 0.5) / 0.5;
 
-            sud.tracks.current[1].freq = obj1.pitch * na_sin;
+/*
+            if(note_alpha < 0.25){
+                a2 = ST.get_alpha_sin( note_alpha / 0.25, 2, 1); 
+            }
+
+            if(note_alpha >= 0.25 && note_alpha < 0.75){
+                a2 = note_alpha;
+            }
 
 
-if(i % 100 === 0){
+            if(note_alpha >= 0.75){
+                a2 = ST.get_alpha_sin( 1 - (note_alpha - 0.75) / 0.25, 2, 1); 
+            }
+*/
+
+            //const na_sin = ST.get_alpha_sin(a2, 1.0, 1);
+
+            sud.tracks.current[1].freq = obj1.pitch;
+
+
+if(i % 1470 === 0){
 
 
 
-//console.log(i, note_alpha);
+  //console.log(i, sud.tracks.current[0].freq);
 
 
 }
