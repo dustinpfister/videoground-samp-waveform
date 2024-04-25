@@ -161,7 +161,14 @@
             // create and push sample value
             let s0 = 0;
             if( cur.amp === 1 ){
-                s0 = Bit_tracks.waveforms[ obj.waveform ]( samp, a_wave );    
+                let waveform = Bit_tracks.waveforms['pulse_1bit'];
+                if(typeof obj.waveform === 'function'){
+                    waveform = obj.waveform;
+                }
+                if(typeof obj.waveform === 'string'){
+                    waveform = Bit_tracks.waveforms[ obj.waveform ];
+                }  
+                s0 = waveform( samp, a_wave );    
             }
             tracks.samples[ti].push( s0 );
             t.push(s0);

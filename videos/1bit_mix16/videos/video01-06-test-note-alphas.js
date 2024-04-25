@@ -25,7 +25,8 @@ VIDEO.init = function(sm, scene, camera){
         count: 2,
         objects: [
             {
-                waveform: 'pulse_1bit',
+                //waveform: 'pulse_1bit',
+                waveform: Bit_tracks.waveforms['pulse_1bit'],
                 mode: 'tone',
                 desc: 'highs',
                 samp: {
