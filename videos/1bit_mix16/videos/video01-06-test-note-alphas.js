@@ -98,18 +98,68 @@ VIDEO.init = function(sm, scene, camera){
         return ( a_sound - note.alpha_start ) / ( note.alpha - note.alpha_start );
     };
 
-    const get_note_alpha_pad = () => {
-
-
-    }
+    const get_note_alpha_pad = (a_sound, note, pad_start = 0.05, pad_end) => {
+        pad_end = pad_end === undefined ? 1 - pad_start : pad_end;
+        const note_alpha = get_note_alpha(a_sound, note);
+        let a2 = 0;
+        if(note_alpha >= pad_start && note_alpha < pad_end){
+            a2 = 1;
+        }
+        return a2;
+    };
 
     const song0 = create_song({
         bps: 8,
         total_beats: 0,
         index:0,
         notes : [
-            {  pitch: 240, beats: 4  },
-            {  pitch: 0, beats: 4  }
+
+            {  pitch: 0, beats: 4  },
+
+            {  pitch: 0, beats: 24  },
+
+            {  pitch: 0, beats: 2  },
+
+            {  pitch: 250, beats: 2  },
+            {  pitch: 270, beats: 2  },
+            {  pitch: 290, beats: 2  },
+            {  pitch: 310, beats: 2  },
+            {  pitch: 330, beats: 2  },
+            {  pitch: 360, beats: 2  },
+            {  pitch: 380, beats: 2  },
+            {  pitch: 400, beats: 2  },
+            {  pitch: 420, beats: 2  },
+            {  pitch: 440, beats: 2  },
+            {  pitch: 460, beats: 2  },
+            {  pitch: 480, beats: 2  },
+
+            {  pitch: 0, beats: 2  },
+
+            {  pitch: 0, beats: 42  },
+
+            {  pitch: 0, beats: 24  },
+
+
+            {  pitch: 0, beats: 24  },
+
+
+            {  pitch: 290, beats: 8  },  // 24 beats
+            {  pitch: 290, beats: 2  },
+            {  pitch: 290, beats: 2  },
+            {  pitch: 290, beats: 2  },
+            {  pitch: 310, beats: 4  },
+            {  pitch: 310, beats: 2  },
+            {  pitch: 360, beats: 4  },
+
+            {  pitch: 290, beats: 8  },  // 24 beats
+            {  pitch: 290, beats: 2  },
+            {  pitch: 290, beats: 2  },
+            {  pitch: 290, beats: 2  },
+            {  pitch: 360, beats: 4  },
+            {  pitch: 360, beats: 2  },
+            {  pitch: 420, beats: 4  },
+
+            {  pitch: 0, beats: 6  }
         ]
     });
 
@@ -119,54 +169,114 @@ VIDEO.init = function(sm, scene, camera){
         total_beats: 0,
         index:0,
         notes : [
+
             {  pitch: 0, beats: 4  },
-            {  pitch: 240, beats: 4  }
 
-/*
-            {  pitch: 80, beats: 4  },
-            {  pitch: 100, beats: 2  },
+            {  pitch: 80, beats: 2  },
             {  pitch: 90, beats: 2  },
-
-            {  pitch: 80, beats: 4  },
             {  pitch: 100, beats: 2  },
-            {  pitch: 90, beats: 2  },
+            {  pitch: 110, beats: 2  },
+            {  pitch: 120, beats: 2  },
+            {  pitch: 130, beats: 2  },
+            {  pitch: 140, beats: 2  },
+            {  pitch: 150, beats: 2  },
+            {  pitch: 160, beats: 2  },
+            {  pitch: 170, beats: 2  },
+            {  pitch: 180, beats: 2  },
+            {  pitch: 190, beats: 2  },
+            
+            {  pitch: 0, beats: 2  },
+ 
+            {  pitch: 0, beats: 24  },
 
+            {  pitch: 0, beats: 2  },
+
+            {  pitch: 80, beats: 24  },  // 42 beats
+            {  pitch: 80, beats: 2  },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 80, beats: 2  },
             {  pitch: 80, beats: 4  },
-            {  pitch: 100, beats: 2  },
-            {  pitch: 90, beats: 2  },
+            {  pitch: 90, beats: 6  },
 
-            {  pitch: 100, beats: 2  },
-            {  pitch: 90, beats: 2  },
-            {  pitch: 80, beats: 4  },
-
-
-
+            {  pitch: 0, beats: 2 },    // 24 beats
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
             {  pitch: 80, beats: 1  },
-            {  pitch: 100, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
             {  pitch: 90, beats: 1  },
 
+
+            {  pitch: 0, beats: 2 },    // 24 beats
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
             {  pitch: 80, beats: 1  },
-            {  pitch: 100, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
             {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
+     
 
+            {  pitch: 0, beats: 2 },    // 24 beats
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
             {  pitch: 80, beats: 1  },
-            {  pitch: 100, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },  
 
-            {  pitch: 90, beats: 2  },
+            {  pitch: 0, beats: 2 },    // 24 beats
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 0, beats: 2 },
+            {  pitch: 80, beats: 2  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 80, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },
+            {  pitch: 90, beats: 1  },       
 
-            {  pitch: 100, beats: 2  },
-            {  pitch: 90, beats: 2  },
-            {  pitch: 80, beats: 2  }
+            {  pitch: 0, beats: 6}
 
-*/
 
         ]
     });
 
-    console.log(song0.total_beats); 
-    console.log(song1.total_beats); 
-
-console.log( ST.get_alpha_sin(0.55, 1.0, 1) );
+    console.log( song0.total_beats / song0.bps ); 
+    console.log( song1.total_beats / song1.bps ); 
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
@@ -185,41 +295,20 @@ console.log( ST.get_alpha_sin(0.55, 1.0, 1) );
             const obj0 = get_note( song0, a_sound );
 
 
-
-
-
-
             const note_alpha = get_note_alpha(a_sound, obj0);
+            let a2 = 0;
+            if(note_alpha >= 0.10 && note_alpha < 0.90){
+                a2 = 1;
+            }
 
-            
+            sud.tracks.current[0].freq = obj0.pitch * get_note_alpha_pad(a_sound, obj0, 0.15, 0.85);
 
-            sud.tracks.current[0].freq = (obj0.pitch / 2) * note_alpha;
+            //sud.tracks.current[0].freq = (obj0.pitch / 2) * note_alpha;
 
 
 
             const obj1 = get_note( song1, a_sound );
-
-
-            //let a2 = 1 - Math.abs(note_alpha - 0.5) / 0.5;
-
-/*
-            if(note_alpha < 0.25){
-                a2 = ST.get_alpha_sin( note_alpha / 0.25, 2, 1); 
-            }
-
-            if(note_alpha >= 0.25 && note_alpha < 0.75){
-                a2 = note_alpha;
-            }
-
-
-            if(note_alpha >= 0.75){
-                a2 = ST.get_alpha_sin( 1 - (note_alpha - 0.75) / 0.25, 2, 1); 
-            }
-*/
-
-            //const na_sin = ST.get_alpha_sin(a2, 1.0, 1);
-
-            sud.tracks.current[1].freq = obj1.pitch;
+            sud.tracks.current[1].freq = obj1.pitch * get_note_alpha_pad(a_sound, obj1, 0.10, 0.90);
 
 
 if(i % 1470 === 0){
