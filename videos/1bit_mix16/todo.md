@@ -10,7 +10,9 @@
 ## () - video01-08-test-sample-alphas
 * (done) I would like to work out some code that has to do with 'sample alphas'
 * (done) This involves making functions that will take a sample index value as one of the arguments
-* () have a get sample alpha method that takes a start and end sample index and returns an alphas between the two
+* (done) have a get sample alpha method that takes a start and end sample index and returns an alphas between the two
+* () have at least two or more tracks
+* () have one track use the custom waveform started in video01-07
 
 
 ## ( done 04/25/2023 ) - video01-07-test-custom-waveform

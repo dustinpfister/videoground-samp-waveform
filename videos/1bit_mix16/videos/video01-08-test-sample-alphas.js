@@ -25,6 +25,14 @@ VIDEO.init = function(sm, scene, camera){
         return ( sample_index + offset ) % cell_size / cell_size;
     };
     
+    const get_sample_range_alpha = (sample_index=0, start_index=0, end_index=0) => {
+        if( sample_index >= start_index && sample_index <= end_index ){
+            const n = sample_index - start_index;
+            const d = end_index - start_index;
+            return n / d;
+        }
+        return 0;
+    };
 
 
     // set up tracks object
@@ -59,22 +67,25 @@ VIDEO.init = function(sm, scene, camera){
             const frame_alpha = get_sample_cell_alpha(i, 1470, 0);
 
 
+            const r1_alpha = get_sample_range_alpha( i, Math.floor(opt.i_size * 0.10), Math.floor(opt.i_size * 0.35) );
+            const r2_alpha = get_sample_range_alpha( i, Math.floor(opt.i_size * 0.50), Math.floor(opt.i_size * 0.90) );
+            const a1 = ST.get_alpha_sin(r1_alpha, 1, 1);
+            const a2 = ST.get_alpha_sin(r2_alpha, 1, 1);
             const samp0 = sud.tracks.objects[0].samp;
-            samp0.frequency = 8 - 7 * a_sound;
+            samp0.frequency = 8 + ( 7 * a1 * -1) + ( 8 * a2 * 1 );
 
             
             let a_wave = frame_alpha;
 
-if(i % 1470 === 0){
+if(i % 1000 === 0){
 
-console.log(a_wave);
 
 }
 
 
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, a_wave );
         },
-        secs: 30
+        secs: 10
     });
 
     // display objects for audio sample arrays for tracks and main final display
