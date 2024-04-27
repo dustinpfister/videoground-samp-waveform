@@ -37,24 +37,26 @@ VIDEO.init = function(sm, scene, camera){
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 1,
+        count: 2,
         objects: [
             {
-                waveform: (samp, a_wave ) => {
-                    const duty = samp.duty === undefined ? 0.5 : samp.duty;
-                    const a = samp.frequency * a_wave % 1;
-                    if(a < duty){
-                        return  -1; 
-                    }
-                    return 1;
-                },
+                waveform: 'pulse_1bit',
                 mode: 'tone',
                 desc: 'pulse',
                 samp: {
                     duty: 0.5,
                     frequency: 0
                 }
-            }
+            },
+            {
+                waveform: 'pulse_1bit',
+                mode: 'tone',
+                desc: 'pulse',
+                samp: {
+                    duty: 0.5,
+                    frequency: 2
+                }
+            },
         ]
     });
 
@@ -69,6 +71,9 @@ VIDEO.init = function(sm, scene, camera){
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
+            const samp0 = sud.tracks.objects[0].samp;
+            const samp1 = sud.tracks.objects[1].samp;
+
 
             const sec_alpha = get_sample_cell_alpha(i, 44100, 0);
             const frame_alpha = get_sample_cell_alpha(i, 1470, 0);
@@ -78,7 +83,7 @@ VIDEO.init = function(sm, scene, camera){
             const r2_alpha = get_sample_range_alpha( i, Math.floor(opt.i_size * 0.50), Math.floor(opt.i_size * 0.90) );
             const a1 = ST.get_alpha_sin(r1_alpha, 1, 1);
             const a2 = ST.get_alpha_sin(r2_alpha, 1, 1);
-            const samp0 = sud.tracks.objects[0].samp;
+
 
             samp0.frequency = 0;
 
@@ -89,6 +94,10 @@ VIDEO.init = function(sm, scene, camera){
             if(a2 > 0){
                 samp0.frequency = 2 + 8 * a2;
             }
+
+
+            const a3 = get_sample_cell_alpha(i, 44100 * 5, 0);
+            samp1.frequency = 2 + 2 * ST.get_alpha_sin(a3, 1, 1);
             
 
 if(i % 1000 === 0){
