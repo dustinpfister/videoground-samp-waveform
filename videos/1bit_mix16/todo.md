@@ -14,7 +14,6 @@
 * () have at least two or more tracks
 * () have one track use the custom waveform started in video01-07
 
-
 ## ( done 04/25/2023 ) - video01-07-test-custom-waveform
 * (done) I will want to have the option to give a custom 1-bit waveform function to use
 * (done) have two tracks in which I am testing out differing options for the custom waveform

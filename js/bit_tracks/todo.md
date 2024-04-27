@@ -7,6 +7,7 @@
     * () optional saw filter for each final mix option
 
 ## R2 - () - merge and mix2 waveforms, note code removed
+    * (done) - can set a frequnecy of zero when using 'tone' mode
     * () - 1-bit waveforms should return 0 or 1
     * () - merge waveform for cretaing a merge down final mix of the 1bit tracks
     * () - mix2 waveform that allows for adjusting ampliude percent between tracks

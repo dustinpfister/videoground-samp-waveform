@@ -9,8 +9,8 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
   '../../../js/samp_debug/r0/samp_debug.js',
-  '../../../js/bit_tracks/r1/bit_tracks.js',
-  '../../../js/bit_tracks/r1/bit_samp_draw.js'
+  '../../../js/bit_tracks/r2/bit_tracks.js',
+  '../../../js/bit_tracks/r2/bit_samp_draw.js'
 ];
 //-------- ----------
 // INIT
@@ -40,12 +40,19 @@ VIDEO.init = function(sm, scene, camera){
         count: 1,
         objects: [
             {
-                waveform: 'pulse_1bit',
+                waveform: (samp, a_wave ) => {
+                    const duty = samp.duty === undefined ? 0.5 : samp.duty;
+                    const a = samp.frequency * a_wave % 1;
+                    if(a < duty){
+                        return  -1; 
+                    }
+                    return 1;
+                },
                 mode: 'tone',
                 desc: 'pulse',
                 samp: {
                     duty: 0.5,
-                    frequency: 8
+                    frequency: 0
                 }
             }
         ]
@@ -67,15 +74,22 @@ VIDEO.init = function(sm, scene, camera){
             const frame_alpha = get_sample_cell_alpha(i, 1470, 0);
 
 
-            const r1_alpha = get_sample_range_alpha( i, Math.floor(opt.i_size * 0.10), Math.floor(opt.i_size * 0.35) );
+            const r1_alpha = get_sample_range_alpha( i, Math.floor(opt.i_size * 0.05), Math.floor(opt.i_size * 0.35) );
             const r2_alpha = get_sample_range_alpha( i, Math.floor(opt.i_size * 0.50), Math.floor(opt.i_size * 0.90) );
             const a1 = ST.get_alpha_sin(r1_alpha, 1, 1);
             const a2 = ST.get_alpha_sin(r2_alpha, 1, 1);
             const samp0 = sud.tracks.objects[0].samp;
-            samp0.frequency = 8 + ( 7 * a1 * -1) + ( 8 * a2 * 1 );
 
+            samp0.frequency = 0;
+
+            if(a1 > 0){
+                samp0.frequency = 2 + 8 - 8 * a1;
+            }
+
+            if(a2 > 0){
+                samp0.frequency = 2 + 8 * a2;
+            }
             
-            let a_wave = frame_alpha;
 
 if(i % 1000 === 0){
 
@@ -83,7 +97,7 @@ if(i % 1000 === 0){
 }
 
 
-            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, a_wave );
+            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, frame_alpha );
         },
         secs: 10
     });
