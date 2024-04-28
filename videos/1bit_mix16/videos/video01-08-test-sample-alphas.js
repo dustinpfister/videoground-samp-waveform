@@ -8,6 +8,7 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
+  '../../../js/samp_alphas/r0/samp_alphas.js',
   '../../../js/samp_debug/r0/samp_debug.js',
   '../../../js/bit_tracks/r2/bit_tracks.js',
   '../../../js/bit_tracks/r2/bit_samp_draw.js'
@@ -19,21 +20,6 @@ VIDEO.init = function(sm, scene, camera){
    
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
-
-
-    const get_sample_cell_alpha = (sample_index=0, cell_size=1470, offset=0) => {
-        return ( sample_index + offset ) % cell_size / cell_size;
-    };
-    
-    const get_sample_range_alpha = (sample_index=0, start_index=0, end_index=0) => {
-        if( sample_index >= start_index && sample_index <= end_index ){
-            const n = sample_index - start_index;
-            const d = end_index - start_index;
-            return n / d;
-        }
-        return 0;
-    };
-
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({
@@ -75,12 +61,12 @@ VIDEO.init = function(sm, scene, camera){
             const samp1 = sud.tracks.objects[1].samp;
 
 
-            const sec_alpha = get_sample_cell_alpha(i, 44100, 0);
-            const frame_alpha = get_sample_cell_alpha(i, 1470, 0);
+            const sec_alpha =   Samp_alphas.cell(i, 44100, 0);
+            const frame_alpha = Samp_alphas.cell(i, 1470, 0);
 
 
-            const r1_alpha = get_sample_range_alpha( i, Math.floor(opt.i_size * 0.05), Math.floor(opt.i_size * 0.35) );
-            const r2_alpha = get_sample_range_alpha( i, Math.floor(opt.i_size * 0.50), Math.floor(opt.i_size * 0.90) );
+            const r1_alpha = Samp_alphas.range( i, Math.floor(opt.i_size * 0.05), Math.floor(opt.i_size * 0.35) );
+            const r2_alpha = Samp_alphas.range( i, Math.floor(opt.i_size * 0.50), Math.floor(opt.i_size * 0.90) );
             const a1 = ST.get_alpha_sin(r1_alpha, 1, 1);
             const a2 = ST.get_alpha_sin(r2_alpha, 1, 1);
 
@@ -96,7 +82,7 @@ VIDEO.init = function(sm, scene, camera){
             }
 
 
-            const a3 = get_sample_cell_alpha(i, 44100 * 5, 0);
+            const a3 = Samp_alphas.cell(i, 44100 * 5, 0);
             samp1.frequency = 2 + 2 * ST.get_alpha_sin(a3, 1, 1);
             
 
