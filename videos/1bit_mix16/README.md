@@ -9,13 +9,12 @@ The goal is to just get started with a general idea of what I want to do when it
   * ( done ) Core Idea of the project working
   * ( done ) New look started for the project with custom draw.js file
   * ( done ) work out a 1-bit noise waveform for R1 of bit_tracks.js
-  
-  * () test out a custom 1-bit noise waveform using R1 of bit_tracks.js
+  * ( done ) test out a custom 1-bit noise waveform using R1 of bit_tracks.js
   
   
 ### Core idea of project working
 
-The first and formost goal here is to just work out what the core idea of the project is of course. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
+The first and formost goal here was to just work out what the core idea of the project is with respect to mixing 1bit tracks into a final 16bit track to upload to YouTube. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
 
 
 <div align="center">
@@ -26,6 +25,13 @@ The first and formost goal here is to just work out what the core idea of the pr
 video01-01-test-2tracks.
     </p>
 </div>
+
+### Test out other general ideas and features with 1bit sound.
+
+In a way the goal of this project was achieved right away with the first video, sense then additional test videos here now have to do with testing out certain ideas as they come up as I move forward with 1bit sound in general. It is then along a matter of time until I retire this project in favor of other more specific project folders, as well as content project folders. 
+
+
+
 
 ## IDEAS FOR ADDITIONAL PROJECTS BASED ON WHAT I HAVE STARTED IN 1BIT_MIX16
 
