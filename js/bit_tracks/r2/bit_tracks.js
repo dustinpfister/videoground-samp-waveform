@@ -23,7 +23,7 @@
         // noise wave
         noise_1bit : (samp, a_wave ) => {
             samp.seed_start = samp.seed_start || 0;
-            samp.seed_delta = samp.seed_delta || 1470 * 10;
+            samp.seed_delta = samp.seed_delta === undefined ? 1470 * 10 : samp.seed_delta;
             samp.alow = samp.alow === undefined ? 0.25 : samp.alow;
             samp.ahigh = samp.ahigh === undefined ? 0.75 : samp.ahigh;
             const seed = Math.round( samp.seed_start + samp.seed_delta * a_wave );

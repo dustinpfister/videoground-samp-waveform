@@ -1,18 +1,15 @@
 # 1bit_mix16 todo list
 
-
-
 ## () - video01-xx-test-music-objects
 * () start a new main js module called 'music\_objects' and start R0 of the module
 * () start with what I all ready have worked out in video01-06-note-alpha
 * () this video will be the first test video when working on this
 
-## () - video01-08-test-sample-alphas
+## ( done 04/29/2024 ) - video01-08-test-sample-alphas
 * (done) I would like to work out some code that has to do with 'sample alphas'
 * (done) This involves making functions that will take a sample index value as one of the arguments
 * (done) have a get sample alpha method that takes a start and end sample index and returns an alphas between the two
-* () have at least two or more tracks
-* () have one track use the custom waveform started in video01-07
+* (done) have at least two or more tracks
 
 ## ( done 04/25/2023 ) - video01-07-test-custom-waveform
 * (done) I will want to have the option to give a custom 1-bit waveform function to use

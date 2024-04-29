@@ -25,29 +25,37 @@ VIDEO.init = function(sm, scene, camera){
     console.log( Samp_alphas.linear(-2, 10, 1, true) );             //  0.8
     console.log( Samp_alphas.linear(-2, 10, 1, false) );            // -0.2
     console.log( Samp_alphas.linear(Math.abs(-2), 10, 1, false) );  //  0.2
-
     console.log( Samp_alphas.sin(7.5, 10, 0.5, false) );  //  0.9238795325112867
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 2,
+        count: 3,
         objects: [
             {
                 waveform: 'pulse_1bit',
                 mode: 'tone',
-                desc: 'pulse',
+                desc: 'pulse-cell-second',
                 samp: {
                     duty: 0.5,
-                    frequency: 0
+                    frequency: 2
+                }
+            },
+            {
+                waveform: 'noise_1bit',
+                mode: 'tone',
+                desc: 'noise-cell-frame',
+                samp: {
+                    frequency: 1,
+                    alow:0, ahigh:1,
+                    seed_delta: 100
                 }
             },
             {
                 waveform: 'pulse_1bit',
                 mode: 'tone',
-                desc: 'pulse',
+                desc: 'pulse-range',
                 samp: {
-                    duty: 0.5,
-                    frequency: 2
+                    frequency: 0
                 }
             },
         ]
@@ -63,45 +71,42 @@ VIDEO.init = function(sm, scene, camera){
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-
-            const samp0 = sud.tracks.objects[0].samp;
-            const samp1 = sud.tracks.objects[1].samp;
-
-
-            const sec_alpha =   Samp_alphas.cell(i, 44100, 0);
+        
+            const sec_alpha = Samp_alphas.cell(i, 44100, 0);
             const frame_alpha = Samp_alphas.cell(i, 1470, 0);
 
+            const samp0 = sud.tracks.objects[0].samp;
+            samp0.frequency = (60 + 300 * sec_alpha) / 30;
+            
+            
+            
+            const samp1 = sud.tracks.objects[1].samp;
+            samp1.frequency = 1;
+            samp1.alow = 0.45 * a_sound;
+            samp1.ahigh = 1 - 0.45 * a_sound;
+            samp1.seed_start = 1000 * a_sound;
+            samp1.seed_delta = 100;
 
-            const r1_alpha = Samp_alphas.range( i, Math.floor(opt.i_size * 0.05), Math.floor(opt.i_size * 0.35) );
+
+            const samp2 = sud.tracks.objects[2].samp;
+            const r1_alpha = Samp_alphas.range( i, Math.floor(opt.i_size * 0.05), Math.floor(opt.i_size * 0.25) );
             const r2_alpha = Samp_alphas.range( i, Math.floor(opt.i_size * 0.50), Math.floor(opt.i_size * 0.90) );
             const a1 = ST.get_alpha_sin(r1_alpha, 1, 1);
             const a2 = ST.get_alpha_sin(r2_alpha, 1, 1);
 
 
-            samp0.frequency = 0;
+            samp2.frequency = 0;
 
             if(a1 > 0){
-                samp0.frequency = 2 + 8 - 8 * a1;
+                samp2.frequency = 16 * a1;
             }
-
             if(a2 > 0){
-                samp0.frequency = 2 + 8 * a2;
+                samp2.frequency = 32 * a2;
             }
-
-
-            const a3 = Samp_alphas.cell(i, 44100 * 5, 0);
-            samp1.frequency = 2 + 2 * ST.get_alpha_sin(a3, 1, 1);
-            
-
-if(i % 1000 === 0){
-
-
-}
-
 
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, frame_alpha );
         },
-        secs: 10
+        secs: 20
     });
 
     // display objects for audio sample arrays for tracks and main final display
