@@ -1,5 +1,5 @@
 /*    video01-08-test-sample-alphas - form 1bit_mix16 in videoground-samp-waveform
- *        * testing out an idea for 'sample alphas'
+ *        * testing out samp_alphas.js R0
  *
  */
 //-------- ----------
@@ -20,6 +20,13 @@ VIDEO.init = function(sm, scene, camera){
    
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
+
+
+    console.log( Samp_alphas.linear(-2, 10, 1, true) );             //  0.8
+    console.log( Samp_alphas.linear(-2, 10, 1, false) );            // -0.2
+    console.log( Samp_alphas.linear(Math.abs(-2), 10, 1, false) );  //  0.2
+
+    console.log( Samp_alphas.sin(7.5, 10, 0.5, false) );  //  0.9238795325112867
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({

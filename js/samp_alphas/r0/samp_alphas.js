@@ -21,6 +21,21 @@
         return 0;
     };
     
+    Samp_alphas.linear = (a=0, b=1, count=1, mod=true) => {
+        let n = a;
+        if(mod){
+            n = THREE.MathUtils.euclideanModulo(a, b);
+        }
+        const a1 = n / b,
+        a2 = a1 * count % 1;
+        return a2;
+    };
+    
+    Samp_alphas.sin = (a=0, b=1, count=1, mod=true) => {
+        const alpha2 = Samp_alphas.linear(a, b, count, mod);
+        return Math.sin( Math.PI * alpha2 );
+    };
+    
     window.Samp_alphas = Samp_alphas;
 
 }());
