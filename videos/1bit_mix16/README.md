@@ -4,7 +4,7 @@ The general idea here is to have more than one 1-bit track, however when it come
 
 ## Goals for the project
 
-The goal is to just get started with a general idea of what I want to do when it comes to 1-bit sound and music. As of this writing I all ready have the core idea of what I want working, so now it is just a question of where I want to go from there. Apart from just mixing upscaled 1-bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that migth result in improved javascript code that is used for creating sample data.
+The goal was to just get started with a general idea of what I want to do when it comes to 1-bit sound and music. I have the core idea of what I want working, so now it is just a question of where I want to go from here. Apart from just mixing 1-bit sound tracks there are a lot of other things I might want to refine while working on this that have to do with custom waveform functions, ways to store music tracks, and many other changes that might result in improved javascript code that is used for creating sample data. Many of these topics where explored in additional test videos for this project, but at this time I am now interested in working on other related projects that I have started.
 
   * ( done ) Core Idea of the project working
   * ( done ) New look started for the project with custom draw.js file
@@ -14,7 +14,7 @@ The goal is to just get started with a general idea of what I want to do when it
   
 ### Core idea of project working
 
-The first and formost goal here was to just work out what the core idea of the project is with respect to mixing 1bit tracks into a final 16bit track to upload to YouTube. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
+The first and foremost goal here was to just work out what the core idea of the project is with respect to mixing 1bit tracks into a final 16bit track to upload to YouTube. So I have started this project off with a very basic test video where I am just working with two 1bit tracks that are used to produce a final 16-bit 44.2kHz mono track that just serves as the first proof of concept of this project.
 
 
 <div align="center">
@@ -28,14 +28,11 @@ video01-01-test-2tracks.
 
 ### Test out other general ideas and features with 1bit sound.
 
-In a way the goal of this project was achieved right away with the first video, sense then additional test videos here now have to do with testing out certain ideas as they come up as I move forward with 1bit sound in general. It is then along a matter of time until I retire this project in favor of other more specific project folders, as well as content project folders. 
-
-
-
+The core goal of this project was achieved right away with the first test video, sense then additional test videos have been made that have to do with testing out certain ideas as they come up as I move forward with 1bit sound in general.  
 
 ## IDEAS FOR ADDITIONAL PROJECTS BASED ON WHAT I HAVE STARTED IN 1BIT_MIX16
 
-Once I have the general idea of what I want to do working okay here I can move on to starting some additional projects. There is working out more when it comes to waveform functions, other forms of mixing such as merging down the 1bit tracks. If I have a dectent set of tools there is also starting to just make a few project folders where the focus is just content.
+Once I have the general idea of what I want to do working okay here I can move on to starting some additional projects. There is working out more when it comes to waveform functions, other forms of mixing such as merging down the 1bit tracks. If I have a decent set of tools there is also starting to just make a few project folders where the focus is just content.
 
 ### Merge down project
 
@@ -43,10 +40,9 @@ The merge down project might just need to be the same code I worked out here, ju
 
 ### Better Standards for Storing Music
 
-I would like to have one or more standards for working out what the music should be for each track in terms of at least pitch and timing. I might want to just import from a standard such as MIDI, which will be fine for pitch and timing, however there is also things like changing the duty cycle when using the pule waveform, and other waveform spicific values. I might be able to do this by just extending JSON exports from MIDI files, in any case I think it would be best to have both MIDI files and JSON exports where I can do any werid custom stuff I might need to do.
+I would like to have one or more standards for working out what the music should be for each track in terms of at least pitch and timing. I might want to just import from a standard such as MIDI, which will be fine for pitch and timing, however there is also things like changing the duty cycle when using the pule waveform, and other waveform specific values. I might be able to do this by just extending JSON exports from MIDI files, in any case I think it would be best to have both MIDI files and JSON exports where I can do any weird custom stuff I might need to do.
 
 ### 24-bit/16-bit to 1-bit conversion tools
 
-When it comes to the content of tracks the main idea that I have is to generate the 1bit sample data using javaScript code alone. However I would like to also create a few tracks that is created by way of raw 1-bit sample data. This raw 1-bit sample data can be in some kind of text format where each bit is actualy 1 byte, however if I work out some kind of binary format that might be a better option. In any case I will want to create some tools for generating whatever the format is from 24-bit and 16-bit mono wav files.
-
+When it comes to the content of tracks the main idea that I have is to generate the 1bit sample data using javaScript code alone. However I would like to also create a few tracks that is created by way of raw 1-bit sample data. This raw 1-bit sample data can be in some kind of text format where each bit is actually 1 byte, however if I work out some kind of binary format that might be a better option. In any case I will want to create some tools for generating whatever the format is from 24-bit and 16-bit mono wav files.
 
