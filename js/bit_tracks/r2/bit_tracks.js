@@ -37,7 +37,8 @@
             }
             return 1;
         },
-        // mix the 1bit tracks
+        // mix the 1bit tracks when making a final 16bit+ mix in a way in which each track is scaled and then mixed
+        // thus the final mix is not 'true' 1bit sound, but in a way it is as this is just many 1bit tracks played in parralle
         mix: (samp, a_wave) => {
             samp.tracks = samp.tracks || [];
             const count = samp.tracks.length;
@@ -45,10 +46,26 @@
             let sum = 0;
             let i = 0;
             while( i < count ){
-                sum += -samp.tracks[i];
+                sum += samp.tracks[i];
                 i += 1;
             } 
             return sum * (1 / count) * samp.amplitude;
+        },
+        // merge many 1-bit tracks to a final 16bit+ mix where we are still just bouncing between to amp ranges, thus this is 'true' 1bit sound.
+        merge: (samp, a_wave) => {
+            samp.tracks = samp.tracks || [];
+            const count = samp.tracks.length;
+            samp.amplitude = samp.amplitude === undefined ? 0.75 : samp.amplitude; 
+            let n = -1;
+            let i = 0;
+            while( i < count ){
+                if( samp.tracks[i] === 1){
+                    n = 1;
+                    break;
+                }
+                i += 1;
+            } 
+            return n * samp.amplitude;
         }
     };
     
