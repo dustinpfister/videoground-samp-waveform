@@ -27,9 +27,8 @@ VIDEO.init = function(sm, scene, camera){
         let i_array = Math.floor( len_array * a );
         const n = samp.array[i_array];
         
-        //console.log(i_array)
         
-        return n === 0 ? -1 : 1; 
+        return Math.random();
     };
 
     // set up tracks object

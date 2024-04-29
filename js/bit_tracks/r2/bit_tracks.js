@@ -1,7 +1,8 @@
 /*
  *  bit_tracks.js r2 - for the 1bit_mix16 project of videoground-samp-waveform
  *      * can set a freq of zero for 'tone' mode
- *
+ *      * a 1-bit waveform function returns a 0 or 1 only
+ *      * make sure that values returned by a 1-bit waveform are converted to a 1 or zero if they are not one of those
  */
  
 (function(){
@@ -14,10 +15,8 @@
         pulse_1bit : (samp, a_wave ) => {
             const duty = samp.duty === undefined ? 0.5 : samp.duty;
             const a = samp.frequency * a_wave % 1;
-            //const ni = samp.ni || 0;
-            //if(a < duty || ni === 0){
             if(a < duty){
-                return  -1; 
+                return  0;
             }
             return 1;
         },
@@ -29,14 +28,12 @@
             samp.ahigh = samp.ahigh === undefined ? 0.75 : samp.ahigh;
             const seed = Math.round( samp.seed_start + samp.seed_delta * a_wave );
             const a = samp.frequency * a_wave % 1;
-            //const ni = samp.ni || 0;
             const n = THREE.MathUtils.seededRandom( seed );
-            //if( ni === 0 || a < samp.alow || a > samp.ahigh ){
             if( a < samp.alow || a > samp.ahigh ){        
-                return -1;
+                return 0;
             }
             if( n < 0.5 ){
-                return -1; 
+                return 0; 
             }
             return 1;
         },
@@ -48,7 +45,7 @@
             let sum = 0;
             let i = 0;
             while( i < count ){
-                sum += samp.tracks[i];
+                sum += -samp.tracks[i];
                 i += 1;
             } 
             return sum * (1 / count) * samp.amplitude;
@@ -155,8 +152,8 @@
                 frequency: freq, ni: ni
             });
             
-            // create and push sample value
-            let s0 = 0;
+            // create 1bit sample value
+            let s_bit = 0;
             if( cur.amp === 1 ){
                 let waveform = Bit_tracks.waveforms['pulse_1bit'];
                 if(typeof obj.waveform === 'function'){
@@ -165,8 +162,19 @@
                 if(typeof obj.waveform === 'string'){
                     waveform = Bit_tracks.waveforms[ obj.waveform ];
                 }  
-                s0 = waveform( samp, a_wave );    
+                s_bit = waveform( samp, a_wave );
             }
+            
+            // make sure s_bit is 0 or 1
+            if(typeof s_bit != 'number' || String(s_bit) === 'NaN' || s_bit < 0.5 ){
+                s_bit = 0;
+            }
+            if(s_bit >= 0.5 ){
+                s_bit = 1;
+            }
+            
+            // convert to -1 to 1 format for tracks.samples, and t
+            const s0 = -1 + 2 * s_bit;
             tracks.samples[ti].push( s0 );
             t.push(s0);
             
