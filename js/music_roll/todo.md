@@ -2,6 +2,5 @@
 
 ## () - R0 - Just get the core idea of this working
     * () work out what the format will be for setting just pitch and amplitude
-    * () allow for comments 
-    * () allow for setting header information
+    * () I will want look ahead and back helpers to aid in the process of note alphas
 
