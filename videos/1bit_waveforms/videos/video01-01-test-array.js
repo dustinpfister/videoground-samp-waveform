@@ -17,7 +17,16 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
    
     const sud = scene.userData;
-    sm.renderer.setClearColor(0x000000, 0.25);
+
+    // array abit waveform
+    const array_1bit = (samp, a_wave) => {
+        samp.array = samp.array || [0,1,1,1,1,1,0,1,0,1];
+        const len_array = samp.array.length;
+        const a = a_wave * samp.frequency % 1 ;
+        let i_array = Math.floor( len_array * a );
+        const n = samp.array[i_array];
+        return n;
+    };
 
     const create_seedrnd_1bit = (count=32, seed_start=0, seed_denom=1, seed_delta=1 ) => {
         let i = 0;
@@ -29,6 +38,12 @@ VIDEO.init = function(sm, scene, camera){
         }
         return array;
     };
+
+    const array_cycle = ( samp, array_collection, alpha=0, count=1 ) => {
+        const i_option = Math.floor( array_collection.length * ( alpha * count % 1 ) );
+        samp.array = array_collection[i_option];
+    };
+
     
     const array_seeded_random = [
         create_seedrnd_1bit(8,   0, 1, 1),
@@ -43,17 +58,6 @@ VIDEO.init = function(sm, scene, camera){
         [ 0,1,0,0,1,0,0,0, 1,0,0,0,0,1,0,0, 0,0,0,1,0,0,0,0, 0,0,1,1,1,1,1,0 ]
     ];
 
-    
-    // array abit waveform
-    const array_1bit = (samp, a_wave) => {
-        samp.array = samp.array || [0,1,1,1,1,1,0,1,0,1];
-        const len_array = samp.array.length;
-        const a = a_wave * samp.frequency % 1 ;
-        let i_array = Math.floor( len_array * a );
-        const n = samp.array[i_array];
-        return n;
-    };
-
     // set up tracks object
     sud.tracks = Bit_tracks.create({
         count: 2,
@@ -64,13 +68,14 @@ VIDEO.init = function(sm, scene, camera){
                 desc: 'array_seeded_random',
                 samp: {
                     array: array_seeded_random[0],
+                    amplitude: 0,
                     frequency: 30
                 }
             },
             {
                 waveform: array_1bit,
                 mode: 'tone',
-                desc: 'array_seeded_random',
+                desc: 'array_literals',
                 samp: {
                     array: array_literals[0],
                     frequency: 30
@@ -84,10 +89,8 @@ VIDEO.init = function(sm, scene, camera){
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            const samp = sud.tracks.objects[0].samp;
-            const i_option = Math.floor( array_seeded_random.length * (a_sound2 * 5 % 1) );
-            samp.array = array_seeded_random[i_option];
-            samp.frequency = 30;
+            array_cycle( sud.tracks.objects[0].samp, array_seeded_random, a_sound2, 5 );
+            array_cycle( sud.tracks.objects[1].samp, array_literals, a_sound2, 1 );
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
             return fs;
