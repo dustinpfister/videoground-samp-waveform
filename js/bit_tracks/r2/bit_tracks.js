@@ -95,7 +95,7 @@
                 desc: 'track ' + i_obj,
                 samp: {
                     frequency: 0,
-                    ni: 0
+                    amplidue: 1
                 },
                 octive: 3,
                 notes: []
@@ -123,29 +123,8 @@
             let freq = samp.frequency === undefined ? 80 : samp.frequency;
             let amp = samp.amplitude === undefined ? 1 : samp.amplitude;
             
-            /*
-            let ni = 0, freq = 0;
-            
-            if(obj.mode === 'tone'){        
-                freq = obj.samp.frequency === undefined ? 80 : obj.samp.frequency;
-                ni = 1;                      
-            }
-            
-            if(obj.mode === 'notes'){
-                if(obj.notes){
-                    ni = obj.notes[ Math.floor( obj.notes.length * a_sound) ];
-                    freq = ni;
-                }
-                if(ni >= 1 && obj.waveform != 'noise_1bit'){
-                    freq = Math.floor( ST.notefreq_by_indices(obj.octive, ni - 1) );
-                }
-            }
-            */
-            
             tracks.current.push({
                 freq: freq,
-                //ni: ni,
-                //amp: ni === 0 || obj.samp.amplitude === 0 ? 0 : 1
                 amp: amp
             });  
             tracks.samples.push([]);
@@ -170,12 +149,12 @@
             const obj = tracks.objects[ti];
             
             // figure out freq value to use
-            let freq = cur.freq; 
-            let ni = cur.ni;
+            let freq = cur.freq;
+            let amp = cur.amp;
                  
             // final samp object to use with waveform function
             const samp = Object.assign({}, obj.samp, {
-                frequency: freq, ni: ni
+                frequency: freq, amplitude: amp
             });
             
             // create 1bit sample value
@@ -212,61 +191,6 @@
             tracks: t
         };
     };
-    /*
-    // create a note for a notes array of a tracks object
-    Bit_tracks.create_note = ( nums_per_sec=8, pitch=1, secs=1, fade=0.15, fade_mode='zero' ) => {
-        const nums = [];
-        let i = 0;
-        const len = Math.ceil( nums_per_sec * secs );
-        while(i < len ){
-            const a_secs = i / len;
-            const a_half = 1 - (Math.abs(0.5 - a_secs) / 0.5);
-            let m = 1;
-            if(fade_mode === 'zero'){
-                m = a_half < fade ? 0 : 1;
-            }
-            if(fade_mode === 'lat'){
-                m = a_half < fade ? a_half / fade : 1;
-            }
-            nums.push( Math.round( pitch  * m ) );
-            i += 1;
-        }
-        return nums;
-    };
-    
-    // parse a song string into an array
-    const parse_song_string = (str) => { 
-        return str
-            .replace(/\n|\r|\r\n/g, '')
-            .split(';')
-            .map( (str) => {
-                return str.trim().split(',');
-            })
-            .filter( (arr) => {
-               return !!arr[0];
-            })
-            .map( (arr) => {        
-                return [
-                    parseInt( arr[0] || 0 ),
-                    parseFloat( arr[1] || 0 )
-                ];
-            
-            });    
-    };
-
-    // song string or array into note numbers
-    Bit_tracks.song_to_notenums = ( song=[], nums_per_sec=64, fade=0.15, fade_mode='zero' ) => {
-        let notenums = [];
-        if(typeof song === 'string'){
-            song = parse_song_string(song);
-        }
-        song.forEach( (params) => {
-            const arr = Bit_tracks.create_note(nums_per_sec, params[0], params[1], fade, fade_mode);
-            notenums.push(arr)
-        });
-        return notenums.flat();
-    };
-    */
     window.Bit_tracks = Bit_tracks;
 
 }());

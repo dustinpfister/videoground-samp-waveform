@@ -12,6 +12,7 @@
     * (done) - make sure than any value returned by a 1bit wavefrom converts to 0 or 1
     * (done) - merge waveform for cretaing a merge down final mix of the 1bit tracks
     * (done) - can set samp.amplitude to 0 for a 1bit waveform
+    * (done) - remove code that has to do with notes
     
     * () - mix waveform that allows for adjusting ampliude percent between tracks
     
@@ -19,9 +20,7 @@
     * () - have a common default object for tracks and mix options objects of create_disp_options in bit_samp_draw.js
     * () - new look for when using mix2 that displays the ampliude for each 1-bit track
     
-    * () - remove code that has to do with notes, and place it in a music\_nums js file
-    * () - new music-nums js file that is the code from bit tracks that has to do with cretaing notes
-    * () - new music-objects js file where the aim is to have a json format for notes and music
+
         
 ## R1 - ( done 04/25/2024 ) - noise waveform, objects, modes
     * (done) - using an array of objects rather than all these arrays at the root tracks object
