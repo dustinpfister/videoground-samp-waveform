@@ -117,7 +117,13 @@
         while(i_obj < tracks.count){
         
             const obj = tracks.objects[i_obj];
+            const samp = obj.samp === undefined ? {} : obj.samp;
             
+            // 'tone' mode default
+            let freq = samp.frequency === undefined ? 80 : samp.frequency;
+            let amp = samp.amplitude === undefined ? 1 : samp.amplitude;
+            
+            /*
             let ni = 0, freq = 0;
             
             if(obj.mode === 'tone'){        
@@ -134,11 +140,13 @@
                     freq = Math.floor( ST.notefreq_by_indices(obj.octive, ni - 1) );
                 }
             }
+            */
             
             tracks.current.push({
                 freq: freq,
-                ni: ni,
-                amp: ni === 0 || obj.samp.amplitude === 0 ? 0 : 1
+                //ni: ni,
+                //amp: ni === 0 || obj.samp.amplitude === 0 ? 0 : 1
+                amp: amp
             });  
             tracks.samples.push([]);
             
@@ -204,7 +212,7 @@
             tracks: t
         };
     };
-    
+    /*
     // create a note for a notes array of a tracks object
     Bit_tracks.create_note = ( nums_per_sec=8, pitch=1, secs=1, fade=0.15, fade_mode='zero' ) => {
         const nums = [];
@@ -258,7 +266,7 @@
         });
         return notenums.flat();
     };
-    
+    */
     window.Bit_tracks = Bit_tracks;
 
 }());
