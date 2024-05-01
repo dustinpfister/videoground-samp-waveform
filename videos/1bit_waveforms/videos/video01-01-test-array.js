@@ -29,25 +29,18 @@ VIDEO.init = function(sm, scene, camera){
         }
         return array;
     };
+    
+    const array_seeded_random = [
+        create_seedrnd_1bit(8,   0, 1, 1),
+        create_seedrnd_1bit(16,  0, 1, 1),
+        create_seedrnd_1bit(32,  0, 1, 1),
+        create_seedrnd_1bit(64,  0, 1, 1),
+        create_seedrnd_1bit(128, 0, 1, 1),
+        create_seedrnd_1bit(256, 0, 1, 1),
+    ];
 
-console.log(create_seedrnd_1bit());
-
-
-    const array_options = [
-        new Array(128).fill(0)
-        .concat( create_seedrnd_1bit(128, 0, 5, 1))
-        .concat( new Array(128).fill(1) )
-        .concat( create_seedrnd_1bit(256, 0, 1, 1) )
-        .concat( new Array(128).fill(0) )
-
-
-
-
-        //[ 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 1,1,1,1,1,1,1,1 ],
-        //[ 0,0,0,0,0,0,0,1, 0,1,1,1,0,1,1,1, 1,0,1,1,1,1,1,0, 1,1,1,1,1,1,1,1 ],
-        //[ 0,0,0,0,1,1,1,1, 0,0,1,1,0,0,1,1, 1,0,1,0,1,0,1,0, 1,1,1,1,1,1,1,1 ],
-        //[ 0,1,0,1,1,1,0,1, 0,1,1,1,0,0,1,1, 1,0,1,0,1,0,1,0, 1,0,1,1,0,0,1,1 ],
-
+    const array_literals = [
+        [ 0,1,0,0,1,0,0,0, 1,0,0,0,0,1,0,0, 0,0,0,1,0,0,0,0, 0,0,1,1,1,1,1,0 ]
     ];
 
     
@@ -63,13 +56,23 @@ console.log(create_seedrnd_1bit());
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 1,
+        count: 2,
         objects: [
             {
                 waveform: array_1bit,
                 mode: 'tone',
-                desc: 'array',
+                desc: 'array_seeded_random',
                 samp: {
+                    array: array_seeded_random[0],
+                    frequency: 30
+                }
+            },
+            {
+                waveform: array_1bit,
+                mode: 'tone',
+                desc: 'array_seeded_random',
+                samp: {
+                    array: array_literals[0],
                     frequency: 30
                 }
             }
@@ -82,9 +85,9 @@ console.log(create_seedrnd_1bit());
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
             const samp = sud.tracks.objects[0].samp;
-            const i_option = Math.floor( array_options.length * a_sound2 );
-            samp.array = array_options[i_option];
-            samp.frequency = 60;
+            const i_option = Math.floor( array_seeded_random.length * (a_sound2 * 5 % 1) );
+            samp.array = array_seeded_random[i_option];
+            samp.frequency = 30;
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
             return fs;
@@ -93,7 +96,7 @@ console.log(create_seedrnd_1bit());
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );
         },
-        secs: 5
+        secs: 25
     });
     // display objects for audio sample arrays for tracks and main final display
     sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, { line_width: 3, midline_style: '#444400' });
