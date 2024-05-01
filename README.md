@@ -1,14 +1,19 @@
 # videoground-samp-waveform
 
-With this project the main focus is to create a collection of video files that have to do with waveform functions, as well as everything that branches off from that. This is a continuation of what I have all ready started with in my [beta world collection](https://github.com/dustinpfister/videoground-beta-world) when it comes to sound syntheses in which I am focusing on this topic alone when it comes to this kind of content.  In time what I work out here will result in even more collections like this in which I niche down yet even farther, or I will just have them all as project folders of this collection.
+The aim here is to have a collection of video files that have to do with waveform functions, as well as various things that branch off from there. This is also a continuation of what I have all ready started with in my [beta world collection](https://github.com/dustinpfister/videoground-beta-world) when it comes to sound syntheses, it is just that here I am focusing on this topic alone.
 
 ## Note worthy projects thus far
 
-Thus far I am still trying to get a good idea of what ideas I should be focusing on over others when it comes to the logic of waveform functions as well as many other aspects of sound such as sample depth, mixing, filters, and so forth. For my own sake as well as anyone that might have interest in what I am doing here I think I should have a main list in this read me file that I update now and then with this.
+Thus far I am still trying to get a good idea of what ideas I should be focusing on over others when it comes to the logic of waveform functions, as well as many other aspects of sound such as sample depth, mixing, and so forth. For my own sake as well as anyone that might have interest in what I am doing here I think I should have a main list in this read me file that I update now and then that will help with this.
+
+### [1bit\_waveforms](https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/1bit_waveforms)
+
+I have started a 1bit\_waveforms project which as the name sugests is an exploration of waveform functions that will return only a 0 or 1 in terms of sample depth. There is just starting out with pulse and noise waveforms, but I would like to work out at least a few more with this.
 
 ### [1bit\_mix16](https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/1bit_mix16)
 
 One major project that I have together thus far has to do with 1-bit sound and how a final 16-bit track will be mixed from two or more 1-bit tracks. There are two general ideas for mixing that come to mind with this, merge down the 1-bit tracks into a single 1-bit track and then scale up to 16-bit, or scale each 1-bit track to 16-bit and mix as usual allowing for all 1-bit tracks to play at once without loss. This 1bit\_mix16 project is then the latter rather than former with this which I think would be better when it comes to making content that will be uploaded to YouTube rather than something that needs to run on retro hardware.
+
 
 ## Getting started with a waveform function
 
