@@ -10,9 +10,10 @@
     * (done) - can set a frequnecy of zero when using 'tone' mode
     * (done) - 1-bit waveforms should return 0 or 1
     * (done) - make sure than any value returned by a 1bit wavefrom converts to 0 or 1
+    * (done) - merge waveform for cretaing a merge down final mix of the 1bit tracks
+    * (done) - can set samp.amplitude to 0 for a 1bit waveform
     
-    * () - merge waveform for cretaing a merge down final mix of the 1bit tracks
-    * () - mix2 waveform that allows for adjusting ampliude percent between tracks
+    * () - mix waveform that allows for adjusting ampliude percent between tracks
     
     * () - just have a w option for create_disp_options in bit_samp_draw.js
     * () - have a common default object for tracks and mix options objects of create_disp_options in bit_samp_draw.js

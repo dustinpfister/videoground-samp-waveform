@@ -3,6 +3,7 @@
  *      * can set a freq of zero for 'tone' mode
  *      * a 1-bit waveform function returns a 0 or 1 only
  *      * make sure that values returned by a 1-bit waveform are converted to a 1 or zero if they are not one of those
+ *      * merge waveform on top of mix
  */
  
 (function(){
@@ -70,7 +71,7 @@
     };
     
     
-        // create a bit tracks object
+    // create a bit tracks object
     Bit_tracks.create = (opt) => {
         opt = opt || {};
         
@@ -137,7 +138,7 @@
             tracks.current.push({
                 freq: freq,
                 ni: ni,
-                amp: ni === 0 ? 0 : 1
+                amp: ni === 0 || obj.samp.amplitude === 0 ? 0 : 1
             });  
             tracks.samples.push([]);
             
