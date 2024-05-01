@@ -14,6 +14,8 @@
     * (done) - can set samp.amplitude to 0 for a 1bit waveform
     * (done) - remove code that has to do with notes
     
+    * () - setting a 1bit samp amplitude to something like 0.5 should result in 1 
+    
     * () - mix waveform that allows for adjusting ampliude percent between tracks
     
     * () - just have a w option for create_disp_options in bit_samp_draw.js

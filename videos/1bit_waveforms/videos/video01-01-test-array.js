@@ -55,7 +55,10 @@ VIDEO.init = function(sm, scene, camera){
     ];
 
     const array_literals = [
-        [ 0,1,0,0,1,0,0,0, 1,0,0,0,0,1,0,0, 0,0,0,1,0,0,0,0, 0,0,1,1,1,1,1,0 ]
+        [ 0,1,0,0,1,0,0,0, 1,0,0,0,0,1,0,0, 0,0,0,1,0,0,0,0, 0,0,1,1,1,1,1,0 ],
+        [ 0,1,1,0,1,1,0,0, 1,1,0,0,0,1,1,0, 0,0,0,1,1,0,0,0, 0,0,1,1,1,1,1,0 ],
+        [ 0,1,1,1,1,1,1,0, 1,1,1,0,0,1,1,1, 0,0,0,1,1,1,0,0, 0,0,1,1,1,1,1,0 ],
+        [ 0,1,1,1,1,1,1,1, 1,1,1,1,0,1,1,1, 1,0,0,1,1,1,1,1, 0,0,1,1,1,1,1,0 ]
     ];
 
     // set up tracks object
@@ -68,7 +71,7 @@ VIDEO.init = function(sm, scene, camera){
                 desc: 'array_seeded_random',
                 samp: {
                     array: array_seeded_random[0],
-                    amplitude: 0,
+                    amplitude: 1,
                     frequency: 30
                 }
             },
@@ -78,6 +81,7 @@ VIDEO.init = function(sm, scene, camera){
                 desc: 'array_literals',
                 samp: {
                     array: array_literals[0],
+                    amplitude: 1,
                     frequency: 30
                 }
             }
@@ -89,7 +93,14 @@ VIDEO.init = function(sm, scene, camera){
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
 
-            array_cycle( sud.tracks.objects[0].samp, array_seeded_random, a_sound2, 5 );
+            let samp0 = sud.tracks.objects[0].samp;
+            samp0.amplitude = 0;
+
+            if(frame % 15 === 0){
+                samp0.amplitude = 1;
+            }
+
+            array_cycle( samp0, array_seeded_random, a_sound2, 5 );
             array_cycle( sud.tracks.objects[1].samp, array_literals, a_sound2, 1 );
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
