@@ -72,7 +72,7 @@ VIDEO.init = function(sm, scene, camera){
                 desc: 'seedpulse',
                 samp: {
                     frequency: 30,
-                    imax: 256,
+                    imax: 16,
                     compo: [ [ 0, 0 ], [0.40, 2, 5, 0, 1], [0.60, 1], [1.00, 2, 1, 0, 1] ]
                 }
             }
@@ -86,13 +86,31 @@ VIDEO.init = function(sm, scene, camera){
 
             const samp = sud.tracks.objects[0].samp;
 
+            
+            if( a_sound2 < 0.25){
+                const a = a_sound2 / 0.25;
+                samp.imax = Math.floor( 16 + ( 496 ) * a );
+                samp.frequency = 30;
+            }
+
+
+            if( a_sound2 >= 0.25 && a_sound2 < 0.75 ){
+                const a = Samp_alphas.sin ( ( a_sound2 - 0.25 ) / 0.50, 1, 2);
+                samp.imax = 512 - 256 * a;
+                samp.frequency = 30;
+            }
+
+            if( a_sound2 >= 0.75){
+                const a = ( a_sound2 - 0.75 ) / 0.25;
+                samp.imax = 512 - Math.floor( 512 * a);
+                samp.frequency = 30;
+            }
+
             //samp.imax = Math.floor( 32 + 1000 * a_sound2);
             //samp.frequency = 30;
-
-
-            samp.imax = Math.floor( 32 + 1000 * a_sound2);
-            samp.frequency = 30; //30 + 10 * Math.sin( Math.PI * ( (1 + 31 * a_sound2 ) * a_sound2 % 1 ) );
-            samp.compo[3][3] = Math.pow(2, 1 + 16 * a_sound2) * -1;
+            //samp.imax = Math.floor( 32 + 1000 * a_sound2);
+            //samp.frequency = 30; //30 + 10 * Math.sin( Math.PI * ( (1 + 31 * a_sound2 ) * a_sound2 % 1 ) );
+            //samp.compo[3][3] = Math.pow(2, 1 + 16 * a_sound2) * -1;
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
             return fs;
@@ -101,7 +119,7 @@ VIDEO.init = function(sm, scene, camera){
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );
         },
-        secs: 60
+        secs: 25
     });
     // display objects for audio sample arrays for tracks and main final display
     sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, { line_width: 3, midline_style: '#444400' });
