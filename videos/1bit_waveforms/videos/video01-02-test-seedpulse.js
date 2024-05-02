@@ -20,46 +20,31 @@ VIDEO.init = function(sm, scene, camera){
     sm.renderer.setClearColor(0x000000, 0.25);
     
     const seedpulse_1bit = (samp, a_wave) => {
-    
         samp.frequency = samp.frequency === undefined ? 80 : samp.frequency; 
         samp.imax = samp.imax === undefined ? 44100 : samp.imax;
-    
         const i = Math.round( ( samp.frequency * a_wave % 1 ) * samp.imax );
         const a = i / samp.imax;
-        
-        
         const compo = samp.compo || [ [0.25, 0], [0.50, 2, 2], [1.00, 1] ];
-        
         let i_compo = 0;
         while(i_compo < compo.length){
-        
             const a_end = compo[i_compo][0];
             const part = compo[i_compo][1];
-            
             if(a <= a_end){
-            
                 if(part === 2){
                     const seed_denom = compo[i_compo][2] === undefined ? 1: compo[i_compo][2];
                     const seed_start = compo[i_compo][3] === undefined ? 0: compo[i_compo][3];
                     const seed_delta = compo[i_compo][4] === undefined ? 1: compo[i_compo][4];
-        
                     const n = THREE.MathUtils.seededRandom( seed_start + Math.floor(i / seed_denom ) * seed_delta );
                     return n >= 0.5 ? 1 : 0;
-        
                 }
-                
                 if(part === 1){
                     return 1;
                 }
-                
                 return 0;
-            
             }
             i_compo += 1;   
         }
-        
         return 0;
-    
     };
 
     // set up tracks object
