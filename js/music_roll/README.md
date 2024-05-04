@@ -10,9 +10,7 @@ So then:
 
 But then when it comes to things like bpm, and so forth that will all depend on addtional code in the video file.
 
-
-
-## Format
+## Shorthand Format
 
 ```
 -- -; -- -;

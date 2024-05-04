@@ -1,0 +1,35 @@
+<script src="./r0/music_roll.js"></script>
+<script>
+
+const song = `
+-- -; -- -;
+-- -; -- -;
+-- -; -- -;
+f5 1; c1 1;
+-- -; -- -;
+f5 1; -- -;
+-- -; -- -;
+f5 1; -- -;
+-- -; -- -;
+g5 1; -- -;
+-- -; -- -;
+f5 1;  0 0;
+-- -; -- -;
+f5 1; -- -;
+-- -; -- -;
+c5 1; -- -;
+-- -; -- -;
+-- -; -- -;
+-- -; -- -;
+ 0 0; -- -;
+`;
+
+const result = Music_roll.parse( song );
+
+result.forEach( (a) => {
+    a.forEach( (b) => {
+        console.log(b);
+    });
+});
+
+</script>
