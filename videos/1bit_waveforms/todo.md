@@ -3,12 +3,9 @@
 ## ( ) - video01-xx-test-bzcurve-1x
    * () a waveform where a 2d bezer curve can be used to adjust duty cycle
 
-## ( ) - video01-xx-test-pulse-2a-note
-   * () same as pulse-2a, but with a note alpha option
-   * () The idea with the note alpha option is to adjust duty cycle over the durration of a note
-
-## ( ) - video01-04-test-pulse-2a
+## ( ) - video01-04-test-pulse-2a-note
    * () a pulse waveform where two alpha values are given for setting duty cycle
+   * () Also have a a_note option that will adjust from zero to the full range of the duty cycle
 
 ## ( done 05/02/2024 ) - video01-03-test-tailfader
     * (done) start a waveform where one part of a duty cycle is just like pulse, but then the final 'fades'
