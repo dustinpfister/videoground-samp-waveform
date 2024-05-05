@@ -20,13 +20,41 @@
         return 440 * Math.pow(2, a + b / 12);
     };
     
-    
-    const process_counts = (objects) => {
-    
+    const loop_ahead = (objects, line_index, track_index, key='freq', value=0) => {
+        let i = line_index;
         const len = objects.length;
+        let n = 0;
+        while(i < len){
+        
+            //console.log( i, track_index, objects[i][track_index][key] );
+        
+            if( objects[i][track_index][key] != value ){
+                return n;
+            }
+            n += 1;
+            i += 1;
+        }
+        return n;
+    };
+    
+    
+    const process_counts = (objects, track_count=1) => {
+   
+        console.log( loop_ahead(objects, 4, 0, 'freq', objects[4][0].freq ) );;
+   
+        track_count = track_count || objects[0].length;
+       
+        const len = objects.length;
+        
         let i = 0;
         while(i < len){
             const obj = objects[i];
+            
+            let i_track = 0;
+            while(i_track < track_count){
+                //console.log( obj[i_track] );
+                i_track += 1;
+            }
             
             i += 1;
         }
