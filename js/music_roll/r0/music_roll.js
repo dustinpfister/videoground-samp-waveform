@@ -21,6 +21,19 @@
     };
     
     
+    const process_counts = (objects) => {
+    
+        const len = objects.length;
+        let i = 0;
+        while(i < len){
+            const obj = objects[i];
+            
+            i += 1;
+        }
+    
+    };
+    
+    
     // parse plain text format into an array
     Music_roll.parse = ( text='' ) => {
         const track_count = 2;
@@ -30,7 +43,7 @@
             track_states[i_ts] = [0, 0, [] ];
             i_ts += 1;
         }
-        return text.split(/\n|\r\n/)
+        const objects = text.split(/\n|\r\n/)
         .filter( loose_empty )
         .map( ( str_line, i, arr ) => {
             const tracks = str_line.split(';').filter(loose_empty)
@@ -53,6 +66,10 @@
                 return { freq: arr_state[0], amp: arr_state[1], param: arr_state[2] };
             });
         });
+        
+        process_counts(objects);
+        
+        return objects;
     };
     
     
