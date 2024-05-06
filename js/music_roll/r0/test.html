@@ -16,7 +16,7 @@ td{
 <div id="out">
 </div>
 
-<script src="./r0/music_roll.js"></script>
+<script src="./music_roll.js"></script>
 <script>
 
 const song = `
@@ -54,7 +54,7 @@ html += '</tr>';
 result.forEach( (a, i_line) => {
     html += '<tr><td> ' + i_line + ') </td>';
     a.forEach( (b, i_track) => {
-        html += '<td> freq : ' + b.freq  + ' </td>';
+        html += '<td> freq: ' + b.freq  + '; amp: ' + b.amp + '; ' + b.n + '/' + b.d + '</td>';
     });
     html += '</tr>';
 });

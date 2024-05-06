@@ -8,26 +8,25 @@
 
     const Music_roll = {};
     
+    // loose empty string helper
     const loose_empty = (str) => {
        return str != '';
     };
     
+    // convert letters to freq numbers in hertz
     const array_notes = 'c,c#,d,d#,e,f,f#,g,g#,a,a#,b'.split(',');
-    
     const notefreq_by_indices = ( i_scale=4, i_note=5 ) => {
         const a = i_scale - 5;
         const b = i_note + 3;
         return 440 * Math.pow(2, a + b / 12);
     };
-    
+
+    // loop ahead function to help get d and n values for each object    
     const loop_ahead = (objects, line_index, track_index, key='freq', value=0) => {
         let i = line_index;
         const len = objects.length;
         let n = 0;
         while(i < len){
-        
-            //console.log( i, track_index, objects[i][track_index][key] );
-        
             if( objects[i][track_index][key] != value ){
                 return n;
             }
@@ -37,32 +36,32 @@
         return n;
     };
     
-    
-    const process_counts = (objects, track_count=1) => {
-   
-        console.log( loop_ahead(objects, 4, 0, 'freq', objects[4][0].freq ) );;
-   
-        track_count = track_count || objects[0].length;
-       
+    // process count values for each object in form of 'n' and 'd' props to help figure out current alpha values
+    const process_counts = (objects) => {
+        const track_count = objects[0].length;
+        const array_freq = new Array(track_count).fill(-1);
+        const array_d = new Array(track_count).fill(-1);
         const len = objects.length;
-        
-        let i = 0;
-        while(i < len){
-            const obj = objects[i];
-            
+        let i_line = 0;
+        while(i_line < len){
             let i_track = 0;
             while(i_track < track_count){
-                //console.log( obj[i_track] );
+                const obj = objects[i_line][i_track];
+                const a = loop_ahead(objects, i_line, i_track, 'freq', obj.freq );
+                if(obj.freq != array_freq[i_track]){
+                    array_freq[i_track] = obj.freq;
+                    array_d[i_track] = a;
+                }
+                obj.d = array_d[i_track];
+                obj.n = obj.d - a;
+        
                 i_track += 1;
             }
-            
-            i += 1;
+            i_line += 1;
         }
-    
     };
     
-    
-    // parse plain text format into an array
+    // parse plain text format into an array of objects
     Music_roll.parse = ( text='' ) => {
         const track_count = 2;
         const track_states = [];
@@ -94,9 +93,7 @@
                 return { freq: arr_state[0], amp: arr_state[1], param: arr_state[2] };
             });
         });
-        
         process_counts(objects);
-        
         return objects;
     };
     
