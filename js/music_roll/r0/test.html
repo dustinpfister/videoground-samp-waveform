@@ -58,7 +58,18 @@ result.forEach( (a, i_line) => {
     });
     html += '</tr>';
 });
-out.innerHTML = html + '</table>'
+out.innerHTML = html + '</table>';
+
+let i_alpha = 0;
+const count = 300;
+while( i_alpha < count ){
+
+    const array_samp = Music_roll.play(result, i_alpha / count);
+    const obj = array_samp[0];
+    console.log( obj.freq, obj.n, obj.d, obj.a_note );
+    i_alpha += 1;
+
+}
 
 </script>
 

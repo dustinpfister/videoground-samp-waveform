@@ -97,6 +97,23 @@
         return objects;
     };
     
+    // give an objects array, and a alpha value to get the current freq, amp, ect for each track
+    Music_roll.play = (objects, alpha=0) => {
+        const array_samp = [];
+        const len = objects.length;
+        const i_line = Math.floor(len * alpha);
+        const a_line = len * alpha % 1;
+        const array_tracks = objects[i_line];
+        const track_count = objects[0].length;
+        let i_track = 0;
+        while(i_track < track_count){      
+            const obj = array_tracks[i_track];
+            const a_note = (obj.n + a_line) / obj.d;
+            array_samp.push( Object.assign({}, obj, { a_note: a_note } ) );
+            i_track += 1;
+        }   
+        return array_samp;
+    };
     
     window.Music_roll = Music_roll;
 
