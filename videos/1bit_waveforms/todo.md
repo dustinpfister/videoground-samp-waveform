@@ -4,8 +4,11 @@
    * () a waveform where a 2d bezer curve can be used to adjust duty cycle
 
 ## ( ) - video01-04-test-pulse-2a-note
-   * () a pulse waveform where two alpha values are given for setting duty cycle
-   * () Also have a a_note option that will adjust from zero to the full range of the duty cycle
+   * (done) a pulse waveform where two alpha values are given for setting duty cycle
+   * (done) also have a a_note option that will adjust from zero to the full range of the duty cycle
+   * () work out at least some kind of tune for this
+   * () have high and low tracks
+
 
 ## ( done 05/02/2024 ) - video01-03-test-tailfader
     * (done) start a waveform where one part of a duty cycle is just like pulse, but then the final 'fades'

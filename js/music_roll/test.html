@@ -1,3 +1,21 @@
+<html>
+<head>
+
+<style>
+th{
+  padding: 10px;
+  background: #4a4a4a;
+}
+td{
+  padding: 10px;
+  background: #9a9a9a;
+}
+</style>
+</head>
+
+<div id="out">
+</div>
+
 <script src="./r0/music_roll.js"></script>
 <script>
 
@@ -24,13 +42,24 @@ c5 1; -- -;
  0 0; -- -;
 `;
 
+const out = document.querySelector('#out')
 const result = Music_roll.parse( song );
 
-result.forEach( (a) => {
-    a.forEach( (b) => {
-        console.log(b);
-    });
-    console.log('----');
+
+let html = '<table><tr><th>line</th>';
+result[0].forEach( (a, i_track) => {
+    html += '<th>track: ' + i_track +'</th>';
 });
+html += '</tr>';
+result.forEach( (a, i_line) => {
+    html += '<tr><td> ' + i_line + ') </td>';
+    a.forEach( (b, i_track) => {
+        html += '<td> freq : ' + b.freq  + ' </td>';
+    });
+    html += '</tr>';
+});
+out.innerHTML = html + '</table>'
 
 </script>
+
+</html>
