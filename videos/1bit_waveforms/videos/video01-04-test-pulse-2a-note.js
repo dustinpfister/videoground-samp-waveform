@@ -9,6 +9,7 @@ VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_create.js',
   '../../../js/samp_alphas/r0/samp_alphas.js',
   '../../../js/samp_debug/r0/samp_debug.js',
+    '../../../js/music_roll/r0/music_roll.js',
   '../../../js/bit_tracks/r2/bit_tracks.js',
   '../../../js/bit_tracks/r2/bit_samp_draw.js'
 ];
@@ -18,6 +19,31 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
    
     const sud = scene.userData;
+
+    const song = `
+-- -; -- -;
+-- -; -- -;
+-- -; -- -;
+f5 1; c1 1;
+-- -; -- -;
+f5 1; -- -;
+-- -; -- -;
+f5 1; -- -;
+-- -; -- -;
+g5 1; -- -;
+-- -; -- -;
+f5 1; -- 0;
+-- -; -- -;
+f5 1; -- -;
+-- -; -- -;
+c5 1; -- -;
+-- -; -- -;
+-- -; -- -;
+-- -; -- -;
+-- 0; -- -;
+`;
+
+    const song_arr = Music_roll.parse( song );
 
     // new pulse function
     const pulse_2a_note_1bit = (samp, a_wave) => {
@@ -36,20 +62,33 @@ VIDEO.init = function(sm, scene, camera){
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 1,
+        count: 2,
         objects: [
             {
                 waveform: pulse_2a_note_1bit,
                 mode: 'tone',
-                desc: 'pulse_2a_note',
+                desc: 'pulse_2a_note highs',
+                samp: {
+                    amplitude: 1,
+                    frequency: 180,
+                    d1: 0.35,
+                    d2: 0.65,
+                    a_note: 1
+                }
+            },
+            {
+                waveform: pulse_2a_note_1bit,
+                mode: 'tone',
+                desc: 'pulse_2a_note lows',
                 samp: {
                     amplitude: 1,
                     frequency: 90,
                     d1: 0.15,
                     d2: 0.85,
-                    a_note: 0.25
+                    a_note: 1
                 }
-            }
+            },
+
         ]
     });
 
@@ -57,14 +96,22 @@ VIDEO.init = function(sm, scene, camera){
     const sound = sud.sound = CS.create_sound({
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-
-            const samp0 = sud.tracks.objects[0].samp;
-            samp0.a_note = Samp_alphas.sin( a_sound2, 1, 1, true );
+        
+            //samp0.a_note = Samp_alphas.sin( a_sound2, 1, 1, true );
 
             Bit_tracks.new_frame(sud.tracks, a_sound2);
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
+        
+            const array_samp = Music_roll.play(song_arr, a_sound);
+
+            const samp0 = sud.tracks.objects[0].samp;
+            
+            samp0.frequency = array_samp[0].freq;
+            samp0.a_note = Samp_alphas.sin(array_samp[0].a_note, 1, 1);
+        
+        
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );
         },

@@ -6,8 +6,9 @@
 ## ( ) - video01-04-test-pulse-2a-note
    * (done) a pulse waveform where two alpha values are given for setting duty cycle
    * (done) also have a a_note option that will adjust from zero to the full range of the duty cycle
-   * () work out at least some kind of tune for this
-   * () have high and low tracks
+   * (done) work out at least some kind of tune for this using new music roll project
+   * (done) have high and low tracks
+   * () I would like to use frequency and amplitude for samp array objects ( music finish r0 of Music_roll)
 
 
 ## ( done 05/02/2024 ) - video01-03-test-tailfader
