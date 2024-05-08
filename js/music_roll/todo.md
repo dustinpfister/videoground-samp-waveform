@@ -15,13 +15,16 @@
     * (done) parse method will return a main object with a line_objects property that contains the array of line objects
     * (done) the main object can contain properties such as lines\_per\_minute
     * (done) total_seconds value for main song object
-
+    * (done) comments for the plain text format.
+    * () header for plain text format
+    
+    * () can set lines per minute, and title by way of header
 
     * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.
     
     * () more than one standard for setting frequnecy allowing for plain number values
-    * () header and comments for the plain text format.
-    * () can set lines per minute, and title by way of header
+
+
     
     * () update readme with hello world examples, any needed details
     

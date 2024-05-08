@@ -72,6 +72,12 @@
         }
         const line_objects = text.split(/\n|\r\n/)
         .filter( loose_empty )
+        .filter( ( line ) => {
+            if(line[0] === '#'){
+                return false;
+            }
+            return true;
+        })
         .map( ( str_line, i, arr ) => {
             const tracks = str_line.split(';').filter(loose_empty)
             return track_states.map( (arr_state, i_ts) => {
