@@ -48,10 +48,11 @@ c5 1; -- -;
 -- -; -- -;
 -- -; -- -;
 -- -; -- -;
+-- -; -- -;
 -- 0; -- -;
 `;
 
-    const song_arr = Music_roll.parse( song );
+    const song_obj = Music_roll.parse( song );
 
     // new pulse function
     const pulse_2a_note_1bit = (samp, a_wave) => {
@@ -99,6 +100,8 @@ c5 1; -- -;
 
         ]
     });
+    
+    console.log(song_obj.total_secs);
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
@@ -109,7 +112,7 @@ c5 1; -- -;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
         
-            const array_samp = Music_roll.play(song_arr, a_sound);
+            const array_samp = Music_roll.play(song_obj, a_sound);
 
             const samp0 = sud.tracks.objects[0].samp;
             
@@ -121,7 +124,7 @@ c5 1; -- -;
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );
         },
-        secs: 10
+        secs: song_obj.total_secs
     });
 
     // display objects for audio sample arrays for tracks and main final display

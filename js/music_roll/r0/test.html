@@ -43,8 +43,8 @@ c5 1; -- -;
 `;
 
 const out = document.querySelector('#out')
-const result = Music_roll.parse( song );
-
+const song_obj = Music_roll.parse( song );
+const result = song_obj.line_objects;
 
 let html = '<table><tr><th>line</th>';
 result[0].forEach( (a, i_track) => {
@@ -64,7 +64,7 @@ let i_alpha = 0;
 const count = 300;
 while( i_alpha < count ){
 
-    const array_samp = Music_roll.play(result, i_alpha / count);
+    const array_samp = Music_roll.play(song_obj, i_alpha / count);
     const obj = array_samp[0];
     console.log( obj.frequency, obj.n, obj.d, obj.a_note );
     i_alpha += 1;

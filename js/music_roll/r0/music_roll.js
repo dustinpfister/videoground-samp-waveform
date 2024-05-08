@@ -1,6 +1,6 @@
 /*
  *  music_roll.js r0 - for videoground-samp-waveform
- *
+ *  https://github.com/dustinpfister/videoground-samp-waveform/tree/master/js/music_roll
  *
  */
  
@@ -22,12 +22,12 @@
     };
 
     // loop ahead function to help get d and n values for each object    
-    const loop_ahead = (objects, line_index, track_index, key='frequency', value=0) => {
+    const loop_ahead = (line_objects, line_index, track_index, key='frequency', value=0) => {
         let i = line_index;
-        const len = objects.length;
+        const len = line_objects.length;
         let n = 0;
         while(i < len){
-            if( objects[i][track_index][key] != value ){
+            if( line_objects[i][track_index][key] != value ){
                 return n;
             }
             n += 1;
@@ -37,17 +37,17 @@
     };
     
     // process count values for each object in form of 'n' and 'd' props to help figure out current alpha values
-    const process_counts = (objects) => {
-        const track_count = objects[0].length;
+    const process_counts = (line_objects) => {
+        const track_count = line_objects[0].length;
         const array_freq = new Array(track_count).fill(-1);
         const array_d = new Array(track_count).fill(-1);
-        const len = objects.length;
+        const len = line_objects.length;
         let i_line = 0;
         while(i_line < len){
             let i_track = 0;
             while(i_track < track_count){
-                const obj = objects[i_line][i_track];
-                const a = loop_ahead(objects, i_line, i_track, 'frequency', obj.frequency );
+                const obj = line_objects[i_line][i_track];
+                const a = loop_ahead(line_objects, i_line, i_track, 'frequency', obj.frequency );
                 if(obj.frequency != array_freq[i_track]){
                     array_freq[i_track] = obj.frequency;
                     array_d[i_track] = a;
@@ -61,7 +61,7 @@
         }
     };
     
-    // parse plain text format into an array of objects
+    // parse plain text format into an array of line_objects
     Music_roll.parse = ( text='' ) => {
         const track_count = 2;
         const track_states = [];
@@ -70,7 +70,7 @@
             track_states[i_ts] = [0, 0, [] ];
             i_ts += 1;
         }
-        const objects = text.split(/\n|\r\n/)
+        const line_objects = text.split(/\n|\r\n/)
         .filter( loose_empty )
         .map( ( str_line, i, arr ) => {
             const tracks = str_line.split(';').filter(loose_empty)
@@ -93,18 +93,25 @@
                 return { frequency: arr_state[0], amplitude: arr_state[1], param: arr_state[2] };
             });
         });
-        process_counts(objects);
-        return objects;
+        process_counts(line_objects);
+        // return main song object
+        const lines_per_minute = 120;
+        return {
+            lines_per_minute: lines_per_minute,
+            total_secs: line_objects.length / lines_per_minute * 60,
+            line_objects: line_objects
+        };
     };
     
-    // give an objects array, and a alpha value to get the current freq, amp, ect for each track
-    Music_roll.play = (objects, alpha=0) => {
+    // give an line_objects array, and a alpha value to get the current freq, amp, ect for each track
+    Music_roll.play = (song, alpha=0) => {
+        const line_objects = song.line_objects;
         const array_samp = [];
-        const len = objects.length;
+        const len = line_objects.length;
         const i_line = Math.floor(len * alpha);
         const a_line = len * alpha % 1;
-        const array_tracks = objects[i_line];
-        const track_count = objects[0].length;
+        const array_tracks = line_objects[i_line];
+        const track_count = line_objects[0].length;
         let i_track = 0;
         while(i_track < track_count){      
             const obj = array_tracks[i_track];
