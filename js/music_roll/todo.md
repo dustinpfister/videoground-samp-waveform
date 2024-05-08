@@ -4,7 +4,7 @@
     * () parse paramaters as part of the over all parse process for line objects
     * () param property of a line object should be an object rather than an array to help simplyfy the process of creating the final samp object used by the waveform function
     * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.
-    * () more than one standard for setting frequnecy allowing for plain number values
+
     
 ## () - R0 - Just get the core idea of this working
     * (done) work out what the format will be for setting just pitch and amplitude
@@ -19,5 +19,7 @@
     * (done) comments for the plain text format.
     * (done) header for plain text format
     * (done) can set lines per minute, and title by way of header
+    
+    * () more than one standard for setting frequnecy allowing for plain number values
     * () update readme
     

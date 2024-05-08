@@ -23,36 +23,37 @@ VIDEO.init = function(sm, scene, camera){
     const song = `
 # This is then a comment
 >title='puse-2a-demo-tune'
->lines_per_minute=240
+>lines_per_minute=90
 -- -; -- -;
 -- -; -- -;
 -- -; -- -;
 f5 1; c1 1;
 -- -; -- -;
--- 0; -- -;
+ 0 0; -- -;
 f5 1; -- -;
 -- -; -- -;
--- 0; -- -;
+-- -; -- -;
 f5 1; -- -;
 -- -; -- -;
--- 0; -- -;
+-- -; -- -;
 g5 1; -- -;
 -- -; -- -;
--- 0; -- -;
+-- -; -- -;
 f5 1; -- 0;
 -- -; -- -;
--- 0; -- -;
+-- -; -- -;
 f5 1; -- -;
 -- -; -- -;
 -- -; -- -;
 -- -; -- -;
--- 0; -- -;
+-- -; -- -;
 c5 1; -- -;
 -- -; -- -;
 -- -; -- -;
 -- -; -- -;
 -- -; -- -;
--- 0; -- -;
+-- -; -- -;
+-- -; -- -;
 `;
 
     const song_obj = Music_roll.parse( song );
@@ -119,7 +120,7 @@ c5 1; -- -;
 
             const samp0 = sud.tracks.objects[0].samp;
             
-            samp0.frequency = array_samp[0].frequency;
+            samp0.frequency = Math.floor( array_samp[0].frequency);
             samp0.amplitude = array_samp[0].amplitude;
             samp0.a_note = Samp_alphas.sin(array_samp[0].a_note, 1, 1);
         
@@ -127,7 +128,7 @@ c5 1; -- -;
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );
         },
-        secs: song_obj.total_secs
+        secs: Math.ceil(song_obj.total_secs)
     });
 
     // display objects for audio sample arrays for tracks and main final display
