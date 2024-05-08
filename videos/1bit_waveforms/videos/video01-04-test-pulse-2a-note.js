@@ -21,6 +21,9 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
 
     const song = `
+# This is then a comment
+>title='puse-2a-demo-tune'
+>lines_per_minute=240
 -- -; -- -;
 -- -; -- -;
 -- -; -- -;
@@ -101,7 +104,7 @@ c5 1; -- -;
         ]
     });
     
-    console.log(song_obj.total_secs);
+    console.log(song_obj);
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({

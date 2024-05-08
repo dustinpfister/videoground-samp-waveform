@@ -66,14 +66,34 @@
         const track_count = 2;
         const track_states = [];
         let i_ts = 0;
+        
+        const header = {
+            lines_per_minute: 120,
+            title: 'none'
+        };
+        
         while(i_ts < track_count){
             track_states[i_ts] = [0, 0, [] ];
             i_ts += 1;
         }
         const line_objects = text.split(/\n|\r\n/)
         .filter( loose_empty )
-        .filter( ( line ) => {
-            if(line[0] === '#'){
+        .filter( ( line ) => { // filter out comments
+            if(line.trim()[0] === '#'){
+                return false;
+            }
+            return true;
+        })
+        .filter( ( line ) => { // filter out 'commands'
+            if(line.trim()[0] === '>'){
+                const command = line.trim().replace('>', '').split('=');
+                console.log( command );
+                if(command[0] === 'lines_per_minute'){
+                    header.lines_per_minute = parseInt( command[1] );
+                }
+                if(command[0] === 'title'){
+                    header.title = command[1];
+                }
                 return false;
             }
             return true;
@@ -101,12 +121,10 @@
         });
         process_counts(line_objects);
         // return main song object
-        const lines_per_minute = 120;
-        return {
-            lines_per_minute: lines_per_minute,
-            total_secs: line_objects.length / lines_per_minute * 60,
+        return Object.assign({}, {
+            total_secs: line_objects.length / header.lines_per_minute * 60,
             line_objects: line_objects
-        };
+        }, header);
     };
     
     // give an line_objects array, and a alpha value to get the current freq, amp, ect for each track
