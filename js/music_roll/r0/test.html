@@ -54,7 +54,7 @@ html += '</tr>';
 result.forEach( (a, i_line) => {
     html += '<tr><td> ' + i_line + ') </td>';
     a.forEach( (b, i_track) => {
-        html += '<td> freq: ' + b.freq  + '; amp: ' + b.amp + '; ' + b.n + '/' + b.d + '</td>';
+        html += '<td> freq: ' + b.frequency  + '; amp: ' + b.amplitude + '; ' + b.n + '/' + b.d + '</td>';
     });
     html += '</tr>';
 });
@@ -66,7 +66,7 @@ while( i_alpha < count ){
 
     const array_samp = Music_roll.play(result, i_alpha / count);
     const obj = array_samp[0];
-    console.log( obj.freq, obj.n, obj.d, obj.a_note );
+    console.log( obj.frequency, obj.n, obj.d, obj.a_note );
     i_alpha += 1;
 
 }

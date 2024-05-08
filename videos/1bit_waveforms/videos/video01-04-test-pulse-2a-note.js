@@ -26,16 +26,24 @@ VIDEO.init = function(sm, scene, camera){
 -- -; -- -;
 f5 1; c1 1;
 -- -; -- -;
+-- 0; -- -;
 f5 1; -- -;
 -- -; -- -;
+-- 0; -- -;
 f5 1; -- -;
 -- -; -- -;
+-- 0; -- -;
 g5 1; -- -;
 -- -; -- -;
+-- 0; -- -;
 f5 1; -- 0;
 -- -; -- -;
+-- 0; -- -;
 f5 1; -- -;
 -- -; -- -;
+-- -; -- -;
+-- -; -- -;
+-- 0; -- -;
 c5 1; -- -;
 -- -; -- -;
 -- -; -- -;
@@ -70,7 +78,7 @@ c5 1; -- -;
                 desc: 'pulse_2a_note highs',
                 samp: {
                     amplitude: 1,
-                    frequency: 180,
+                    frequency: 0,
                     d1: 0.35,
                     d2: 0.65,
                     a_note: 1
@@ -82,7 +90,7 @@ c5 1; -- -;
                 desc: 'pulse_2a_note lows',
                 samp: {
                     amplitude: 1,
-                    frequency: 90,
+                    frequency: 0,
                     d1: 0.15,
                     d2: 0.85,
                     a_note: 1
@@ -96,9 +104,6 @@ c5 1; -- -;
     const sound = sud.sound = CS.create_sound({
         waveform: Bit_tracks.waveforms.mix,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-        
-            //samp0.a_note = Samp_alphas.sin( a_sound2, 1, 1, true );
-
             Bit_tracks.new_frame(sud.tracks, a_sound2);
             return fs;
         },
@@ -108,7 +113,8 @@ c5 1; -- -;
 
             const samp0 = sud.tracks.objects[0].samp;
             
-            samp0.frequency = array_samp[0].freq;
+            samp0.frequency = array_samp[0].frequency;
+            samp0.amplitude = array_samp[0].amplitude;
             samp0.a_note = Samp_alphas.sin(array_samp[0].a_note, 1, 1);
         
         

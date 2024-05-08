@@ -22,7 +22,7 @@
     };
 
     // loop ahead function to help get d and n values for each object    
-    const loop_ahead = (objects, line_index, track_index, key='freq', value=0) => {
+    const loop_ahead = (objects, line_index, track_index, key='frequency', value=0) => {
         let i = line_index;
         const len = objects.length;
         let n = 0;
@@ -47,9 +47,9 @@
             let i_track = 0;
             while(i_track < track_count){
                 const obj = objects[i_line][i_track];
-                const a = loop_ahead(objects, i_line, i_track, 'freq', obj.freq );
-                if(obj.freq != array_freq[i_track]){
-                    array_freq[i_track] = obj.freq;
+                const a = loop_ahead(objects, i_line, i_track, 'frequency', obj.frequency );
+                if(obj.frequency != array_freq[i_track]){
+                    array_freq[i_track] = obj.frequency;
                     array_d[i_track] = a;
                 }
                 obj.d = array_d[i_track];
@@ -90,7 +90,7 @@
                 if( !a[1].match(/-/)  ){    
                     arr_state[1] = parseInt(a[1]);
                 }
-                return { freq: arr_state[0], amp: arr_state[1], param: arr_state[2] };
+                return { frequency: arr_state[0], amplitude: arr_state[1], param: arr_state[2] };
             });
         });
         process_counts(objects);
