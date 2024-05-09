@@ -105,11 +105,20 @@
                 // update freq 
                 if( !a[0].match(/-/)  ){
                     let freq = 0;
+                    // set by key and octive string such as c#3
                     const key_str = a[0].match(/[a-z]#?/);
                     const oct_str = a[0].match(/[0-9]/);
                     if(key_str && oct_str){
                         freq = notefreq_by_indices( parseInt(oct_str), array_notes.indexOf(key_str[0]) );   
-                    }       
+                    }
+                    
+                    const freq_int = parseInt( parseInt(a[0]) );
+                    
+                    if(String(freq_int) != 'NaN'){
+                        freq = freq_int;
+                    }
+                    
+                    
                     arr_state[0] = freq;
                 }
                 // update amp

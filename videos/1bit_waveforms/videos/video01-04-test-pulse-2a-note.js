@@ -20,6 +20,24 @@ VIDEO.init = function(sm, scene, camera){
    
     const sud = scene.userData;
 
+
+    const song = `
+# This is then a comment
+>title='puse-2a-demo-tune'
+>lines_per_minute=90
+-- -; 30 1;
+-- -; -- -;
+-- -; -- -;
+-- -; 60 1;
+-- -; -- -;
+-- -; -- -;
+-- -; 60 1;
+-- -; -- -;
+-- -; -- -;
+`;
+
+
+/*
     const song = `
 # This is then a comment
 >title='puse-2a-demo-tune'
@@ -55,6 +73,7 @@ c5 1; -- -;
 -- -; -- -;
 -- -; -- -;
 `;
+*/
 
     const song_obj = Music_roll.parse( song );
 
@@ -119,10 +138,15 @@ c5 1; -- -;
             const array_samp = Music_roll.play(song_obj, a_sound);
 
             const samp0 = sud.tracks.objects[0].samp;
+            const samp1 = sud.tracks.objects[1].samp;
             
-            samp0.frequency = Math.floor( array_samp[0].frequency);
+            samp0.frequency = Math.floor( array_samp[0].frequency );
             samp0.amplitude = array_samp[0].amplitude;
-            samp0.a_note = Samp_alphas.sin(array_samp[0].a_note, 1, 1);
+            samp0.a_note = Samp_alphas.sin( array_samp[0].a_note, 1, 1);
+            
+            samp1.frequency = Math.floor( array_samp[1].frequency );
+            samp1.amplitude = array_samp[1].amplitude;
+            samp1.a_note = Samp_alphas.sin( array_samp[1].a_note, 1, 1);
         
         
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);

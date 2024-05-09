@@ -19,7 +19,8 @@
     * (done) comments for the plain text format.
     * (done) header for plain text format
     * (done) can set lines per minute, and title by way of header
+    * (done) more than one standard for setting frequnecy allowing for plain number values
     
-    * () more than one standard for setting frequnecy allowing for plain number values
+    * () adress isshue where I can not have two notes on the same freq
     * () update readme
     
