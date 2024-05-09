@@ -22,25 +22,7 @@
         const b = i_note + 3;
         return 440 * Math.pow(2, a + b / 12);
     };
-
-    // loop ahead function to help get d and n values for each object
-    /*  
-    const loop_ahead = (line_objects, line_index, track_index, key='frequency', value=0) => {
-        let i = line_index;
-        const len = line_objects.length;
-        let n = 0;
-        while(i < len){
-            if( line_objects[i][track_index][key] != value ){
-                return n;
-            }
-            n += 1;
-            i += 1;
-        }
-        return n;
-    };
-    */
-    
-    
+   
     // loop ahead function to help get d and n values for each object    
     const loop_ahead2 = (line_objects, line_index, track_index ) => {
         let i = line_index + 1;
@@ -61,7 +43,6 @@
     // process count values for each object in form of 'n' and 'd' props to help figure out current alpha values
     const process_counts = (line_objects) => {
         const track_count = line_objects[0].length;
-        //const array_freq = new Array(track_count).fill(-1);
         const array_a = new Array(track_count).fill('--');
         const array_d = new Array(track_count).fill(1);
         const len = line_objects.length;
@@ -70,21 +51,9 @@
             let i_track = 0;
             while(i_track < track_count){
             
-                const obj = line_objects[i_line][i_track];
-                
-                //!!! using frequency as a way to find if the n and d values does not work so great
-                // if I have two notes at the same frequency, so using the a0 prop might be better for now.
-                // this will contain '--' if the not contines, else somehting else
-                //const a = loop_ahead(line_objects, i_line, i_track, 'frequency', obj.frequency );
-                //if(obj.frequency != array_freq[i_track]){
-                //    array_freq[i_track] = obj.frequency;
-                //    array_d[i_track] = a;
-                //}
-                //obj.d = array_d[i_track];
-                //obj.n = obj.d - a;
-                    
+                const obj = line_objects[i_line][i_track];            
                 const a = loop_ahead2(line_objects, i_line, i_track);  
-                //if(obj.a0 != '---' || i_line === 0){
+    
                 if( !obj.a0.match(REGEX_CONTINUE) || i_line === 0){
                     array_a[i_track] = obj.a0;
                     array_d[i_track] = a;
@@ -92,9 +61,6 @@
                 obj.d = array_d[i_track];
                 obj.n = obj.d - a;
                 
-                
-                //console.log(a, obj.n + '/' + obj.d, obj.a0)
-        
                 i_track += 1;
             }
             i_line += 1;
@@ -188,7 +154,7 @@
         }, header);
     };
     
-    // give an line_objects array, and a alpha value to get the current freq, amp, ect for each track
+    // give an song object, and a alpha value to get the current freq, amp, ect for each track
     Music_roll.play = (song, alpha=0) => {
         const line_objects = song.line_objects;
         const array_samp = [];
