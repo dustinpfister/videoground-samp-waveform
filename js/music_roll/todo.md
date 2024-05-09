@@ -22,7 +22,7 @@
     * (done) more than one standard for setting frequnecy allowing for plain number values
     * (done) address isshue with setting track\_count in Music\_roll.parse
     
-    * () use new process text helper function to also process the main line objects, and header commands
+    * (done) use new process text helper function to also process the main line objects, and header commands
     
     * () address isshue where I can not have two notes on the same freq
 

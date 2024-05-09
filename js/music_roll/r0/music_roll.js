@@ -92,46 +92,31 @@
         return process_raw_text(text)[0].split(';').filter(loose_empty).length;
     };
     
+    const process_header_commands = (header) => {
+        return (command) => {
+            if(command[0] === 'lines_per_minute'){
+                header.lines_per_minute = parseInt( command[1] );
+            }
+            if(command[0] === 'title'){
+                header.title = command[1];
+            }     
+        }
+    };
+    
     // parse plain text format into an array of line_objects
     Music_roll.parse = ( text='' ) => {
-        
-        
-        
         const track_count = get_track_count(text);
         const track_states = [];
         let i_ts = 0;
-        
         const header = {
             lines_per_minute: 120,
             title: 'none'
         };
-        
         while(i_ts < track_count){
             track_states[i_ts] = [0, 0, [] ];
             i_ts += 1;
         }
-        
-        const line_objects = text.split(/\n|\r\n/)
-        .filter( loose_empty )
-        .filter( ( line ) => { // filter out comments
-            if(line.trim()[0] === '#'){
-                return false;
-            }
-            return true;
-        })
-        .filter( ( line ) => { // filter out 'commands'
-            if(line.trim()[0] === '>'){
-                const command = line.trim().replace('>', '').split('=');
-                if(command[0] === 'lines_per_minute'){
-                    header.lines_per_minute = parseInt( command[1] );
-                }
-                if(command[0] === 'title'){
-                    header.title = command[1];
-                }
-                return false;
-            }
-            return true;
-        })
+        const line_objects = process_raw_text(text, process_header_commands(header) )
         .map( ( str_line, i, arr ) => {
             const tracks = str_line.split(';').filter(loose_empty)
             return track_states.map( (arr_state, i_ts) => {
