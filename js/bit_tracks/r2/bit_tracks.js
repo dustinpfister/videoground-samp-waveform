@@ -133,6 +133,16 @@
         }
     };
     
+    // apply the state of an array_samp returned by Music_roll.play
+    Bit_tracks.apply_music_roll = (tracks, array_samp) => {
+        array_samp.forEach( (samp_roll, i) => {
+            const samp = tracks.objects[i].samp;
+            tracks.objects[i].samp = Object.assign(samp, samp_roll, {
+                a_note : Math.sin( Math.PI * samp_roll.a_note )
+            });
+        });
+    };
+    
     // create a sampset object for the final waveform function that will be used
     Bit_tracks.for_sampset = (tracks, a_sound=0, secs=1, amp=0.75, a_wave=undefined ) => {
         const t = [];

@@ -155,17 +155,7 @@ f3 1;-- -;
         
             const array_samp = Music_roll.play(song_obj, a_sound);
 
-            const samp0 = sud.tracks.objects[0].samp;
-            const samp1 = sud.tracks.objects[1].samp;
-
-            samp0.frequency = array_samp[0].frequency;
-            samp0.amplitude = array_samp[0].amplitude;
-            samp0.a_note = Samp_alphas.sin( array_samp[0].a_note, 1, 1);
-            
-            samp1.frequency = array_samp[1].frequency;
-            samp1.amplitude = array_samp[1].amplitude;
-            samp1.a_note = Samp_alphas.sin( array_samp[1].a_note, 1, 1);
-        
+            Bit_tracks.apply_music_roll(sud.tracks, array_samp);
         
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
             return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );

@@ -13,6 +13,7 @@
     * (done) - merge waveform for cretaing a merge down final mix of the 1bit tracks
     * (done) - can set samp.amplitude to 0 for a 1bit waveform
     * (done) - remove code that has to do with notes
+    * (done) - method to update samp objects of all tracks with an array of values from Music_roll.play
     
     * () - setting a 1bit samp amplitude to something like 0.5 should result in 1 
     
