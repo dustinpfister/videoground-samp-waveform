@@ -6,6 +6,8 @@
  
 (function(){
 
+    const REGEX_CONTINUE_NOTE = /^-+/
+
     const Music_roll = {};
     
     // loose empty string helper
@@ -46,7 +48,8 @@
         let n = 1;
         while(i < len){
             const obj = line_objects[i][track_index]; 
-            if( obj.a0 != '--' ){
+            //if( obj.a0 != '---' ){
+            if( !obj.a0.match( REGEX_CONTINUE_NOTE ) ){
                 return n;
             }
             n += 1;
@@ -81,7 +84,8 @@
                 //obj.n = obj.d - a;
                     
                 const a = loop_ahead2(line_objects, i_line, i_track);  
-                if(obj.a0 != '--' || i_line === 0){
+                //if(obj.a0 != '---' || i_line === 0){
+                if( !obj.a0.match(REGEX_CONTINUE_NOTE) || i_line === 0){
                     array_a[i_track] = obj.a0;
                     array_d[i_track] = a;
                 }
@@ -151,11 +155,14 @@
             return track_states.map( (arr_state, i_ts) => {
                 const a = tracks[i_ts].split(' ').filter(loose_empty);
                 // update freq 
-                if( !a[0].match(/-/)  ){
+                if( !a[0].match(/^-/)  ){
                     let freq = 0;
                     // set by key and octive string such as c#3
                     const key_str = a[0].match(/[a-z]#?/);
                     const oct_str = a[0].match(/[0-9]/);
+                    
+                    console.log(key_str, oct_str)
+                    
                     if(key_str && oct_str){
                         freq = notefreq_by_indices( parseInt(oct_str), array_notes.indexOf(key_str[0]) );   
                     }
@@ -167,7 +174,7 @@
                     arr_state[0] = freq;
                 }
                 // update amp
-                if( !a[1].match(/-/)  ){    
+                if( !a[1].match(/^-/)  ){    
                     arr_state[1] = parseInt(a[1]);
                 }
                 const line_obj = { frequency: arr_state[0], amplitude: arr_state[1], param: arr_state[2], a0: a[0] };
