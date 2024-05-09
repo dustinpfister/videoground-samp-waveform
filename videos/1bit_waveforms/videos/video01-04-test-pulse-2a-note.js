@@ -20,11 +20,55 @@ VIDEO.init = function(sm, scene, camera){
    
     const sud = scene.userData;
 
-
     const song = `
 # This is then a comment
 >title='puse-2a-demo-tune'
->lines_per_minute=90
+>lines_per_minute=60
+-- -;-- -;
+c5 1;f2 1;
+-- -;-- -;
+-- -;d2 1;
+-- -;d2 1;
+-- -;f2 1;
+-- -;-- -;
+-- -;d2 1;
+-- -;d2 1;
+e5 1;f2 1;
+-- -;-- -;
+-- -;d2 1;
+-- -;d2 1;
+-- -;f2 1;
+-- -;g2 1;
+-- -;-- -;
+-- -;-- -;
+-- -;-- -;
+-- -;-- -;
+-- -;-- -;
+d5 1;f2 1;
+-- -;-- -;
+-- -;d2 1;
+-- -;d2 1;
+-- -;f2 1;
+-- -;-- -;
+-- -;d2 1;
+-- -;d2 1;
+f5 1;f2 1;
+f5 1;-- -;
+e5 1;d2 1;
+-- -;d2 1;
+-- -;f2 1;
+c5 1;g2 1;
+-- -;-- -;
+-- -;-- -;
+-- -;-- -;
+-- -;-- -;
+`;
+
+/*
+    const song = `
+# This is then a comment
+>title='puse-2a-demo-tune'
+>lines_per_minute=60
 f3 1;90 1;
 f3 1;-- -;
 f3 1;-- -;
@@ -46,46 +90,9 @@ f3 1;-- -;
 -- -;-- -;
 -- -;-- -;
 `;
-
-
-
-/*
-    const song = `
-# This is then a comment
->title='puse-2a-demo-tune'
->lines_per_minute=90
--- -; -- -;
--- -; -- -;
--- -; -- -;
-f5 1; c1 1;
--- -; -- -;
- 0 0; -- -;
-f5 1; -- -;
--- -; -- -;
--- -; -- -;
-f5 1; -- -;
--- -; -- -;
--- -; -- -;
-g5 1; -- -;
--- -; -- -;
--- -; -- -;
-f5 1; -- 0;
--- -; -- -;
--- -; -- -;
-f5 1; -- -;
--- -; -- -;
--- -; -- -;
--- -; -- -;
--- -; -- -;
-c5 1; -- -;
--- -; -- -;
--- -; -- -;
--- -; -- -;
--- -; -- -;
--- -; -- -;
--- -; -- -;
-`;
 */
+
+
 
 
     const song_obj = Music_roll.parse( song );
@@ -136,8 +143,6 @@ c5 1; -- -;
 
         ]
     });
-    
-    console.log(song_obj);
 
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
