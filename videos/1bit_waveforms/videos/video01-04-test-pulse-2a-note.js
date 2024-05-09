@@ -64,36 +64,6 @@ c5 1;g2 1;
 -- -;-- -;
 `;
 
-/*
-    const song = `
-# This is then a comment
->title='puse-2a-demo-tune'
->lines_per_minute=60
-f3 1;90 1;
-f3 1;-- -;
-f3 1;-- -;
-g3 1;90 1;
-f3 1;-- -;
-f3 1;-- -;
-c3 1;90 1;
--- -;-- -;
--- -;-- -;
--- -;90 1;
-d3 1;-- -;
-c3 1;-- -;
-d3 1;-- -;
-e3 1;-- -;
-f3 1;-- -;
--- -;-- -;
--- -;-- -;
-f3 1;-- -;
--- -;-- -;
--- -;-- -;
-`;
-*/
-
-
-
 
     const song_obj = Music_roll.parse( song );
 
@@ -106,7 +76,8 @@ f3 1;-- -;
         const n1 = Math.min(d1, d2);
         const n2 = Math.max(d1, d2);
         const range = Math.abs(n2 - n1);
-        if( a_note > 0 && a_cycle >= n1 + range / 2 * ( 1 - a_note )  && a_cycle <= n2 - range / 2 * ( 1 - a_note ) ){
+        const a = Math.sin( Math.PI * a_note );
+        if( a > 0 && a_cycle >= n1 + range / 2 * ( 1 - a )  && a_cycle <= n2 - range / 2 * ( 1 - a ) ){
             return 1;
         }
         return 0;

@@ -134,11 +134,19 @@
     };
     
     // apply the state of an array_samp returned by Music_roll.play
-    Bit_tracks.apply_music_roll = (tracks, array_samp) => {
+    Bit_tracks.apply_music_roll = (tracks, array_samp, mode='lat', b=0.15) => {
         array_samp.forEach( (samp_roll, i) => {
             const samp = tracks.objects[i].samp;
+            let a_note = samp_roll.a_note;
+            if(mode === 'sin'){
+                a_note = Math.sin( Math.PI * samp_roll.a_note );
+            }
+            if(mode === 'pad'){
+               const a = (a_note - b ) / ( 1 - b * 2 );
+               a_note = samp_roll.a_note < b || samp_roll.a_note > (1 - b) ? 0 : a ;
+            }
             tracks.objects[i].samp = Object.assign(samp, samp_roll, {
-                a_note : Math.sin( Math.PI * samp_roll.a_note )
+                a_note : a_note
             });
         });
     };
