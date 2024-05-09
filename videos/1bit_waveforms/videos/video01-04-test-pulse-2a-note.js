@@ -20,24 +20,25 @@ VIDEO.init = function(sm, scene, camera){
    
     const sud = scene.userData;
 
-
+/*
     const song = `
 # This is then a comment
 >title='puse-2a-demo-tune'
 >lines_per_minute=90
--- -; 30 1;
--- -; -- -;
--- -; -- -;
--- -; 60 1;
--- -; -- -;
--- -; -- -;
--- -; 60 1;
--- -; -- -;
--- -; -- -;
+-- -;
+-- -;
+f3 1;
+-- -;
+-- -;
+-- -;
+-- -;
+-- -;
+-- -;
 `;
+*/
 
 
-/*
+
     const song = `
 # This is then a comment
 >title='puse-2a-demo-tune'
@@ -73,7 +74,7 @@ c5 1; -- -;
 -- -; -- -;
 -- -; -- -;
 `;
-*/
+
 
     const song_obj = Music_roll.parse( song );
 

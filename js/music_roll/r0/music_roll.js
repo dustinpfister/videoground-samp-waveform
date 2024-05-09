@@ -47,13 +47,20 @@
             let i_track = 0;
             while(i_track < track_count){
                 const obj = line_objects[i_line][i_track];
+                //!!! using frequency as a way to find if the n and d values does not work so great
+                // if I have two notes at the same frequency, so using the a0 prop might be better for now.
+                // this will contain '--' if the not contines, else somehting else
                 const a = loop_ahead(line_objects, i_line, i_track, 'frequency', obj.frequency );
+                //const a = loop_ahead(line_objects, i_line, i_track, 'a0', obj.a0 );
+                
                 if(obj.frequency != array_freq[i_track]){
                     array_freq[i_track] = obj.frequency;
                     array_d[i_track] = a;
                 }
                 obj.d = array_d[i_track];
                 obj.n = obj.d - a;
+                
+                console.log(obj.n + '/' + obj.d)
         
                 i_track += 1;
             }
@@ -61,9 +68,36 @@
         }
     };
     
+    // get track count from raw text
+    const process_raw_text = (text, for_command=()=>{} ) => {
+        return text.split(/\n|\r\n/)
+        .filter( loose_empty )
+        .filter( ( line ) => { // filter out comments
+            if(line.trim()[0] === '#'){
+                return false;
+            }
+            return true;
+        })
+        .filter( ( line, i ) => { // filter out 'commands'
+            if(line.trim()[0] === '>'){
+                const command = line.trim().replace('>', '').split('=');
+                for_command( command, line, i ); 
+                return false;
+            }
+            return true;
+        });  
+    };
+    
+    const get_track_count = (text) => {
+        return process_raw_text(text)[0].split(';').filter(loose_empty).length;
+    };
+    
     // parse plain text format into an array of line_objects
     Music_roll.parse = ( text='' ) => {
-        const track_count = 2;
+        
+        
+        
+        const track_count = get_track_count(text);
         const track_states = [];
         let i_ts = 0;
         
@@ -76,6 +110,7 @@
             track_states[i_ts] = [0, 0, [] ];
             i_ts += 1;
         }
+        
         const line_objects = text.split(/\n|\r\n/)
         .filter( loose_empty )
         .filter( ( line ) => { // filter out comments
@@ -87,7 +122,6 @@
         .filter( ( line ) => { // filter out 'commands'
             if(line.trim()[0] === '>'){
                 const command = line.trim().replace('>', '').split('=');
-                console.log( command );
                 if(command[0] === 'lines_per_minute'){
                     header.lines_per_minute = parseInt( command[1] );
                 }
@@ -125,7 +159,8 @@
                 if( !a[1].match(/-/)  ){    
                     arr_state[1] = parseInt(a[1]);
                 }
-                return { frequency: arr_state[0], amplitude: arr_state[1], param: arr_state[2] };
+                const line_obj = { frequency: arr_state[0], amplitude: arr_state[1], param: arr_state[2], a0: a[0] };
+                return line_obj;
             });
         });
         process_counts(line_objects);

@@ -20,7 +20,11 @@
     * (done) header for plain text format
     * (done) can set lines per minute, and title by way of header
     * (done) more than one standard for setting frequnecy allowing for plain number values
+    * (done) address isshue with setting track\_count in Music\_roll.parse
     
-    * () adress isshue where I can not have two notes on the same freq
+    * () use new process text helper function to also process the main line objects, and header commands
+    
+    * () address isshue where I can not have two notes on the same freq
+
     * () update readme
     
