@@ -59,8 +59,8 @@
     const process_counts = (line_objects) => {
         const track_count = line_objects[0].length;
         //const array_freq = new Array(track_count).fill(-1);
-        const array_a = new Array(track_count).fill(-1);
-        const array_d = new Array(track_count).fill(-1);
+        const array_a = new Array(track_count).fill('--');
+        const array_d = new Array(track_count).fill(1);
         const len = line_objects.length;
         let i_line = 0;
         while(i_line < len){
@@ -81,7 +81,7 @@
                 //obj.n = obj.d - a;
                     
                 const a = loop_ahead2(line_objects, i_line, i_track);  
-                if(obj.a0 != '--'){
+                if(obj.a0 != '--' || i_line === 0){
                     array_a[i_track] = obj.a0;
                     array_d[i_track] = a;
                 }
@@ -159,14 +159,11 @@
                     if(key_str && oct_str){
                         freq = notefreq_by_indices( parseInt(oct_str), array_notes.indexOf(key_str[0]) );   
                     }
-                    
+                    // allow for direct input of herts values
                     const freq_int = parseInt( parseInt(a[0]) );
-                    
                     if(String(freq_int) != 'NaN'){
                         freq = freq_int;
                     }
-                    
-                    
                     arr_state[0] = freq;
                 }
                 // update amp
