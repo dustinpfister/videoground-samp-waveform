@@ -36,31 +36,58 @@
         return n;
     };
     
+    
+    // loop ahead function to help get d and n values for each object    
+    const loop_ahead2 = (line_objects, line_index, track_index ) => {
+        let i = line_index + 1;
+        const len = line_objects.length;
+        let n = 1;
+        while(i < len){
+            const obj = line_objects[i][track_index]; 
+            if( obj.a0 != '--' ){
+                return n;
+            }
+            n += 1;
+            i += 1;
+        }
+        return n;
+    };
+    
     // process count values for each object in form of 'n' and 'd' props to help figure out current alpha values
     const process_counts = (line_objects) => {
         const track_count = line_objects[0].length;
-        const array_freq = new Array(track_count).fill(-1);
+        //const array_freq = new Array(track_count).fill(-1);
+        const array_a = new Array(track_count).fill(-1);
         const array_d = new Array(track_count).fill(-1);
         const len = line_objects.length;
         let i_line = 0;
         while(i_line < len){
             let i_track = 0;
             while(i_track < track_count){
+            
                 const obj = line_objects[i_line][i_track];
+                
                 //!!! using frequency as a way to find if the n and d values does not work so great
                 // if I have two notes at the same frequency, so using the a0 prop might be better for now.
                 // this will contain '--' if the not contines, else somehting else
-                const a = loop_ahead(line_objects, i_line, i_track, 'frequency', obj.frequency );
-                //const a = loop_ahead(line_objects, i_line, i_track, 'a0', obj.a0 );
-                
-                if(obj.frequency != array_freq[i_track]){
-                    array_freq[i_track] = obj.frequency;
+                //const a = loop_ahead(line_objects, i_line, i_track, 'frequency', obj.frequency );
+                //if(obj.frequency != array_freq[i_track]){
+                //    array_freq[i_track] = obj.frequency;
+                //    array_d[i_track] = a;
+                //}
+                //obj.d = array_d[i_track];
+                //obj.n = obj.d - a;
+                    
+                const a = loop_ahead2(line_objects, i_line, i_track);  
+                if(obj.a0 != '--'){
+                    array_a[i_track] = obj.a0;
                     array_d[i_track] = a;
                 }
                 obj.d = array_d[i_track];
                 obj.n = obj.d - a;
                 
-                console.log(obj.n + '/' + obj.d)
+                
+                console.log(a, obj.n + '/' + obj.d, obj.a0)
         
                 i_track += 1;
             }

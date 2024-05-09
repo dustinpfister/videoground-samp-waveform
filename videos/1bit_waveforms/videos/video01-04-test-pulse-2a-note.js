@@ -26,9 +26,9 @@ VIDEO.init = function(sm, scene, camera){
 >title='puse-2a-demo-tune'
 >lines_per_minute=90
 f3 1;
+f3 1;
 -- -;
--- -;
--- -;
+f3 1;
 -- -;
 -- -;
 -- -;
