@@ -21,7 +21,8 @@
         return 440 * Math.pow(2, a + b / 12);
     };
 
-    // loop ahead function to help get d and n values for each object    
+    // loop ahead function to help get d and n values for each object
+    /*  
     const loop_ahead = (line_objects, line_index, track_index, key='frequency', value=0) => {
         let i = line_index;
         const len = line_objects.length;
@@ -35,6 +36,7 @@
         }
         return n;
     };
+    */
     
     
     // loop ahead function to help get d and n values for each object    
@@ -87,7 +89,7 @@
                 obj.n = obj.d - a;
                 
                 
-                console.log(a, obj.n + '/' + obj.d, obj.a0)
+                //console.log(a, obj.n + '/' + obj.d, obj.a0)
         
                 i_track += 1;
             }

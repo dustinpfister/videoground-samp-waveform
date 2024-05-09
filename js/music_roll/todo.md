@@ -24,5 +24,7 @@
     * (done) use new process text helper function to also process the main line objects, and header commands
     * (done) address isshue where I can not have two notes on the same freq
 
+    * () freq format should be three dashes --- or update code to work better with variable patterns
+
     * () update readme
     

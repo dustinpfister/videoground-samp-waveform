@@ -25,15 +25,26 @@ VIDEO.init = function(sm, scene, camera){
 # This is then a comment
 >title='puse-2a-demo-tune'
 >lines_per_minute=90
-f3 1;
-f3 1;
--- -;
-f3 1;
--- -;
--- -;
--- -;
--- -;
--- -;
+f3 1;90 1;
+f3 1;-- -;
+f3 1;-- -;
+g3 1;90 1;
+f3 1;-- -;
+f3 1;-- -;
+c3 1;90 1;
+-- -;-- -;
+-- -;-- -;
+-- -;90 1;
+d3 1;-- -;
+c3 1;-- -;
+d3 1;-- -;
+e3 1;-- -;
+f3 1;-- -;
+-- -;-- -;
+-- -;-- -;
+f3 1;-- -;
+-- -;-- -;
+-- -;-- -;
 `;
 
 
@@ -96,7 +107,7 @@ c5 1; -- -;
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 1,
+        count: 2,
         objects: [
             {
                 waveform: pulse_2a_note_1bit,
@@ -140,15 +151,15 @@ c5 1; -- -;
             const array_samp = Music_roll.play(song_obj, a_sound);
 
             const samp0 = sud.tracks.objects[0].samp;
-            //const samp1 = sud.tracks.objects[1].samp;
+            const samp1 = sud.tracks.objects[1].samp;
             
             samp0.frequency = Math.floor( array_samp[0].frequency );
             samp0.amplitude = array_samp[0].amplitude;
             samp0.a_note = Samp_alphas.sin( array_samp[0].a_note, 1, 1);
             
-            //samp1.frequency = Math.floor( array_samp[1].frequency );
-            //samp1.amplitude = array_samp[1].amplitude;
-            //samp1.a_note = Samp_alphas.sin( array_samp[1].a_note, 1, 1);
+            samp1.frequency = Math.floor( array_samp[1].frequency );
+            samp1.amplitude = array_samp[1].amplitude;
+            samp1.a_note = Samp_alphas.sin( array_samp[1].a_note, 1, 1);
         
         
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
