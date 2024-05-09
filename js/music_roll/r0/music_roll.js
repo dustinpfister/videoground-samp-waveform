@@ -6,7 +6,7 @@
  
 (function(){
 
-    const REGEX_CONTINUE_NOTE = /^-+/
+    const REGEX_CONTINUE = /^-+/
 
     const Music_roll = {};
     
@@ -49,7 +49,7 @@
         while(i < len){
             const obj = line_objects[i][track_index]; 
             //if( obj.a0 != '---' ){
-            if( !obj.a0.match( REGEX_CONTINUE_NOTE ) ){
+            if( !obj.a0.match( REGEX_CONTINUE ) ){
                 return n;
             }
             n += 1;
@@ -85,7 +85,7 @@
                     
                 const a = loop_ahead2(line_objects, i_line, i_track);  
                 //if(obj.a0 != '---' || i_line === 0){
-                if( !obj.a0.match(REGEX_CONTINUE_NOTE) || i_line === 0){
+                if( !obj.a0.match(REGEX_CONTINUE) || i_line === 0){
                     array_a[i_track] = obj.a0;
                     array_d[i_track] = a;
                 }
@@ -155,13 +155,11 @@
             return track_states.map( (arr_state, i_ts) => {
                 const a = tracks[i_ts].split(' ').filter(loose_empty);
                 // update freq 
-                if( !a[0].match(/^-/)  ){
+                if( !a[0].match(REGEX_CONTINUE)  ){
                     let freq = 0;
                     // set by key and octive string such as c#3
                     const key_str = a[0].match(/[a-z]#?/);
                     const oct_str = a[0].match(/[0-9]/);
-                    
-                    console.log(key_str, oct_str)
                     
                     if(key_str && oct_str){
                         freq = notefreq_by_indices( parseInt(oct_str), array_notes.indexOf(key_str[0]) );   
@@ -171,10 +169,11 @@
                     if(String(freq_int) != 'NaN'){
                         freq = freq_int;
                     }
-                    arr_state[0] = freq;
+                    
+                    arr_state[0] = Math.round( freq );
                 }
                 // update amp
-                if( !a[1].match(/^-/)  ){    
+                if( !a[1].match(REGEX_CONTINUE)  ){    
                     arr_state[1] = parseInt(a[1]);
                 }
                 const line_obj = { frequency: arr_state[0], amplitude: arr_state[1], param: arr_state[2], a0: a[0] };

@@ -25,6 +25,7 @@
     * (done) address isshue where I can not have two notes on the same freq
     * (done) fixed bug where I was not getting proper n and d values for the first note
     * (done) freq format should be three dashes --- or update code to work better with variable patterns
-
+    * (done) rounding frequency
+    
     * () update readme
     

@@ -157,12 +157,12 @@ f3 1;-- -;
 
             const samp0 = sud.tracks.objects[0].samp;
             const samp1 = sud.tracks.objects[1].samp;
-            
-            samp0.frequency = Math.floor( array_samp[0].frequency );
+
+            samp0.frequency = array_samp[0].frequency;
             samp0.amplitude = array_samp[0].amplitude;
             samp0.a_note = Samp_alphas.sin( array_samp[0].a_note, 1, 1);
             
-            samp1.frequency = Math.floor( array_samp[1].frequency );
+            samp1.frequency = array_samp[1].frequency;
             samp1.amplitude = array_samp[1].amplitude;
             samp1.a_note = Samp_alphas.sin( array_samp[1].a_note, 1, 1);
         
