@@ -4,6 +4,7 @@
  *      * a 1-bit waveform function returns a 0 or 1 only
  *      * make sure that values returned by a 1-bit waveform are converted to a 1 or zero if they are not one of those
  *      * merge waveform on top of mix
+ *      * pulse
  */
  
 (function(){
@@ -20,6 +21,19 @@
                 return  0;
             }
             return 1;
+        },
+        pulse2a_1bit : (samp, a_wave) => {
+            const d1 = samp.d1 === undefined ? 0.25 : samp.d1;
+            const d2 = samp.d2 === undefined ? 0.75 : samp.d2;
+            const a_note = samp.a_note === undefined ? 1 : samp.a_note;
+            const a_cycle = samp.frequency * a_wave % 1;
+            const n1 = Math.min(d1, d2);
+            const n2 = Math.max(d1, d2);
+            const range = Math.abs(n2 - n1);
+            if( a_note > 0 && a_cycle >= n1 + range / 2 * ( 1 - a_note )  && a_cycle <= n2 - range / 2 * ( 1 - a_note ) ){
+                return 1;
+            }
+            return 0;
         },
         // noise wave
         noise_1bit : (samp, a_wave ) => {

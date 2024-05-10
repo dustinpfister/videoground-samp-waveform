@@ -12,7 +12,7 @@ With R0 of the project I just got a very basic core idea of what I wanted with t
 
 With R1 I added an additional built in waveform function that is a basic noise waveform, some code that has to do with notes, allowed for making custom waveforms on a video by video basis as needed, and also made a number of additional improvements.
 
-### R2 - Merge final waveform, note code removed
+### R2 - Merge final waveform, note code removed, more 1bit built in waveform options
 
 Now with R2 forward I am starting to think not just in terms of what I need to add to with bit\_tracks, but also what I should remove from it as well. There is starting to think in terms of additional mixing methods such as merge, and other mixing options that get away from the limitations of raw 1-bit sound. However I am now thinking that some of the code that has to do with notes should be removed in favor of other projects that can be used with bit\_tracks, bit also additional audio projects outside of bit_tracks as well.
 

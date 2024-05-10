@@ -13,6 +13,10 @@
     * (done) - method to update samp objects of all tracks with an array of values from Music_roll.play
     * (done) - I might want to have more than one option with how to apply the final a\_note value when using apply music roll
     
+    * (done) - add pulse2a\_1bit waveform
+    
+    
+    
     * () - Setting a 1bit samp amplitude to something like 0.5 should result in 1 
     
     * () - mix waveform that allows for adjusting ampliude percent between tracks
