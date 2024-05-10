@@ -22,7 +22,8 @@
             }
             return 1;
         },
-        pulse2a_1bit : (samp, a_wave) => {
+        // pulse2a waveform
+        pulse2a_lin_1bit : (samp, a_wave) => {
             const d1 = samp.d1 === undefined ? 0.25 : samp.d1;
             const d2 = samp.d2 === undefined ? 0.75 : samp.d2;
             const a_note = samp.a_note === undefined ? 1 : samp.a_note;
@@ -104,8 +105,8 @@
         
             const obj = Object.assign({
                 waveform: 'pulse_1bit',
-                //mode: 'tone',
                 desc: 'track ' + i_obj,
+                a_note_mode: 'pad.25',
                 samp: {
                     frequency: 0,
                     amplidue: 1
@@ -144,7 +145,7 @@
     };
     
     // apply the state of an array_samp returned by Music_roll.play
-    Bit_tracks.apply_music_roll = (tracks, array_samp, mode='lat', b=0.15) => {
+    Bit_tracks.apply_music_roll = (tracks, array_samp, mode='lin', b=0.15) => {
         array_samp.forEach( (samp_roll, i) => {
             const samp = tracks.objects[i].samp;
             let a_note = samp_roll.a_note;
@@ -159,6 +160,23 @@
                 a_note : a_note
             });
         });
+    };
+    
+    const get_final_anote_1bit = (obj_track, samp) => {
+        const a_note = samp.a_note === undefined ? 0.5 : samp.a_note;
+        
+        // force_mid mode will mean to always keep the a_note value in the middle
+        if(obj_track.a_note_mode === 'force_mid'){
+            return 0.5;
+        }
+        
+        if(obj_track.a_note_mode === 'sin'){
+            return Math.sin( Math.PI * a_note );
+        }
+        
+        // just use any given a_note or default defined at top of function
+        return a_note;
+        
     };
     
     // create a sampset object for the final waveform function that will be used
@@ -182,7 +200,9 @@
                  
             // final samp object to use with waveform function
             const samp = Object.assign({}, obj.samp, {
-                frequency: freq, amplitude: amp
+                frequency: freq,
+                amplitude: amp,
+                a_note: get_final_anote_1bit(obj, obj.samp)
             });
             
             // create 1bit sample value
@@ -194,7 +214,7 @@
                 }
                 if(typeof obj.waveform === 'string'){
                     waveform = Bit_tracks.waveforms[ obj.waveform ];
-                }  
+                }
                 s_bit = waveform( samp, a_wave );
             }
             

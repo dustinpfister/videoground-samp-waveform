@@ -11,11 +11,11 @@
     * (done) - can set samp.amplitude to 0 for a 1bit waveform
     * (done) - remove code that has to do with notes
     * (done) - method to update samp objects of all tracks with an array of values from Music_roll.play
-    * (done) - I might want to have more than one option with how to apply the final a\_note value when using apply music roll
-    
+    * (done) - I might want to have more than one option with how to apply the final a\_note value when using apply music roll    
     * (done) - add pulse2a\_1bit waveform
+    * (done) - have a track object option that will set how a\_note is to be processed 
     
-    
+    * () - have a pad a\_note mode
     
     * () - Setting a 1bit samp amplitude to something like 0.5 should result in 1 
     

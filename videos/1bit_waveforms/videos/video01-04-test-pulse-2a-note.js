@@ -76,7 +76,7 @@ c5 1;g2 1;
         const n1 = Math.min(d1, d2);
         const n2 = Math.max(d1, d2);
         const range = Math.abs(n2 - n1);
-        const a = Math.sin( Math.PI * a_note );
+        const a = a_note; //Math.sin( Math.PI * a_note );
         if( a > 0 && a_cycle >= n1 + range / 2 * ( 1 - a )  && a_cycle <= n2 - range / 2 * ( 1 - a ) ){
             return 1;
         }
