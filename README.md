@@ -10,10 +10,21 @@ Thus far I am still trying to get a good idea of what ideas I should be focusing
 
 I have started a 1bit\_waveforms project which as the name sugests is an exploration of waveform functions that will return only a 0 or 1 in terms of sample depth. There is just starting out with pulse and noise waveforms, but I would like to work out at least a few more with this.
 
+<div align="center">
+      <a href="https://www.youtube.com/watch?v=7vjvp2R8Yh4">
+         <img src="https://img.youtube.com/vi/7vjvp2R8Yh4/0.jpg" style="width:50%;">
+      </a>
+</div>
+
 ### [1bit\_mix16](https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/1bit_mix16)
 
 One major project that I have together thus far has to do with 1-bit sound and how a final 16-bit track will be mixed from two or more 1-bit tracks. There are two general ideas for mixing that come to mind with this, merge down the 1-bit tracks into a single 1-bit track and then scale up to 16-bit, or scale each 1-bit track to 16-bit and mix as usual allowing for all 1-bit tracks to play at once without loss. This 1bit\_mix16 project is then the latter rather than former with this which I think would be better when it comes to making content that will be uploaded to YouTube rather than something that needs to run on retro hardware.
 
+<div align="center">
+      <a href="https://www.youtube.com/watch?v=glOx1dScKT8">
+         <img src="https://img.youtube.com/vi/glOx1dScKT8/0.jpg" style="width:50%;">
+      </a>
+</div>
 
 ## Getting started with a waveform function
 
