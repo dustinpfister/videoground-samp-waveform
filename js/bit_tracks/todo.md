@@ -3,10 +3,7 @@
 ## RX - () - stereo
     * () if I have a updated samp create module that can do stereo there is doing things with that
 
-## RX - () - saw filter
-    * () optional saw filter for each final mix option
-
-## R2 - () - merge and mix2 waveforms, note code removed
+## R2 - () - merge waveform, note code removed
     * (done) - can set a frequnecy of zero when using 'tone' mode
     * (done) - 1-bit waveforms should return 0 or 1
     * (done) - make sure than any value returned by a 1bit wavefrom converts to 0 or 1
@@ -16,7 +13,7 @@
     * (done) - method to update samp objects of all tracks with an array of values from Music_roll.play
     * (done) - I might want to have more than one option with how to apply the final a\_note value when using apply music roll
     
-    * () - setting a 1bit samp amplitude to something like 0.5 should result in 1 
+    * () - Setting a 1bit samp amplitude to something like 0.5 should result in 1 
     
     * () - mix waveform that allows for adjusting ampliude percent between tracks
     

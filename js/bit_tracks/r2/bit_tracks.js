@@ -70,7 +70,6 @@
         }
     };
     
-    
     // create a bit tracks object
     Bit_tracks.create = (opt) => {
         opt = opt || {};
@@ -91,14 +90,12 @@
         
             const obj = Object.assign({
                 waveform: 'pulse_1bit',
-                mode: 'tone',
+                //mode: 'tone',
                 desc: 'track ' + i_obj,
                 samp: {
                     frequency: 0,
                     amplidue: 1
-                },
-                octive: 3,
-                notes: []
+                }
             }, opt_obj);
             tracks.objects.push(obj);              
             i_obj += 1;
@@ -119,7 +116,6 @@
             const obj = tracks.objects[i_obj];
             const samp = obj.samp === undefined ? {} : obj.samp;
             
-            // 'tone' mode default
             let freq = samp.frequency === undefined ? 80 : samp.frequency;
             let amp = samp.amplitude === undefined ? 1 : samp.amplitude;
             
