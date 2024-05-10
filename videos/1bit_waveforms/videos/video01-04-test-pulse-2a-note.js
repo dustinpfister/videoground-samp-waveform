@@ -103,10 +103,10 @@ c5 1;g2 1;
                 }
             },
             {
-                waveform: 'pulse_1bit',
+                waveform: 'pulse2a_1bit',
                 mode: 'tone',
                 desc: 'pulse_2a_note lows',
-                a_note_mode: 'pad.10',
+                a_note_mode: 'lin',
                 samp: {
                     amplitude: 1,
                     frequency: 0,
