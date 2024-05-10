@@ -17,13 +17,13 @@
         pulse_1bit : (samp, a_wave ) => {
             const duty = samp.duty === undefined ? 0.5 : samp.duty;
             const a = samp.frequency * a_wave % 1;
-            if(a < duty){
+            if(a < duty || samp.a_note === 0){
                 return  0;
             }
             return 1;
         },
         // pulse2a waveform
-        pulse2a_lin_1bit : (samp, a_wave) => {
+        pulse2a_1bit : (samp, a_wave) => {
             const d1 = samp.d1 === undefined ? 0.25 : samp.d1;
             const d2 = samp.d2 === undefined ? 0.75 : samp.d2;
             const a_note = samp.a_note === undefined ? 1 : samp.a_note;

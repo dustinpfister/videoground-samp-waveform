@@ -68,6 +68,7 @@ c5 1;g2 1;
     const song_obj = Music_roll.parse( song );
 
     // new pulse function
+/*
     const pulse_2a_note_1bit = (samp, a_wave) => {
         const d1 = samp.d1 === undefined ? 0.25 : samp.d1;
         const d2 = samp.d2 === undefined ? 0.75 : samp.d2;
@@ -82,13 +83,14 @@ c5 1;g2 1;
         }
         return 0;
     };
+*/
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({
         count: 2,
         objects: [
             {
-                waveform: pulse_2a_note_1bit,
+                waveform: 'pulse2a_1bit',
                 mode: 'tone',
                 desc: 'pulse_2a_note highs',
                 a_note_mode: 'sin',
@@ -101,10 +103,10 @@ c5 1;g2 1;
                 }
             },
             {
-                waveform: pulse_2a_note_1bit,
+                waveform: 'pulse_1bit',
                 mode: 'tone',
                 desc: 'pulse_2a_note lows',
-                a_note_mode: 'pad.15.sin',
+                a_note_mode: 'pad.10',
                 samp: {
                     amplitude: 1,
                     frequency: 0,

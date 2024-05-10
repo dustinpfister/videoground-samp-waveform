@@ -14,8 +14,9 @@
     * (done) - I might want to have more than one option with how to apply the final a\_note value when using apply music roll    
     * (done) - add pulse2a\_1bit waveform
     * (done) - have a track object option that will set how a\_note is to be processed 
-    
     * (done) - have a pad a\_note mode
+    
+    * () - have the option to supply a function for a note mode option of track objects
     
     * () - Setting a 1bit samp amplitude to something like 0.5 should result in 1 
     
