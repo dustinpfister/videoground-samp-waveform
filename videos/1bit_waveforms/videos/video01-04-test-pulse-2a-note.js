@@ -91,6 +91,7 @@ c5 1;g2 1;
                 waveform: pulse_2a_note_1bit,
                 mode: 'tone',
                 desc: 'pulse_2a_note highs',
+                a_note_mode: 'sin',
                 samp: {
                     amplitude: 1,
                     frequency: 0,
@@ -103,6 +104,7 @@ c5 1;g2 1;
                 waveform: pulse_2a_note_1bit,
                 mode: 'tone',
                 desc: 'pulse_2a_note lows',
+                a_note_mode: 'pad.15.sin',
                 samp: {
                     amplitude: 1,
                     frequency: 0,

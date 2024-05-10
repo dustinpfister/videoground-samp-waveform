@@ -106,7 +106,7 @@
             const obj = Object.assign({
                 waveform: 'pulse_1bit',
                 desc: 'track ' + i_obj,
-                a_note_mode: 'pad.25',
+                a_note_mode: 'sin',
                 samp: {
                     frequency: 0,
                     amplidue: 1
@@ -145,17 +145,18 @@
     };
     
     // apply the state of an array_samp returned by Music_roll.play
-    Bit_tracks.apply_music_roll = (tracks, array_samp, mode='lin', b=0.15) => {
+    Bit_tracks.apply_music_roll = (tracks, array_samp) => {
         array_samp.forEach( (samp_roll, i) => {
             const samp = tracks.objects[i].samp;
             let a_note = samp_roll.a_note;
-            if(mode === 'sin'){
-                a_note = Math.sin( Math.PI * samp_roll.a_note );
-            }
-            if(mode === 'pad'){
-               const a = (a_note - b ) / ( 1 - b * 2 );
-               a_note = samp_roll.a_note < b || samp_roll.a_note > (1 - b) ? 0 : a ;
-            }
+            
+            //if(mode === 'sin'){
+            //    a_note = Math.sin( Math.PI * samp_roll.a_note );
+            //}
+            //if(mode === 'pad'){
+            //   const a = (a_note - b ) / ( 1 - b * 2 );
+            //   a_note = samp_roll.a_note < b || samp_roll.a_note > (1 - b) ? 0 : a ;
+            //}
             tracks.objects[i].samp = Object.assign(samp, samp_roll, {
                 a_note : a_note
             });
@@ -172,6 +173,21 @@
         
         if(obj_track.a_note_mode === 'sin'){
             return Math.sin( Math.PI * a_note );
+        }
+        
+        if(obj_track.a_note_mode.match(/^pad/)){
+            const arr = obj_track.a_note_mode.split('.');
+            let points = parseInt( arr[1] );
+            points = String(points) === 'NaN' ? 5 : points;
+            points = points < 0 ? 0 : points;
+            points = points > 100 ? 100 : points;
+            const b = points / 100;
+            const a = (a_note - b ) / ( 1 - b * 2 );
+            const a2 = a_note < b || a_note > (1 - b) ? 0 : a;
+            if( arr[2] === 'sin'){
+                return Math.sin( Math.PI * a2 );
+            }
+            return a2;
         }
         
         // just use any given a_note or default defined at top of function

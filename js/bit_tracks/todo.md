@@ -15,7 +15,7 @@
     * (done) - add pulse2a\_1bit waveform
     * (done) - have a track object option that will set how a\_note is to be processed 
     
-    * () - have a pad a\_note mode
+    * (done) - have a pad a\_note mode
     
     * () - Setting a 1bit samp amplitude to something like 0.5 should result in 1 
     
