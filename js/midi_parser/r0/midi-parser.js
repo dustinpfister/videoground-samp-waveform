@@ -255,6 +255,28 @@
          */
         customInterpreter : null // function( e_type , arrayByffer, metaEventLength){ return e_data_int }
     };
+    
+    /**
+    * get_types() : a function for getting an array of all event types of a given type and meta type 
+    * 
+    * 
+    */
+    MidiParser.get_types = (midi, track_index=0, type=9, metaType=false ) => {
+        const types_arr = [];
+        const evnt = midi.track[0].event;
+        let i=0, len = evnt.length;
+        while(i < len){
+            const obj = evnt[i];
+            if(obj.metaType === metaType && opt.type === type){
+                types_arr.push(obj);
+            }
+            if(!obj.metaType && obj.type === type){
+                types_arr.push(obj);   
+            }
+            i += 1;
+        }
+        return types_arr;
+    };    
 
 
     // if running in NODE export module
