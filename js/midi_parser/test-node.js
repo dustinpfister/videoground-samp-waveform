@@ -17,7 +17,22 @@ read('./midi/test_1track_1m.mid', 'binary', (e, data) => {
 
     const midi = MidiParser.parse(u);
     
-    const note_on = MidiParser.get_types(midi, 0, 9, false);
+    const note_on = MidiParser.get_types(midi, 0, 9, false)
+    .map( (obj) => {
+        obj.secs = parseFloat( (obj.deltaTime / midi.timeDivision).toFixed(3)  );
+        return obj;
+    })
+    .sort( (a, b) => {
+    
+    
+        if(a.deltaTime < b.deltaTime){
+            return -1;
+        }
+        if(a.deltaTime > b.deltaTime){
+            return 1;
+        }
+        return 0;
+    });
     
     console.log(note_on);
 
