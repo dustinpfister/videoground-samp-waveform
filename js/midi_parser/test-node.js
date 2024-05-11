@@ -17,24 +17,23 @@ read('./midi/test_1track_1m.mid', 'binary', (e, data) => {
 
     const midi = MidiParser.parse(u);
     
-    const note_on = MidiParser.get_types(midi, 0, 9, false)
-    .map( (obj) => {
-        obj.secs = parseFloat( (obj.deltaTime / midi.timeDivision).toFixed(3)  );
+    let note_on = MidiParser.get_types(midi, 0, 9, false)
+    .map( (obj, i, arr) => {
+        const a = arr[i - 1] || {};
+        const b = a.deltaTime || 0;
+        //!!! I do not thing this is how to get secs but it is a start
+        obj.t =  b + obj.deltaTime;
         return obj;
-    })
-    .sort( (a, b) => {
-    
-    
-        if(a.deltaTime < b.deltaTime){
-            return -1;
-        }
-        if(a.deltaTime > b.deltaTime){
-            return 1;
-        }
-        return 0;
     });
     
+    const total_t = note_on.reduce( (acc, obj) => {
+        return acc + obj.t;
+    }, 0);
+    
+    
+    
     console.log(note_on);
+    console.log(total_t);
 
 /*
     const note_on_arr = [];
