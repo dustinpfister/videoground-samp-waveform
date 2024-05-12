@@ -31,6 +31,15 @@ read('./midi/test_1track_1m.mid', 'binary', (e, data) => {
     }, 0);
     
     
+    let tempo = MidiParser.get_types(midi, 0, 255, 81)
+   
+    const tempo_data = tempo[0].data
+    const bpm = 60000000 / tempo_data;
+    
+    console.log( 'tempo=' + tempo_data  );
+    console.log( 'bpm=' + bpm );
+    
+   
     
     console.log(note_on);
     console.log(total_t);

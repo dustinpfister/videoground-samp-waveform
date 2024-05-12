@@ -267,7 +267,7 @@
         let i=0, len = evnt.length;
         while(i < len){
             const obj = evnt[i];
-            if(obj.metaType === metaType && opt.type === type){
+            if(obj.metaType === metaType && obj.type === type){
                 types_arr.push(obj);
             }
             if(!obj.metaType && obj.type === type){
