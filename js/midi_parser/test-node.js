@@ -17,18 +17,23 @@ read('./midi/test_1track_1m.mid', 'binary', (e, data) => {
 
     const midi = MidiParser.parse(u);
     
-    let note_on = MidiParser.get_types(midi, 0, 9, false)
-    .map( (obj, i, arr) => {
-        const a = arr[i - 1] || {};
-        const b = a.deltaTime || 0;
-        //!!! I do not thing this is how to get secs but it is a start
-        obj.t =  b + obj.deltaTime;
+    
+    let note_on = MidiParser.get_types(midi, 0, 9, false);
+    
+    // get total time
+    //const total_t = note_on.reduce( (acc, obj) => {
+    //    return acc + obj.deltaTime;
+    //}, 0);
+    
+    const total_t = MidiParser.get_total_time(midi);
+    
+    let t = 0;
+    note_on = note_on.map( (obj) => {
+        t += obj.deltaTime;
+        obj.t = t;
+        obj.alpha = t / total_t; 
         return obj;
     });
-    
-    const total_t = note_on.reduce( (acc, obj) => {
-        return acc + obj.t;
-    }, 0);
     
     
     let tempo = MidiParser.get_types(midi, 0, 255, 81)

@@ -258,8 +258,6 @@
     
     /**
     * get_types() : a function for getting an array of all event types of a given type and meta type 
-    * 
-    * 
     */
     MidiParser.get_types = (midi, track_index=0, type=9, metaType=false ) => {
         const types_arr = [];
@@ -277,7 +275,16 @@
             i += 1;
         }
         return types_arr;
-    };    
+    };
+    /**
+    * get_total_time() : get total time in midi clock ticks
+    */  
+    MidiParser.get_total_time = (midi) => {
+        let note_on = MidiParser.get_types(midi, 0, 9, false);
+        return note_on.reduce( (acc, obj) => {
+            return acc + obj.deltaTime;
+        }, 0);
+    };
 
 
     // if running in NODE export module
