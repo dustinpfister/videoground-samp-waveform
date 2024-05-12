@@ -270,7 +270,8 @@
             if(obj.metaType === metaType && obj.type === type){
                 types_arr.push(obj);
             }
-            if(!obj.metaType && obj.type === type){
+            const b1 = metaType === undefined || metaType === false || parseInt(metaType) === 'NaN';
+            if( b1 && obj.type === type){
                 types_arr.push(obj);   
             }
             i += 1;
