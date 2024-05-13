@@ -23,7 +23,7 @@ VIDEO.init = function(sm, scene, camera){
     const song = `
 # megaman2 woodman based on midi file found here: https://www.vgmusic.com/music/console/nintendo/nes/mm2-wood.mid
 >title='Megaman 2 : Woodman Stage 1-bit-tracks > 16-bit final mix '
->lines_per_minute=120
+>lines_per_minute=600;
 #
 # Some opening silence
 #
@@ -68,7 +68,7 @@ b-4 1;--- -;
 a-4 1;f#2 1;
 --- -;--- -;
 #
-# measure7;  beat 1; staff 1 = ch 0, staff 9 = ch 1
+# measure 7;  beat 1; staff 1 = ch 0, staff 9 = ch 1
 #
 --- -;--- -;
 --- -;--- -;
@@ -87,9 +87,9 @@ g#4 1;f#2 1;
 a-4 1;f#2 1;
 --- -;f#2 1;
 #
-# measure8;  beat 1; staff 1 = ch 0, staff 9 = ch 1
+# measure 8;  beat 1; staff 1 = ch 0, staff 9 = ch 1
 #
-  0 0;--- -;
+  0 0;f#2 1;
 --- -;--- -;
 f#4 1;f#2 1;
 --- -;f#2 1;
@@ -102,9 +102,85 @@ a#4 1;f#2 1;
 --- -;f#2 1;
 --- -;f#2 1;
 c#5 1;f#2 1;
+--- -;-- -;
+--- -;f#2 1;
+--- -;f#2 1;
+#
+#  measure 9;  beat 1; staff 1 = ch 0, staff 9 = ch 1
+#
+b-4 1;g-2 1;
 --- -;--- -;
---- -;f#2 1;
---- -;f#2 1;
+--- -;g-2 1;
+--- -;g-2 1;
+--- -;g-2 1;
+--- -;--- -;
+--- -;g-2 1;
+--- -;g-2 1;
+b-4 1;g-2 1;
+--- -;--- -;
+--- -;g-2 1;
+--- -;g-2 1;
+a-4 1;g-2 1;
+--- -;--- -;
+c#5 1;g-2 1;
+--- -;g-2 1;
+#
+# measure 10;  beat 1; staff 1 = ch 0, staff 9 = ch 1
+#
+  0 0;g-2 1;
+--- -;--- -;
+b-4 1;g-2 1;
+--- -;g-2 1;
+--- -;g-2 1;
+--- -;--- -;
+--- -;g-2 1;
+--- -;g-2 1;
+--- -;g-2 1;
+--- -;--- -;
+b-4 -;g-2 1;
+--- -;g-2 1;
+a-4 -;g-2 1;
+--- -;--- -;
+b-4 -;e-2 1;
+--- -;--- -;
+#
+# measure 11;  beat 1; staff 1 = ch 0, staff 9 = ch 1
+#
+b-4 1;--- -;
+--- -;--- -;
+--- -;e-2 1;
+--- -;e-2 1;
+--- -;e-2 1;
+--- -;--- -;
+--- -;e-2 1;
+--- -;e-2 1;
+--- -;e-2 1;
+--- -;--- -;
+--- -;e-2 1;
+--- -;e-2 1;
+b-4 1;e-2 1;
+--- -;--- -;
+c#5 1;e#2 1;
+--- -;--- -;
+#
+# measure 12;  beat 1; staff 1 = ch 0, staff 9 = ch 1
+#
+--- -;--- -;
+--- -;--- -;
+--- -;e#2 1;
+--- -;e#2 1;
+b-4 1;e#2 1;
+--- -;--- -;
+--- -;e#2 1;
+--- -;e#2 1;
+a-4 1;e#2 1;
+--- -;--- -;
+--- -;e#2 1;
+--- -;e#2 1;
+g#4 1;e#2 1;
+--- -;--- -;
+--- -;e#2 1;
+--- -;e#2 1;
 #
 # Ending silence
 #
@@ -122,7 +198,7 @@ c#5 1;f#2 1;
             {
                 waveform: 'pulse2a_1bit',
                 mode: 'tone',
-                desc: 'pulse_2a_note highs',
+                desc: 'pulse2a_1bit highs',
                 a_note_mode: 'sin',
                 samp: {
                     amplitude: 1,
@@ -135,7 +211,7 @@ c#5 1;f#2 1;
             {
                 waveform: 'pulse_1bit',
                 mode: 'tone',
-                desc: 'pulse_2a_note lows',
+                desc: 'pulse_1bit lows',
                 a_note_mode: 'pad:15',
                 samp: {
                     amplitude: 1,
