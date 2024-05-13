@@ -23,7 +23,7 @@ VIDEO.init = function(sm, scene, camera){
     const song = `
 # megaman2 woodman based on midi file found here: https://www.vgmusic.com/music/console/nintendo/nes/mm2-wood.mid
 >title='Megaman 2 : Woodman Stage 1-bit-tracks > 16-bit final mix '
->lines_per_minute=700
+>lines_per_minute=120
 #
 # Some opening silence
 #
@@ -133,15 +133,14 @@ c#5 1;f#2 1;
                 }
             },
             {
-                waveform: 'pulse2a_1bit',
+                waveform: 'pulse_1bit',
                 mode: 'tone',
                 desc: 'pulse_2a_note lows',
                 a_note_mode: 'pad:15',
                 samp: {
                     amplitude: 1,
                     frequency: 0,
-                    d1: 0.15,
-                    d2: 0.85,
+                    duty: 0.5,
                     a_note: 1
                 }
             },
