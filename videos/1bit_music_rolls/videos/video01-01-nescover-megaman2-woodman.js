@@ -1092,9 +1092,14 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sud = scene.userData;
     const sound = sud.sound;
+
     // background
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = 'rgba(128,0,0,1)';
     ctx.fillRect(0,0, canvas.width, canvas.height);
+
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.fillRect(0,0, canvas.width, canvas.height);
+
     // draw sample data for 1bit tracks, and 16bit mix
     DSD.draw_tracks(ctx, sud.tracks, sud.track_disp_opt);
     DSD.draw( ctx, sound.array_frame, sud.track_disp_opt.mix, sm.per, 'final 16-bit mix' );
