@@ -17,6 +17,24 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
+
+    // set clear color for three.js renderer
+    sm.renderer.setClearColor(0x000000, 0);
+
+    camera.far = 50;
+    camera.updateProjectionMatrix()
+
+    // starting a new visual thing for this
+    const grid = new THREE.GridHelper(200, 60);
+    grid.position.y = -2;
+    grid.material.linewidth = 4;
+    scene.add(grid);
+
+    const grid2 = new THREE.GridHelper(200, 60);
+    grid2.position.y = 2;
+    grid2.material.linewidth = 4;
+    scene.add(grid2);
+
    
     const sud = scene.userData;
 
@@ -1077,9 +1095,9 @@ c-5 1;e#2 1;
     sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, {
         w: 600, h: 600, sx: 1279 - 650, sy: 120,
         line_width: 6, 
-        midline_style: ['white', 'white'],
-        track_styles: ['white', 'white'],
-        mix_styles: ['white', 'white']
+        midline_style: ['black', 'yellow'],
+        track_styles: ['white', 'black'],
+        mix_styles: ['red', 'yellow']
     });
     // set vg sm.frameMax to frames value of sound object
     sm.frameMax = sound.frames;
@@ -1088,6 +1106,14 @@ c-5 1;e#2 1;
 // UPDATE
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
+
+    // update camera
+    const z = -100 + 150 * per;
+
+    camera.position.set( 0, 0, z );
+    camera.lookAt( 0, 0, z + 10 );
+
+
     const sud = scene.userData;
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
@@ -1100,16 +1126,25 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sound = sud.sound;
 
     // background
-    ctx.fillStyle = 'rgba(128,0,0,1)';
+    ctx.fillStyle = 'rgba(0,0,0,1)';
     ctx.fillRect(0,0, canvas.width, canvas.height);
 
-    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.fillStyle = 'rgba(255,255,255,0.2)';
     ctx.fillRect(0,0, canvas.width, canvas.height);
+
+
+    // draw scene object
+    renderer.render(scene, camera);
+    ctx.drawImage(renderer.domElement, 0,0, canvas.width, canvas.height);
 
     // draw sample data for 1bit tracks, and 16bit mix
     DSD.draw_tracks(ctx, sud.tracks, sud.track_disp_opt);
     DSD.draw( ctx, sound.array_frame, sud.track_disp_opt.mix, sm.per, 'final 16-bit mix' );
+
     // top display info
     DSD.draw_info(ctx, sound, sm, '#ffffff', 30);
+
+
+
 };
 
