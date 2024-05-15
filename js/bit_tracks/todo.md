@@ -22,7 +22,7 @@
     
     * () - mix waveform that allows for adjusting ampliude percent between tracks
     
-    * () - just have a w option for create_disp_options in bit_samp_draw.js
+    * (done) - just have a w option for create_disp_options in bit_samp_draw.js
     * () - have a common default object for tracks and mix options objects of create_disp_options in bit_samp_draw.js
     * () - new look for when using mix2 that displays the ampliude for each 1-bit track
     
