@@ -15,16 +15,10 @@
     * (done) - add pulse2a\_1bit waveform
     * (done) - have a track object option that will set how a\_note is to be processed 
     * (done) - have a pad a\_note mode
+    * (done) - just have a w option for create_disp_options in bit_samp_draw.js
     
     * () - have the option to supply a function for a note mode option of track objects
-    
     * () - Setting a 1bit samp amplitude to something like 0.5 should result in 1 
-    
-    * () - mix waveform that allows for adjusting ampliude percent between tracks
-    
-    * (done) - just have a w option for create_disp_options in bit_samp_draw.js
-    * () - have a common default object for tracks and mix options objects of create_disp_options in bit_samp_draw.js
-    * () - new look for when using mix2 that displays the ampliude for each 1-bit track
     
 
         

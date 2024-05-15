@@ -1076,8 +1076,10 @@ c-5 1;e#2 1;
     // display objects for audio sample arrays for tracks and main final display
     sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, {
         w: 600, h: 600, sx: 1279 - 650, sy: 120,
-        line_width: 3, 
-        midline_style: '#000000' 
+        line_width: 6, 
+        midline_style: ['white', 'white'],
+        track_styles: ['white', 'white'],
+        mix_styles: ['white', 'white']
     });
     // set vg sm.frameMax to frames value of sound object
     sm.frameMax = sound.frames;

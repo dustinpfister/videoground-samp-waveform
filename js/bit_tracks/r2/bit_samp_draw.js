@@ -62,7 +62,32 @@
     };
     /********* **********
     CREATE DISP OPTIONS - create draw_sample_data options objects to use with each track, and also the main mix
-    ********** *********/      
+    ********** *********/
+    const process_styles = (opt) => {
+        ['midline_style', 'track_styles', 'mix_styles'].forEach( ( key ) => {
+            const value = opt[key];
+            if(!value){
+                opt[key] = [
+                    '#ff0000',
+                    '#ff0000'
+                ];
+            }           
+            if(typeof value === 'string'){
+                opt[key] = [
+                   value,
+                   value
+                ];
+            
+            }
+            if(typeof value === 'object' && value instanceof Array){
+                opt[key] = [
+                   value[0] || '#ff0000',
+                   value[1] || '#ff0000'
+                ];
+            }
+        });
+        return opt;
+    };
     DSD.create_disp_options = (tracks, sound, opt={} ) => {  
         opt = Object.assign({}, {
             w: 1200,
@@ -76,7 +101,10 @@
             midline_style: '#ff0000',
             track_styles: ['#ffffff', '#444444'],
             mix_styles: ['#ff0000', '#880000'],
-        }, opt); 
+        }, opt);
+        
+        opt = process_styles(opt);
+        
         const track_disp_opt = {
             tracks: [],
             mix: {}
@@ -90,7 +118,7 @@
                 padx: 0, pady: opt.text_pad * -1, mode: 'raw', overlay_alpha: opt.overlay_alpha,
                 lineWidth: opt.line_width, boxLineWidth: opt.line_width,
                 boxStyle: opt.track_styles[1], lineStyle: opt.track_styles[0],
-                midline_style: opt.midline_style
+                midline_style: opt.midline_style[0]
             };       
             i_track += 1;
         }  
@@ -99,7 +127,7 @@
             sx: opt.sx, sy: opt.sy + h * tracks.count + opt.text_space * tracks.count, 
             padx: 0, pady: opt.text_pad * -1, mode: sound.mode, overlay_alpha: opt.overlay_alpha, 
             lineWidth: opt.line_width, boxLineWidth: opt.line_width, boxStyle: opt.mix_styles[1], lineStyle: opt.mix_styles[0],
-                midline_style: opt.midline_style
+                midline_style: opt.midline_style[1]
         };      
         return track_disp_opt;  
     };
