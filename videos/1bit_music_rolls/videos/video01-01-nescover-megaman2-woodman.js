@@ -25,12 +25,12 @@ VIDEO.init = function(sm, scene, camera){
     camera.updateProjectionMatrix()
 
     // starting a new visual thing for this
-    const grid = new THREE.GridHelper(200, 60);
+    const grid = new THREE.GridHelper(200, 60, 0xffffff, 0xffffff );
     grid.position.y = -2;
     grid.material.linewidth = 4;
     scene.add(grid);
 
-    const grid2 = new THREE.GridHelper(200, 60);
+    const grid2 = new THREE.GridHelper(200, 60, 0xffffff, 0xffffff );
     grid2.position.y = 2;
     grid2.material.linewidth = 4;
     scene.add(grid2);
@@ -1103,33 +1103,18 @@ c-5 1;e#2 1;
     sm.frameMax = sound.frames;
 
     return new Promise( (resolve, reject) => {
-
-        const loader = new THREE.ImageLoader();
-
+        const manager = new THREE.LoadingManager();
+        manager.onLoad = () => {
+                resolve('we should be good')
+        };
+        const loader = new THREE.ImageLoader(manager);
+        const image_error = (err) => {
+            console.warn('image error.');
+        };
         const url_subject = videoAPI.pathJoin(sm.filePath, 'img/video01-01-subject.png');
-
-        // load a image resource
-        loader.load(
-	    // resource URL
-	    url_subject,
-
-	    // onLoad callback
-	    function ( image ) {
-                console.log(image);
-                sud.img_subject = image;
-                resolve(image)
-	    },
-
-	    // onProgress callback currently not supported
-	    undefined,
-
-	    // onError callback
-	    function (e) {
-		console.error( 'An error happened.' );
-                console.log(e);
-	    }
-        );
-
+        const url_background = videoAPI.pathJoin(sm.filePath, 'img/video01-01-background.png');
+        loader.load( url_subject, ( image ) => { sud.img_subject = image; }, undefined, image_error );
+        loader.load( url_background, ( image ) => { sud.img_background = image; }, undefined, image_error );
     });
 
 };
@@ -1157,25 +1142,29 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sound = sud.sound;
 
     // background
-    ctx.fillStyle = 'rgba(0,0,0,1)';
-    ctx.fillRect(0,0, canvas.width, canvas.height);
+    ctx.drawImage( sud.img_background, 0, 0, canvas.width, canvas.height );
 
-    ctx.fillStyle = 'rgba(255,255,255,0.2)';
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
     ctx.fillRect(0,0, canvas.width, canvas.height);
-
 
     // draw scene object
     renderer.render(scene, camera);
     ctx.drawImage(renderer.domElement, 0,0, canvas.width, canvas.height);
 
-    // draw subject image
-    if(sud.img_subject){
-        ctx.drawImage( sud.img_subject, 0,0 );
-    }
-
     // draw sample data for 1bit tracks, and 16bit mix
+    ctx.fillStyle = 'rgba(0,128,128,0.8)';
+
+
+    ctx.fillRect(600,40, 660, 660);
+
+
     DSD.draw_tracks(ctx, sud.tracks, sud.track_disp_opt);
     DSD.draw( ctx, sound.array_frame, sud.track_disp_opt.mix, sm.per, 'final 16-bit mix' );
+
+    // draw subject image
+    if(sud.img_subject){
+        ctx.drawImage( sud.img_subject, 100, 170, 400, 400 );
+    }
 
     // top display info
     DSD.draw_info(ctx, sound, sm, '#ffffff', 30);
