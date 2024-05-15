@@ -1101,6 +1101,37 @@ c-5 1;e#2 1;
     });
     // set vg sm.frameMax to frames value of sound object
     sm.frameMax = sound.frames;
+
+    return new Promise( (resolve, reject) => {
+
+        const loader = new THREE.ImageLoader();
+
+        const url_subject = videoAPI.pathJoin(sm.filePath, 'img/video01-01-subject.png');
+
+        // load a image resource
+        loader.load(
+	    // resource URL
+	    url_subject,
+
+	    // onLoad callback
+	    function ( image ) {
+                console.log(image);
+                sud.img_subject = image;
+                resolve(image)
+	    },
+
+	    // onProgress callback currently not supported
+	    undefined,
+
+	    // onError callback
+	    function (e) {
+		console.error( 'An error happened.' );
+                console.log(e);
+	    }
+        );
+
+    });
+
 };
 //-------- ----------
 // UPDATE
@@ -1136,6 +1167,11 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // draw scene object
     renderer.render(scene, camera);
     ctx.drawImage(renderer.domElement, 0,0, canvas.width, canvas.height);
+
+    // draw subject image
+    if(sud.img_subject){
+        ctx.drawImage( sud.img_subject, 0,0 );
+    }
 
     // draw sample data for 1bit tracks, and 16bit mix
     DSD.draw_tracks(ctx, sud.tracks, sud.track_disp_opt);
