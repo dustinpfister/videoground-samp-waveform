@@ -1054,8 +1054,9 @@ c-5 1;e#2 1;
                 samp: {
                     amplitude: 1,
                     frequency: 0,
-                    d1: 0.35,
-                    d2: 0.65,
+                    //d1: 0.45,d2: 0.55,
+                    d1: 0.35,d2: 0.65,
+                    //d1: 0.15, d2: 0.85,
                     a_note: 1
                 }
             },
@@ -1084,9 +1085,19 @@ c-5 1;e#2 1;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             const array_samp = Music_roll.play(song_obj, a_sound);
-            Bit_tracks.apply_music_roll(sud.tracks, array_samp);      
+
+            // can adjust track freq like this if I want
+            array_samp[0].frequency = Math.floor(array_samp[0].frequency * 0.30 );
+
+            Bit_tracks.apply_music_roll(sud.tracks, array_samp);
+
+
+
+   
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
-            return Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );
+            samp = Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );
+            return samp;
+
         },
         secs: Math.ceil( song_obj.total_secs )
     });
