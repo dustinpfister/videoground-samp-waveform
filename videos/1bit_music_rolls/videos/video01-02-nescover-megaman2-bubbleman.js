@@ -11,7 +11,8 @@ VIDEO.scripts = [
     '../../../js/samp_debug/r0/samp_debug.js',
     '../../../js/music_roll/r0/music_roll.js',
     '../../../js/bit_tracks/r2/bit_tracks.js',
-    '../../../js/bit_tracks/r2/bit_samp_draw.js'
+    '../../../js/bit_tracks/r2/bit_samp_draw.js',
+    '../../../js/export_done/r0/export_done.js'
 ];
 //-------- ----------
 // INIT
@@ -226,30 +227,6 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
 //-------- ----------
 // EXPORT DONE
 //-------- ----------
-VIDEO.export_done = (sm) => {
-    
-    // commands used for video only, and video + audio
-    // ffmpeg -framerate 30 -i frame-%06d.png -pix_fmt yuv420p raw.mp4
-    // ffmpeg -framerate 30 -i frame-%06d.png -i video.wav -b:a 192k -pix_fmt yuv420p raw.mp4
-    
-    // Maybe use this feature to automate cleanup?
-    // find frame-*.png -delete
-    
-    const in_file = videoAPI.pathJoin( sm.imageFolder, 'frame-%06d.png' );
-    const in_file_audio = videoAPI.pathJoin( sm.imageFolder, 'video.wav' );
-    const out_file = videoAPI.pathJoin( sm.imageFolder, 'raw.mp4' );
-    const exec_line = 'ffmpeg -y -framerate 30 -i ' + in_file + ' -i ' + in_file_audio + ' -b:a 192k -pix_fmt yuv420p ' + out_file;
-    const clean_line = 'find ' + videoAPI.pathJoin( sm.imageFolder, 'frame-*.png') + ' -delete';
-    
-    videoAPI.exec( exec_line )
-    .then( (data) => {
-        console.log( 'looks like that went well' );
-        return videoAPI.exec(clean_line);
-    })
-    .then( (data) => {
-        console.log('clean up is done');
-        console.log(data)
-    });
-    
+VIDEO.export_done = function(sm){
+    return ED.to_mp4_audio_clean(sm);
 };
-
