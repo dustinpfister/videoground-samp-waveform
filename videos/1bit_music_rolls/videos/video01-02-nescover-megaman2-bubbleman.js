@@ -42,23 +42,80 @@ VIDEO.init = function(sm, scene, camera){
     const song = `
 # megaman2 bubbleman based on midi file found here: https://www.vgmusic.com/music/console/nintendo/nes/by-bubbleman.mid
 >title='Megaman 2 : Bubbleman Stage 1-bit-tracks > 16-bit final mix '
->lines_per_minute=700;
+>lines_per_minute=350;
 #
-# measure 1; beat 1; staff 1 = ch 0, staff 9 = ch 1
+# measure 1; staff 2 = ch 0, staff 3 = ch 1, staff 4 = ch 2
 #
+e-3 1;e-5 1;a-1 1;
+--- -;--- -;--- -;
+c-4 1;--- -;--- -;
+--- -;--- -;--- -;
+a-3 1;--- -;--- -;
+--- -;--- -;--- -;
+e-3 1;--- -;a-1 1;
+--- -;--- -;--- -;
+c-4 1;f-5 1;--- -;
+--- -;--- -;--- -;
+e-3 1;--- -;--- -;
+--- -;--- -;--- -;
+a-3 1;g-5 1;--- -;
+--- -;--- -;--- -;
+c-4 1;e-5 1;--- -;
+--- -;--- -;--- -;
+#
+# measure 2; staff 2 = ch 0, staff 3 = ch 1, staff 4 = ch 2
+#
+e-3 1;--- -;--- -;
+--- -;--- -;--- -;
+c-4 1;--- -;--- -;
+--- -;--- -;--- -;
+a-3 1;--- -;--- -;
+--- -;--- -;--- -;
+e-3 1;--- -;--- -;
+--- -;--- -;--- -;
+c-4 1;--- -;--- -;
+--- -;--- -;--- -;
+e-3 1;--- -;--- -;
+--- -;--- -;--- -;
+a-3 1;--- -;a-1 1;
+--- -;--- -;--- -;
+c-4 1;--- -;--- -;
+--- -;--- -;--- -;
+#
+# measure 3; staff 2 = ch 0, staff 3 = ch 1, staff 4 = ch 2
+#
+e-3 1;d-5 1;e-2 1;
+--- -;--- -;--- -;
+b-3 1;--- -;--- -;
+--- -;--- -;--- -;
+g#3 1;--- -;--- -;
+--- -;--- -;--- -;
+e-3 1;--- -;e-2 1;
+--- -;--- -;--- -;
+b-3 1;d-5 1;--- -;
+--- -;--- -;--- -;
+e-3 1;--- -;--- -;
+--- -;--- -;--- -;
+g#3 1;e-5 1;--- -;
+--- -;--- -;--- -;
+b-3 1;b-4 1;--- -;
+--- -;--- -;--- -;
+#
+# measure 4; staff 2 = ch 0, staff 3 = ch 1, staff 4 = ch 2
+#
+b-2 1;--- -;--- -;
+--- -;--- -;--- -;
+b-2 1;--- -;--- -;
+--- -;--- -;--- -;
+--- 0;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
+b-2 1;--- -;--- -;
 --- -;--- -;--- -;
+b-2 1;--- -;--- -;
 --- -;--- -;--- -;
---- -;--- -;--- -;
---- -;--- -;--- -;
---- -;--- -;--- -;
---- -;--- -;--- -;
---- -;--- -;--- -;
---- -;--- -;--- -;
---- -;--- -;--- -;
---- -;--- -;--- -;
+--- 0;--- -;e-2 1;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
@@ -129,13 +186,10 @@ VIDEO.init = function(sm, scene, camera){
             const array_samp = Music_roll.play(song_obj, a_sound);
 
             // can adjust track freq like this if I want
-            array_samp[0].frequency = Math.floor(array_samp[0].frequency * 0.30 );
+            //array_samp[0].frequency = Math.floor(array_samp[0].frequency * 0.30 );
 
             Bit_tracks.apply_music_roll(sud.tracks, array_samp);
 
-
-
-   
             const sec_alpha = Samp_alphas.cell(i, 44100, 0);
             samp = Bit_tracks.for_sampset(sud.tracks, a_sound, opt.secs, 0.35, sec_alpha );
             return samp;
