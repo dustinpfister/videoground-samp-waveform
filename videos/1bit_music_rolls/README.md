@@ -6,3 +6,10 @@ Now that I have a music roll system in place that seems to work okay, I would no
 
 I think that maybe a good place to start with this will be a few Nintendo Entertainment System Covers \( NES Covers \). There was a lot of great music that came out with various games, and I think that it would be cool to hear some 1bit track to 16bit mix style music rolls of some key tunes from various games that came out with that system.
 
+<div align="center">
+      <a href="https://www.youtube.com/watch?v=ZJfbU9oTf0M">
+         <img src="https://img.youtube.com/vi/ZJfbU9oTf0M/0.jpg" style="width:50%;">
+      </a>
+</div>
+
+
