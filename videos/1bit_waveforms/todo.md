@@ -3,6 +3,10 @@
 ## ( ) - video01-xx-test-bzcurve-1x
     * () a waveform where a 2d bezer curve can be used to adjust duty cycle
 
+## () - video01-05-test-two-channel
+    * () start a test video where the aim is to explore using a single 1bit channel for more than one channel rather than mixing
+    * () it should be possible to offset a given range of samples in such a way to allow for at least two channels in one
+
 ## ( done 05/10/2023 ) - video01-04-test-pulse-2a-note
     * (done) a pulse waveform where two alpha values are given for setting duty cycle
     * (done) also have a a_note option that will adjust from zero to the full range of the duty cycle
