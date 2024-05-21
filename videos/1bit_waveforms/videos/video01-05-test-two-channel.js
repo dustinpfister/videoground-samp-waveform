@@ -24,23 +24,23 @@ VIDEO.init = function(sm, scene, camera){
     const two_channel = ( samp, a_wave ) => {
 
         samp.dps = samp.dps === undefined ? 40 : samp.dps;
-        samp.dr = samp.dr === undefined ? 2 : samp.dr;
+        //samp.dr = samp.dr === undefined ? 2 : samp.dr;
         
 
-        //if( samp.a_note1 < 0.05 || samp.a_note1 > 0.95 ){
-        //    return 0;
-        //}
-        //if( samp.a_note2 < 0.05 || samp.a_note2 > 0.95 ){
-        //    return 0;
-        //}
-
-
-        if( Math.floor( a_wave * samp.dps) % samp.dr === 0){
-            return a_wave * samp.freq1 % 1 < 0.25 ? 1 : 0;
+        if( samp.a_note1 < 0.05 || samp.a_note1 > 0.95 ){
+            return 0;
+        }
+        if( samp.a_note2 < 0.05 || samp.a_note2 > 0.95 ){
+            return 0;
         }
 
-        if( Math.floor( a_wave * samp.dps) % samp.dr != 0){
-            return a_wave * samp.freq2 % 1 < 0.5 ? 1 : 0;
+
+        if( Math.floor( a_wave * samp.dps) % 2 === 0){
+            return a_wave * (samp.freq1 * 2) % 1 < 0.25 ? 1 : 0;
+        }
+
+        if( Math.floor( a_wave * samp.dps) % 2 != 0){
+            return a_wave * (samp.freq2 * 2) % 1 < 0.5 ? 1 : 0;
         }
 
 
@@ -1146,7 +1146,7 @@ e-6 1;--- -;--- -;
 
     // set up tracks object
     sud.tracks = Bit_tracks.create({
-        count: 1,
+        count: 2,
         objects: [
             {
                 waveform: two_channel,
@@ -1158,10 +1158,20 @@ e-6 1;--- -;--- -;
                     freq1: 300,
                     freq2: 80,
                     a_note: 1,
-                    dps: 30,
-                    dr: 2
+                    dps: 50
                 }
-            }
+            },
+            {
+                waveform: 'pulse_1bit',
+                mode: 'tone',
+                desc: 'pulse',
+                a_note_mode: 'pad:10',
+                samp: {
+                    amplitude: 1,
+                    frequency: 0,
+                    a_note: 1,
+                }
+            },
         ]
     });
 
@@ -1184,6 +1194,7 @@ const array_samp = Music_roll.play(song_obj, a_sound);
 
         const tracks = sud.tracks;
         const samp1 = tracks.objects[0].samp;
+        const samp2 = tracks.objects[1].samp;
 
 
 
@@ -1191,6 +1202,11 @@ const array_samp = Music_roll.play(song_obj, a_sound);
         samp1.a_note1 = array_samp[0].a_note; 
         samp1.freq2 = array_samp[2].frequency;
         samp1.a_note2 = array_samp[2].a_note;
+
+
+        samp2.frequency = array_samp[1].frequency;
+        samp2.a_note = array_samp[1].a_note;
+
 
         //array_samp.forEach( (samp_roll, i) => {
             
