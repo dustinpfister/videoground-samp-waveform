@@ -1,7 +1,9 @@
 // Just open a wav file, read the header, and spit out the info
 const read = require('fs').readFile;
 
-read('../tone_24bit_stereo.wav', (e, data) => {
+const uri = process.argv[2] || '../test.wav';
+
+read(uri, (e, data) => {
 
 
     // https://docs.fileformat.com/audio/wav/
