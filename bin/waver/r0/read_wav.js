@@ -27,6 +27,8 @@ const get_header_object = (data) => {
 };
 
 
+const sample_count = 40;
+
 open(uri_wav, 'r+')
 .then( (fd) => {
     const buff = Buffer.alloc(44);
@@ -36,6 +38,18 @@ open(uri_wav, 'r+')
         const header = get_header_object(data.buffer);
     
         console.log(header)
+        
+        const buff_audio = Buffer.alloc(3 * sample_count);
+        return read(fd, buff_audio, 0, 3 * sample_count, 44)
+    })
+    .then((data)=>{
+    
+        let i_sample = 0;
+        while(i_sample < sample_count){
+    
+            console.log(i_sample, data.buffer.readIntLE(3 * i_sample, 3) )
+            i_sample += 1;
+        }
     
     })
 
