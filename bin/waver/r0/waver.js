@@ -20,15 +20,14 @@ const writer_append = (uri, buff, clear = true ) => {
 const GENERATORS = {
     sin: {
         channels: 2,
-        sample_rate: 44100,
-        sample_depth: 8,
-        sample_size: 44100,    // number of total samples to create
-        options: [ { freq: 80, amp: 1.00 }, { freq: 200, amp: 1.00 }, ],
+        sample_rate: 48000,
+        sample_depth: 24,
+        sample_size: 48000,    // number of total samples to create
+        options: [ { freq: 160, amp: 0.90 }, { freq: 600, amp: 0.25 }, ],
         gen: ( index_sample, opt, generator ) => {
             const a_sec = index_sample % generator.sample_rate / generator.sample_rate;
             const a_cycle = opt.freq * a_sec % 1;
-            const n_alpha = Math.sin( Math.PI * 1 * a_cycle ) * opt.amp;
-            
+            const n_alpha = 0.5 - 0.5 * Math.sin( Math.PI  * 2 * a_cycle )  * opt.amp;
             // return value should be in 0-1 format
             return n_alpha;
         }
@@ -132,6 +131,12 @@ writer_append('../out.wav', header, true)
             if(generator.sample_depth === 16){
                 const value = Math.floor(-32768 + (n_alpha * 65535));
                 buffer_data.writeInt16LE(value, index_sample * ( 2 * ch ) + ( 2 * index_ch ) );
+            }
+            
+            // 24 bit sound
+            if(generator.sample_depth === 24){
+                const value = Math.floor(-8388608 + (n_alpha * ( 16777215) ) );
+                buffer_data.writeIntLE(value, index_sample * ( 3 * ch ) + ( 3 * index_ch ), 3 );
             }
     
             index_ch += 1;
