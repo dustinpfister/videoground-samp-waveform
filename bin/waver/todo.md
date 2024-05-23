@@ -1,12 +1,15 @@
 # waver todo list
 
 ## () - R0 - generator, for_samp
-    * () for this project I will be using JSM
-    * () I will need a main js file with code for reading and writing wav
-    * () I will need code for using a generator and for_samp funciton to create a final out wav file
+    * (done) I will need a main js file with code for writing wav
+    * (done) have a built in generator for sin wave tone
+    
+    * () for\_samp functions: I will want to start a collection of built in for\_samp functions
+    * () a for\_samp function will take generated sample data, and create a standard final data
+    * () renderers: start a collection of functions that will render the final output ( wav, int text, 1-bit js array, one or many files, whatever ) 
     * () have a built in generator function for reading wav file source
-    * () have a built in generator for sin wave tone
-    * () have a built in for_samp function for conversion to n bit sample depth
+    * () have a built in for\_samp function for conversion to n bit sample depth
     * () have init and done functions
-    * () have a custom format for defining how waver will work
+    * () have a custom plugin format for defining how waver will work
+    * () start one plugin format that will create array data to use with my 1bit waveform
    
