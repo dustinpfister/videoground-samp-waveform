@@ -81,11 +81,9 @@ const create_wave_header = (opts) => {
     return Buffer.from( buff );
 };
 
-
 /********* **********
  CRUDE START HERE
 ********** *********/
-
 const generator = GENERATORS.sin;
 
 const secs = generator.sample_size / generator.sample_rate;
@@ -110,9 +108,7 @@ console.log( 'data_size= ' + data_size );
 writer_append('../out.wav', header, true)
 .then(()=>{
     console.log('header written, writing samples...');
-    
-    
-    
+  
     let index_sample = 0;
     while( index_sample < generator.sample_size ){
         let index_ch = 0;
@@ -143,16 +139,9 @@ writer_append('../out.wav', header, true)
         }
         index_sample += 1;
     }
-    
-    //console.log(buffer_data)
-    
-    console.log(buffer_data.length);
-    
-    return writer_append('../out.wav', buffer_data, false);
         
 })
 .then(()=>{
     console.log('wav file done');
 });
-
 

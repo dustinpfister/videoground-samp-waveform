@@ -4,8 +4,6 @@ const read = require('fs').readFile;
 const uri = process.argv[2] || '../test.wav';
 
 read(uri, (e, data) => {
-
-
     // https://docs.fileformat.com/audio/wav/
     const header = {};
     header.riff = data.subarray(0, 4).toString();          // 'RIFF' string
@@ -26,6 +24,4 @@ read(uri, (e, data) => {
     header.data_size = data.readInt32LE(40);
     
     console.log( header );
-    
-
 });
