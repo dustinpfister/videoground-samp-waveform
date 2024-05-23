@@ -1,4 +1,18 @@
-
+const path = require('path');
+const fs = require('fs');
+const promisify = require('util').promisify;
+const write = promisify(fs.writeFile);
+//-------- ----------
+// PUPLIC API 
+//-------- ----------
+// use fs.writeFile in append mode to write the given Uint8Array
+// however allow for a clear method that will write over with a new file if it is there
+const writer_append = (uri, buff, clear = true ) => {
+    if(clear){
+        return write( uri, buff );
+    }
+    return write( uri, buff, { flag: 'a+' } );
+};
 
 /********* **********
  BUILT IN GENERATORS
@@ -6,14 +20,15 @@
 const GENERATORS = {
     sin: {
         channels: 2,
-        sample_rate: 10,
-        sample_depth: 24,
-        sample_size: 10,
-        options: { freq: 1, amp: 0.45 },
-        gen: ( index_sample, opt, generator ) => {       
+        sample_rate: 44100,
+        sample_depth: 16,
+        sample_size: 44100,    // number of total samples to create
+        options: [ { freq: 80, amp: 1.00 }, { freq: 200, amp: 1.00 }, ],
+        gen: ( index_sample, opt, generator ) => {
             const a_sec = index_sample % generator.sample_rate / generator.sample_rate;
             const a_cycle = opt.freq * a_sec % 1;
-            const n_alpha = Math.sin( Math.PI * a_cycle ) * opt.amp;
+            const n_alpha = Math.sin( Math.PI * 1 * a_cycle ) * opt.amp;
+            
             // return value should be in 0-1 format
             return n_alpha;
         }
@@ -36,8 +51,7 @@ const create_wave_header = (opts) => {
     const dataSize = numFrames * blockAlign;
     const buff = new ArrayBuffer(44);
     const dv = new DataView(buff);
-    let p = 0;
-    
+    let p = 0; 
     function writeString(s) {
         for (let i = 0; i < s.length; i++) {
             dv.setUint8(p + i, s.charCodeAt(i));
@@ -65,7 +79,7 @@ const create_wave_header = (opts) => {
     writeUint16(bytesPerSample * 8);  // BitsPerSample
     writeString('data');              // Subchunk2ID
     writeUint32(dataSize);            // Subchunk2Size
-    return Buffer.from(buff);
+    return Buffer.from( buff );
 };
 
 
@@ -74,16 +88,73 @@ const create_wave_header = (opts) => {
 ********** *********/
 
 const generator = GENERATORS.sin;
-let index_sample = 0;
 
-console.log( create_wave_header() );
+const secs = generator.sample_size / generator.sample_rate;
+const frame_count = Math.ceil(generator.sample_size * secs);
+const bytes_per_sample = generator.sample_depth / 8;
+const header = create_wave_header({
+    numFrames: frame_count,
+    numChannels: generator.channels,
+    sampleRate: generator.sample_rate,
+    bytesPerSample: bytes_per_sample
+});
 
-while( index_sample < generator.sample_size ){
+const data_size = frame_count *  generator.channels * bytes_per_sample;
+
+const buffer_data = Buffer.alloc( data_size );
+
+console.log( 'seconds=' + secs );
+console.log( 'bytes_per_sample=' + bytes_per_sample);
+console.log( 'frame_count= ' + frame_count );
+console.log( 'data_size= ' + data_size );
+
+writer_append('../out.wav', header, true)
+.then(()=>{
+    console.log('header written, writing samples...');
     
-    const n_alpha = generator.gen( index_sample,  generator.options, generator );
     
-    console.log(n_alpha)
     
-    index_sample += 1;
-}
+    let index_sample = 0;
+    while( index_sample < generator.sample_size ){
+        let index_ch = 0;
+        const ch = generator.channels;
+        while(index_ch < ch){
+    
+            const n_alpha = generator.gen( index_sample,  generator.options[index_ch], generator );
+    
+            let value = 0; 
+    
+            // 16 bit sound
+            if(generator.sample_depth === 16){
+                let value = Math.floor(-32768 + (n_alpha * 65535));
+                
+                //console.log(index_sample, n_alpha, value)
+                
+                //buffer_data.writeInt16LE(value, index_sample * 2);
+                
+                //buffer_data.writeInt16LE(value, index_sample * 2 + ( 2 * index_ch ) );
+                
+                //buffer_data.writeInt16LE(value, index_sample * ( 4 + index_ch * 2 ) );
+                
+                buffer_data.writeInt16LE(value, index_sample * (2 * ch) + (2 * index_ch) );
+                
+                
+            }
+    
+            index_ch += 1;
+        }
+        index_sample += 1;
+    }
+    
+    //console.log(buffer_data)
+    
+    console.log(buffer_data.length);
+    
+    return writer_append('../out.wav', buffer_data, false);
+        
+})
+.then(()=>{
+    console.log('wav file done');
+});
+
 
