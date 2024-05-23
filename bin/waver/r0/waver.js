@@ -21,7 +21,7 @@ const GENERATORS = {
     sin: {
         channels: 2,
         sample_rate: 44100,
-        sample_depth: 16,
+        sample_depth: 8,
         sample_size: 44100,    // number of total samples to create
         options: [ { freq: 80, amp: 1.00 }, { freq: 200, amp: 1.00 }, ],
         gen: ( index_sample, opt, generator ) => {
@@ -122,23 +122,16 @@ writer_append('../out.wav', header, true)
     
             const n_alpha = generator.gen( index_sample,  generator.options[index_ch], generator );
     
-            let value = 0; 
+            // 8 bit sound
+            if(generator.sample_depth === 8){
+                const value = Math.round( n_alpha * 255 );
+                buffer_data.writeUint8(value, index_sample * ch + index_ch );
+            }
     
             // 16 bit sound
             if(generator.sample_depth === 16){
-                let value = Math.floor(-32768 + (n_alpha * 65535));
-                
-                //console.log(index_sample, n_alpha, value)
-                
-                //buffer_data.writeInt16LE(value, index_sample * 2);
-                
-                //buffer_data.writeInt16LE(value, index_sample * 2 + ( 2 * index_ch ) );
-                
-                //buffer_data.writeInt16LE(value, index_sample * ( 4 + index_ch * 2 ) );
-                
-                buffer_data.writeInt16LE(value, index_sample * (2 * ch) + (2 * index_ch) );
-                
-                
+                const value = Math.floor(-32768 + (n_alpha * 65535));
+                buffer_data.writeInt16LE(value, index_sample * ( 2 * ch ) + ( 2 * index_ch ) );
             }
     
             index_ch += 1;
