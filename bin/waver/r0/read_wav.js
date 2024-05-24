@@ -18,7 +18,7 @@ const get_header_object = (data) => {
     header.format_type = data.readUint8(20);               // should be 1 for PCM
     header.channels = data.readInt16LE(22);                // number of channels 1=mono, 2=stereo, 3+= multi channels
     header.sample_rate = data.readInt32LE(24);             // sample rate in hertz (44100 = cd)
-    header.frame_size = data.readInt32LE(28);              // frame size
+    header.frame_size = data.readInt32LE(28);              // !!! This is not frame size, but size per second
     header.block_align = data.readInt16LE(32);             // block align in bytes ( 2 for 16-bit mono, 6 for 24-bit, ect)
     header.sample_depth = data.readInt16LE(34);            // sample depth in bits per sample (16 = cd )
     header.data = data.subarray(36, 40).toString();        // 'data' string
@@ -27,68 +27,34 @@ const get_header_object = (data) => {
 };
 
 
-const sample_count = 40;
+let sample_count = 0;
+let bytes_per_frame = 1;
 
 open(uri_wav, 'r+')
 .then( (fd) => {
-    const buff = Buffer.alloc(44);
-    return read(fd, buff, 0, 44, 0)
+    const buff_header = Buffer.alloc(44);
+    return read(fd, buff_header, 0, 44, 0)
     .then((data)=>{
-    
         const header = get_header_object(data.buffer);
-    
-        console.log(header)
+        // update bytes per frame now that we have the header data
+        bytes_per_frame = header.channels * (header.sample_depth / 8);
+        // I can now set the sample count
+        sample_count = header.data_size / bytes_per_frame;
         
+        // figure start and end byte counts for data part of wav file
         const buff_audio = Buffer.alloc(3 * sample_count);
-        return read(fd, buff_audio, 0, 3 * sample_count, 44)
+        return read(fd, buff_audio, 0, 3 * sample_count, 44);
     })
     .then((data)=>{
-    
         let i_sample = 0;
         while(i_sample < sample_count){
-    
             console.log(i_sample, data.buffer.readIntLE(3 * i_sample, 3) )
             i_sample += 1;
         }
+        return close(fd);
+    })
+    .then(()=>{
     
     })
-
-    //const buff = new Buffer.alloc(36);
-    //return read(fd, buff, 0, 36)
-    //.then((data) => {
-    //console.log(data)
-    //    return close(fd);
-    //});
-})
-
-/*
-fs.open('gfg.txt', 'r+', function (err, fd) {
-    if (err) {
-        return console.error(err);
-    }
- 
-    console.log("Reading the file");
- 
-    fs.read(fd, buffer, 0, buffer.length,
-        0, function (err, bytes) {
-            if (err) {
-                console.log(err);
-            }
- 
-            if (bytes > 0) {
-                console.log(buffer.
-                    slice(0, bytes).toString());
-            }
-            console.log(bytes + " bytes read");
- 
-            // Close the opened file.
-            fs.close(fd, function (err) {
-                if (err) {
-                    console.log(err);
-                }
- 
-                console.log("File closed successfully");
-            });
-        });
 });
-*/
+
