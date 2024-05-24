@@ -29,7 +29,7 @@ const get_header_object = (data) => {
 
 let sample_count = 0;
 let bytes_per_frame = 1;
-
+const
 open(uri_wav, 'r+')
 .then( (fd) => {
     const buff_header = Buffer.alloc(44);
@@ -55,6 +55,6 @@ open(uri_wav, 'r+')
     })
     .then(()=>{
     
-    })
+    });
 });
 

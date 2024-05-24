@@ -4,7 +4,12 @@
     * (done) I will need a main js file with code for writing wav
     * (done) have a built in generator for sin wave tone
     
-    * () finish what I worked out for read\_wav script
+    * () with read wav script I would like a read wav method working
+    * () I should be able to give start and end values when calling this read wav method
+    * () I should be able to give sample index values when calling
+    * () I should also be able to use it to just get a total count of samples
+    * () I should also be able to use it to get header info.
+    
     * () once I have read_wav worked out I will have a better idea of how to start the final form of generators
     
     * () for\_samp functions: I will want to start a collection of built in for\_samp functions
