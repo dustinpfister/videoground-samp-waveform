@@ -7,7 +7,9 @@ const read = promisify(fs.read);
 
 const uri_wav = process.argv[2] || 'audio.wav';
 
-
+/*   get_header_object
+ *   get a header object from a 44 byte data buffer that is the head of a wav file
+ */
 const get_header_object = (data) => {
     const header = {};
     header.riff = data.subarray(0, 4).toString();          // 'RIFF' string
@@ -22,39 +24,77 @@ const get_header_object = (data) => {
     header.block_align = data.readInt16LE(32);             // block align in bytes ( 2 for 16-bit mono, 6 for 24-bit, ect)
     header.sample_depth = data.readInt16LE(34);            // sample depth in bits per sample (16 = cd )
     header.data = data.subarray(36, 40).toString();        // 'data' string
-    header.data_size = data.readInt32LE(40);
+    header.data_size = data.readInt32LE(40);               // total size of the data area of the file in bytes
     return header;
 };
 
-
-let sample_count = 0;
-let bytes_per_frame = 1;
-const
-open(uri_wav, 'r+')
-.then( (fd) => {
-    const buff_header = Buffer.alloc(44);
-    return read(fd, buff_header, 0, 44, 0)
-    .then((data)=>{
-        const header = get_header_object(data.buffer);
-        // update bytes per frame now that we have the header data
-        bytes_per_frame = header.channels * (header.sample_depth / 8);
-        // I can now set the sample count
-        sample_count = header.data_size / bytes_per_frame;
-        
-        // figure start and end byte counts for data part of wav file
-        const buff_audio = Buffer.alloc(3 * sample_count);
-        return read(fd, buff_audio, 0, 3 * sample_count, 44);
-    })
-    .then((data)=>{
-        let i_sample = 0;
-        while(i_sample < sample_count){
-            console.log(i_sample, data.buffer.readIntLE(3 * i_sample, 3) )
-            i_sample += 1;
-        }
-        return close(fd);
-    })
-    .then(()=>{
-    
+/*    get_wav_samples
+ *    get an array of samples for each channel
+ */
+ 
+const get_wav_samples = (uri_wav) => {
+    let sample_count = 0;
+    let bytes_per_frame = 1;
+    let header = {};
+    let samples = [];
+    return open(uri_wav, 'r+')
+    .then( (fd) => {
+        const buff_header = Buffer.alloc(44);
+        return read(fd, buff_header, 0, 44, 0)
+        .then((data)=>{
+            header = get_header_object(data.buffer);   
+            // update bytes per frame now that we have the header data
+            bytes_per_frame = header.channels * (header.sample_depth / 8);
+            // I can now set the sample count
+            sample_count = header.data_size / bytes_per_frame;
+            // figure start and end byte counts for data part of wav file
+            const buff_audio = Buffer.alloc(3 * sample_count);
+            return read(fd, buff_audio, 0, 3 * sample_count, 44);
+        })
+        .then((data)=>{
+            const buff_audio = data.buffer;
+            let i_sample = 0;
+            samples = new Array(header.channels).fill( [] );
+            while(i_sample < sample_count){
+                let index_ch = 0;
+                while(index_ch < header.channels){
+                    let sample_value = 0;
+                    // 8 bit sound
+                    if(header.sample_depth === 8){
+                        //const value = Math.round( n_alpha * 255 );
+                        //buffer_data.writeUint8(value, index_sample * ch + index_ch );
+                    }
+                    // 16 bit sound
+                    if(header.sample_depth === 16){
+                        //const value = Math.floor(-32768 + (n_alpha * 65535));
+                        //buffer_data.writeInt16LE(value, index_sample * ( 2 * ch ) + ( 2 * index_ch ) );
+                    }
+                    // 24 bit sound
+                    if(header.sample_depth === 24){
+                        const byte_start = i_sample * bytes_per_frame + ( 3 * index_ch );
+                        sample_value = buff_audio.readIntLE( byte_start, 3 );
+                    }
+                    samples[index_ch].push(sample_value);
+                    index_ch += 1;
+                }
+                i_sample += 1;
+            }
+            return close(fd);
+        })
+        .then(()=>{
+            return Promise.resolve( {
+                header: header,
+                total_samples: header.data_size / bytes_per_frame,
+                samples: samples
+            });
+        });
     });
+};
+
+
+get_wav_samples(uri_wav)
+.then( (result) => {
+    console.log(result)
 });
+
 
