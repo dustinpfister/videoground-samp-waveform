@@ -31,16 +31,11 @@ const get_header_object = (data) => {
 /*    get_wav_samples
  *    get an array of samples for each channel
  */
- 
 const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
-
     let sample_count = sample_end - sample_start;
     let bytes_per_frame = 1;
     let header = {};
     let samples = [];
-    
-    
-    
     return open(uri_wav, 'r+')
     .then( (fd) => {
         const buff_header = Buffer.alloc(44);
@@ -49,8 +44,6 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
             header = get_header_object(data.buffer);   
             // update bytes per frame now that we have the header data
             bytes_per_frame = header.channels * (header.sample_depth / 8);
-            // I can now set the sample count
-            //sample_count = header.data_size / bytes_per_frame;
             // figure start and end byte counts for data part of wav file
             const buff_audio = Buffer.alloc(3 * sample_count);
             return read(fd, buff_audio, 0, bytes_per_frame * sample_count, 44 + bytes_per_frame * sample_start);
@@ -96,10 +89,21 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
     });
 };
 
-let start = 2;
-get_wav_samples(uri_wav, start, start + 10)
-.then( (result) => {
-    console.log(result)
-});
+const get_wav_total_samples = (uri_wav, ) => {
+    return get_wav_samples(uri_wav, 0, 0)
+    .then( (result) => {
+        return result.total_samples;
+    });
+};
 
+get_wav_total_samples(uri_wav)
+.then( (total_samples) => {
+    console.log(total_samples);
+    let start = 0;
+    return get_wav_samples(uri_wav, 0, total_samples)
+})
+.then( (result) => {
+   console.log(result)
+   console.log(result.samples[0].length)
+});
 

@@ -5,8 +5,8 @@
     * (done) have a built in generator for sin wave tone
     * (done) with read wav script I would like a get\_wav\_samples method working    
     * (done) I should be able to give start and end sample index values when calling this get\_wav\_samples method
-
-    * () I should have a get wav total samples method so I know what kind of values to given when calling get wav samples method
+    * (done) I should have a get wav total samples method so I know what kind of values to given when calling get wav samples method
+    
     * () get wav samples method should work with 8, 16, and 24 bit wav files both mono and stereo
     
     * () once I have read_wav worked out I will have a better idea of how to start the final form of generators
