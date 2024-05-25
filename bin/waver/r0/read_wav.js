@@ -45,7 +45,7 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
             // update bytes per frame now that we have the header data
             bytes_per_frame = header.channels * (header.sample_depth / 8);
             // figure start and end byte counts for data part of wav file
-            const buff_audio = Buffer.alloc(3 * sample_count);
+            const buff_audio = Buffer.alloc(bytes_per_frame * sample_count);
             return read(fd, buff_audio, 0, bytes_per_frame * sample_count, 44 + bytes_per_frame * sample_start);
         })
         .then((data)=>{
@@ -98,12 +98,15 @@ const get_wav_total_samples = (uri_wav, ) => {
 
 get_wav_total_samples(uri_wav)
 .then( (total_samples) => {
-    console.log(total_samples);
     let start = 0;
-    return get_wav_samples(uri_wav, 0, total_samples)
+    
+    const i_samp_start = Math.floor( total_samples * 1.00 );
+    let i_samp_end = i_samp_start + 10;
+    
+    return get_wav_samples(uri_wav, i_samp_start, i_samp_end);
 })
 .then( (result) => {
-   console.log(result)
-   console.log(result.samples[0].length)
+    
+    console.log(result)
 });
 
