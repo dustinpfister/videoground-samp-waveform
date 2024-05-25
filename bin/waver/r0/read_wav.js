@@ -42,13 +42,9 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
         const buff_header = Buffer.alloc(44);
         return read(fd, buff_header, 0, 44, 0)
         .then((data)=>{
-            header = get_header_object(data.buffer);   
-            // update bytes per frame now that we have the header data
+            header = get_header_object(data.buffer);
             bytes_per_frame = header.channels * (header.sample_depth / 8);
-            
             total_samples = header.data_size / bytes_per_frame;
-            
-            // figure start and end byte counts for data part of wav file
             const buff_audio = Buffer.alloc(bytes_per_frame * sample_count);
             return read(fd, buff_audio, 0, bytes_per_frame * sample_count, 44 + bytes_per_frame * sample_start);
         })
@@ -60,26 +56,18 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
                 let index_ch = 0;
                 while(index_ch < header.channels){
                     let sample_value = 0;
-                    // 8 bit sound
+                    const bytes_per_sample = header.sample_depth / 8;
+                    const byte_start = i_sample * bytes_per_frame + ( bytes_per_sample * index_ch );
                     if(header.sample_depth === 8){
-                        //const value = Math.round( n_alpha * 255 );
-                        //buffer_data.writeUint8(value, index_sample * ch + index_ch );
+                        sample_value = buff_audio.readUIntLE( byte_start, 1 );
                     }
-                    // 16 bit sound
                     if(header.sample_depth === 16){
-                        //const value = Math.floor(-32768 + (n_alpha * 65535));
-                        //buffer_data.writeInt16LE(value, index_sample * ( 2 * ch ) + ( 2 * index_ch ) );
+                        sample_value = buff_audio.readIntLE( byte_start, 2 );
                     }
-                    // 24 bit sound
                     if(header.sample_depth === 24){
-                        const byte_start = i_sample * bytes_per_frame + ( 3 * index_ch );
                         sample_value = buff_audio.readIntLE( byte_start, 3 );
                     }
-                                        
                     samples[index_ch].push(sample_value);
-                    
-                    console.log(i_sample, index_ch, samples[index_ch]);
-                    
                     index_ch += 1;
                 }
                 i_sample += 1;
@@ -108,15 +96,16 @@ get_wav_total_samples(uri_wav)
 .then( (total_samples) => {
     let start = 0;
     
-    const i_samp_start = 470;
-    //const i_samp_start = 480000;
-    //const i_samp_start = Math.floor( total_samples * 1.00 );
-    let i_samp_end = i_samp_start + 4;
+    //const i_samp_start = 470;
+    //const i_samp_start = 479999;
+    //const i_samp_start = 331199;
+    const i_samp_start = Math.floor( total_samples * 0.5352 );
+    let i_samp_end = i_samp_start + 50;
     
     return get_wav_samples(uri_wav, i_samp_start, i_samp_end);
 })
 .then( (result) => {
     
-    //console.log(result)
+    console.log(result)
 });
 
