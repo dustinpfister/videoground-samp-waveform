@@ -6,8 +6,11 @@
     * (done) with read wav script I would like a get\_wav\_samples method working    
     * (done) I should be able to give start and end sample index values when calling this get\_wav\_samples method
     * (done) I should have a get wav total samples method so I know what kind of values to given when calling get wav samples method
+    * (done) fixed bug that had to do with not cloning sample arrays
     
     * () get wav samples method should work with 8, 16, and 24 bit wav files both mono and stereo
+
+    * () adress isshue where I end up with zeros when going out of range reading a wav file
     
     * () once I have read_wav worked out I will have a better idea of how to start the final form of generators
     

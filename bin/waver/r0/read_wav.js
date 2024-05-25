@@ -34,6 +34,7 @@ const get_header_object = (data) => {
 const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
     let sample_count = sample_end - sample_start;
     let bytes_per_frame = 1;
+    let total_samples = 0;
     let header = {};
     let samples = [];
     return open(uri_wav, 'r+')
@@ -44,6 +45,9 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
             header = get_header_object(data.buffer);   
             // update bytes per frame now that we have the header data
             bytes_per_frame = header.channels * (header.sample_depth / 8);
+            
+            total_samples = header.data_size / bytes_per_frame;
+            
             // figure start and end byte counts for data part of wav file
             const buff_audio = Buffer.alloc(bytes_per_frame * sample_count);
             return read(fd, buff_audio, 0, bytes_per_frame * sample_count, 44 + bytes_per_frame * sample_start);
@@ -51,8 +55,8 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
         .then((data)=>{
             const buff_audio = data.buffer;
             let i_sample = 0;
-            samples = new Array(header.channels).fill( [] );
-            while(i_sample < sample_count){
+            samples = new Array(header.channels).fill(1).map(()=>{ return []; });
+            while(i_sample < sample_count && ( sample_start + i_sample ) < (total_samples) ){
                 let index_ch = 0;
                 while(index_ch < header.channels){
                     let sample_value = 0;
@@ -71,7 +75,11 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
                         const byte_start = i_sample * bytes_per_frame + ( 3 * index_ch );
                         sample_value = buff_audio.readIntLE( byte_start, 3 );
                     }
+                                        
                     samples[index_ch].push(sample_value);
+                    
+                    console.log(i_sample, index_ch, samples[index_ch]);
+                    
                     index_ch += 1;
                 }
                 i_sample += 1;
@@ -82,7 +90,7 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
             return Promise.resolve( {
                 header: header,
                 sample_start: sample_start,
-                total_samples: header.data_size / bytes_per_frame,
+                total_samples: total_samples,
                 samples: samples
             });
         });
@@ -100,13 +108,15 @@ get_wav_total_samples(uri_wav)
 .then( (total_samples) => {
     let start = 0;
     
-    const i_samp_start = Math.floor( total_samples * 1.00 );
-    let i_samp_end = i_samp_start + 10;
+    const i_samp_start = 470;
+    //const i_samp_start = 480000;
+    //const i_samp_start = Math.floor( total_samples * 1.00 );
+    let i_samp_end = i_samp_start + 4;
     
     return get_wav_samples(uri_wav, i_samp_start, i_samp_end);
 })
 .then( (result) => {
     
-    console.log(result)
+    //console.log(result)
 });
 
