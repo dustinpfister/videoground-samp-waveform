@@ -1,5 +1,5 @@
-/*   read_wav.js - draft js file for waver.js R0
- *      * The main goal here is to just have decent code for reading wav files
+/*   waver_gen.js - draft js file for waver.js R0
+ *      * The main goal here is to have decent code just for a 'generator'
  *
  */
 const path = require('path');
@@ -11,9 +11,10 @@ const read = promisify(fs.read);
 
 const uri_wav = process.argv[2] || 'audio.wav';
 
-/*   get_header_object
- *   get a header object from a 44 byte data buffer that is the head of a wav file
- */
+/********* **********
+ WAV FILE TOOLS
+********** *********/
+// get a header object from a 44 byte data buffer that is the head of a wav file
 const get_header_object = (data) => {
     const header = {};
     header.riff = data.subarray(0, 4).toString();          // 'RIFF' string
@@ -31,10 +32,7 @@ const get_header_object = (data) => {
     header.data_size = data.readInt32LE(40);               // total size of the data area of the file in bytes
     return header;
 };
-
-/*    get_wav_samples
- *    get an array of samples for each channel
- */
+// get an array of samples for each channel
 const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
     let sample_count = sample_end - sample_start;
     let bytes_per_frame = 1;
@@ -88,21 +86,27 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
         });
     });
 };
-
+// get a total count of samples from a wav file
 const get_wav_total_samples = (uri_wav, ) => {
     return get_wav_samples(uri_wav, 0, 0)
     .then( (result) => {
         return result.total_samples;
     });
 };
+/********* **********
+  GENERATOR
+********** *********/
 
+
+const GENERATOR = {
+
+};
+
+/*
 get_wav_total_samples(uri_wav)
 .then( (total_samples) => {
     let start = 0;
     
-    //const i_samp_start = 470;
-    //const i_samp_start = 479999;
-    //const i_samp_start = 331199;
     const i_samp_start = Math.floor( total_samples * 0.5352 );
     let i_samp_end = i_samp_start + 50;
     
@@ -112,4 +116,4 @@ get_wav_total_samples(uri_wav)
     
     console.log(result)
 });
-
+*/
