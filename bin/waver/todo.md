@@ -11,10 +11,22 @@
 
     * (done) start a new waver\_gen.js file, starting with the read\_wav js file code, where the focus will be just on generators
     * (done) I will want to start a create\_samples generator function that is called to supply common options to the generator that I want to use
-    * ()  
+
+    <!-- wav generator -->
+    * () start a wav generator that will read a wav file as a way to create samples
+    * () the main gen function of a generator should return a promise
+    * () the final sample format of the data should be in the 0 to 1 float range
+    * () the generator should return an object with a samples property
+    * () the samples property should be an array of arrays where each nested array is samples for a given channel
     
+    <!-- tone generator -->
+    * () start a tone generator that will create sample data from code
+    * () have a built in sin waveform
     
+    <!-- wav generator options -->
+    * () wav generator options for reading just parts of a wav file
     
+    <!-- for samp funcitons -->
     * () for\_samp functions: I will want to start a collection of built in for\_samp functions
     * () a for\_samp function will take generated sample data, and create a standard final data
     * () renderers: start a collection of functions that will render the final output ( wav, int text, 1-bit js array, one or many files, whatever ) 
