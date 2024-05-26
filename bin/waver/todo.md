@@ -9,8 +9,9 @@
     * (done) fixed bug that had to do with not cloning sample arrays
     * (done) get wav samples method should work with 8, 16, and 24 bit wav files both mono and stereo
 
-    * () start a new waver\_gen.js file, starting with the read\_wav js file code, where the focus will be just on generators
-    * ()     
+    * (done) start a new waver\_gen.js file, starting with the read\_wav js file code, where the focus will be just on generators
+    * (done) I will want to start a create\_samples generator function that is called to supply common options to the generator that I want to use
+    * ()  
     
     
     

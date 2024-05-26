@@ -96,24 +96,37 @@ const get_wav_total_samples = (uri_wav, ) => {
 /********* **********
   GENERATOR
 ********** *********/
+const GENERATORS = {
 
-
-const GENERATOR = {
+    wav : {
+    
+    
+    }
 
 };
 
-/*
-get_wav_total_samples(uri_wav)
-.then( (total_samples) => {
-    let start = 0;
-    
-    const i_samp_start = Math.floor( total_samples * 0.5352 );
-    let i_samp_end = i_samp_start + 50;
-    
-    return get_wav_samples(uri_wav, i_samp_start, i_samp_end);
-})
-.then( (result) => {
-    
-    console.log(result)
+
+const GEN = {};
+// the main create samples method
+const CREATE_DEFAULT = {
+    sample_rate: 48000,
+    channels: 2,
+    sample_count: 48000,
+    generator_name : 'wav',
+    generator_options : ['audio.wav']
+};
+GEN.create_samples = (opt) => {
+    opt = Object.assign({}, CREATE_DEFAULT, opt);
+
+    console.log(opt);
+
+};
+
+GEN.create_samples({
+   sample_rate: 44100,
+   channels: 1,
+   options: [ path.join( __dirname, process.argv[2] || '../out.wav' ) ]
 });
-*/
+
+
+
