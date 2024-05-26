@@ -96,36 +96,56 @@ const get_wav_total_samples = (uri_wav, ) => {
 /********* **********
   GENERATOR
 ********** *********/
-const GENERATORS = {
+const GENERATORS = {};
 
-    wav : {
-    
-    
-    }
+GENERATORS.wav = {};
 
+GENERATORS.wav.create = (opt) => {
+    const uri_wav = opt.generator_options.uri;
+    return get_wav_total_samples(uri_wav)
+    .then( (total_samples) => {
+        let start = 0;
+    
+        const i_samp_start = Math.floor( total_samples * 0.53 );
+        let i_samp_end = i_samp_start + 50;
+    
+        return get_wav_samples(uri_wav, i_samp_start, i_samp_end);
+    })
+    .then( (result) => {
+    
+        return result;
+    });
+    
 };
 
 
-const GEN = {};
+const api = {};
 // the main create samples method
 const CREATE_DEFAULT = {
     sample_rate: 48000,
     channels: 2,
     sample_count: 48000,
     generator_name : 'wav',
-    generator_options : ['audio.wav']
+    generator_options : { uri: 'audio.wav' }
 };
-GEN.create_samples = (opt) => {
+api.create_samples = (opt) => {
     opt = Object.assign({}, CREATE_DEFAULT, opt);
 
-    console.log(opt);
-
+    const gen = GENERATORS[ opt.generator_name ]
+    
+    gen.create( opt )
+    .then( (result) => {
+    
+        console.log(result)
+    
+    })
+    
 };
 
-GEN.create_samples({
+api.create_samples({
    sample_rate: 44100,
    channels: 1,
-   options: [ path.join( __dirname, process.argv[2] || '../out.wav' ) ]
+   generator_options: { uri: path.join( __dirname, process.argv[2] || '../gary.wav' ) }
 });
 
 

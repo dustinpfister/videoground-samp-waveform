@@ -8,13 +8,12 @@
     * (done) I should have a get wav total samples method so I know what kind of values to given when calling get wav samples method
     * (done) fixed bug that had to do with not cloning sample arrays
     * (done) get wav samples method should work with 8, 16, and 24 bit wav files both mono and stereo
-
     * (done) start a new waver\_gen.js file, starting with the read\_wav js file code, where the focus will be just on generators
     * (done) I will want to start a create\_samples generator function that is called to supply common options to the generator that I want to use
 
     <!-- wav generator -->
-    * () start a wav generator that will read a wav file as a way to create samples
-    * () the main gen function of a generator should return a promise
+    * (done) start a wav generator that will read a wav file as a way to create samples
+    * (done) the main gen function of a generator should return a promise
     * () the final sample format of the data should be in the 0 to 1 float range
     * () the generator should return an object with a samples property
     * () the samples property should be an array of arrays where each nested array is samples for a given channel
