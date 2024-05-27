@@ -10,10 +10,12 @@ const promisify = require('util').promisify;
 const open = promisify(fs.open);
 const close = promisify(fs.close);
 const read = promisify(fs.read);
-
 const uri_wav = process.argv[2] || 'audio.wav';
-
-
+ 
+const GENERATORS = {};
+/********* **********
+ HELPERS
+********** *********/
 const signedint_to_alpha = ( value=0, bytes=3 ) => {
     const min = Buffer.from( new Array( bytes - 1 ).fill(0).concat( [128] ) ).readIntLE(0, bytes);
     const max = Buffer.from( new Array( bytes - 1 ).fill(255).concat( [127] ) ).readIntLE(0, bytes);
@@ -21,7 +23,6 @@ const signedint_to_alpha = ( value=0, bytes=3 ) => {
     const alpha = ( value + delta) / ( max  + delta );
     return alpha;
 };
-
 const unsignedint_to_alpha = ( value=0, bytes=1 ) => {
     const min = Buffer.from( new Array( bytes).fill(0) ).readUintLE(0, bytes);
     const max = Buffer.from( new Array( bytes).fill(255) ).readUintLE(0, bytes);
@@ -29,7 +30,6 @@ const unsignedint_to_alpha = ( value=0, bytes=1 ) => {
     const alpha = ( value + delta) / ( max  + delta );
     return alpha;
 };
-
 /********* **********
  WAV FILE TOOLS
 ********** *********/
@@ -118,7 +118,6 @@ const get_wav_total_samples = (uri_wav, ) => {
 /********* **********
   GENERATOR WAV
 ********** *********/
-const GENERATORS = {};
 GENERATORS.wav = {
     name: 'wav',
     options: { uri: 'audio.wav' }
@@ -129,8 +128,8 @@ GENERATORS.wav.create = (opt) => {
     return get_wav_total_samples(uri_wav)
     .then( (total_samples) => {
         let start = 0;
-        const i_samp_start = Math.floor( total_samples * 0.53 );
-        let i_samp_end = i_samp_start + 50;  
+        const i_samp_start = Math.floor( total_samples * 0.00 );
+        let i_samp_end = total_samples;  
         return get_wav_samples( uri_wav, i_samp_start, i_samp_end, true );
     })
     .then( (result) => {
