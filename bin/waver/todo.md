@@ -17,9 +17,14 @@
     * (done) the samples property should be an array of arrays where each nested array is samples for a given channel
     * (done) The final object from the generator should also give sample_rate, total_samples, and channels props
     
-    <!-- for samp funcitons -->
+    <!-- for samp functions -->
+    * () start a waver\_forsamp script
+    * () start with just some dummy data in the format of what a generator will create
     * () for\_samp functions: I will want to start a collection of built in for\_samp functions
     * () a for\_samp function will take generated sample data, and create a standard final data
+    * () the first built in example can be a to 1bit example
+    
+    <!-- renderers -->
     * () renderers: start a collection of functions that will render the final output ( wav, int text, 1-bit js array, one or many files, whatever ) 
     * () have a built in generator function for reading wav file source
     * () have a built in for\_samp function for conversion to n bit sample depth

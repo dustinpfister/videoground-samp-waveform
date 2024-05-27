@@ -116,15 +116,13 @@ const get_wav_total_samples = (uri_wav, ) => {
     });
 };
 /********* **********
-  GENERATOR
+  GENERATOR WAV
 ********** *********/
 const GENERATORS = {};
-
 GENERATORS.wav = {
     name: 'wav',
     options: { uri: 'audio.wav' }
 };
-
 // the method to call to create the samples
 GENERATORS.wav.create = (opt) => {
     const uri_wav = opt.generator_options.uri;
@@ -154,13 +152,12 @@ GENERATORS.wav.create = (opt) => {
         }
     })
 };
-
-
+/********* **********
+  PUBLIC API
+********** *********/
 const api = {};
-
-
 api.signedint_to_alpha = signedint_to_alpha;
-
+api.unsignedint_to_alpha = unsignedint_to_alpha;
 // the main create samples method
 const CREATE_DEFAULT = {
     sample_rate: 48000,
@@ -169,8 +166,6 @@ const CREATE_DEFAULT = {
     generator_name : 'wav',
     generator_options : { }
 };
-
-
 api.create_samples = (opt) => {
     opt = Object.assign({}, CREATE_DEFAULT, opt);
     const gen = GENERATORS[ opt.generator_name ];
@@ -178,22 +173,8 @@ api.create_samples = (opt) => {
     opt.generator_options = Object.assign({}, gen.options, opt.generator_options );
     return gen.create( opt );
 };
+module.exports = api;
 
-
-
-const opt = {
-   sample_rate: 44100,
-   channels: 1
-};
-
-if(process.argv[2]){
-    opt.generator_options = { uri: path.join( __dirname, process.argv[2] ) }
-}
-
-api.create_samples(opt)
-.then( (result) => {
-    console.log(result);
-})
 
 
 
