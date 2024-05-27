@@ -14,9 +14,9 @@
     <!-- wav generator -->
     * (done) start a wav generator that will read a wav file as a way to create samples
     * (done) the main gen function of a generator should return a promise
-    * () the final sample format of the data should be in the 0 to 1 float range
-    * () the generator should return an object with a samples property
-    * () the samples property should be an array of arrays where each nested array is samples for a given channel
+    * (done) the final sample format of the data should be in the 0 to 1 float range
+    * (done) the generator should return an object with a samples property
+    * (done) the samples property should be an array of arrays where each nested array is samples for a given channel
     
     <!-- tone generator -->
     * () start a tone generator that will create sample data from code

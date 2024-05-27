@@ -1,5 +1,7 @@
 /*   waver_gen.js - draft js file for waver.js R0
- *      * The main goal here is to have decent code just for a 'generator'
+ *      * The main goal here is to have decent code just for what a 'generator' is
+ *      * have both a wav, and 'tone' generator
+ *      * methods to help use a given generator, built into this file or otherwise
  *
  */
 const path = require('path');
@@ -10,6 +12,23 @@ const close = promisify(fs.close);
 const read = promisify(fs.read);
 
 const uri_wav = process.argv[2] || 'audio.wav';
+
+
+const signedint_to_alpha = ( value=0, bytes=3 ) => {
+    const min = Buffer.from( new Array( bytes - 1 ).fill(0).concat( [128] ) ).readIntLE(0, bytes);
+    const max = Buffer.from( new Array( bytes - 1 ).fill(255).concat( [127] ) ).readIntLE(0, bytes);
+    const delta = Math.abs(min);
+    const alpha = ( value + delta) / ( max  + delta );
+    return alpha;
+};
+
+const unsignedint_to_alpha = ( value=0, bytes=1 ) => {
+    const min = Buffer.from( new Array( bytes).fill(0) ).readUintLE(0, bytes);
+    const max = Buffer.from( new Array( bytes).fill(255) ).readUintLE(0, bytes);
+    const delta = Math.abs(min);
+    const alpha = ( value + delta) / ( max  + delta );
+    return alpha;
+};
 
 /********* **********
  WAV FILE TOOLS
@@ -33,7 +52,7 @@ const get_header_object = (data) => {
     return header;
 };
 // get an array of samples for each channel
-const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
+const get_wav_samples = (uri_wav, sample_start=0, sample_end=0, to_alpha=true) => {
     let sample_count = sample_end - sample_start;
     let bytes_per_frame = 1;
     let total_samples = 0;
@@ -61,13 +80,16 @@ const get_wav_samples = (uri_wav, sample_start=0, sample_end=0) => {
                     const bytes_per_sample = header.sample_depth / 8;
                     const byte_start = i_sample * bytes_per_frame + ( bytes_per_sample * index_ch );
                     if(header.sample_depth === 8){
-                        sample_value = buff_audio.readUIntLE( byte_start, 1 );
+                        const value = buff_audio.readIntLE( byte_start, 1 );
+                        sample_value = to_alpha ? unsignedint_to_alpha( value, 1 ) : value;
                     }
                     if(header.sample_depth === 16){
-                        sample_value = buff_audio.readIntLE( byte_start, 2 );
+                        const value = buff_audio.readIntLE( byte_start, 2 );
+                        sample_value = to_alpha ? signedint_to_alpha( value, 2 ) : value;
                     }
                     if(header.sample_depth === 24){
-                        sample_value = buff_audio.readIntLE( byte_start, 3 );
+                        const value = buff_audio.readIntLE( byte_start, 3 );
+                        sample_value = to_alpha ? signedint_to_alpha( value, 3 ) : value;
                     }
                     samples[index_ch].push(sample_value);
                     index_ch += 1;
@@ -100,6 +122,7 @@ const GENERATORS = {};
 
 GENERATORS.wav = {};
 
+// the method to call to create the samples
 GENERATORS.wav.create = (opt) => {
     const uri_wav = opt.generator_options.uri;
     return get_wav_total_samples(uri_wav)
@@ -109,17 +132,26 @@ GENERATORS.wav.create = (opt) => {
         const i_samp_start = Math.floor( total_samples * 0.53 );
         let i_samp_end = i_samp_start + 50;
     
-        return get_wav_samples(uri_wav, i_samp_start, i_samp_end);
+        return get_wav_samples( uri_wav, i_samp_start, i_samp_end, true );
     })
     .then( (result) => {
     
-        return result;
+        return {
+        
+            samples: result.samples
+        
+        }
+        
     });
     
 };
 
 
 const api = {};
+
+
+api.signedint_to_alpha = signedint_to_alpha;
+
 // the main create samples method
 const CREATE_DEFAULT = {
     sample_rate: 48000,
@@ -128,6 +160,8 @@ const CREATE_DEFAULT = {
     generator_name : 'wav',
     generator_options : { uri: 'audio.wav' }
 };
+
+
 api.create_samples = (opt) => {
     opt = Object.assign({}, CREATE_DEFAULT, opt);
 
@@ -136,7 +170,7 @@ api.create_samples = (opt) => {
     gen.create( opt )
     .then( (result) => {
     
-        console.log(result)
+        console.log(result);
     
     })
     
