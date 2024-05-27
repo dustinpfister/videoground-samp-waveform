@@ -139,7 +139,7 @@ writer_append('../out.wav', header, true)
         }
         index_sample += 1;
     }
-        
+    return writer_append('../out.wav', buffer_data, false);   
 })
 .then(()=>{
     console.log('wav file done');
