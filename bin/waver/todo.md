@@ -10,20 +10,12 @@
     * (done) get wav samples method should work with 8, 16, and 24 bit wav files both mono and stereo
     * (done) start a new waver\_gen.js file, starting with the read\_wav js file code, where the focus will be just on generators
     * (done) I will want to start a create\_samples generator function that is called to supply common options to the generator that I want to use
-
-    <!-- wav generator -->
     * (done) start a wav generator that will read a wav file as a way to create samples
     * (done) the main gen function of a generator should return a promise
     * (done) the final sample format of the data should be in the 0 to 1 float range
     * (done) the generator should return an object with a samples property
     * (done) the samples property should be an array of arrays where each nested array is samples for a given channel
-    
-    <!-- tone generator -->
-    * () start a tone generator that will create sample data from code
-    * () have a built in sin waveform
-    
-    <!-- wav generator options -->
-    * () wav generator options for reading just parts of a wav file
+    * (done) The final object from the generator should also give sample_rate, total_samples, and channels props
     
     <!-- for samp funcitons -->
     * () for\_samp functions: I will want to start a collection of built in for\_samp functions
@@ -34,4 +26,13 @@
     * () have init and done functions
     * () have a custom plugin format for defining how waver will work
     * () start one plugin format that will create array data to use with my 1bit waveform
+    
+    <!-- tone generator -->
+    * () start a tone generator that will create sample data from code
+    * () have a built in sin waveform
+    
+    <!-- wav generator options -->
+    * () wav generator options for reading just parts of a wav file
+    
+    
    
