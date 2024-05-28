@@ -8,7 +8,6 @@ const promisify = require('util').promisify;
 const open = promisify(fs.open);
 const close = promisify(fs.close);
 const read = promisify(fs.read);
-const uri_wav = process.argv[2] || 'audio.wav';
  
 const GENERATORS = {};
 /********* **********

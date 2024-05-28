@@ -23,28 +23,26 @@
     * (done) the first built in example can be a to n-bit example
     * (done) start a final waver.js file in root of R0 folder
     * (done) start final lib folder with waver gen, and waver forsamp drafts
-    
-    <!-- start renderers -->
-    * () start a collection of functions that will render the final output ( wav, int text, 1-bit js array, one or many files, whatever ) 
+    * (done) start a collection of functions that will render the final output ( wav, int text, 1-bit js array, one or many files, whatever )
+    * (done) have a wav renderers    
+    <!-- renderers -->
+    * () make use of default options for a given renderer
     * () have a text\_json renderer that will write a single text file that is a json file of the final result object for starters
-    
+    * () be able to choose the rendrer when calling the write result method
+    * () be able to pass a custom renderer
+    * () make the write_append method public to help in the process of making a custom renderer
     <!-- more work on for samp module -->
     * () for samp functions should work with more than one channel
     * () I will want to be able to give custom options for each forsamp function used
     * () can give a string for a built in for samp function, or an object for a custom one.
     * () should be able to call a few for samp functions in order
-    
     <!-- more work on renderers -->
     * () have an option for the json renderer that will create a collection of json files for large audio files
-    * () start a wav renderer
-    
     <!-- tone generator -->
     * () start a tone generator that will create sample data from code
     * () have a built in sin waveform
-    
     <!-- wav generator options -->
     * () wav generator options for reading just parts of a wav file
-       
     <!-- external plugins -->
     * () update waver gen to allow for using a string, or an object for a generator
     * () have init and done functions

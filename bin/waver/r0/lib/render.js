@@ -1,19 +1,11 @@
-/*   waver.js - R0 - create wav files or other data from and to wav files
+/*   render.js - from waver.js R0
+ *      * This is code that will 'render' a final result object to an output format
  *
  */
-//-------- ----------
-// NODE MODULES
-//-------- ----------
 const path = require('path');
 const fs = require('fs');
 const promisify = require('util').promisify;
 const write = promisify(fs.writeFile);
-//-------- ----------
-// GENERATORS
-//-------- ----------
-const waver_gen = require( path.join(__dirname, './lib/gen.js') );
-const waver_forsamp = require( path.join(__dirname, './lib/forsamp.js') );
-const waver_render = require( path.join(__dirname, './lib/render.js') );
 //-------- ----------
 // HELPERS
 //-------- ----------
@@ -25,9 +17,7 @@ const writer_append = (uri, buff, clear = true ) => {
     }
     return write( uri, buff, { flag: 'a+' } );
 };
-
-
-
+// create a wav file header buffer
 const create_wave_header = (opts) => {
     opts = opts || {};
     const numFrames = opts.numFrames || 0;           // default to 0 frames
@@ -69,28 +59,67 @@ const create_wave_header = (opts) => {
     writeUint32(dataSize);            // Subchunk2Size
     return Buffer.from( buff );
 };
+/********* **********
+  RENDERERS - JSON
+********** *********/
+const RENDERERS = {};
+// wav file renderer
+RENDERERS.wav = {
+    options: { uri_out: 'test.wav' },
+    write: (result, opt) => {
+        const uri_out = opt.uri_out;
+        const bytes_per_sample = 1;
+        const buffer_data = Buffer.alloc( result.total_samples * bytes_per_sample );
+        // create final data buffer
+        let index_sample = 0;
+        while( index_sample < result.total_samples ){
+            let index_ch = 0;
+            const ch = result.channels;
+            while(index_ch < ch){
+                const n_alpha = result.samples[index_ch][index_sample]
+                // 8 bit sound
+                if( bytes_per_sample === 1){
+                    const value = Math.round( n_alpha * 255 );
+                    buffer_data.writeUint8(value, index_sample * ch + index_ch );
+                }
+                // 16 bit sound
+                if(bytes_per_sample === 2){
+                    const value = Math.floor(-32768 + (n_alpha * 65535));
+                    buffer_data.writeInt16LE(value, index_sample * ( 2 * ch ) + ( 2 * index_ch ) );
+                }
+                // 24 bit sound
+                if(bytes_per_sample === 3){
+                    const value = Math.floor(-8388608 + (n_alpha * ( 16777215) ) );
+                    buffer_data.writeIntLE(value, index_sample * ( 3 * ch ) + ( 3 * index_ch ), 3 );
+                }
+                index_ch += 1;
+            }
+            index_sample += 1;
+        }
+        // create header buffer
+        const header = create_wave_header({
+            numFrames: result.total_samples,
+            numChannels: result.channels,
+            sampleRate: result.sample_rate,
+            bytesPerSample: bytes_per_sample  
+        });
+        // write out the data to the final file
+        return writer_append(uri_out, header, true)
+        .then(()=>{
+            return writer_append(uri_out, buffer_data, false);
+        });    
+    }
+};
+/********* **********
+  PUBLIC API
+********** *********/
+const api = {};
+api.write_result = (result, opt) => {
+    return RENDERERS.wav.write(result, opt)
+};
+module.exports = api;
 
 
-const opt_gen = {};
-
-if(process.argv[2]){
-    const uri_in = path.join( __dirname, process.argv[2] );
-    opt_gen.generator_options = { uri: uri_in }
-}
-
-waver_gen.create_samples(opt_gen)
-.then( (result) => {
-
-    // process the result
-    waver_forsamp.process_result( result  );
-    
-    const opt_render = { uri_out: '../out.wav' };
-    waver_render.write_result(result, opt_render)
-    .then(()=>{
-        console.log('looks like we made it');
-    });    
-    
-});
 
 
 
