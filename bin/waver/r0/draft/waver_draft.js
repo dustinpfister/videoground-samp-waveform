@@ -1,12 +1,4 @@
-/*   test_waver_forsamp.js - testing out waver_gen.js for waver R0
- *
- */
-
-
-const waver_gen = require('./waver_gen.js');
 const path = require('path');
-const waver_forsamp = require('./waver_forsamp.js');
-
 const fs = require('fs');
 const promisify = require('util').promisify;
 const write = promisify(fs.writeFile);
@@ -22,8 +14,31 @@ const writer_append = (uri, buff, clear = true ) => {
     return write( uri, buff, { flag: 'a+' } );
 };
 
+/********* **********
+ BUILT IN GENERATORS
+********** *********/
+const GENERATORS = {
+    sin: {
+        channels: 2,
+        sample_rate: 48000,
+        sample_depth: 24,
+        sample_size: 48000,    // number of total samples to create
+        options: [ { freq: 160, amp: 0.90 }, { freq: 600, amp: 0.25 }, ],
+        gen: ( index_sample, opt, generator ) => {
+            const a_sec = index_sample % generator.sample_rate / generator.sample_rate;
+            const a_cycle = opt.freq * a_sec % 1;
+            const n_alpha = 0.5 - 0.5 * Math.sin( Math.PI  * 2 * a_cycle )  * opt.amp;
+            // return value should be in 0-1 format
+            return n_alpha;
+        }
+    }   
+};
 
-
+// Build a Wave file buffer
+// base on what I found here
+// https://gist.github.com/also/900023
+// https://ccrma.stanford.edu/courses/422-winter-2023/index.htm
+// https://docs.fileformat.com/audio/wav/
 const create_wave_header = (opts) => {
     opts = opts || {};
     const numFrames = opts.numFrames || 0;           // default to 0 frames
@@ -66,51 +81,58 @@ const create_wave_header = (opts) => {
     return Buffer.from( buff );
 };
 
+/********* **********
+ CRUDE START HERE
+********** *********/
+const generator = GENERATORS.sin;
 
-const opt = {
-   //sample_rate: 44100,
-   //channels: 1
-};
+const secs = generator.sample_size / generator.sample_rate;
+const frame_count = Math.ceil(generator.sample_size * secs);
+const bytes_per_sample = generator.sample_depth / 8;
+const header = create_wave_header({
+    numFrames: frame_count,
+    numChannels: generator.channels,
+    sampleRate: generator.sample_rate,
+    bytesPerSample: bytes_per_sample
+});
 
-if(process.argv[2]){
-    opt.generator_options = { uri: path.join( __dirname, process.argv[2] ) }
-}
+const data_size = frame_count *  generator.channels * bytes_per_sample;
 
-waver_gen.create_samples(opt)
-.then( (result) => {
+const buffer_data = Buffer.alloc( data_size );
 
-    // process the result
-    waver_forsamp.process_result( result  );
+console.log( 'seconds=' + secs );
+console.log( 'bytes_per_sample=' + bytes_per_sample);
+console.log( 'frame_count= ' + frame_count );
+console.log( 'data_size= ' + data_size );
 
-    // crude start for a renderer
-    
-    const bytes_per_sample = 1;
-    const buffer_data = Buffer.alloc( result.total_samples * bytes_per_sample );
-    
+const uri_wav = process.argv[2] || '../../out.wav';
+
+writer_append(uri_wav, header, true)
+.then(()=>{
+    console.log('header written, writing samples...');
+  
     let index_sample = 0;
-    while( index_sample < result.total_samples ){
+    while( index_sample < generator.sample_size ){
         let index_ch = 0;
-        const ch = result.channels;
+        const ch = generator.channels;
         while(index_ch < ch){
     
-            //const n_alpha = generator.gen( index_sample,  generator.options[index_ch], generator );
-    
-            const n_alpha = result.samples[index_ch][index_sample]
+            const n_alpha = generator.gen( index_sample,  generator.options[index_ch], generator );
     
             // 8 bit sound
-            if( bytes_per_sample === 1){
+            if(generator.sample_depth === 8){
                 const value = Math.round( n_alpha * 255 );
                 buffer_data.writeUint8(value, index_sample * ch + index_ch );
             }
     
             // 16 bit sound
-            if(bytes_per_sample === 2){
+            if(generator.sample_depth === 16){
                 const value = Math.floor(-32768 + (n_alpha * 65535));
                 buffer_data.writeInt16LE(value, index_sample * ( 2 * ch ) + ( 2 * index_ch ) );
             }
             
             // 24 bit sound
-            if(bytes_per_sample === 3){
+            if(generator.sample_depth === 24){
                 const value = Math.floor(-8388608 + (n_alpha * ( 16777215) ) );
                 buffer_data.writeIntLE(value, index_sample * ( 3 * ch ) + ( 3 * index_ch ), 3 );
             }
@@ -119,48 +141,9 @@ waver_gen.create_samples(opt)
         }
         index_sample += 1;
     }
-    
-    
-    const header = create_wave_header({
-        numFrames: result.total_samples,
-        numChannels: result.channels,
-        sampleRate: result.sample_rate,
-        bytesPerSample: bytes_per_sample  
-    });
-    
-    console.log(header)
-    console.log( buffer_data );
-    
-    const uri_out = '../out2.wav';
-    
-    writer_append(uri_out, header, true)
-    .then(()=>{
-        console.log('okay that was good');
-        return writer_append(uri_out, buffer_data, false);
-    })
-    .then(()=>{
-        console.log('that should be good then');
-    })
-    
-    
+    return writer_append(uri_wav, buffer_data, false);   
+})
+.then(()=>{
+    console.log('wav file done');
 });
-
-
-/*
-const result = {
-  sample_rate: 44100,
-  total_samples: 5,
-  channels: 1,
-  samples: [
-    [
-       0, 0.25, 0.49, 0.50, 0.75
-    ]
-  ],
-  message: 'SUCCESS: Good Results'
-}
-console.log(result)
-waver_forsamp.process_result( result  );
-console.log(result)
-*/
-
 

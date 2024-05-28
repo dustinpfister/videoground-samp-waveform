@@ -1,7 +1,7 @@
 // Just open a wav file, read the header, and spit out the info
 const read = require('fs').readFile;
 
-const uri = process.argv[2] || '../test.wav';
+const uri = process.argv[2] || '../../test.wav';
 
 read(uri, (e, data) => {
     // https://docs.fileformat.com/audio/wav/

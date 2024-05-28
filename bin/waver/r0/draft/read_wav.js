@@ -9,7 +9,7 @@ const open = promisify(fs.open);
 const close = promisify(fs.close);
 const read = promisify(fs.read);
 
-const uri_wav = process.argv[2] || 'audio.wav';
+const uri_wav = process.argv[2] || '../../test.wav';
 
 /*   get_header_object
  *   get a header object from a 44 byte data buffer that is the head of a wav file

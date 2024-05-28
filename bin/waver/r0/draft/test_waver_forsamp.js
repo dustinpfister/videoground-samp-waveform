@@ -3,11 +3,9 @@
  */
 
 
-
+const waver_gen = require('./waver_gen.js');
 const path = require('path');
-
-const waver_gen = require('./draft/waver_gen.js');
-const waver_forsamp = require('./draft/waver_forsamp.js');
+const waver_forsamp = require('./waver_forsamp.js');
 
 const fs = require('fs');
 const promisify = require('util').promisify;
@@ -75,8 +73,7 @@ const opt = {
 };
 
 if(process.argv[2]){
-    const uri_in = path.join( __dirname, process.argv[2] );
-    opt.generator_options = { uri: uri_in }
+    opt.generator_options = { uri: path.join( __dirname, process.argv[2] ) }
 }
 
 waver_gen.create_samples(opt)
@@ -134,7 +131,7 @@ waver_gen.create_samples(opt)
     console.log(header)
     console.log( buffer_data );
     
-    const uri_out = path.join( __dirname, process.argv[3] || '../out2.wav' );
+    const uri_out = path.join( __dirname, process.argv[3] || '../../out2.wav' );
     
     writer_append(uri_out, header, true)
     .then(()=>{
