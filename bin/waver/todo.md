@@ -21,7 +21,9 @@
     * (done) for\_samp functions: I will want to start a collection of built in for\_samp functions
     * (done) a for\_samp function will take generated sample data, and create a standard final data
     * (done) the first built in example can be a to n-bit example
-        
+    * (done) start a final waver.js file in root of R0 folder
+    * (done) start final lib folder with waver gen, and waver forsamp drafts
+    
     <!-- start renderers -->
     * () start a collection of functions that will render the final output ( wav, int text, 1-bit js array, one or many files, whatever ) 
     * () have a text\_json renderer that will write a single text file that is a json file of the final result object for starters

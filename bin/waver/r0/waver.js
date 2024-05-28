@@ -1,17 +1,19 @@
-/*   test_waver_forsamp.js - testing out waver_gen.js for waver R0
+/*   waver.js - R0 - create wav files or other data from and to wav files
  *
  */
-
-
-
+//-------- ----------
+// NODE MODULES
+//-------- ----------
 const path = require('path');
-
-const waver_gen = require('./draft/waver_gen.js');
-const waver_forsamp = require('./draft/waver_forsamp.js');
-
 const fs = require('fs');
 const promisify = require('util').promisify;
 const write = promisify(fs.writeFile);
+//-------- ----------
+// GENERATORS
+//-------- ----------
+const waver_gen = require( path.join(__dirname, './lib/gen.js') );
+const waver_forsamp = require( path.join(__dirname, './lib/forsamp.js') );
+
 //-------- ----------
 // PUPLIC API 
 //-------- ----------
@@ -148,22 +150,5 @@ waver_gen.create_samples(opt)
     
 });
 
-
-/*
-const result = {
-  sample_rate: 44100,
-  total_samples: 5,
-  channels: 1,
-  samples: [
-    [
-       0, 0.25, 0.49, 0.50, 0.75
-    ]
-  ],
-  message: 'SUCCESS: Good Results'
-}
-console.log(result)
-waver_forsamp.process_result( result  );
-console.log(result)
-*/
 
 
