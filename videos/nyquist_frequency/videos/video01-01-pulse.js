@@ -25,10 +25,13 @@ VIDEO.init = function(sm, scene, camera){
     const sound = sud.sound = CS.create_sound({
         waveform : (samp, a_wave) => {
              const a_cycle = samp.frequency * a_wave % 1;
-
              const cycle_points = Math.round( a_cycle * 100) % 100;
+             const a_cp = cycle_points / 100; 
 
-             if(cycle_points < 50){
+             //return -1 + 2 * Math.sin( Math.PI * a_cp ) * samp.amplitude;
+
+
+             if(a_cp < 0.50){
                  return -1 + samp.amplitude * 2;
              }
              return -1;
@@ -37,24 +40,16 @@ VIDEO.init = function(sm, scene, camera){
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-
             const sample_rate = opt.sound.sample_rate;
-            
-
-            const spc = sud.samples_per_cycle = Math.floor(700 - 698 * a_sound) ;
+            const spf = sample_rate / 30;
+            const spc = sud.samples_per_cycle = Math.floor(spf - ( spf - 2 ) * a_sound) ;
             sud.frequency = samp.frequency = sample_rate / spc;
-            samp.amplitude = 1.00;
-
-
-            if(i % 1470 === 0 ){
-                //console.log( i, sud.samples_per_cycle )
-            }
-
-
+            samp.amplitude = 0.65;
             return samp;
         },
         secs: 60
     });
+
     sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
     sm.frameMax = sound.frames;
 };
