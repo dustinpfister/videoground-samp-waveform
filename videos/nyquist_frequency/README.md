@@ -14,9 +14,9 @@ I should have started this project a long time ago, but better late than never. 
 const a_cycle = samp.frequency * a_wave % 1;
 ```
 
-For the most part this expression works fine, but there are a few edge cases where it will cause unexspected results. The problem has to do with values like 0.4999.. where 0.5 is desired. I was sample to fix this by using the same expression, but then using the value to create another alpha value from it that is based on a fixed number of points for a cycle.
+For the most part this expression works fine, but there are a few edge cases where it will cause unexpected results. The problem has to do with values like 0.4999.. where 0.5 is desired. I was sample to fix this by using the same expression, but then using the value to create another alpha value from it that is based on a fixed number of points for a cycle.
 
-An example of the old pulse waveform funciton that I would use in videos would look like this:
+An example of the old pulse waveform function that I would use in videos would look like this:
 
 ```js
 const pulse_old = (sampeset, a_wave ) => {
@@ -45,13 +45,40 @@ const pulse_new = (samp, a_wave) => {
 };
 ```
 
-This new pulse waveform function seems to adress the problems that I have noticed when using the old pulse waveform function, and I now get desired results when a frequency reaches the folding frequency. Now the result is every other sample being set to alternbative values rather than the werid situation that would happen with the old pulse waveform funciton.
+This new pulse waveform function seems to address the problems that I have noticed when using the old pulse waveform function, and I now get desired results when a frequency reaches the folding frequency. Now the result is every other sample being set to alternative values rather than the weird situation that would happen with the old pulse waveform function.
 
 ## Setting a samples\_per\_cycle SPC, then setting Frequency based on that.
 
+There is setting frequency at a given start point such as 80 hertz and then going up to 22,050 hertz. However another way of thinking about this is in terms of how many samples per waveform cycle and then figuring out what frequency is based on that. So then 2 samples per waveform cycle should always be Nyquist frequency, and then as the samples per waveform cycle approach the sample rate, the frequency will go down from Nyquist frequency to 1 hertz. Alliteratively this samples per cycle value can start at the sample rate, and then go down to 2 as a way to let pitch run threw the full range.
+
+So then something like this then:
+
+```js
+//start spc at at sample rate and go down to 2 from there.
+const spc = sud.samples_per_cycle = sample_rate - Math.floor( (sample_rate - 1) * a_sound);
+samp.frequency = sample_rate / spc;
+```
+However this results in a video in which the overwhelming volume of the content is very low frequency sound with the last bit of the content starting to go threw the higher frequency should. One way to adjust for that might be to think more in terms of samples per frame, rather than samples per second.
+
+```js
+const spf = sample_rate / 30;
+const spc = sud.samples_per_cycle = Math.floor(spf - ( spf - 2 ) * a_sound );
+samp.frequency = sample_rate / spc;
+```
+
+However the best way to deal with this might be to just keep things as they are, and look into other expressions for alpha values other than just a simple linear progression.
 
 
 ## Main Video alpha value expressions
 
+Another isshue that I discovered while working on the first video for this project has to again to do with some typical alpha values that I use when making a video. Most of the time I go with just a simple frame over max frame value as a way to update things over the course of a full video. However there are a few alternative expressions for this that I have found that I need to use now and then as they do have a small but present impact and precision.
+
+In some cases I find myself adding to the frame index, or subtracting from the total frame count for example.
+
+```js
+const a_sound3 = ( frame + 0 ) / ( max_frame - 1 );
+```
+
+There is also making use of other methods that follow a curve rather than a straight line when graphed.
 
 
