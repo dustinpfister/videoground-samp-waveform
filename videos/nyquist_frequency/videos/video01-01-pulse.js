@@ -22,32 +22,53 @@ VIDEO.init = function(sm, scene, camera){
     sud.frequency = 0;
     sud.data_samples = [];
 
+    const pulse = (samp, a_wave) => {
+        const duty = samp.duty === undefined ? 0.5 : samp.duty;
+        const max_points = samp.max_points === undefined ? 100 : samp.max_points;
+        const a_cycle = samp.frequency * a_wave % 1;
+        const cycle_points = Math.round( a_cycle * max_points) % max_points;
+        const a_cp = cycle_points / max_points;
+        if(a_cp < duty){
+            return -1 + samp.amplitude * 2;
+        }
+        return -1;
+    };
+
     const sound = sud.sound = CS.create_sound({
-        waveform : (samp, a_wave) => {
-             const a_cycle = samp.frequency * a_wave % 1;
-             const cycle_points = Math.round( a_cycle * 100) % 100;
-             const a_cp = cycle_points / 100; 
-
-             //return -1 + 2 * Math.sin( Math.PI * a_cp ) * samp.amplitude;
-
-
-             if(a_cp < 0.50){
-                 return -1 + samp.amplitude * 2;
-             }
-             return -1;
-        },
+        waveform : pulse,
         for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
+            const sample_rate = opt.sound.sample_rate;
+
+            // figuring spc on frame by frame basis
+            const a_sound3 = ( frame + 0 ) / ( max_frame - 1 );
+
+            
+            //fs.spc = sud.samples_per_cycle = sample_rate - Math.round( (sample_rate - 2) * a_sound3 );
+
+
+            const spf = sample_rate / 30;
+            fs.spc = sud.samples_per_cycle = Math.floor(spf - ( spf - 2 ) * a_sound3 );
+
             return fs;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             const sample_rate = opt.sound.sample_rate;
-            const spf = sample_rate / 30;
-            const spc = sud.samples_per_cycle = Math.floor(spf - ( spf - 2 ) * a_sound) ;
+
+            // use a spc figured on a frame by frame basis
+            const spc = fs.spc;
+
+            // start spc at at sample rate and go down to 2 from there.
+            // const spc = sud.samples_per_cycle = sample_rate - Math.floor( (sample_rate - 1) * a_sound);
+
+            // start spc at samples per frame and go down to 2 from there.
+            // const spf = sample_rate / 30;
+            // const spc = sud.samples_per_cycle = Math.floor(spf - ( spf - 2 ) * a_sound );
+
             sud.frequency = samp.frequency = sample_rate / spc;
             samp.amplitude = 0.65;
             return samp;
         },
-        secs: 60
+        secs: 30
     });
 
     sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
