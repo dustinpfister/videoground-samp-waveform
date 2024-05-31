@@ -49,9 +49,9 @@ VIDEO.init = function(sm, scene, camera){
             const spc_start = 1000;
             const alpha = Samp_alphas.sin(a_sound, 1, 0.5, true);
 
-            let spc = Math.round(spc_start - (spc_start - 2) * alpha);
-            
-            
+            let spc_f = spc_start - (spc_start - 2) * alpha;
+            let spc = spc_f;            
+
 
             const freq = sample_rate / spc;
 
@@ -59,9 +59,10 @@ VIDEO.init = function(sm, scene, camera){
             sud.samples_per_cycle = sample_rate / freq;
 
             samp.amplitude = 0.65;
+
             return samp;
         },
-        secs: 30
+        secs: 300
     });
 
     sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };

@@ -2,6 +2,13 @@
 
 In order to have at least one waveform cycle I need to have at least two samples to do so. This would mean then that there is a limit for pitch that is about half of whatever the sample rate is. There is a term for this which is nyquist\_frequency or folding frequency. For example at a sampling rate of 44100 Hz ( or 44100 samples per second if you prefer ),  the corresponding Nyquist frequency is 22050 Hz.
 
+## video01-xx-pulse
+
+The first few videos make use of a new pulse function that I started for this project that resolves problems that happen when approaching Nyquist frequency. I also worked out a whole lot of other expressions that have to do with how to go about increasing frequency from a start point forward to  Nyquist frequency and also started to touch base on a lot of other issues that come up. For one thing I am thinking in terms of Samples Per waveform Cycle \( SPC for short as it shows up in the code \), and then setting frequency based on that, and with that there are issues that come up when setting a start point for this value that starts high, and then goes down to 2 which in this case would be Nyquist frequency if we are thinking in terms of Samples Per Cycle rather than Hertz. 
+
+Also with this first set of videos I started a new display that shows the current state of each sample, for each frame. This helps a lot for debugging purposes, but is also kind of cool to look at as various patterns start to show up.
+
+
 ## New Visual display that will show sample state on frame by frame basis
 
 The aim with this project then is to create some video files in which I explore this topic of  Nyquist frequency  more. While doing so I can also have a new display for the content that will show what the current deal is on a sample, by sample basis. What I mean by that is having a way to display how many samples per waveform cycle there are given the current pitch. This would mean having a visual display of each sample, for each frame of the video. So again if we are taking a 44.1 Khz sample rate, this would mean showing the state of 1470 samples on any one given frame at 30 Frames Per Second.
