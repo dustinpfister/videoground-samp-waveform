@@ -1,5 +1,9 @@
-/*    video01-01-bassbasic-2xbeat - form bass_basic in videoground-samp-waveform 
-          * just get the basic idea of the waveform working
+/*    video01-01-pulse-1k-2 - form nyquist_frequency project in videoground-samp-waveform repo
+ *      
+ *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
+ *    
+ *    * worked out a new pulse waveform that addresses some problems
+ *    * started a new display that shows the state of each sample, for each frame
  */
 //-------- ----------
 // SCRIPTS
@@ -7,6 +11,7 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
+    '../../../js/samp_alphas/r0/samp_alphas.js',
   '../../../js/samp_create/r0/samp_draw.js',
     '../../../js/export_done/r0/export_done.js'
 ];
@@ -17,12 +22,12 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
-
     sud.samples_per_cycle = 0;
     sud.frequency = 0;
     sud.data_samples = [];
 
-    const pulse = (samp, a_wave) => {
+    // updated pulse waveform function for nyquist_frequency project
+    const pulse_cp = (samp, a_wave) => {
         const duty = samp.duty === undefined ? 0.5 : samp.duty;
         const max_points = samp.max_points === undefined ? 10 : samp.max_points;
         const a_cycle = samp.frequency * a_wave % 1;
@@ -36,40 +41,27 @@ VIDEO.init = function(sm, scene, camera){
 
 
     const sound = sud.sound = CS.create_sound({
-        waveform : pulse,
-        for_frame : (fs, frame, max_frame, a_sound2, opt ) => {
-
-            const sample_rate = opt.sound.sample_rate;
-
-            const a_sound3 = ( frame + 0 ) / ( max_frame - 1 );
-
-            //const alpha = a_sound3;
-            const log_adjust = Math.pow(10, 300);
-            const alpha = Math.log(log_adjust * a_sound3) / Math.log( log_adjust );
-
-            const spc = sample_rate - 2 * Math.round( (sample_rate - 2 ) * alpha / 2);
-            fs.frequency = sample_rate / spc;
-
-
-            return fs;
-        },
+        waveform : pulse_cp,
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
+        
             const sample_rate = opt.sound.sample_rate;
 
-            //const updates = opt.secs * 30;
-            //const alpha = Math.round(updates * a_sound) / updates;
+            const spc_start = 1000;
+            const alpha = Samp_alphas.sin(a_sound, 1, 0.5, true);
 
-            //const spc = sample_rate - 2 * Math.round( (sample_rate - 2 ) * alpha / 2);
+            let spc = Math.round(spc_start - (spc_start - 2) * alpha);
+            
+            
 
-            //const freq = sample_rate / spc;
+            const freq = sample_rate / spc;
 
-            sud.frequency = samp.frequency = fs.frequency;
-            sud.samples_per_cycle = sample_rate / fs.frequency;
+            sud.frequency = samp.frequency = freq;
+            sud.samples_per_cycle = sample_rate / freq;
 
             samp.amplitude = 0.65;
             return samp;
         },
-        secs: 300
+        secs: 30
     });
 
     sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
