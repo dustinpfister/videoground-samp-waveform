@@ -19,6 +19,7 @@ VIDEO.scripts = [
 // INIT
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
+
     const sud = scene.userData;
     sm.renderer.setClearColor(0x000000, 0.25);
 
