@@ -1,8 +1,8 @@
-/*    video01-02-pulse-1k-2spc-no-round - form nyquist_frequency project in videoground-samp-waveform repo
+/*    video01-03-pulse-1k-2spc-update-count - form nyquist_frequency project in videoground-samp-waveform repo
  *      
  *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
  *    
- *    * same code as with video01-01, but I am not rounding    
+ *    * use a fixed number of updates per second of video 
  *
  */
 //-------- ----------
@@ -26,9 +26,13 @@ VIDEO.init = function(sm, scene, camera){
     sud.frequency = 0;
     sud.data_samples = [];
 
-    // spc start and grain
-    const spc_start = 1000;
-    const grain = 4;
+    sud.SPC_START = 1000;
+    sud.SPC_END = 2;
+    sud.TOTAL_SECS = 30;
+    // spc_grain and updates_per_frame are used to change rounding of the samples per cycle values
+    // as well as the rate of update of the frequnecy
+    sud.SPC_GRAIN = 2;
+    sud.UPDATES_PER_FRAME = 4;
 
     // updated pulse waveform function for nyquist_frequency project
     const pulse_cp = (samp, a_wave) => {
@@ -50,14 +54,16 @@ VIDEO.init = function(sm, scene, camera){
         
             const sample_rate = opt.sound.sample_rate;
 
-            const a1 = a_sound;
+            
+            const updates = opt.secs * ( 30 * sud.UPDATES_PER_FRAME );
+            const i_update = Math.floor( updates  * a_sound );
+            //const a_update = updates * a_sound % 1;
+
+            const a_final = i_update / (updates - 1);
 
 
-            const a_final = Samp_alphas.sin(a1, 1, 0.5, true);
-
-
-            let spc_f = spc_start - (spc_start - 2) * a_final;
-            let spc = parseFloat( spc_f.toFixed(grain)  );      
+            let spc_f = sud.SPC_START - (sud.SPC_START - sud.SPC_END) * a_final;
+            let spc = parseFloat( spc_f.toFixed(sud.SPC_GRAIN) );      
 
 
             const freq = sample_rate / spc;
@@ -65,11 +71,11 @@ VIDEO.init = function(sm, scene, camera){
             sud.frequency = samp.frequency = freq;
             sud.samples_per_cycle = sample_rate / freq;
 
-            samp.amplitude = 0.65;
+            samp.amplitude = 0.45;
 
             return samp;
         },
-        secs: 30
+        secs: sud.TOTAL_SECS
     });
 
     sud.opt_frame = { w: 1200, h: 420, sy: 150, sx: 40, mode: sound.mode, overlay_alpha: 0.5 };
@@ -98,8 +104,8 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
 
     // text info - freq and samp per sec
     const text_info = '' + 
-        ' frequency: ' + sud.frequency.toFixed(4) +
-        ' samples_per_cycle: ' + sud.samples_per_cycle.toFixed(8);        
+        ' frequency: ' + sud.frequency.toFixed(2).padStart(3 + 5, 0) +
+        ' samples_per_cycle: ' + sud.samples_per_cycle.toFixed(sud.SPC_GRAIN).padStart( ( 1 + sud.SPC_GRAIN ) + 5, 0);        
     ctx.fillStyle = 'white';
     ctx.font = '30px  courier';
     ctx.textBaseline = 'top';
