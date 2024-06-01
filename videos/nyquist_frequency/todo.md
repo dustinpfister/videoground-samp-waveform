@@ -10,6 +10,7 @@
     * (done) same as video01-01 only no rounding
     * (done) should still have the samples per cycle fixed to a a given precision
     
-## ( done 06/01/2024 ) - video01-03-pulse-1k-2spc-update-count
+## ( done 06/01/2024 ) - video01-03-pulse-735-2spc-update-count
     * (done) video in which a fixed number of updates are used for spc over the course of the video
     * (done) the count of updates could be one per frame, or 4 per frame, ect
+    * (done) starting at 735 spc (60 hertz)

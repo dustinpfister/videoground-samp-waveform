@@ -1,4 +1,4 @@
-/*    video01-03-pulse-1k-2spc-update-count - form nyquist_frequency project in videoground-samp-waveform repo
+/*    video01-03-pulse-735-2spc-update-count - form nyquist_frequency project in videoground-samp-waveform repo
  *      
  *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
  *    
@@ -26,12 +26,12 @@ VIDEO.init = function(sm, scene, camera){
     sud.frequency = 0;
     sud.data_samples = [];
 
-    sud.SPC_START = 1000;
+    sud.SPC_START = 735;
     sud.SPC_END = 2;
     sud.TOTAL_SECS = 30;
     // spc_grain and updates_per_frame are used to change rounding of the samples per cycle values
     // as well as the rate of update of the frequnecy
-    sud.SPC_GRAIN = 2;
+    sud.SPC_GRAIN = 0;
     sud.UPDATES_PER_FRAME = 4;
 
     // updated pulse waveform function for nyquist_frequency project
