@@ -11,6 +11,7 @@
 VIDEO.scripts = [
   '../../../js/samp_create/r0/samp_tools.js',
   '../../../js/samp_create/r0/samp_create.js',
+  '../../../js/samp_debug/r0/samp_debug.js',
     '../../../js/samp_alphas/r0/samp_alphas.js',
   '../../../js/samp_create/r0/samp_draw.js',
     '../../../js/export_done/r0/export_done.js'
@@ -28,7 +29,7 @@ VIDEO.init = function(sm, scene, camera){
 
     sud.SPC_START = 735;
     sud.SPC_END = 2;
-    sud.TOTAL_SECS = 30;
+    sud.TOTAL_SECS = 10;
     // spc_grain and updates_per_frame are used to change rounding of the samples per cycle values
     // as well as the rate of update of the frequnecy
     sud.SPC_GRAIN = 0;
@@ -101,7 +102,12 @@ VIDEO.update = function(sm, scene, camera, per, bias){
     // create the data samples
     sud.data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
 
-    return CS.write_frame_samples(sud.sound, sud.data_samples, sm.frame, sm.imageFolder, sm.isExport);
+    if(sm.isExport){
+        return CS.write_frame_samples(sud.sound, sud.data_samples, sm.frame, sm.imageFolder, sm.isExport)
+        .then( () => {
+            return CDB.write_text_samples(sud.data_samples, sm.frame, sm.imageFolder  );
+        });
+    }
 };
 //-------- ----------
 // RENDER
