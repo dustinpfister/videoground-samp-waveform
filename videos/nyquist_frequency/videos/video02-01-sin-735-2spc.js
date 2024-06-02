@@ -29,7 +29,7 @@ VIDEO.init = function(sm, scene, camera){
 
     sud.SPC_START = 735;
     sud.SPC_END = 2;
-    sud.TOTAL_SECS = 10;
+    sud.TOTAL_SECS = 30;
     // spc_grain and updates_per_frame are used to change rounding of the samples per cycle values
     // as well as the rate of update of the frequnecy
     sud.SPC_GRAIN = 0;
@@ -62,19 +62,24 @@ VIDEO.init = function(sm, scene, camera){
 
             const a_final = i_update / (updates - 1);
 
+            // the old way I was seeting spc
+            // let spc_f = sud.SPC_START - (sud.SPC_START - sud.SPC_END) * a_final;
+            // let spc = parseFloat( spc_f.toFixed(sud.SPC_GRAIN) ); 
 
-            let spc_f = sud.SPC_START - (sud.SPC_START - sud.SPC_END) * a_final;
-            let spc = parseFloat( spc_f.toFixed(sud.SPC_GRAIN) );      
 
-            //let spc =  512 - 510 * a_final; //2046 - 2 * Math.round( 1024  * a_final);
+            // !!! one way to avoid the pop sound is to stick not just to int values
+            // for spc, but certain int values relative to sample rate
+            // let spc = 22050 / 150;
+     
 
+            let spc = sample_rate / Math.round( sample_rate / 2 * a_final );
 
             const freq = sample_rate / spc;
 
             sud.frequency = samp.frequency = freq;
             sud.samples_per_cycle = sample_rate / freq;
 
-            samp.amplitude = 0.40;
+            samp.amplitude = 0.65;
 
             //!!! seems to be a problem with the a_wave value I am using
             // the problem seems to have something to do with using modulo %
