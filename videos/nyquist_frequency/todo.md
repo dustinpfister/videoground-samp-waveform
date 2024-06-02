@@ -14,3 +14,6 @@
     * (done) video in which a fixed number of updates are used for spc over the course of the video
     * (done) the count of updates could be one per frame, or 4 per frame, ect
     * (done) starting at 735 spc (60 hertz)
+    
+## () - video02-01-sin-735-2spc
+    * () using a sin waveform rather than pulse
