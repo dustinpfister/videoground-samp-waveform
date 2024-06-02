@@ -16,4 +16,10 @@
     * (done) starting at 735 spc (60 hertz)
     
 ## () - video02-01-sin-735-2spc
-    * () using a sin waveform rather than pulse
+    * (done) using a sin waveform rather than pulse
+    * (done) use samp debug to see what is going on with each sample
+    
+    * () work more on R0 of samp debug adding functions to hep get more detail about the state for each sample
+    * () see about using the a_update and int values for frequnecy to adress isshue realted to fractions of waveform cycles
+    
+    
