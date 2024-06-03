@@ -1,8 +1,8 @@
-/*    video02-01-sin-735-2spc - form nyquist_frequency project in videoground-samp-waveform repo
+/*    draft02-01-sin-updates-per-frame - form nyquist_frequency project in videoground-samp-waveform repo
  *      
  *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
  *    
- *    * using a new sin waveform
+ *    * working out some clean code where the focus is just on updates per frame using a sin waveform
  *
  */
 //-------- ----------
@@ -29,71 +29,46 @@ VIDEO.init = function(sm, scene, camera){
 
     sud.SPC_START = 735;
     sud.SPC_END = 2;
-    sud.TOTAL_SECS = 5;
-    // spc_grain and updates_per_frame are used to change rounding of the samples per cycle values
-    // as well as the rate of update of the frequency
+    sud.TOTAL_SECS = 30;
     sud.SPC_GRAIN = 0;
-    sud.UPDATES_PER_FRAME = 4;
+    sud.UPDATES_PER_FRAME = 1;
 
     // updated sin waveform function for nyquist_frequency project
     const sin_cp = (samp, a_wave) => {
         const duty = samp.duty === undefined ? 0.5 : samp.duty;
-        const max_points = samp.max_points === undefined ? 10000 : samp.max_points;
+        const max_points = samp.max_points === undefined ? 1000000: samp.max_points;
         const a_cycle = samp.frequency * a_wave % 1;
         const cycle_points = Math.round( a_cycle * max_points) % max_points;
         const a_cp = cycle_points / max_points;
-
-
         return Math.sin( Math.PI * 2 * a_cp ) * samp.amplitude
-
     };
-
 
     const sound = sud.sound = CS.create_sound({
         waveform : sin_cp,
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
         
             const sample_rate = opt.sound.sample_rate;
-
-            
+            const samples_per_update = sample_rate / ( 30 * sud.UPDATES_PER_FRAME )  
             const updates = opt.secs * ( 30 * sud.UPDATES_PER_FRAME );
             const i_update = Math.floor( updates  * a_sound );
             const a_update = updates * a_sound;
 
-            const a_final = i_update / (updates - 1);
 
-            // the old way I was seeting spc
-            // let spc_f = sud.SPC_START - (sud.SPC_START - sud.SPC_END) * a_final;
-            // let spc = parseFloat( spc_f.toFixed(sud.SPC_GRAIN) ); 
+            const freq = 1 + (sample_rate / 2 - 1) * a_sound;
+
+            samp.a_wave = a_update;
+            const freq_adjust = freq / (30 * sud.UPDATES_PER_FRAME );
+            samp.frequency = freq_adjust;
 
 
-            // !!! one way to avoid the pop sound is to stick not just to int values
-            // for spc, but certain int values relative to sample rate
-            //let spc = Math.pow(2, Math.round( 14 * a_final) );
-     
+            samp.amplitude = 0.45;
 
-            let spc = sample_rate / Math.round( sample_rate / 2 * a_final );
+            sud.frequency = freq;
+            sud.samples_per_cycle = sample_rate / freq; 
 
-            const freq = sample_rate / spc;
-
-            sud.frequency = samp.frequency = freq;
-            sud.samples_per_cycle = sample_rate / freq;
-
-            samp.amplitude = 0.65;
-
-            //!!! seems to be a problem with the a_wave value I am using
-            // the problem seems to have something to do with using modulo %
-            
-            // so not using modulo, or using a_sound and increasing freq seems to fix the problem
-            samp.a_wave = a_sound * opt.secs;
-
-            //samp.frequency = freq * opt.secs;
-            //samp.a_wave = a_sound;
-
-            // there is also trying the a_update alpha
-            //samp.frequency = freq / 30 / sud.UPDATES_PER_FRAME;
-            //samp.a_wave = a_update; 
-
+            //!!! looks like the freq, and freq_adjust values are GOOD!
+            // so the problem must be with something else.
+            // console.log(freq, freq_adjust);
 
             return samp;
         },
