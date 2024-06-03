@@ -1,8 +1,8 @@
-/*    draft02-01-sin-updates-per-frame - form nyquist_frequency project in videoground-samp-waveform repo
+/*    draft01-04-sin-updates-per-frame - form nyquist_frequency project in videoground-samp-waveform repo
  *      
  *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
- *    
- *    * working out some code where the focus is just on updates per frame using a sin waveform
+ *
+ *    * it seems like there is some kind of core problem with the a_wave values that I am using    
  *
  */
 //-------- ----------
@@ -27,47 +27,44 @@ VIDEO.init = function(sm, scene, camera){
     sud.frequency = 0;
     sud.data_samples = [];
 
-    sud.SPC_START = 735;
-    sud.SPC_END = 2;
-    sud.TOTAL_SECS = 10;
-    sud.SPC_GRAIN = 0;
-    sud.UPDATES_PER_FRAME = 8;
+    sud.TOTAL_SECS = 3;
 
-    // updated sin waveform function for nyquist_frequency project
-    const sin_cp = (samp, a_wave) => {
+    // updated pulse waveform function for nyquist_frequency project
+    const pulse_cp = (samp, a_wave) => {
         const duty = samp.duty === undefined ? 0.5 : samp.duty;
-        const max_points = samp.max_points === undefined ? 1000000: samp.max_points;
+        const max_points = samp.max_points === undefined ? 100000 : samp.max_points;
         const a_cycle = samp.frequency * a_wave % 1;
         const cycle_points = Math.round( a_cycle * max_points) % max_points;
         const a_cp = cycle_points / max_points;
-        return Math.sin( Math.PI * 2 * a_cp ) * samp.amplitude;
+        if(a_cp >= (duty / 2) && a_cp <= (duty / 2 + duty ) ){
+            return samp.amplitude * 1;
+        }
+        return samp.amplitude * -1;
     };
 
     const sound = sud.sound = CS.create_sound({
-        waveform : sin_cp,
+        waveform : pulse_cp,
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
         
             const sample_rate = opt.sound.sample_rate;
-            const samples_per_update = sample_rate / ( 30 * sud.UPDATES_PER_FRAME )  
-            const updates = opt.secs * ( 30 * sud.UPDATES_PER_FRAME );
-            const i_update = Math.floor( updates  * a_sound );
-            const a_update = updates * a_sound;
+
+            const spc = 700;
+            samp.frequency = sud.frequency = sample_rate / spc;
+            samp.amplitude = 0.65;
+
+            //!!! this gives me 0 to 1 values, but I get a distortion every second
+            samp.a_wave = a_sound * opt.secs % 1;
 
 
-            const freq = 1 + (sample_rate / 2 - 1) * a_sound;
+            //!!! this works, but now I no longer have - 0 to 1 values
+            //samp.a_wave = a_sound * opt.secs;
 
-            samp.a_wave = a_update;
-            const freq_adjust = freq / (30 * sud.UPDATES_PER_FRAME );
-            samp.frequency = freq_adjust;
+            if(i % sample_rate === 0){
 
-            samp.amplitude = 0.45;
+                console.log(i, a_sound);
 
-            sud.frequency = freq;
-            sud.samples_per_cycle = sample_rate / freq; 
+            }
 
-            //!!! looks like the freq, and freq_adjust values are GOOD!
-            // so the problem must be with something else.
-            // console.log(freq, freq_adjust);
 
             return samp;
         },
@@ -106,7 +103,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // text info - freq and samp per sec
     const text_info = '' + 
         ' frequency: ' + sud.frequency.toFixed(2).padStart(3 + 5, 0) +
-        ' samples_per_cycle: ' + sud.samples_per_cycle.toFixed(sud.SPC_GRAIN).padStart( ( 1 + sud.SPC_GRAIN ) + 5, 0);        
+        ' samples_per_cycle: ' + sud.samples_per_cycle.toFixed(4)       
     ctx.fillStyle = 'white';
     ctx.font = '30px  courier';
     ctx.textBaseline = 'top';

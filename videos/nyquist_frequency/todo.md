@@ -3,8 +3,11 @@
 ## () - video02-01-sin-735-2spc
     * (done) using a sin waveform rather than pulse
     * (done) use samp debug to see what is going on with each sample    
-    * () work more on R0 of samp debug adding functions to hep get more detail about the state for each sample
-    * () see about using the a_update and int values for frequnecy to adress isshue realted to fractions of waveform cycles
+    * (done) work more on R0 of samp debug adding functions to hep get more detail about the state for each sample
+    * (done) see about using the a_update and int values for frequnecy in a draft to adress isshue realted to fractions of waveform cycles
+    
+## ( done 06/03/2023 ) - draft01-05-pulse-duration-by-samples
+    * (done) start a draft project where the goal is to create a video in terms of the number of samples needed, rather than setting to a fixed number of seconds
 
 ## ( done 06/03/2024 ) - start video02-xx-sin, and drafts
     * (done) start video02-xx-sin set of videos using a sine waveform
