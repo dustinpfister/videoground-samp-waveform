@@ -1,4 +1,4 @@
-/*    video01-02-pulse-1k-2spc-no-round - form nyquist_frequency project in videoground-samp-waveform repo
+/*    draft01-02-pulse-1k-2spc-no-round - form nyquist_frequency project in videoground-samp-waveform repo
  *      
  *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
  *    

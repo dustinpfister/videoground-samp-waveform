@@ -1,4 +1,4 @@
-/*    video01-03-pulse-735-2spc-update-count - form nyquist_frequency project in videoground-samp-waveform repo
+/*    draft01-03-pulse-735-2spc-update-count - form nyquist_frequency project in videoground-samp-waveform repo
  *      
  *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
  *    
