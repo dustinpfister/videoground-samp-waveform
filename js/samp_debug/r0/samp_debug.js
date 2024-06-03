@@ -7,10 +7,16 @@
     const CDB = {};
     // write out an array of data samples to a text file
     CDB.write_text_samples = (data_samples, frame=0, filePath  ) => {
-        if(!filePath){ return; }
+        if(!filePath){
+            return Promise.reject('no filePath given');
+        }
         const fn = 'samples_' + frame + '.txt';
-        const uri = videoAPI.pathJoin(filePath, fn);
-        const text = data_samples.join('\n');
+        const dir_frames = videoAPI.pathJoin(filePath, 'debug/frames');
+        const uri = videoAPI.pathJoin(dir_frames, fn);
+        const max_samp_index_nums = String(data_samples.length).length;
+        const text = data_samples.map((samp, i)=>{
+            return String(i).padStart(max_samp_index_nums, '0') + ' ' + samp;
+        }).join('\n');
         if( frame === 0 ){
             return videoAPI.write(uri, text, true )
         }

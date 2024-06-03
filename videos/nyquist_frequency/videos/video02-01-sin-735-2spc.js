@@ -29,7 +29,7 @@ VIDEO.init = function(sm, scene, camera){
 
     sud.SPC_START = 735;
     sud.SPC_END = 2;
-    sud.TOTAL_SECS = 30;
+    sud.TOTAL_SECS = 5;
     // spc_grain and updates_per_frame are used to change rounding of the samples per cycle values
     // as well as the rate of update of the frequnecy
     sud.SPC_GRAIN = 0;
