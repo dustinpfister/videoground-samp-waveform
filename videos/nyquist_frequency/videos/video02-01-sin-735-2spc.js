@@ -31,14 +31,14 @@ VIDEO.init = function(sm, scene, camera){
     sud.SPC_END = 2;
     sud.TOTAL_SECS = 5;
     // spc_grain and updates_per_frame are used to change rounding of the samples per cycle values
-    // as well as the rate of update of the frequnecy
+    // as well as the rate of update of the frequency
     sud.SPC_GRAIN = 0;
-    sud.UPDATES_PER_FRAME = 32;
+    sud.UPDATES_PER_FRAME = 4;
 
     // updated sin waveform function for nyquist_frequency project
     const sin_cp = (samp, a_wave) => {
         const duty = samp.duty === undefined ? 0.5 : samp.duty;
-        const max_points = samp.max_points === undefined ? 100 : samp.max_points;
+        const max_points = samp.max_points === undefined ? 10000 : samp.max_points;
         const a_cycle = samp.frequency * a_wave % 1;
         const cycle_points = Math.round( a_cycle * max_points) % max_points;
         const a_cp = cycle_points / max_points;
@@ -58,7 +58,7 @@ VIDEO.init = function(sm, scene, camera){
             
             const updates = opt.secs * ( 30 * sud.UPDATES_PER_FRAME );
             const i_update = Math.floor( updates  * a_sound );
-            //const a_update = updates * a_sound % 1;
+            const a_update = updates * a_sound ;
 
             const a_final = i_update / (updates - 1);
 
@@ -69,7 +69,7 @@ VIDEO.init = function(sm, scene, camera){
 
             // !!! one way to avoid the pop sound is to stick not just to int values
             // for spc, but certain int values relative to sample rate
-            // let spc = 22050 / 150;
+            //let spc = Math.pow(2, Math.round( 14 * a_final) );
      
 
             let spc = sample_rate / Math.round( sample_rate / 2 * a_final );
@@ -89,6 +89,10 @@ VIDEO.init = function(sm, scene, camera){
 
             //samp.frequency = freq * opt.secs;
             //samp.a_wave = a_sound;
+
+            // there is also trying the a_update alpha
+            //samp.frequency = freq / 30 / sud.UPDATES_PER_FRAME;
+            //samp.a_wave = a_update; 
 
 
             return samp;
