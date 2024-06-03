@@ -1,8 +1,8 @@
-/*    video02-01-sin-735-2spc - form nyquist_frequency project in videoground-samp-waveform repo
+/*    draft01-06-pulse-amp-adjust - form nyquist_frequency project in videoground-samp-waveform repo
  *      
  *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
- *    
- *    * using a new sin waveform
+ *
+ *    * how about one where I adjust amplitude at the ends
  *
  */
 //-------- ----------
@@ -27,26 +27,29 @@ VIDEO.init = function(sm, scene, camera){
     sud.frequency = 0;
     sud.data_samples = [];
 
-    sud.SPC_START = 735;
-    sud.SPC_END = 2;
-    sud.TOTAL_SECS = 5;
-    // spc_grain and updates_per_frame are used to change rounding of the samples per cycle values
-    // as well as the rate of update of the frequency
-    sud.SPC_GRAIN = 0;
-    sud.UPDATES_PER_FRAME = 4;
+    sud.TOTAL_SECS = 300;
 
-    // updated sin waveform function for nyquist_frequency project
-    const sin_cp = (samp, a_wave) => {
-        const max_points = samp.max_points === undefined ? 10000 : samp.max_points;
+    // updated pulse waveform function for nyquist_frequency project
+    const pulse_cp = (samp, a_wave) => {
+        const duty = samp.duty === undefined ? 0.5 : samp.duty;
+        const max_points = samp.max_points === undefined ? 100000 : samp.max_points;
         const a_cycle = samp.frequency * a_wave % 1;
         const cycle_points = Math.round( a_cycle * max_points) % max_points;
         const a_cp = cycle_points / max_points;
-
-
-        return Math.sin( Math.PI * 2 * a_cp ) * samp.amplitude
-
+        if(a_cp >= duty){
+            return samp.amplitude * 1;
+        }
+        return samp.amplitude * -1;
     };
 
+    // updated sin waveform function for nyquist_frequency project
+    const sin_cp = (samp, a_wave) => {
+        const max_points = samp.max_points === undefined ? 1000000: samp.max_points;
+        const a_cycle = samp.frequency * a_wave % 1;
+        const cycle_points = Math.round( a_cycle * max_points) % max_points;
+        const a_cp = cycle_points / max_points;
+        return Math.sin( Math.PI * 2 * a_cp ) * samp.amplitude;
+    };
 
     const sound = sud.sound = CS.create_sound({
         waveform : sin_cp,
@@ -54,44 +57,35 @@ VIDEO.init = function(sm, scene, camera){
         
             const sample_rate = opt.sound.sample_rate;
 
+            const update_count = 699;
+
+            const i_update = Math.floor(update_count * a_sound);
+            const a_update = update_count * a_sound % 1;
+
+            let spc = sud.samples_per_cycle = 700 - i_update;
             
-            const updates = opt.secs * ( 30 * sud.UPDATES_PER_FRAME );
-            const i_update = Math.floor( updates  * a_sound );
-            const a_update = updates * a_sound;
+            samp.frequency = sud.frequency = 0;
+            samp.amplitude = 0.00;
+            if(spc > 0){
+                samp.frequency = sud.frequency = sample_rate / spc;
 
-            const a_final = i_update / (updates - 1);
+                const amp = 1;
+                samp.amplitude = amp;
+                
+                if(a_update < 0.10){
+                    samp.amplitude = a_update / 0.10 * amp; 
+                }
 
-            // the old way I was seeting spc
-            // let spc_f = sud.SPC_START - (sud.SPC_START - sud.SPC_END) * a_final;
-            // let spc = parseFloat( spc_f.toFixed(sud.SPC_GRAIN) ); 
+                if(a_update >= 0.90){
 
+                    samp.amplitude = amp - ( a_update - 0.90 ) / 0.10 * amp; 
+                }
 
-            // !!! one way to avoid the pop sound is to stick not just to int values
-            // for spc, but certain int values relative to sample rate
-            //let spc = Math.pow(2, Math.round( 14 * a_final) );
-     
+                
+            }
 
-            let spc = sample_rate / Math.round( sample_rate / 2 * a_final );
-
-            const freq = sample_rate / spc;
-
-            sud.frequency = samp.frequency = freq;
-            sud.samples_per_cycle = sample_rate / freq;
-
-            samp.amplitude = 0.65;
-
-            //!!! seems to be a problem with the a_wave value I am using
-            // the problem seems to have something to do with using modulo %
-            
-            // so not using modulo, or using a_sound and increasing freq seems to fix the problem
+            //!!! this gives me 0 to 1 values, but I get a distortion every second
             samp.a_wave = a_sound * opt.secs;
-
-            //samp.frequency = freq * opt.secs;
-            //samp.a_wave = a_sound;
-
-            // there is also trying the a_update alpha
-            //samp.frequency = freq / 30 / sud.UPDATES_PER_FRAME;
-            //samp.a_wave = a_update; 
 
 
             return samp;
@@ -131,7 +125,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     // text info - freq and samp per sec
     const text_info = '' + 
         ' frequency: ' + sud.frequency.toFixed(2).padStart(3 + 5, 0) +
-        ' samples_per_cycle: ' + sud.samples_per_cycle.toFixed(sud.SPC_GRAIN).padStart( ( 1 + sud.SPC_GRAIN ) + 5, 0);        
+        ' samples_per_cycle: ' + sud.samples_per_cycle.toFixed(4)       
     ctx.fillStyle = 'white';
     ctx.font = '30px  courier';
     ctx.textBaseline = 'top';
