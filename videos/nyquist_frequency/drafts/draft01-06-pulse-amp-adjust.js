@@ -27,7 +27,7 @@ VIDEO.init = function(sm, scene, camera){
     sud.frequency = 0;
     sud.data_samples = [];
 
-    sud.TOTAL_SECS = 300;
+    sud.TOTAL_SECS = 30;
 
     // updated pulse waveform function for nyquist_frequency project
     const pulse_cp = (samp, a_wave) => {
@@ -57,7 +57,7 @@ VIDEO.init = function(sm, scene, camera){
         
             const sample_rate = opt.sound.sample_rate;
 
-            const update_count = 699;
+            const update_count = 10;
 
             const i_update = Math.floor(update_count * a_sound);
             const a_update = update_count * a_sound % 1;
@@ -69,17 +69,19 @@ VIDEO.init = function(sm, scene, camera){
             if(spc > 0){
                 samp.frequency = sud.frequency = sample_rate / spc;
 
-                const amp = 1;
-                samp.amplitude = amp;
+                samp.amplitude = Samp_alphas.sin(a_update, 1, 1)
+
+                //const amp = 1;
+                //samp.amplitude = amp;
                 
-                if(a_update < 0.10){
-                    samp.amplitude = a_update / 0.10 * amp; 
-                }
+                //if(a_update < 0.10){
+                //    samp.amplitude = a_update / 0.10 * amp; 
+                //}
 
-                if(a_update >= 0.90){
+                //if(a_update >= 0.90){
 
-                    samp.amplitude = amp - ( a_update - 0.90 ) / 0.10 * amp; 
-                }
+                //    samp.amplitude = amp - ( a_update - 0.90 ) / 0.10 * amp; 
+                //}
 
                 
             }
