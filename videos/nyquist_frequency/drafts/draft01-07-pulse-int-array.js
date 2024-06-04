@@ -32,6 +32,7 @@ VIDEO.init = function(sm, scene, camera){
     
     sud.sample_rate = 44100;
 
+
 /*
     sud.spc_arr = [
         85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 
@@ -40,12 +41,23 @@ VIDEO.init = function(sm, scene, camera){
         43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30,
         29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 
         15, 14, 13, 12, 11, 10,  9,  8,  7,  6,  5,  4,  3,  2    
-    ].filter( (spc) => {
-        return sud.sample_rate / spc % 1 === 0;
-    });
+    ];
 */
 
-    sud.spc_arr = '84,75,70,63,60,50,49,45,42,36,35,30,28,25,21,20,18,15,14,12,10,9,7,6,5,4,3,2'.split(',').map((str)=>{return parseInt(str);})
+    // can create an array with a loop
+    sud.spc_arr = [];
+    let spc = 1470;
+    while(spc >= 2){
+        sud.spc_arr.push(spc);
+        spc -= 1;
+    }
+    // filter all spcs that will result in fractions
+    sud.spc_arr = sud.spc_arr.filter( (spc) => {
+        return sud.sample_rate / spc % 1 === 0;
+    });
+
+
+    //sud.spc_arr = '84,75,70,63,60,50,49,45,42,36,35,30,28,25,21,20,18,15,14,12,10,9,7,6,5,4,3,2'.split(',').map((str)=>{return parseInt(str);})
 
     const sound = sud.sound = CS.create_sound({
         waveform : Nyquist_waveforms.pulse_cp,
