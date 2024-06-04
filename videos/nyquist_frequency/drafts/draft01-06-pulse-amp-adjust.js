@@ -2,19 +2,22 @@
  *      
  *    https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency
  *
- *    * how about one where I adjust amplitude at the ends
+ *    * with this one I tried out just reducing amplitude during the start and end of updates
  *
  */
 //-------- ----------
 // SCRIPTS
 //-------- ----------
 VIDEO.scripts = [
-  '../../../js/samp_create/r0/samp_tools.js',
-  '../../../js/samp_create/r0/samp_create.js',
-  '../../../js/samp_debug/r0/samp_debug.js',
+    '../../../js/samp_create/r0/samp_tools.js',
+    '../../../js/samp_create/r0/samp_create.js',
+    '../../../js/samp_debug/r0/samp_debug.js',
     '../../../js/samp_alphas/r0/samp_alphas.js',
-  '../../../js/samp_create/r0/samp_draw.js',
-    '../../../js/export_done/r0/export_done.js'
+    '../../../js/export_done/r0/export_done.js',
+
+
+    '../js/nyquist_draw.js'
+  
 ];
 //-------- ----------
 // INIT
@@ -52,12 +55,12 @@ VIDEO.init = function(sm, scene, camera){
     };
 
     const sound = sud.sound = CS.create_sound({
-        waveform : sin_cp,
+        waveform : pulse_cp,
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
         
             const sample_rate = opt.sound.sample_rate;
 
-            const update_count = 10;
+            const update_count = 699;
 
             const i_update = Math.floor(update_count * a_sound);
             const a_update = update_count * a_sound % 1;
@@ -68,22 +71,15 @@ VIDEO.init = function(sm, scene, camera){
             samp.amplitude = 0.00;
             if(spc > 0){
                 samp.frequency = sud.frequency = sample_rate / spc;
-
-                samp.amplitude = Samp_alphas.sin(a_update, 1, 1)
-
-                //const amp = 1;
-                //samp.amplitude = amp;
-                
-                //if(a_update < 0.10){
-                //    samp.amplitude = a_update / 0.10 * amp; 
-                //}
-
-                //if(a_update >= 0.90){
-
-                //    samp.amplitude = amp - ( a_update - 0.90 ) / 0.10 * amp; 
-                //}
-
-                
+                //samp.amplitude = Samp_alphas.sin(a_update, 1, 1)
+                const amp = 1;
+                samp.amplitude = amp;
+                if(a_update < 0.025){
+                    samp.amplitude = a_update / 0.025 * amp; 
+                }
+                if(a_update >= 0.975){
+                    samp.amplitude = amp - ( a_update - 0.975 ) / 0.025 * amp; 
+                }
             }
 
             //!!! this gives me 0 to 1 values, but I get a distortion every second
@@ -117,60 +113,10 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 // RENDER
 //-------- ----------
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
-    const sud = scene.userData;
-    const sound = sud.sound;
-
-    // background
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0,0, canvas.width, canvas.height);
-
-    // text info - freq and samp per sec
-    const text_info = '' + 
-        ' frequency: ' + sud.frequency.toFixed(2).padStart(3 + 5, 0) +
-        ' samples_per_cycle: ' + sud.samples_per_cycle.toFixed(4)       
-    ctx.fillStyle = 'white';
-    ctx.font = '30px  courier';
-    ctx.textBaseline = 'top';
-    ctx.fillText(text_info,10,10);
-
-    // text info - freq and samp per sec
-    const text_info2 = '' +
-        ' frame: ' + String(sm.frame).padStart(String(sm.frameMax).length, '0') + '/' + sm.frameMax;
-    ctx.fillText(text_info2, 10, 40);
-
-
-    // data samples
-    const len = sud.data_samples.length;
-    const i_delta = len / 10;
-    let i_slice = 0;
-    while(i_slice < 10){
-        const i_start = i_delta * i_slice;
-        const i_end = i_start + i_delta;
-        const slice1 = sud.data_samples.slice(i_start, i_end);
-        slice1.forEach( (sample, i) => {
-
-            const n = ST.mode_to_raw(sample, 'int16');
-
-            const a = 0.01 - 0.99 * n;
-            const x = 10 + (i * 8.5);
-            my = 120 + 60 * i_slice;
-
-            const sy = my;
-            const ey = my + 25 * a;
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = 'lime';
-            ctx.beginPath();
-            ctx.moveTo(x, sy);
-            ctx.lineTo(x, ey);
-            ctx.closePath();
-            ctx.stroke();
-        
-        });
-        i_slice += 1;
-    }
-
+    Nyquist_draw.background(ctx, canvas);
+    Nyquist_draw.info(ctx, scene.userData, sm);
+    Nyquist_draw.samples(ctx, scene.userData.data_samples);
 };
-
 //-------- ----------
 // EXPORT DONE
 //-------- ----------
