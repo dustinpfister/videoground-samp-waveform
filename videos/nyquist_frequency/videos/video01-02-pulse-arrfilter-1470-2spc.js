@@ -30,9 +30,9 @@ VIDEO.init = function(sm, scene, camera){
     sud.samples_per_cycle = 0;
     sud.frequency = 0;
     sud.data_samples = [];
-    sud.TOTAL_SECS = 30;    
+    sud.TOTAL_SECS = 30;
     sud.sample_rate = 44100;
-    sud.amplitude = 0.25;
+    sud.amplitude = 0.35;
     // can create an array with a loop
     sud.spc_arr = [];
     let spc = sud.SPC_START;

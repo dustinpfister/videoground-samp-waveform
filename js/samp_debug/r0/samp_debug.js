@@ -1,6 +1,5 @@
 // samp-debug - r0 - from videoground-samp-waveform
 (function(){
-
     //-------- ----------
     // PUPLIC API
     //-------- ----------
@@ -17,10 +16,7 @@
         const text = data_samples.map((samp, i)=>{
             return String(i).padStart(max_samp_index_nums, '0') + ' ' + samp;
         }).join('\n');
-        if( frame === 0 ){
-            return videoAPI.write(uri, text, true )
-        }
-        return videoAPI.write(uri, text, false );
+        return videoAPI.write(uri, text, true );
     };
     // append public api to window
     window.CDB = CDB;
