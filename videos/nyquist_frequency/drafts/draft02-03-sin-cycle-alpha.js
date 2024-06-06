@@ -35,24 +35,26 @@ VIDEO.init = function(sm, scene, camera){
     // sound object
     const sound = sud.sound = CS.create_sound({
         waveform : (samp, a_wave) => {
-            const a = (a_wave + samp.a_shift) % 1;
-            return Math.sin( Math.PI * 2 *  a );
+            const a = (samp.a_shift + a_wave) % 1;
+            return Math.sin( Math.PI * 2 *  a ) * -1;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
 
             const tone_sc = 1470;
-            const cycle_start = 2;
+            const cycle_start = 1;
             const cycle_end = 736;
 
             const tone_count = opt.i_size / tone_sc;
             const tone_index = Math.floor( i / tone_sc);
             const tone_a1 = i % tone_sc / tone_sc;
             const tone_a2 = tone_index / tone_count;
-            const cycle_count = (cycle_start + Math.round( ( cycle_end - cycle_start) * tone_a2 ) );
+            const cycle_count_frac = cycle_start + ( cycle_end - cycle_start) * tone_a2;
+            const cycle_count = Math.floor(cycle_count_frac);
             const a_cycle = cycle_count * tone_a1 % 1;
+            const i_cycle = Math.floor(cycle_count * tone_a1);
 
             samp.a_wave = a_cycle;
-samp.a_shift = 4 * opt.secs % 1;;
+            samp.a_shift = 0.25;
 
             if(i %  1470 === 0){
                 sud.freq1 = get_freq(cycle_count, tone_sc);
@@ -86,8 +88,28 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 // RENDER
 //-------- ----------
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
+    const sud = scene.userData;
     Nyquist_draw.background(ctx, canvas);
-    //Nyquist_draw.info(ctx, scene.userData, sm);
+    //Nyquist_draw.info(ctx, sud, sm);
+
+    ctx.fillStyle = 'white';
+    ctx.font = '30px courier';
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
+
+
+    const pad_freq = (freq) => {
+        return String( Math.floor(freq) ).padStart(5, 0);
+    };
+
+    //if(sud.freq1 === sud.freq2){
+    //    ctx.fillText( sud.freq1 + ' hertz', 10, 10 );
+    //}
+
+    //if(sud.freq1 != sud.freq2){
+        ctx.fillText( pad_freq(sud.freq1) + ' to ' + pad_freq(sud.freq2) + ' hertz', 10, 10 );
+    //}
+
     Nyquist_draw.samples(ctx, scene.userData.data_samples);
 };
 //-------- ----------
