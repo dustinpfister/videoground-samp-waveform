@@ -3,6 +3,11 @@
 ## () - draft03-01-arr-cycle-alpha
     * I would like to have video03-xx forward make use of an array that is used to define the nature of the waveform
 
+## ( done 06/06/2024 ) - draft02-04-sin-reduce
+    * (done) have a starting number of samples per waveform cycle such as 1470 \( 30 hertz \)
+    * (done) have a set number of cycles to go until we have a reduction
+    * (done) the number of samples per waveform reduces by 1 when a set out of cycles is over
+
 ## ( done 06/06/2024 ) - draft02-03-sin-cycle-alpha
     * (done) the core idea is to use cycle-alpha as the value for samp.awave
     * (done) so I will need a sin waveform function that is designed this way.
