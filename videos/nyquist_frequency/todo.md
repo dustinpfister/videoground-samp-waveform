@@ -1,9 +1,12 @@
 # nyquist_frequency todo list
 
+## () - draft03-01-arr-cycle-alpha
+    * I would like to have video03-xx forward make use of an array that is used to define the nature of the waveform
+
 ## () - draft02-03-sin-cycle-alpha
-    * () the core idea is to use cycle-alpha as the value for samp.awave
-    * () so I will need a sin waveform function that is designed this way.
-    * () I can then start to create a fixed number of cycles, and sample per cycles value 
+    * (done) the core idea is to use cycle-alpha as the value for samp.awave
+    * (done) so I will need a sin waveform function that is designed this way.
+    * (done) I can then start to create a fixed number of cycles, and sample per cycles value 
     
 ## ( done 06/06/2024 ) - draft02-02-sin-arrfilter
     * (done) try out the same code as with video01-02 only using a sin waveform
