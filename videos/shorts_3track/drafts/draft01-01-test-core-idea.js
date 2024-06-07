@@ -1,6 +1,7 @@
 /*    draft01-01-test-core-idea - form shorts_3track in videoground-samp-waveform
  *        
  */
+VIDEO.resmode = 6;
 //-------- ----------
 // SCRIPTS
 //-------- ----------
@@ -10,8 +11,10 @@ VIDEO.scripts = [
     '../../../js/samp_alphas/r0/samp_alphas.js',
     '../../../js/samp_debug/r0/samp_debug.js',
     '../../../js/music_roll/r0/music_roll.js',
+
     '../../../js/bit_tracks/r2/bit_tracks.js',
     '../../../js/bit_tracks/r2/bit_samp_draw.js',
+
     '../../../js/export_done/r0/export_done.js'
 ];
 //-------- ----------
@@ -195,7 +198,7 @@ VIDEO.init = function(sm, scene, camera){
 
     // display objects for audio sample arrays for tracks and main final display
     sud.track_disp_opt = DSD.create_disp_options(sud.tracks, sound, {
-        w: 600, h: 600, sx: 1279 - 650, sy: 120,
+        w: 600, h: 600, sx: 60, sy: 350,
         line_width: 6, 
         midline_style: ['black', 'yellow'],
         track_styles: ['white', 'black'],
@@ -257,7 +260,7 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.fillStyle = 'rgba(0,128,128,0.8)';
 
 
-    ctx.fillRect(600,40, 660, 660);
+    ctx.fillRect(30,280, 660, 660);
 
 
     DSD.draw_tracks(ctx, sud.tracks, sud.track_disp_opt);
