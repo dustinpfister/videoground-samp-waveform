@@ -22,5 +22,5 @@
     * () I will want to have a collection of waveform options to use for each track
     
     <!-- music rolls -->
-    * () I will want to have the music roll as an external file
+    * (done) I will want to have the music roll as an external file
     
