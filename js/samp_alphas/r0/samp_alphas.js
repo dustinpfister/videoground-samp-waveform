@@ -36,6 +36,14 @@
         return Math.sin( Math.PI * alpha2 );
     };
     
+    Samp_alphas.pad = (a=0, b=1, count=1, mod=true, pad_low=0.10, pad_high=0.90, pad=0) => {
+        const alpha2 = Samp_alphas.linear(a, b, count, mod);
+        if(alpha2 <= padLow || alpha2 >= pad_high){
+            return pad;
+        }       
+        return ( alpha2 - pad_low ) / ( pad_high - pad_low );
+    };
+    
     window.Samp_alphas = Samp_alphas;
 
 }());

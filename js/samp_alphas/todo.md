@@ -6,5 +6,8 @@
     * (done) include a linear method based on the one from samp_tools as I would like to replace that with this in time
     * (done) incldue a sin method based on the one from samp tools
     * (done) update the basic alpha method to allow for adjuistment of what mod function to use
+    * (done) add a pad alpha method
+    
+    * () add curve alpha methods
     
     
