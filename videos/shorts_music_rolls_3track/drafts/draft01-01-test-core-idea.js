@@ -83,15 +83,15 @@ VIDEO.init = function(sm, scene, camera){
 #
 # measure 1;
 #
-c-4 1;--- -;e-3 -;
+c-4 1;--- -;e-2 -;
 --- -;--- -;--- -;
 c-4 1;--- -;--- -;
 --- -;--- -;--- -;
-c-4 1;--- -;e-3 -;
+c-4 1;--- -;e-2 -;
 --- -;--- -;--- -;
-c-4 1;--- -;e-3 1;
+c-4 1;--- -;e-2 1;
 --- -;--- -;--- -;
-c-4 1;--- -;e-3 1;
+c-4 1;--- -;e-2 1;
 --- -;--- -;--- -;
 c-4 1;--- -;--- -;
 --- -;--- -;--- -;
@@ -102,17 +102,17 @@ c-4 1;--- -;--- -;
 #
 # measure 2;
 #
-c-4 1;--- -;b-2 1;
+c-4 1;--- -;b-1 1;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
---- -;--- -;c-3 1;
+--- -;--- -;c-2 1;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
-  0 0;--- -;e-3 1;
+  0 0;--- -;e-2 1;
 --- -;--- -;--- -;
---- -;--- -;f-3 1;
+--- -;--- -;f-2 1;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
@@ -121,15 +121,15 @@ c-4 1;--- -;b-2 1;
 #
 # measure 3;
 #
-c-4 1;g-2 1;e-3 1;
+c-4 1;g-2 1;e-2 1;
 --- -;--- -;--- -;
 c-4 1;--- -;--- -;
 --- -;--- -;--- -;
-c-4 1;--- -;e-3 1;
+c-4 1;--- -;e-2 1;
 --- -;--- -;--- -;
-c-4 1;--- -;e-3 1;
+c-4 1;--- -;e-2 1;
 --- -;--- -;--- -;
-c-4 1;--- -;e-3 1;
+c-4 1;--- -;e-2 1;
 --- -;--- -;--- -;
 c-4 1;--- -;--- -;
 --- -;--- -;--- -;
@@ -140,17 +140,17 @@ c-4 1;--- -;--- -;
 #
 # measure 4;
 #
-c-4 1;e-3 1;b-2 1;
+c-4 1;e-3 1;b-1 1;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
---- -;--- -;c-3 1;
+--- -;--- -;c-2 1;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
-  0 0;--- -;e-3 1;
+  0 0;--- -;e-2 1;
 --- -;--- -;--- -;
---- -;--- -;f-3 1;
+--- -;--- -;f-2 1;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
 --- -;--- -;--- -;
@@ -165,8 +165,6 @@ c-4 1;e-3 1;b-2 1;
     // create the main sound object using CS.create_sound
     const sound = sud.sound = CS.create_sound({
         waveform: (samp, a_wave) => {
-
-            
 
             const amp0 = samp.amp0 === undefined ? 1.0 : samp.amp0;
             const freq0 = samp.freq0 === undefined ? 0 : samp.freq0;
@@ -183,41 +181,26 @@ c-4 1;e-3 1;b-2 1;
             const a2 = a_wave * freq2 % 1;
             const n2 = Math.sin( Math.PI * 2 * a2 ) * amp2;
             
-            /*
-            const amp1 = 0.10 + 0.90 * a_wave;
-            const mag = Math.random();
-            const neg = Math.random() < 0.5 ? -1 : 1;
-            const n1 = mag * amp1 * neg;
-            
-            const n2 = 0;
-            */
-
             update_disp_point( sud.disp_points_0, samp.i, n0 );
             update_disp_point( sud.disp_points_1, samp.i, n1 );
             update_disp_point( sud.disp_points_2, samp.i, n2 );
             
-            return (n0 + n1 + n2) / 3;
+            return ( n0 + n1 + n2 ) / 3 * samp.master_amplitude;
 
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             const array_samp = Music_roll.play(song_obj, a_sound);
 
-            samp.amp0 = Samp_alphas.sin(array_samp[0].a_note, 1, 1);
+            samp.amp0 = Samp_alphas.sin(array_samp[0].a_note, 1, 1) * 0.25;
             samp.freq0 = array_samp[0].frequency;
             
-            samp.amp1 = Samp_alphas.sin(array_samp[1].a_note, 1, 1);
+            samp.amp1 = Samp_alphas.sin(array_samp[1].a_note, 1, 1) * 0.25;
             samp.freq1 = array_samp[1].frequency;
             
-            samp.amp2 = Samp_alphas.sin(array_samp[2].a_note, 1, 1);
+            samp.amp2 = Samp_alphas.sin(array_samp[2].a_note, 1, 1) * 1.00;
             samp.freq2 = array_samp[2].frequency;
 
-if(i % 1470 === 0){
-
-   //console.log(song_obj);
-   //console.log(array_samp);
-
-}
-
+            samp.master_amplitude = 0.65;
             samp.a_wave = opt.secs * a_sound % 1;
             samp.i = i % 1470;
 
