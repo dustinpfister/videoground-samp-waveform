@@ -191,11 +191,16 @@ c-4 1;e-3 1;b-1 1;
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
             const array_samp = Music_roll.play(song_obj, a_sound);
 
-            samp.amp0 = Samp_alphas.sin(array_samp[0].a_note, 1, 1) * 0.25;
+            samp.amp0 = Samp_alphas.sin(array_samp[0].a_note, 1, 1) * 0.15;
             samp.freq0 = array_samp[0].frequency;
             
-            samp.amp1 = Samp_alphas.sin(array_samp[1].a_note, 1, 1) * 0.25;
+            samp.amp1 = Samp_alphas.sin(array_samp[1].a_note, 1, 1) * 0.35;
             samp.freq1 = array_samp[1].frequency;
+            
+            //!!! I will want to work out new logic for adjusting amplitude
+            //const a_pad = Samp_alphas.pad(array_samp[2].a_note, 1, 1, true, 0.10, 0.90, 0);
+            //const a_padsin = 1; //Samp_alphas.sin(a_pad, 1, 1);
+            //samp.amp2 = a_padsin * 1.00;
             
             samp.amp2 = Samp_alphas.sin(array_samp[2].a_note, 1, 1) * 1.00;
             samp.freq2 = array_samp[2].frequency;
