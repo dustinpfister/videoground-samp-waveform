@@ -21,6 +21,9 @@ VIDEO.init = function(sm, scene, camera){
 
     const sud = scene.userData;
 
+    // the music roll file to use
+    const URI_ROLL = videoAPI.pathJoin( sm.filePath, 'draft_roll.txt' );
+
     // FIXED CAMERA SETTINGS
     camera.fov = 30;
     camera.updateProjectionMatrix();
@@ -36,17 +39,15 @@ VIDEO.init = function(sm, scene, camera){
     sud.disp_points_1 = Samp_geodisp.create_points(1470,  0);
     sud.disp_points_2 = Samp_geodisp.create_points(1470, -3);
     
-    
-    //update_disp_point(disp_points, 0, -1);
-    //
-
     scene.add( sud.disp_points_0, sud.disp_points_1, sud.disp_points_2 );
-    scene.add( new THREE.GridHelper( 10, 10 ) );
-
     
-    
-    const uri = videoAPI.pathJoin( sm.filePath, 'draft_roll.txt' );   
-    return videoAPI.read( uri,  {alpha: 0, buffer_size_alpha: 1} )
+    const grid = new THREE.GridHelper( 10, 10, 0xafafaf, 0xafafaf);
+    grid.position.z = -0.25;
+    grid.material.linewidth = 4;
+    grid.rotation.x = Math.PI * 0.5;
+    scene.add( grid );
+   
+    return videoAPI.read( URI_ROLL,  {alpha: 0, buffer_size_alpha: 1} )
     .then((roll)=>{
     
         const song_obj = Music_roll.parse( roll );
@@ -117,6 +118,10 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
+    
+    camera.position.set(-10 + 20 * bias, 0, 35);
+    camera.lookAt(0,0,0);
+    
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
 };

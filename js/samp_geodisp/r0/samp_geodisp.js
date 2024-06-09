@@ -19,7 +19,7 @@
         geometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array(vertices), 3 ) );        
         geometry.setAttribute( 'color', new THREE.BufferAttribute( new Float32Array(colors), 3 ) );
         // material
-        const material = new THREE.PointsMaterial({ size: 0.50, vertexColors: true });
+        const material = new THREE.PointsMaterial({ size: 1.00, vertexColors: true });
         // create, setup, and return the points object
         const points = new THREE.Points( geometry, material );
         points.position.set(0, posY, 0);
