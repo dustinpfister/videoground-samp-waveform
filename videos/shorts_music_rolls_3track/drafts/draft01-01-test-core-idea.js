@@ -8,13 +8,10 @@ VIDEO.resmode = 6;
 VIDEO.scripts = [
     '../../../js/samp_create/r0/samp_tools.js',
     '../../../js/samp_create/r0/samp_create.js',
+    '../../../js/samp_geodisp/r0/samp_geodisp.js',
     '../../../js/samp_alphas/r0/samp_alphas.js',
     '../../../js/samp_debug/r0/samp_debug.js',
     '../../../js/music_roll/r0/music_roll.js',
-
-    //'../../../js/bit_tracks/r2/bit_tracks.js',
-    //'../../../js/bit_tracks/r2/bit_samp_draw.js',
-
     '../../../js/export_done/r0/export_done.js'
 ];
 //-------- ----------
@@ -34,40 +31,10 @@ VIDEO.init = function(sm, scene, camera){
     // BACKGROUND
     scene.background = new THREE.Color( 0.25, 0.25, 0.25 );
 
-
-    // SAMPLE GEOMETRY
-    
-    const create_disp_points = (samp_size = 1470, posY=0) => {
-        const geometry = new THREE.BufferGeometry();
-        let i = 0;
-        const arr = [];
-        while(i < samp_size){
-            const a = i / samp_size;
-            const x = -5 + 10 * a;
-            const y = 0;
-            const z = 0;
-            arr.push(x, y, z);
-            i += 1;
-        }
-        const vertices = new Float32Array(arr);
-        geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
-        const material = new THREE.PointsMaterial({ size: 0.50});
-        const points = new THREE.Points( geometry, material );
-        points.position.set(0, posY, 0);
-        return points;
-    };
-    
-    const update_disp_point = (disp_points, index=0, samp=0, yMax=1) => {
-        const geo = disp_points.geometry;
-        const pos = geo.getAttribute('position');
-        pos.setXYZ(index, -5 + 10 * ( index / pos.count ), samp * yMax, 0);
-        pos.needsUpdate = true;
-    };
-
-
-    sud.disp_points_0 = create_disp_points(1470,  3);
-    sud.disp_points_1 = create_disp_points(1470,  0);
-    sud.disp_points_2 = create_disp_points(1470, -3);
+    // create display points
+    sud.disp_points_0 = Samp_geodisp.create_points(1470,  3);
+    sud.disp_points_1 = Samp_geodisp.create_points(1470,  0);
+    sud.disp_points_2 = Samp_geodisp.create_points(1470, -3);
     
     
     //update_disp_point(disp_points, 0, -1);
@@ -104,9 +71,9 @@ VIDEO.init = function(sm, scene, camera){
                 const a2 = a_wave * freq2 % 1;
                 const n2 = Math.sin( Math.PI * 2 * a2 ) * amp2;
             
-                update_disp_point( sud.disp_points_0, samp.i, n0 );
-                update_disp_point( sud.disp_points_1, samp.i, n1 );
-                update_disp_point( sud.disp_points_2, samp.i, n2 );
+                Samp_geodisp.update_point( sud.disp_points_0, samp.i, n0 );
+                Samp_geodisp.update_point( sud.disp_points_1, samp.i, n1 );
+                Samp_geodisp.update_point( sud.disp_points_2, samp.i, n2 );
             
                 return ( n0 + n1 + n2 ) / 3 * samp.master_amplitude;
 
