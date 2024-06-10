@@ -8,15 +8,18 @@ const FORSAMP = {};
 ********** *********/
 FORSAMP.nbit = {
     name: 'nbit',
-    options: { bits: 1, min_amp: 0.75 },
+    options: { bits: 1, amp: 0.75 },
     process: (value, index_samp, index_ch, result, opt) => {
         const levels = Math.pow( 2, opt.bits );
         const  dx = value - 0.5;
         const d = Math.sqrt(dx * dx);
-        if( d <= 0.015 || d >= 0.500 ){
-            return 0.25;
+        const amp_low = 1 - opt.amp;
+        const amp_delta = opt.amp - amp_low;
+        //if( d <= 0.020 || d >= 0.350 ){
+        if( d <= 0.020 ){
+            return amp_low;
         }      
-        return 0.25 + 0.5 * Math.round( value  * ( levels - 1) );
+        return amp_low + amp_delta * Math.round( value  * ( levels - 1) );
     }
 };
 /********* **********

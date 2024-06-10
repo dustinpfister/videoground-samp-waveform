@@ -83,8 +83,18 @@ waver_gen.create_samples(opt_gen)
 
     // process the result
     waver_forsamp.process_result( result  );
-    
-    const opt_render = { uri_out: process.argv[3] || '../out.wav' };
+
+    const opt_render = { 
+       name: 'wav',
+       uri_out: process.argv[3] || '../out.wav'
+    };
+
+/*
+    const opt_render = { 
+       name: 'text_array',
+       pwd: process.env.PWD
+    };
+*/
     waver_render.write_result(result, opt_render)
     .then(()=>{
         console.log('looks like we made it');

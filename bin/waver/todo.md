@@ -26,12 +26,13 @@
     * (done) start a collection of functions that will render the final output ( wav, int text, 1-bit js array, one or many files, whatever )
     * (done) have a wav renderers    
     <!-- renderers -->
+    *
+    * () have a text\_arrays that will create a text version of a very long
     * () make use of default options for a given renderer
-    * () have a text\_json renderer that will write a single text file that is a json file of the final result object for starters
     * () be able to choose the rendrer when calling the write result method
     * () be able to pass a custom renderer
     * () make the write_append method public to help in the process of making a custom renderer
-    <!-- more work on for samp module -->
+    <!-- samp module -->
     * () for samp functions should work with more than one channel
     * () I will want to be able to give custom options for each forsamp function used
     * () can give a string for a built in for samp function, or an object for a custom one.

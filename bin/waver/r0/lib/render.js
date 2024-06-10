@@ -60,11 +60,12 @@ const create_wave_header = (opts) => {
     return Buffer.from( buff );
 };
 /********* **********
-  RENDERERS - JSON
+  RENDERERS
 ********** *********/
 const RENDERERS = {};
 // wav file renderer
 RENDERERS.wav = {
+    name: 'wav',
     options: { uri_out: 'test.wav' },
     write: (result, opt) => {
         const uri_out = opt.uri_out;
@@ -110,12 +111,30 @@ RENDERERS.wav = {
         });    
     }
 };
+RENDERERS.text_array = {
+    name: 'text_array',
+    options: { pwd: process.env.PWD },
+    write: (result, opt) => {
+    
+        //console.log(result.samples[0]);
+        //return Promise.resolve();
+        
+        const uri_out = path.join(opt.pwd, 'array.txt');
+        const buffer_data = Buffer.from( result.samples[0].join() );
+        return writer_append(uri_out, buffer_data, true);
+        
+    
+    }
+};
 /********* **********
   PUBLIC API
 ********** *********/
 const api = {};
 api.write_result = (result, opt) => {
-    return RENDERERS.wav.write(result, opt)
+
+    const name = opt.name || 'wav';
+
+    return RENDERERS[name].write(result, opt)
 };
 module.exports = api;
 
