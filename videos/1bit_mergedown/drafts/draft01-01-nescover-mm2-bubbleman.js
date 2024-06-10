@@ -26,7 +26,7 @@ VIDEO.init = function(sm, scene, camera){
 
     const URI_ROLL = videoAPI.pathJoin( sm.filePath, 'mm2_bubbleman_roll.txt' );
     
-    sud.disp_mix = Samp_geodisp.create_points(1470,  0);
+    sud.disp_mix = Samp_geodisp.create_points( { point_size: 0.25, x_delta: 6.25 } );
 
     scene.add( sud.disp_mix );
 
