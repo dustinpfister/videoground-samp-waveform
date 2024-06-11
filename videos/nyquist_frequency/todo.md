@@ -1,7 +1,10 @@
 # nyquist_frequency todo list
 
-## () - draft03-01-arr-cycle-alpha
-    * I would like to have video03-xx forward make use of an array that is used to define the nature of the waveform
+## () - draft02-05-sin-mix
+    * () try a new system that involves playing two or more tones at any given moment, meaning the final result is a mix
+    * () at any given time 1 or more tones will be active
+    * () the amplitude of the current frequnecy will start out at 0, go up to 1, then back down to zero over time
+    
 
 ## ( done 06/06/2024 ) - draft02-04-sin-reduce
     * (done) have a starting number of samples per waveform cycle such as 1470 \( 30 hertz \)

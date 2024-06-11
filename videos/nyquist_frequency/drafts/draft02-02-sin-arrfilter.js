@@ -23,7 +23,7 @@ VIDEO.scripts = [
 VIDEO.init = function(sm, scene, camera){
     // scene use data object
     const sud = scene.userData;
-    sud.SPC_START = 1470;
+    sud.SPC_START = 735;
     sud.SPC_END = 2;
     sud.samples_per_cycle = 0;
     sud.frequency = 0;
