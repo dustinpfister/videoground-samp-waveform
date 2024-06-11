@@ -1,10 +1,13 @@
 # nyquist_frequency todo list
 
-## () - draft02-05-sin-mix
+## () - draft02-06-sin-mix
     * () try a new system that involves playing two or more tones at any given moment, meaning the final result is a mix
     * () at any given time 1 or more tones will be active
     * () the amplitude of the current frequnecy will start out at 0, go up to 1, then back down to zero over time
-    
+
+## ( done 06/11/2024 ) - draft02-05-sin-int
+    * (done) just work out a simple system that has to do with rounding SPC or frequnecy just for the sake of having a better idea of what is going on
+    * (done) update main readme with some notes
 
 ## ( done 06/06/2024 ) - draft02-04-sin-reduce
     * (done) have a starting number of samples per waveform cycle such as 1470 \( 30 hertz \)

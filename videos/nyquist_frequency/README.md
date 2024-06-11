@@ -13,6 +13,12 @@ Also with this first set of videos I started a new display that shows the curren
 
 The aim with this project then is to create some video files in which I explore this topic of  Nyquist frequency  more. While doing so I can also have a new display for the content that will show what the current deal is on a sample, by sample basis. What I mean by that is having a way to display how many samples per waveform cycle there are given the current pitch. This would mean having a visual display of each sample, for each frame of the video. So again if we are taking a 44.1 Khz sample rate, this would mean showing the state of 1470 samples on any one given frame at 30 Frames Per Second.
 
+## Problems with hertz fractions, setting total time to any value, ect
+
+Ran into a lot of problems that have to do with hertz fractions, setting total time of the video to any value, the rate at which frequnecy changes over time, so forth. Of course when I have any frequnecy value that has a fraction that will be that I will have a fraction of a waveform cycle resulting in this poping noise every second. One might think that all I will have to do then is just round and that will be the end of it but this is just one problem that seems to come up. There are all kinds of other distorations that can happen that are the result of things like updating frequnecy to fast, or two slow. A lot of other problems seem to have to do with setting the length of the video to any time that I want. As a result of this I ended up making a lot of drafts, trying to come up with a good system for just incresing frequnecy over time.
+
+ 
+
 ## Discovered a Problem with the Alpha values I was using for waveform cycles
 
 I should have started this project a long time ago, but better late than never. Anyway while working on the very first video for this project I have noticed a significant problem with the alpha value ( 0 to 1 value ) that I was using to find the current state of a waveform. The expression I was using was this:
