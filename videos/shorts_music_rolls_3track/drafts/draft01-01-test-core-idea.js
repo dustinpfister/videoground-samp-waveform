@@ -30,10 +30,20 @@ VIDEO.init = function(sm, scene, camera){
         const amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;       
         return Math.sin( Math.PI * 2 * a_cycle ) * amp;          
     };
+    
+    const wf_square = (samp, a_wave) => {
+        const a_cycle = a_wave * samp.freq % 1;
+        const amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;       
+        let n = -1;
+        if(a_cycle >= 0.5){
+           n = 1;
+        }
+        return n * amp;
+    };
 
     const THREE_TRACKS = {
         master_amplitude: 0.65,
-        total_mix_points: 100,
+        total_mix_points: 3,
         tracks: [
             {
                 mix_points: 1,
@@ -44,8 +54,8 @@ VIDEO.init = function(sm, scene, camera){
                 waveform: wf_sin
             },
             {
-                mix_points: 98,
-                waveform: wf_sin
+                mix_points: 1,
+                waveform: wf_square
             }
         ]
     };
