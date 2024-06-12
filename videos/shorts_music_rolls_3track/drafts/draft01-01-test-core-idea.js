@@ -35,13 +35,9 @@ VIDEO.init = function(sm, scene, camera){
     scene.background = new THREE.Color( 0.25, 0.25, 0.25 );
 
     // create display points
-    //sud.disp_points_0 = Samp_geodisp.create_points(1470,  3);
-    //sud.disp_points_1 = Samp_geodisp.create_points(1470,  0);
-    //sud.disp_points_2 = Samp_geodisp.create_points(1470, -3);
-    
     sud.disp_points_0 = Samp_geodisp.create_points( { y: 3 } );
-    sud.disp_points_0 = Samp_geodisp.create_points( { y: 0 } );
-    sud.disp_points_0 = Samp_geodisp.create_points( { y:-3 } );
+    sud.disp_points_1 = Samp_geodisp.create_points( { y: 0 } );
+    sud.disp_points_2 = Samp_geodisp.create_points( { y:-3 } );
     
     scene.add( sud.disp_points_0, sud.disp_points_1, sud.disp_points_2 );
     
@@ -55,7 +51,6 @@ VIDEO.init = function(sm, scene, camera){
     .then((roll)=>{
     
         const song_obj = Music_roll.parse( roll );
-
 
         // create the main sound object using CS.create_sound
         const sound = sud.sound = CS.create_sound({
