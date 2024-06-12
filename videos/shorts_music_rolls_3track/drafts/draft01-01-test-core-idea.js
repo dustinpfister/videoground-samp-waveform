@@ -34,6 +34,9 @@ VIDEO.init = function(sm, scene, camera){
     // BACKGROUND
     scene.background = new THREE.Color( 0.25, 0.25, 0.25 );
 
+    
+
+
     // create display points
     sud.disp_points_0 = Samp_geodisp.create_points( { y: 3 } );
     sud.disp_points_1 = Samp_geodisp.create_points( { y: 0 } );
@@ -81,10 +84,10 @@ VIDEO.init = function(sm, scene, camera){
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
                 const array_samp = Music_roll.play(song_obj, a_sound);
 
-                samp.amp0 = Samp_alphas.sin(array_samp[0].a_note, 1, 1) * 0.15;
+                samp.amp0 = Samp_alphas.sin(array_samp[0].a_note, 1, 1) * 1.00;
                 samp.freq0 = array_samp[0].frequency;
             
-                samp.amp1 = Samp_alphas.sin(array_samp[1].a_note, 1, 1) * 0.35;
+                samp.amp1 = Samp_alphas.sin(array_samp[1].a_note, 1, 1) * 1.00;
                 samp.freq1 = array_samp[1].frequency;
             
                 //!!! I will want to work out new logic for adjusting amplitude
