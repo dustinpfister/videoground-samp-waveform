@@ -1,6 +1,6 @@
 # shorts_music_rolls_3track todo list
 
-## () draft01-02-test-music-roll-r1
+## () draft01-02-test-waveform-params
     TRACK OBJECTS:
         * () I will want to have at least one track waveform that makes use of one or more waveform paramaters
     MUSIC ROLLS:
@@ -15,7 +15,7 @@
     MAIN MIX WAVEFORM:
         * (done) start a main mix waveform function
         * (done) I should have a points system for setting what the amplitude is for each track
-        * () the samp objects for each track should be in the form of an array
+        * (done) the samp objects for each track should be in the form of an array
     MUSIC ROLLS:
         * (done) I will want to have the music roll as an external file
     MISC: 
@@ -27,5 +27,8 @@
         * (done) I will need a function that will update this kind of geometry
         * (done) see about uisng vertex colors
         * (done) start a new main js file for this
-        * () have default options for style, and other settings, have custom options in this draft 
+        * (done) have default options for style, and other settings, have custom options in this draft
+        
+        * () I should have a way to change the colors used for points or lines
+        
     

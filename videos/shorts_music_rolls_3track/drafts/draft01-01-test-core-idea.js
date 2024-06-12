@@ -23,6 +23,13 @@ VIDEO.init = function(sm, scene, camera){
 
     // the music roll file to use
     const URI_ROLL = videoAPI.pathJoin( sm.filePath, 'draft_roll.txt' );
+    
+    
+    const wf_sin = (samp, a_wave) => {
+        const a_cycle = a_wave * samp.freq % 1;
+        const amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;       
+        return Math.sin( Math.PI * 2 * a_cycle ) * amp;          
+    };
 
     const THREE_TRACKS = {
         master_amplitude: 0.65,
@@ -30,12 +37,15 @@ VIDEO.init = function(sm, scene, camera){
         tracks: [
             {
                 mix_points: 1,
+                waveform: wf_sin
             },
             {
                 mix_points: 1,
+                waveform: wf_sin
             },
             {
                 mix_points: 98,
+                waveform: wf_sin
             }
         ]
     };
@@ -70,28 +80,14 @@ VIDEO.init = function(sm, scene, camera){
         // create the main sound object using CS.create_sound
         const sound = sud.sound = CS.create_sound({
             waveform: (samp, a_wave) => {
-
-                const amp0 = samp.amp0 === undefined ? 1.0 : samp.amp0;
-                const freq0 = samp.freq0 === undefined ? 0 : samp.freq0;
-                const a0 = a_wave * freq0 % 1;
-                let n0 = Math.sin( Math.PI * 2 * a0 ) * amp0;
-            
-                const amp1 = samp.amp1 === undefined ? 1.0 : samp.amp1;
-                const freq1 = samp.freq1 === undefined ? 0 : samp.freq1;
-                const a1 = a_wave * freq1 % 1;
-                let n1 = Math.sin( Math.PI * 2 * a1 ) * amp1;
-            
-                const amp2 = samp.amp2 === undefined ? 1.0 : samp.amp2;
-                const freq2 = samp.freq2 === undefined ? 0 : samp.freq2;
-                const a2 = a_wave * freq2 % 1;
-                let n2 = Math.sin( Math.PI * 2 * a2 ) * amp2;
+                        
+                let n0 = THREE_TRACKS.tracks[0].waveform(samp.tracks[0], a_wave);
+                let n1 = THREE_TRACKS.tracks[1].waveform(samp.tracks[1], a_wave);
+                let n2 = THREE_TRACKS.tracks[2].waveform(samp.tracks[2], a_wave);
             
                 Samp_geodisp.update_point( sud.disp_points_0, samp.i, n0 );
                 Samp_geodisp.update_point( sud.disp_points_1, samp.i, n1 );
                 Samp_geodisp.update_point( sud.disp_points_2, samp.i, n2 );
-            
-                
-                //return ( n0 + n1 + n2 ) / 3 * samp.master_amplitude;
                 
                 n0 = n0 * THREE_TRACKS.tracks[0].mix_points / THREE_TRACKS.total_mix_points;
                 n1 = n1 * THREE_TRACKS.tracks[1].mix_points / THREE_TRACKS.total_mix_points;
@@ -99,20 +95,18 @@ VIDEO.init = function(sm, scene, camera){
                 
                 return ( n0 + n1 + n2 ) * samp.master_amplitude;
                 
-
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
                 const array_samp = Music_roll.play(song_obj, a_sound);
 
-                samp.amp0 = Samp_alphas.sin(array_samp[0].a_note, 1, 1) * 1.00;
-                samp.freq0 = array_samp[0].frequency;
-            
-                samp.amp1 = Samp_alphas.sin(array_samp[1].a_note, 1, 1) * 1.00;
-                samp.freq1 = array_samp[1].frequency;
-            
-                samp.amp2 = Samp_alphas.sin(array_samp[2].a_note, 1, 1) * 1.00;
-                samp.freq2 = array_samp[2].frequency;
-
+                samp.tracks = THREE_TRACKS.tracks.map( (track, i) => {
+                    return {
+                        amp: 1.00,
+                        a_note: array_samp[i].a_note,
+                        freq: array_samp[i].frequency
+                    };
+                });
+                
                 samp.master_amplitude = THREE_TRACKS.master_amplitude;
                 samp.a_wave = opt.secs * a_sound % 1;
                 samp.i = i % 1470;
