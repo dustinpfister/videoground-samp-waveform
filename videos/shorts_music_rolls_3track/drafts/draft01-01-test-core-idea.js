@@ -24,18 +24,30 @@ VIDEO.init = function(sm, scene, camera){
     // the music roll file to use
     const URI_ROLL = videoAPI.pathJoin( sm.filePath, 'draft_roll.txt' );
 
+    const THREE_TRACKS = {
+        master_amplitude: 0.65,
+        total_mix_points: 100,
+        tracks: [
+            {
+                mix_points: 1,
+            },
+            {
+                mix_points: 1,
+            },
+            {
+                mix_points: 98,
+            }
+        ]
+    };
+
     // FIXED CAMERA SETTINGS
     camera.fov = 30;
     camera.updateProjectionMatrix();
     camera.position.set(0, 5, 40);
     camera.lookAt(0,0,0);
 
-
     // BACKGROUND
     scene.background = new THREE.Color( 0.25, 0.25, 0.25 );
-
-    
-
 
     // create display points
     sud.disp_points_0 = Samp_geodisp.create_points( { y: 3 } );
@@ -62,23 +74,31 @@ VIDEO.init = function(sm, scene, camera){
                 const amp0 = samp.amp0 === undefined ? 1.0 : samp.amp0;
                 const freq0 = samp.freq0 === undefined ? 0 : samp.freq0;
                 const a0 = a_wave * freq0 % 1;
-                const n0 = Math.sin( Math.PI * 2 * a0 ) * amp0;
+                let n0 = Math.sin( Math.PI * 2 * a0 ) * amp0;
             
                 const amp1 = samp.amp1 === undefined ? 1.0 : samp.amp1;
                 const freq1 = samp.freq1 === undefined ? 0 : samp.freq1;
                 const a1 = a_wave * freq1 % 1;
-                const n1 = Math.sin( Math.PI * 2 * a1 ) * amp1;
+                let n1 = Math.sin( Math.PI * 2 * a1 ) * amp1;
             
                 const amp2 = samp.amp2 === undefined ? 1.0 : samp.amp2;
                 const freq2 = samp.freq2 === undefined ? 0 : samp.freq2;
                 const a2 = a_wave * freq2 % 1;
-                const n2 = Math.sin( Math.PI * 2 * a2 ) * amp2;
+                let n2 = Math.sin( Math.PI * 2 * a2 ) * amp2;
             
                 Samp_geodisp.update_point( sud.disp_points_0, samp.i, n0 );
                 Samp_geodisp.update_point( sud.disp_points_1, samp.i, n1 );
                 Samp_geodisp.update_point( sud.disp_points_2, samp.i, n2 );
             
-                return ( n0 + n1 + n2 ) / 3 * samp.master_amplitude;
+                
+                //return ( n0 + n1 + n2 ) / 3 * samp.master_amplitude;
+                
+                n0 = n0 * THREE_TRACKS.tracks[0].mix_points / THREE_TRACKS.total_mix_points;
+                n1 = n1 * THREE_TRACKS.tracks[1].mix_points / THREE_TRACKS.total_mix_points;
+                n2 = n2 * THREE_TRACKS.tracks[2].mix_points / THREE_TRACKS.total_mix_points;
+                
+                return ( n0 + n1 + n2 ) * samp.master_amplitude;
+                
 
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
@@ -90,15 +110,10 @@ VIDEO.init = function(sm, scene, camera){
                 samp.amp1 = Samp_alphas.sin(array_samp[1].a_note, 1, 1) * 1.00;
                 samp.freq1 = array_samp[1].frequency;
             
-                //!!! I will want to work out new logic for adjusting amplitude
-                //const a_pad = Samp_alphas.pad(array_samp[2].a_note, 1, 1, true, 0.10, 0.90, 0);
-                //const a_padsin = 1; //Samp_alphas.sin(a_pad, 1, 1);
-                //samp.amp2 = a_padsin * 1.00;
-            
                 samp.amp2 = Samp_alphas.sin(array_samp[2].a_note, 1, 1) * 1.00;
                 samp.freq2 = array_samp[2].frequency;
 
-                samp.master_amplitude = 0.65;
+                samp.master_amplitude = THREE_TRACKS.master_amplitude;
                 samp.a_wave = opt.secs * a_sound % 1;
                 samp.i = i % 1470;
 

@@ -9,13 +9,13 @@
     
 ## () draft01-01-test-core-idea
     TRACK OBJECTS:
-        * () I will want to work out a new system for the objects that will be used for each track
-        * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
+        * (done) I will want to work out a new system for the objects that will be used for each track
         * () I will want to have a collection of waveform options to use for each track beyond just sin
+        * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
     MAIN MIX WAVEFORM:
         * (done) start a main mix waveform function
+        * (done) I should have a points system for setting what the amplitude is for each track
         * () the samp objects for each track should be in the form of an array
-        * () I should have a points system for setting what the amplitude is for each track
     MUSIC ROLLS:
         * (done) I will want to have the music roll as an external file
     MISC: 
