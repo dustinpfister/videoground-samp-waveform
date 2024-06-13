@@ -37,11 +37,11 @@
     };
     
     Samp_geodisp.create_line = (opt) => {
-        const DEFAULTS = { samp_size: 1470, y: 0, x_delta: 5, y_delta: 1, line_width: 3.00 }
+        const DEFAULTS = { samp_size: 1470, y: 0, x_delta: 5, y_delta: 1, linewidth: 3.00 }
         opt = opt || {};
         opt = Object.assign({}, DEFAULTS, opt);
         const geometry = create_line_geo(opt);
-        const material = new THREE.LineBasicMaterial({ vertexColors: true, linewidth: opt.line_width });
+        const material = new THREE.LineBasicMaterial({ vertexColors: true, linewidth: opt.linewidth });
         const line = new THREE.Line( geometry, material );
         line.position.set(0, opt.y, 0);
         line.userData = opt;
