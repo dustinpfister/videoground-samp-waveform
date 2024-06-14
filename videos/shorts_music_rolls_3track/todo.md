@@ -1,5 +1,29 @@
 # shorts_music_rolls_3track todo list
 
+<!-- ROLLS -->
+
+## () nes-megaman2
+    * woodman.txt - pull from 1bit music rolls
+    * bubbleman   - pull from 1bit music rolls
+
+## () nes-castlevania
+    * https://castlevaniadungeon.net/Media/midi.html
+    * level1.txt - vampire_killer_1.mid
+    * level2.txt - stalker_3.mid
+    * level3.txt - wicked_child_1.mid
+    * level4.txt - walking_on_the_edge_1.mid
+    * level5.txt - heart_of_fire_1.mid
+    * level6.txt - out_of_time_1.mid
+
+<!-- PLAYER FILES -->
+
+## () video01-01-toneonly-tri-pulse-noise
+    * () just start the first final player file
+    * () track0 will be tri, track1 will be pulse, and track2 will be noise
+    * () work out a look for this file that will set it apart from any future player files
+
+<!-- DFATFS FOR NEW PLAYER FILES -->
+
 ## () draft01-02-test-waveform-params
     TRACK OBJECTS:
         * () I will want to have at least one track waveform that makes use of one or more waveform paramaters
@@ -10,6 +34,8 @@
 ## () draft01-02-wrapper-functions
     TRACK OBJECTS:
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
+
+<!-- DONE -->
 
 ## () draft01-01-test-core-idea
         * (done) start a new display that involves creating a buffer geometry
