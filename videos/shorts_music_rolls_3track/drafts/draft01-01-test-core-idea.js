@@ -22,11 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
 
     // the music roll file to use
-    //const URI_ROLL = videoAPI.pathJoin( sm.filePath, 'draft_roll.txt' );
-    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/nes_megaman2/woodman.txt' );
-
-console.log(URI_ROLL);
-
+    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/draft/3track_test_1.txt' );
 
     
     const wf_sin = (samp, a_wave) => {
@@ -89,8 +85,6 @@ console.log(URI_ROLL);
     return videoAPI.read( URI_ROLL,  {alpha: 0, buffer_size_alpha: 1} )
     .then((roll)=>{
 
-console.log(roll);
-    
         const song_obj = Music_roll.parse( roll );
 
         // create the main sound object using CS.create_sound
