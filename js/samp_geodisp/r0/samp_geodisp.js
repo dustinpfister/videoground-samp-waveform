@@ -12,7 +12,8 @@
         while(i < opt.samp_size){
             const a = i / opt.samp_size;
             vertices.push(opt.x_delta * -1 + ( opt.x_delta * 2 ) * a, 0, 0);
-            Array.prototype.push.apply(colors, [1, a, 1 - a] );
+            //Array.prototype.push.apply(colors, [1, a, 1 - a] );
+            Array.prototype.push.apply(colors, opt.for_vertcolor(a, i, opt.samp_size, opt) );
             i += 1;
         }
         geometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array(vertices), 3 ) );        
@@ -22,7 +23,15 @@
     
     const Samp_geodisp = {};
     
-    const DEFAULTS_POINTS = { samp_size: 1470, y: 0, x_delta: 5, y_delta: 1, point_size: 1.00, linewidth: 3 };
+    const DEFAULTS_POINTS = {
+        samp_size: 1470, y: 0, x_delta: 5, y_delta: 1, point_size: 1.00, linewidth: 3,
+        for_vertcolor: (a, i, len, opt) => {
+            const r = 1 - a;
+            const g = 1;
+            const b = a;
+            return [r, g, b ];
+        }
+    };
     
     Samp_geodisp.create_points = (opt) => {
         opt = opt || {};
