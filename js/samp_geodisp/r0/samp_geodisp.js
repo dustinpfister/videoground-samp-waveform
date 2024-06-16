@@ -12,7 +12,7 @@
         while(i < opt.samp_size){
             const a = i / opt.samp_size;
             vertices.push(opt.x_delta * -1 + ( opt.x_delta * 2 ) * a, 0, 0);
-            colors.push(1, a, 1 - a);
+            Array.prototype.push.apply(colors, [1, a, 1 - a] );
             i += 1;
         }
         geometry.setAttribute( 'position', new THREE.BufferAttribute( new Float32Array(vertices), 3 ) );        
@@ -22,10 +22,11 @@
     
     const Samp_geodisp = {};
     
+    const DEFAULTS_POINTS = { samp_size: 1470, y: 0, x_delta: 5, y_delta: 1, point_size: 1.00, linewidth: 3 };
+    
     Samp_geodisp.create_points = (opt) => {
-        const DEFAULTS = { samp_size: 1470, y: 0, x_delta: 5, y_delta: 1, point_size: 1.00 }
         opt = opt || {};
-        opt = Object.assign({}, DEFAULTS, opt);
+        opt = Object.assign({}, DEFAULTS_POINTS, opt);
         const geometry = create_line_geo(opt);
         // material
         const material = new THREE.PointsMaterial({ size: opt.point_size, vertexColors: true });
@@ -37,9 +38,8 @@
     };
     
     Samp_geodisp.create_line = (opt) => {
-        const DEFAULTS = { samp_size: 1470, y: 0, x_delta: 5, y_delta: 1, linewidth: 3.00 }
         opt = opt || {};
-        opt = Object.assign({}, DEFAULTS, opt);
+        opt = Object.assign({}, DEFAULTS_POINTS, opt);
         const geometry = create_line_geo(opt);
         const material = new THREE.LineBasicMaterial({ vertexColors: true, linewidth: opt.linewidth });
         const line = new THREE.Line( geometry, material );
@@ -48,7 +48,7 @@
         return line;
     };
     
-    Samp_geodisp.update_point = (disp_points, index=0, samp=0, yMax=1) => {
+    Samp_geodisp.update_point = ( disp_points, index=0, samp=0 ) => {
         const geo = disp_points.geometry;
         const pos = geo.getAttribute('position');
         const pud = disp_points.userData;     
