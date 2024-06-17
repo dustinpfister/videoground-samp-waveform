@@ -18,9 +18,10 @@
 <!-- PLAYER FILES -->
 
 ## () video01-01-toneonly-tri-pulse-noise
-    * () just start the first final player file
+    * (done) start the first player file based on draft01-01
     * () track0 will be tri, track1 will be pulse, and track2 will be noise
     * () work out a look for this file that will set it apart from any future player files
+    * () start a main rolls folder called shorts_3track and create a video01-01-toneonly.txt file
 
 <!-- DRAFTS FOR NEW PLAYER FILES -->
 
