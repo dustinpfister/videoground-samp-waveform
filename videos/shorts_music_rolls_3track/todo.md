@@ -2,7 +2,11 @@
 
 <!-- ROLLS -->
 
-## () nes-megaman2
+## () dark_seed_one
+    * (done) first of a set of songs for an album called dark_seed
+    * () work out what measure 1 will be for this
+
+## () nes_megaman2
     * woodman.txt - pull from 1bit music rolls
     * bubbleman   - pull from 1bit music rolls
 
@@ -19,9 +23,12 @@
 
 ## () video01-01-toneonly-tri-pulse-noise
     * (done) start the first player file based on draft01-01
-    * () track0 will be tri, track1 will be pulse, and track2 will be noise
+    * (done) track0 will be tri, track1 will be pulse, and track2 will be noise
+    * (done) start a main rolls folder called shorts_3track, start first roll file
+    * (done) have a final tri waveform to use for these
+    * () have a final noise waveform to use for these
+
     * () work out a look for this file that will set it apart from any future player files
-    * () start a main rolls folder called shorts_3track and create a video01-01-toneonly.txt file
 
 <!-- DRAFTS FOR NEW PLAYER FILES -->
 

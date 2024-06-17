@@ -22,21 +22,37 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
 
     // the music roll file to use
-    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/draft/3track_test_1.txt' );
+    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/dark_seed_one.txt' );
 
-    const WF_PULSE_SAMP_DEFAULTS = {
-        duty: 0.40,
-        freq: 0,
-        amp: 0,
-        a_note: 0
-    }; 
 
+    /********* **********
+    TRI
+    ********** *********/
+    const wf_tri = {
+        samp_default: { freq: 0, amp: 0, step_count: 5 },
+        waveform: (samp, a_wave) => {
+            samp = Object.assign({}, wf_tri.samp_default, samp);
+            const a_cycle = a_wave * samp.freq % 1;  
+            let a_bias = 1 - Math.abs( 0.5 - a_cycle ) / 0.5;
+            if(samp.step_count >= 2){
+                a_bias = Math.floor( a_bias * samp.step_count) / (samp.step_count - 1);
+            } 
+            return samp.amp * -1 + samp.amp * 2 * a_bias;
+        }    
+    };
+    const wf_tri_vamp = {
+        samp_default: {},
+        waveform: (samp, a_wave) => {
+            samp = Object.assign({}, wf_tri_vamp.samp_default, samp);
+            samp.amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;
+            return wf_tri.waveform(samp, a_wave);
+        }    
+    };   
+    /********* **********
+    PULSE
+    ********** *********/
     const wf_pulse = {
-        samp_default: {
-            duty: 0.50,
-            freq: 0,
-            amp: 0
-        },
+        samp_default: { duty: 0.50, freq: 0, amp: 0 },
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_pulse.samp_default, samp);
             const a_cycle = a_wave * samp.freq % 1;    
@@ -50,12 +66,8 @@ VIDEO.init = function(sm, scene, camera){
             return n * samp.amp;
         }    
     };
-  
     const wf_pulse_vduty = {
-        samp_default: {
-            v_duty: true,
-            duty_target: 0.50
-        },
+        samp_default: { v_duty: true, duty_target: 0.50, a_note: 0 },
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_pulse_vduty.samp_default, samp);
             if(samp.v_duty){
@@ -68,6 +80,20 @@ VIDEO.init = function(sm, scene, camera){
             return wf_pulse.waveform(samp, a_wave);
         }
     };
+    
+    /********* **********
+    NOISE
+    ********** *********/
+    const wf_noise = {
+        samp_default: {
+            freq: 0,
+            amp: 0
+        },
+        waveform: (samp, a_wave) => {
+            samp = Object.assign({}, wf_noise.samp_default, samp);
+            return 0;
+        }    
+    };
 
     const THREE_TRACKS = {
         master_amplitude: 0.65,
@@ -75,7 +101,7 @@ VIDEO.init = function(sm, scene, camera){
         tracks: [
             {
                 mix_points: 1,
-                waveform: wf_pulse_vduty.waveform
+                waveform: wf_tri_vamp.waveform
             },
             {
                 mix_points: 1,
@@ -83,7 +109,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             {
                 mix_points: 2,
-                waveform: wf_pulse_vduty.waveform
+                waveform: wf_noise.waveform
             }
         ]
     };
