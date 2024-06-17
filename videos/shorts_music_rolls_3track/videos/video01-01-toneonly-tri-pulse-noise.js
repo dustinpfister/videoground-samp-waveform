@@ -110,7 +110,7 @@ VIDEO.init = function(sm, scene, camera){
     TRACK OBJECTS
     ********** *********/
     const THREE_TRACKS = {
-        master_amplitude: 0.65,
+        master_amplitude: 0.75,
         total_mix_points: 4,
         tracks: [
             {
@@ -127,15 +127,16 @@ VIDEO.init = function(sm, scene, camera){
             }
         ]
     };
-
-    // FIXED CAMERA SETTINGS
+    /********* **********
+    FIXED CAMERA SETTINGS
+    ********** *********/
     camera.fov = 30;
     camera.updateProjectionMatrix();
-    camera.position.set(0, 5, 40);
+    camera.position.set(0, 0, 35);
     camera.lookAt(0,0,0);
 
     // BACKGROUND
-    scene.background = new THREE.Color( 0.25, 0.25, 0.25 );
+    scene.background = new THREE.Color( 0.10, 0.10, 0.10 );
 
     // create display points
     sud.disp_points_0 = Samp_geodisp.create_line( { y: 3, linewidth: 18, for_vertcolor: (a) => { return [1,1-a,a] } } );
@@ -144,11 +145,20 @@ VIDEO.init = function(sm, scene, camera){
     
     scene.add( sud.disp_points_0, sud.disp_points_1, sud.disp_points_2 );
     
-    const grid = new THREE.GridHelper( 10, 10, 0xafafaf, 0xafafaf);
-    grid.position.z = -0.25;
-    grid.material.linewidth = 4;
-    grid.rotation.x = Math.PI * 0.5;
-    scene.add( grid );
+    const create_disp_grid = () => {
+    
+        const grid = new THREE.GridHelper( 2, 2, 0x808080, 0x808080);
+        grid.position.z = -0.25;
+        grid.material.linewidth = 4;
+        grid.rotation.x = Math.PI * 0.5;
+        grid.scale.set(5,1,1);
+        return grid;
+    
+    };
+    
+   sud.disp_points_0.add( create_disp_grid() );
+   sud.disp_points_1.add( create_disp_grid() );
+   sud.disp_points_2.add( create_disp_grid() );
    
     return videoAPI.read( URI_ROLL,  {alpha: 0, buffer_size_alpha: 1} )
     .then((roll)=>{
@@ -207,10 +217,6 @@ VIDEO.init = function(sm, scene, camera){
 //-------- ----------
 VIDEO.update = function(sm, scene, camera, per, bias){
     const sud = scene.userData;
-    
-    camera.position.set(-10 + 20 * bias, 0, 35);
-    camera.lookAt(0,0,0);
-    
     const data_samples = CS.create_frame_samples(sud.sound, sm.frame, sm.frameMax );
     return CS.write_frame_samples(sud.sound, data_samples, sm.frame, sm.imageFolder, sm.isExport);
 };
