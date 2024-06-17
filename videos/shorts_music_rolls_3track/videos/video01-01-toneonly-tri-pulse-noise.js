@@ -26,12 +26,13 @@ VIDEO.init = function(sm, scene, camera){
 
 
     /********* **********
-    TRI
+    WAVEFORM 0 - TRI
     ********** *********/
     const wf_tri = {
         samp_default: { freq: 0, amp: 0, step_count: 5 },
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_tri.samp_default, samp);
+            if(!samp.freq){ return 0; }
             const a_cycle = a_wave * samp.freq % 1;  
             let a_bias = 1 - Math.abs( 0.5 - a_cycle ) / 0.5;
             if(samp.step_count >= 2){
@@ -41,7 +42,7 @@ VIDEO.init = function(sm, scene, camera){
         }    
     };
     const wf_tri_vamp = {
-        samp_default: {},
+        samp_default: { a_note: 0 },
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_tri_vamp.samp_default, samp);
             samp.amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;
@@ -49,16 +50,14 @@ VIDEO.init = function(sm, scene, camera){
         }    
     };   
     /********* **********
-    PULSE
+    WAVEFORM 1 - PULSE
     ********** *********/
     const wf_pulse = {
         samp_default: { duty: 0.50, freq: 0, amp: 0 },
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_pulse.samp_default, samp);
+            if(!samp.freq){ return 0; }
             const a_cycle = a_wave * samp.freq % 1;    
-            if(!samp.freq){
-                return 0;
-            }
             let n = -1;
             if(a_cycle >= samp.duty){
                n = 1;
@@ -69,7 +68,7 @@ VIDEO.init = function(sm, scene, camera){
     const wf_pulse_vduty = {
         samp_default: { v_duty: true, duty_target: 0.50, a_note: 0 },
         waveform: (samp, a_wave) => {
-            samp = Object.assign({}, wf_pulse_vduty.samp_default, samp);
+            samp = Object.assign({}, wf_pulse_vduty.samp_default, samp);        
             if(samp.v_duty){
                 samp.duty = samp.duty_target * Samp_alphas.sin(samp.a_note, 1, 1);
             }
@@ -79,22 +78,37 @@ VIDEO.init = function(sm, scene, camera){
             samp.amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;
             return wf_pulse.waveform(samp, a_wave);
         }
-    };
-    
+    };    
     /********* **********
-    NOISE
+    WAVEFORM 2 - NOISE
     ********** *********/
     const wf_noise = {
-        samp_default: {
-            freq: 0,
-            amp: 0
-        },
+        samp_default: { freq: 0, amp: 0, values_per_wave: 80, int_shift: 0, freq_alpha: 1 },
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_noise.samp_default, samp);
-            return 0;
-        }    
+            if(!samp.freq){ return 0; } 
+            const freq_raw = samp.freq;
+            const freq = freq_raw * samp.freq_alpha;
+            const a = ( a_wave * freq % 1 ) * samp.values_per_wave;
+            const i = Math.floor( a * 0.99999999 );
+            const b = -1 + 2 * THREE.MathUtils.seededRandom( samp.int_shift + i );
+            const n = b;
+            return n * samp.amp;
+        }  
     };
-
+    const wf_noise_vamp = {
+        samp_default: { a_note: 0, vpw_start: 20, vpw_delta: 30 },
+        waveform: (samp, a_wave) => {
+            samp = Object.assign({}, wf_noise_vamp.samp_default, samp);
+            const a2 = Samp_alphas.sin(samp.a_note, 1, 1);
+            samp.amp = a2 * samp.amp;
+            samp.values_per_wave = samp.vpw_start + samp.vpw_delta * samp.a_note;
+            return wf_noise.waveform(samp, a_wave);
+        }  
+    };
+    /********* **********
+    TRACK OBJECTS
+    ********** *********/
     const THREE_TRACKS = {
         master_amplitude: 0.65,
         total_mix_points: 4,
@@ -109,7 +123,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             {
                 mix_points: 2,
-                waveform: wf_noise.waveform
+                waveform: wf_noise_vamp.waveform
             }
         ]
     };
