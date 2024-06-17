@@ -111,7 +111,7 @@ VIDEO.init = function(sm, scene, camera){
     ********** *********/
     const THREE_TRACKS = {
         master_amplitude: 0.75,
-        total_mix_points: 4,
+        total_mix_points: 3,
         tracks: [
             {
                 mix_points: 1,
@@ -122,7 +122,7 @@ VIDEO.init = function(sm, scene, camera){
                 waveform: wf_pulse_vduty.waveform
             },
             {
-                mix_points: 2,
+                mix_points: 1,
                 waveform: wf_noise_vamp.waveform
             }
         ]
@@ -139,9 +139,9 @@ VIDEO.init = function(sm, scene, camera){
     scene.background = new THREE.Color( 0.10, 0.10, 0.10 );
 
     // create display points
-    sud.disp_points_0 = Samp_geodisp.create_line( { y: 3, linewidth: 18, for_vertcolor: (a) => { return [1,1-a,a] } } );
-    sud.disp_points_1 = Samp_geodisp.create_line( { y: 0, linewidth: 18, for_vertcolor: (a) => { return [0,1,1-a] } } );
-    sud.disp_points_2 = Samp_geodisp.create_line( { y:-3, linewidth: 18, for_vertcolor: (a) => { return [a,a,1] } } );
+    sud.disp_points_0 = Samp_geodisp.create_line( { y: 3, linewidth: 10, for_vertcolor: (a) => { return [1,1-a,a] } } );
+    sud.disp_points_1 = Samp_geodisp.create_line( { y: 0, linewidth: 10, for_vertcolor: (a) => { return [0,1,1-a] } } );
+    sud.disp_points_2 = Samp_geodisp.create_line( { y:-3, linewidth: 10, for_vertcolor: (a) => { return [a,a,1] } } );
     
     scene.add( sud.disp_points_0, sud.disp_points_1, sud.disp_points_2 );
     
@@ -191,7 +191,7 @@ VIDEO.init = function(sm, scene, camera){
 
                 samp.tracks = THREE_TRACKS.tracks.map( (track, i) => {
                     return {
-                        amp: 1.00,
+                        amp: array_samp[i].amplitude / 100,
                         a_note: array_samp[i].a_note,
                         freq: array_samp[i].frequency
                     };
