@@ -1,4 +1,4 @@
->title='dark seed: one'
+>title=dark_seed: One
 >lines_per_minute=300;
 #
 # measure 1;

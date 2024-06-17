@@ -28,6 +28,7 @@
     * (done) have a final tri waveform to use for these
     * (done) have a final noise waveform to use for these
     * (done) work out a look for this file that will set it apart from any future player files
+    * (done) display title of current roll
 
 <!-- DRAFTS FOR NEW PLAYER FILES -->
 

@@ -163,7 +163,9 @@ VIDEO.init = function(sm, scene, camera){
     return videoAPI.read( URI_ROLL,  {alpha: 0, buffer_size_alpha: 1} )
     .then((roll)=>{
 
-        const song_obj = Music_roll.parse( roll );
+        sud.song_obj = Music_roll.parse( roll );
+        
+        console.log(sud.song_obj.title);
 
         // create the main sound object using CS.create_sound
         const sound = sud.sound = CS.create_sound({
@@ -185,7 +187,7 @@ VIDEO.init = function(sm, scene, camera){
                 
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
-                const array_samp = Music_roll.play(song_obj, a_sound);
+                const array_samp = Music_roll.play(sud.song_obj, a_sound);
 
                 samp.tracks = THREE_TRACKS.tracks.map( (track, i) => {
                     return {
@@ -202,7 +204,7 @@ VIDEO.init = function(sm, scene, camera){
                 return samp;
 
             },
-            secs: Math.ceil( song_obj.total_secs )
+            secs: Math.ceil( sud.song_obj.total_secs )
         });
 
         // set vg sm.frameMax to frames value of sound object
@@ -226,15 +228,20 @@ VIDEO.update = function(sm, scene, camera, per, bias){
 VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const sud = scene.userData;
     
-    
-    //sud.disp_points.geometry.getAttribute('position').needsUpdate = true;
-    
-    ctx.fillStyle = 'rgba(0,0,0,1)';
-    ctx.fillRect(0,0, canvas.width, canvas.height);
-
-
+    // draw 3d
     renderer.render(scene, camera);
     ctx.drawImage(renderer.domElement, 0, 0, canvas.width, canvas.height);
+
+    // draw title with 2d context
+    ctx.fillStyle = 'white';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.font = '35px courier';
+    const album = sud.song_obj.title.split(':')[0];
+    const title = sud.song_obj.title.split(':')[1];
+    
+    ctx.fillText(album, canvas.width / 2, 150);
+    ctx.fillText(title, canvas.width / 2, 200);
 
 };
 
