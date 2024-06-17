@@ -24,38 +24,66 @@ VIDEO.init = function(sm, scene, camera){
     // the music roll file to use
     const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/draft/3track_test_1.txt' );
 
-    
-    const wf_sin = (samp, a_wave) => {
-        const a_cycle = a_wave * samp.freq % 1;
-        const amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;       
-        return Math.sin( Math.PI * 2 * a_cycle ) * amp;          
+    const WF_PULSE_SAMP_DEFAULTS = {
+        duty: 0.40,
+        freq: 0,
+        amp: 0,
+        a_note: 0
+    }; 
+
+    const wf_pulse = {
+        samp_default: {
+            duty: 0.50,
+            freq: 0,
+            amp: 0
+        },
+        waveform: (samp, a_wave) => {
+            samp = Object.assign({}, wf_pulse.samp_default, samp);
+            const a_cycle = a_wave * samp.freq % 1;    
+            if(!samp.freq){
+                return 0;
+            }
+            let n = -1;
+            if(a_cycle >= samp.duty){
+               n = 1;
+            }
+            return n * samp.amp;
+        }    
     };
-    
-    const wf_square = (samp, a_wave) => {
-        const a_cycle = a_wave * samp.freq % 1;
-        const amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;       
-        let n = -1;
-        if(a_cycle >= 0.5){
-           n = 1;
+  
+    const wf_pulse_vduty = {
+        samp_default: {
+            v_duty: true,
+            duty_target: 0.50
+        },
+        waveform: (samp, a_wave) => {
+            samp = Object.assign({}, wf_pulse_vduty.samp_default, samp);
+            if(samp.v_duty){
+                samp.duty = samp.duty_target * Samp_alphas.sin(samp.a_note, 1, 1);
+            }
+            if(!samp.v_duty){
+                samp.duty = duty_target
+            }
+            samp.amp = Samp_alphas.sin(samp.a_note, 1, 1) * samp.amp;
+            return wf_pulse.waveform(samp, a_wave);
         }
-        return n * amp;
     };
 
     const THREE_TRACKS = {
         master_amplitude: 0.65,
-        total_mix_points: 3,
+        total_mix_points: 4,
         tracks: [
             {
                 mix_points: 1,
-                waveform: wf_sin
+                waveform: wf_pulse_vduty.waveform
             },
             {
                 mix_points: 1,
-                waveform: wf_sin
+                waveform: wf_pulse_vduty.waveform
             },
             {
-                mix_points: 1,
-                waveform: wf_square
+                mix_points: 2,
+                waveform: wf_pulse_vduty.waveform
             }
         ]
     };
