@@ -1,3 +1,5 @@
+# darkseed01_one.txt was made for video01-01-toneonly-tri-pulse-noise - form shorts_3track
+# June/18/2024
 >title=dark_seed: One
 >lines_per_minute=300;
 #
