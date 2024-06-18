@@ -1,0 +1,25 @@
+# darkseed02_two.txt was made for video01-01-toneonly-tri-pulse-noise - form shorts_3track
+# I was also using R0 of music_roll for this
+>title=dark_seed: Two
+>lines_per_minute=800;
+#
+# measure 1;
+#
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+--- --;--- --;c-1 99;
+
+
