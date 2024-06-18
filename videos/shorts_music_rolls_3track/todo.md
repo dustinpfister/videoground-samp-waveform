@@ -2,15 +2,11 @@
 
 <!-- ROLLS -->
 
-## () dark_seed_one
-    * (done) first of a set of songs for an album called dark_seed
-    * () work out what measure 1 will be for this
-
 ## () nes_megaman2
     * woodman.txt - pull from 1bit music rolls
     * bubbleman   - pull from 1bit music rolls
 
-## () nes-castlevania
+## () nes_castlevania
     * https://castlevaniadungeon.net/Media/midi.html
     * level1.txt - vampire_killer_1.mid
     * level2.txt - stalker_3.mid
@@ -21,6 +17,25 @@
 
 <!-- PLAYER FILES -->
 
+<!-- DRAFTS FOR NEW PLAYER FILES -->
+
+## () draft01-02-test-waveform-params
+    TRACK OBJECTS:
+        * () I will want to have at least one track waveform that makes use of one or more waveform paramaters
+    MUSIC ROLLS:
+        * () work on R1 of music rolls, and get waveform paramaters working
+        * () work out a new roll that makes use of paramaters
+
+## () draft01-03-wrapper-functions
+    TRACK OBJECTS:
+        * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
+
+<!-- DONE ROLLS -->
+
+## ( done 06/18/2024 ) dark_seed_one
+    * (done) first of a set of songs for an album called dark_seed
+    * (done) work out what measure 1 will be for this
+
 ## ( done 06/17/2024 ) video01-01-toneonly-tri-pulse-noise
     * (done) start the first player file based on draft01-01
     * (done) track0 will be tri, track1 will be pulse, and track2 will be noise
@@ -29,20 +44,6 @@
     * (done) have a final noise waveform to use for these
     * (done) work out a look for this file that will set it apart from any future player files
     * (done) display title of current roll
-
-<!-- DRAFTS FOR NEW PLAYER FILES -->
-
-## () draft01-02-wrapper-functions
-    TRACK OBJECTS:
-        * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
-## () draft01-03-test-waveform-params
-    TRACK OBJECTS:
-        * () I will want to have at least one track waveform that makes use of one or more waveform paramaters
-    MUSIC ROLLS:
-        * () work on R1 of music rolls, and get waveform paramaters working
-        * () work out a new roll that makes use of paramaters
-
-<!-- DONE -->
 
 ## ( done 06/16/2024 ) draft01-01-test-core-idea
     * (done) start a new display that involves creating a buffer geometry

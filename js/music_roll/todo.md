@@ -4,9 +4,10 @@
     * () parse paramaters as part of the over all parse process for line objects
     * () param property of a line object should be an object rather than an array to help simplyfy the process of creating the final samp object used by the waveform function
     * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.
+    * () can set artist, and album keys for a song object
 
     
-## () - R0 - Just get the core idea of this working
+## ( done 06/18/2024 ) - R0 - Just get the core idea of this working
     * (done) work out what the format will be for setting just pitch and amplitude
     * (done) start code that will parse the text into objects
     * (done) I will need a helper function to process counts to help with the note alphas
@@ -26,6 +27,5 @@
     * (done) fixed bug where I was not getting proper n and d values for the first note
     * (done) freq format should be three dashes --- or update code to work better with variable patterns
     * (done) rounding frequency
-    
-    * () update readme
+    * (done) update readme
     
