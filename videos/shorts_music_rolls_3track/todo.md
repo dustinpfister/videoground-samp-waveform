@@ -2,6 +2,24 @@
 
 <!-- ROLLS -->
 
+## ( ) dark_seed_two
+
+## ( ) dark_seed_three
+
+## ( ) dark_seed_four
+
+## ( ) dark_seed_five
+
+## ( ) dark_seed_six
+
+## ( ) dark_seed_seven
+
+## ( ) dark_seed_eight
+
+## ( ) dark_seed_nine
+
+## ( ) dark_seed_ten
+
 ## () nes_megaman2
     * woodman.txt - pull from 1bit music rolls
     * bubbleman   - pull from 1bit music rolls
@@ -35,6 +53,7 @@
 ## ( done 06/18/2024 ) dark_seed_one
     * (done) first of a set of songs for an album called dark_seed
     * (done) work out what measure 1 will be for this
+    * (done) finish the tune
 
 ## ( done 06/17/2024 ) video01-01-toneonly-tri-pulse-noise
     * (done) start the first player file based on draft01-01
