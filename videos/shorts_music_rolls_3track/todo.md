@@ -2,8 +2,6 @@
 
 <!-- ROLLS -->
 
-## ( ) ROLL: dark_seed_five
-
 ## ( ) ROLL: dark_seed_six
 
 ## ( ) ROLL: dark_seed_seven
@@ -43,6 +41,9 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/20/2024 ) ROLL: dark_seed_five
+    * (done) fast notes for noise track
 
 ## ( done 06/20/2024 ) ROLL: dark_seed_four
     * (done) start the score
