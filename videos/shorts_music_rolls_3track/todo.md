@@ -2,6 +2,17 @@
 
 <!-- ROLLS -->
 
+## ( ) ROLL: nes_castlevania - level1
+    * (done) base roll on cv_level1.txt - vampire_killer_1.mid
+    * (done) start with measure1
+    * (done) measure 2
+    * (done) measure 3
+    * (done) measure 4
+    * (done) measure 5
+    * () measure 6
+    * () measure 7
+    * () measure 8
+
 ## ( ) ROLL: dark_seed_six
     * () start the score
     * () try out somehting where a few notes are played in tri track, then pulse, then togeather
@@ -19,12 +30,6 @@
     * mm2_02_
     * mm2_03_woodman.txt - pull from 1bit music rolls
     * mm2_04_bubbleman   - pull from 1bit music rolls
-
-## ( ) ROLL: nes_castlevania - level1
-    * (done) base roll on cv_level1.txt - vampire_killer_1.mid
-    * (done) start with measure1
-    * () measure 2
-    * () measure 3
     
 ## ( ) ROLL: nes_castlevania - level2
     * https://castlevaniadungeon.net/Media/midi.html
@@ -36,8 +41,6 @@
 
 <!-- PLAYER FILES -->
 
-## () video01-02-toneonly-neslook
-   * () same as with video01-01, only with new nes look
 
 <!-- DRAFTS FOR NEW PLAYER FILES -->
 
@@ -53,6 +56,9 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/20/2024 ) video01-02-toneonly-neslook
+   * (done) same as with video01-01, only with new nes look
 
 ## ( done 06/20/2024 ) ROLL: dark_seed_five
     * (done) fast notes for noise track
