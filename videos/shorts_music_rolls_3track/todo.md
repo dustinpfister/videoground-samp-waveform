@@ -3,6 +3,8 @@
 <!-- ROLLS -->
 
 ## ( ) ROLL: dark_seed_six
+    * () start the score
+    * () try out somehting where a few notes are played in tri track, then pulse, then togeather
 
 ## ( ) ROLL: dark_seed_seven
 
@@ -13,19 +15,29 @@
 ## ( ) ROLL: dark_seed_ten
 
 ## ( ) ROLL: nes_megaman2
-    * woodman.txt - pull from 1bit music rolls
-    * bubbleman   - pull from 1bit music rolls
+    * mm2_01_
+    * mm2_02_
+    * mm2_03_woodman.txt - pull from 1bit music rolls
+    * mm2_04_bubbleman   - pull from 1bit music rolls
 
-## ( ) ROLL: nes_castlevania
+## ( ) ROLL: nes_castlevania - level1
+    * (done) base roll on cv_level1.txt - vampire_killer_1.mid
+    * (done) start with measure1
+    * () measure 2
+    * () measure 3
+    
+## ( ) ROLL: nes_castlevania - level2
     * https://castlevaniadungeon.net/Media/midi.html
-    * level1.txt - vampire_killer_1.mid
-    * level2.txt - stalker_3.mid
-    * level3.txt - wicked_child_1.mid
-    * level4.txt - walking_on_the_edge_1.mid
-    * level5.txt - heart_of_fire_1.mid
-    * level6.txt - out_of_time_1.mid
+    * cv_level2.txt - stalker_3.mid
+    * cv_level3.txt - wicked_child_1.mid
+    * cv_level4.txt - walking_on_the_edge_1.mid
+    * cv_level5.txt - heart_of_fire_1.mid
+    * cv_level6.txt - out_of_time_1.mid
 
 <!-- PLAYER FILES -->
+
+## () video01-02-toneonly-neslook
+   * () same as with video01-01, only with new nes look
 
 <!-- DRAFTS FOR NEW PLAYER FILES -->
 
