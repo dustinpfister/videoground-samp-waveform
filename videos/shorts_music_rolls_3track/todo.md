@@ -2,10 +2,6 @@
 
 <!-- ROLLS -->
 
-## ( ) ROLL: dark_seed_four
-    * () start the score
-    * () start with the noise track, make it simular to the first seeded noise video
-
 ## ( ) ROLL: dark_seed_five
 
 ## ( ) ROLL: dark_seed_six
@@ -47,6 +43,10 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/20/2024 ) ROLL: dark_seed_four
+    * (done) start the score
+    * (done) start with the noise track, make it simular to the first seeded noise video
 
 ## ( done 06/20/2024 ) ROLL: dark_seed_three
     * (done) start score
