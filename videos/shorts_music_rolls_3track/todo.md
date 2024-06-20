@@ -2,13 +2,9 @@
 
 <!-- ROLLS -->
 
-## ( ) ROLL: dark_seed_three
-    * () start score
-    * () try something with lots of eighth notes on the tri track
-    * () try lots of half and eight notes for pulse track
-    * () try whole and half notes for noise
-
 ## ( ) ROLL: dark_seed_four
+    * () start the score
+    * () start with the noise track, make it simular to the first seeded noise video
 
 ## ( ) ROLL: dark_seed_five
 
@@ -51,6 +47,12 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/20/2024 ) ROLL: dark_seed_three
+    * (done) start score
+    * (done) try something with lots of eighth notes on the tri track
+    * (done) try some half and eight notes for pulse track
+    * (done) try whole and half notes for noise
 
 ## ( done 06/19/2024 ) ROLL: dark_seed_two
     * (done) start score
