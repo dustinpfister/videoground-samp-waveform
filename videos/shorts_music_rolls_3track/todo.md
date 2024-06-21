@@ -1,6 +1,13 @@
 # shorts_music_rolls_3track todo list
 
-<!-- ROLLS -->
+<!-- ROLLS-ORIGINAL -->
+
+## ( ) ROLL: dark_seed_six
+    * (done) start the score
+    * (done) try out somehting where a few notes are played in tri track, then pulse, then togeather
+    * () adjust things with pitch and amplitude before publish
+
+<!-- ROLLS-COVER -->
 
 ## ( ) ROLL: nes_castlevania - level1
     * (done) base roll on cv_level1.txt - vampire_killer_1.mid
@@ -13,9 +20,6 @@
     * () measure 7
     * () measure 8
 
-## ( ) ROLL: dark_seed_six
-    * () start the score
-    * () try out somehting where a few notes are played in tri track, then pulse, then togeather
 
 ## ( ) ROLL: dark_seed_seven
 
