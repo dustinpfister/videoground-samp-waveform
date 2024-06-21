@@ -2,10 +2,8 @@
 
 <!-- ROLLS-ORIGINAL -->
 
-## ( ) ROLL: dark_seed_six
-    * (done) start the score
-    * (done) try out somehting where a few notes are played in tri track, then pulse, then togeather
-    * () adjust things with pitch and amplitude before publish
+## ( ) ROLL: dark_seed_seven
+    * () start the score
 
 <!-- ROLLS-COVER -->
 
@@ -19,9 +17,6 @@
     * () measure 6
     * () measure 7
     * () measure 8
-
-
-## ( ) ROLL: dark_seed_seven
 
 ## ( ) ROLL: dark_seed_eight
 
@@ -60,6 +55,11 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/21/2024 ) ROLL: dark_seed_six
+    * (done) start the score
+    * (done) try out somehting where a few notes are played in tri track, then pulse, then togeather
+    * (done) adjust things with pitch and amplitude before publish
 
 ## ( done 06/20/2024 ) video01-02-toneonly-neslook
    * (done) same as with video01-01, only with new nes look
