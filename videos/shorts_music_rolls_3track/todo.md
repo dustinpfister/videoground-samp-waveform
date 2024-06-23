@@ -2,9 +2,12 @@
 
 <!-- ROLLS-ORIGINAL -->
 
-## ( ) ROLL: dark_seed_eight
+## ( ) ROLL: dark_seed_nine
     * () start the score
 
+## ( ) ROLL: dark_seed_ten
+    * () start the score
+    
 <!-- ROLLS-COVER -->
 
 ## ( ) ROLL: nes_castlevania - level1
@@ -17,10 +20,6 @@
     * () measure 6
     * () measure 7
     * () measure 8
-
-## ( ) ROLL: dark_seed_nine
-
-## ( ) ROLL: dark_seed_ten
 
 ## ( ) ROLL: nes_megaman2
     * mm2_01_
@@ -53,6 +52,9 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/23/2024 ) ROLL: dark_seed_eight
+    * (done) start the score
 
 ## ( done 06/22/2024 ) ROLL: dark_seed_seven
     * (done) start the score
