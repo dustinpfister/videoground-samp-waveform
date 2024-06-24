@@ -2,9 +2,6 @@
 
 <!-- ROLLS-ORIGINAL -->
 
-## ( ) ROLL: dark_seed_nine
-    * () start the score
-
 ## ( ) ROLL: dark_seed_ten
     * () start the score
     
@@ -52,6 +49,10 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/24/2023 ) ROLL: dark_seed_nine
+    * (done) start the score
+    * (done) work out a tune that is 32 lines per measure, and 960 lines per minute
 
 ## ( done 06/23/2024 ) ROLL: dark_seed_eight
     * (done) start the score

@@ -1,4 +1,4 @@
-# darkseed06_six.txt was made for video01-01-toneonly-tri-pulse-noise - form shorts_3track
+# darkseed06_seven.txt was made for video01-01-toneonly-tri-pulse-noise - form shorts_3track
 # I was also using R0 of music_roll for this
 >title=dark_seed: Seven
 >lines_per_minute=480;
