@@ -3,8 +3,29 @@
 <!-- ROLLS-ORIGINAL -->
 
 ## ( ) ROLL: dark_seed_ten
-    * () start the score
-    
+    * (done) start the score
+    * () try one of the tunes that I wrote down
+
+## ( ) ROLL: dark_seed_eleven
+
+## ( ) ROLL: dark_seed_twelve
+
+## ( ) ROLL: dark_seed_thirteen
+
+## ( ) ROLL: dark_seed_fourteen
+
+## ( ) ROLL: dark_seed_fifteen
+
+## ( ) ROLL: dark_seed_sixteen
+
+## ( ) ROLL: dark_seed_seventeen
+
+## ( ) ROLL: dark_seed_eighteen
+
+## ( ) ROLL: dark_seed_nineteen
+
+## ( ) ROLL: dark_seed_twenty
+
 <!-- ROLLS-COVER -->
 
 ## ( ) ROLL: nes_castlevania - level1
