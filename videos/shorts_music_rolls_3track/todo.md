@@ -2,11 +2,6 @@
 
 <!-- ROLLS-ORIGINAL -->
 
-## ( ) ROLL: dark_seed_twelve
-    * (done) start the score file
-    * () just have a simple noise bass riff
-    * () have a measure or two where tri and pulse just play togeather
-
 ## ( ) ROLL: dark_seed_thirteen
     * () start the score file
 
@@ -68,6 +63,10 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/26/2024 ) ROLL: dark_seed_twelve
+    * (done) start the score file
+    * (done) just have a simple noise bass riff
 
 ## ( done 06/25/2024 ) ROLL: dark_seed_eleven
     * (done) start the score
