@@ -2,13 +2,13 @@
 
 <!-- ROLLS-ORIGINAL -->
 
-## ( ) ROLL: dark_seed_eleven
-    * () start the score
-    * () base this one again on a tune that was wrote down on paper
-
 ## ( ) ROLL: dark_seed_twelve
+    * (done) start the score file
+    * () just have a simple noise bass riff
+    * () have a measure or two where tri and pulse just play togeather
 
 ## ( ) ROLL: dark_seed_thirteen
+    * () start the score file
 
 ## ( ) ROLL: dark_seed_fourteen
 
@@ -69,6 +69,10 @@
 
 <!-- DONE -->
 
+## ( done 06/25/2024 ) ROLL: dark_seed_eleven
+    * (done) start the score
+    * (done) base this one again on a tune that was wrote down on paper
+
 ## ( done 06/24/2024 ) ROLL: dark_seed_ten
     * (done) start the score
     * (done) try one of the tunes that I wrote down
@@ -89,7 +93,7 @@
     * (done) adjust things with pitch and amplitude before publish
 
 ## ( done 06/20/2024 ) video01-02-toneonly-neslook
-   * (done) same as with video01-01, only with new nes look
+    * (done) same as with video01-01, only with new nes look
 
 ## ( done 06/20/2024 ) ROLL: dark_seed_five
     * (done) fast notes for noise track
