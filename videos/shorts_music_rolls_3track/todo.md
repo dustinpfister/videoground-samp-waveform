@@ -2,10 +2,8 @@
 
 <!-- ROLLS-ORIGINAL -->
 
-## ( ) ROLL: dark_seed_sixteen
-    * () start the score file
-
 ## ( ) ROLL: dark_seed_seventeen
+    * () start the score
 
 ## ( ) ROLL: dark_seed_eighteen
 
@@ -57,6 +55,9 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/28/2024 ) ROLL: dark_seed_sixteen
+    * (done) start the score file
 
 ## ( done 06/27/2024 ) ROLL: dark_seed_fourteen
     * (done) start the score file
