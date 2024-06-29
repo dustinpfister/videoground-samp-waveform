@@ -2,14 +2,33 @@
 
 <!-- ROLLS-ORIGINAL -->
 
-## ( ) ROLL: dark_seed_eighteen
-    * () start the score
-
 ## ( ) ROLL: dark_seed_nineteen
     * () start the score
+    * () try another 2 measure tune
 
 ## ( ) ROLL: dark_seed_twenty
     * () start the score
+    * () try another 2 measure tune
+
+## ( ) ROLL: dark_seed_twentyone
+    * () start the score
+    * () 4 measure tune, focus on what the hook is
+
+## ( ) ROLL: dark_seed_twentytwo
+    * () start the score
+    * () 4 measure tune, focus on what the hook is
+    
+## ( ) ROLL: dark_seed_twentythree
+    * () start the score
+    * () 4 measure tune, focus on what the hook is
+    
+## ( ) ROLL: dark_seed_twentyfour
+    * () start the score
+    * () 4 measure tune, focus on what the hook is
+    
+## ( ) ROLL: dark_seed_twentyfive
+    * () start the score
+    * () 4 measure tune, focus on what the hook is
 
 <!-- ROLLS-COVER -->
 
@@ -55,6 +74,9 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 06/29/2024 ) ROLL: dark_seed_eighteen
+    * (done) start the score
 
 ## ( done 06/29/2024 ) ROLL: dark_seed_seventeen
     * ( done ) start the score
