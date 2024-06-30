@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
 
     // the music roll file to use
-    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/dark_seed/darkseed20_twenty.txt' );
+    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/dark_seed/darkseed21_twentyone.txt' );
 
 
     /********* **********
@@ -240,8 +240,8 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     const album = sud.song_obj.title.split(':')[0];
     const title = sud.song_obj.title.split(':')[1];
     
-    ctx.fillText(album, canvas.width / 2, 150);
-    ctx.fillText(title, canvas.width / 2, 200);
+    ctx.fillText(album.trim(), canvas.width / 2, 150);
+    ctx.fillText(title.trim(), canvas.width / 2, 200);
 
 };
 

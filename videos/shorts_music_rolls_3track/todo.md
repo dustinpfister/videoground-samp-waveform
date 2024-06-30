@@ -3,24 +3,44 @@
 <!-- ROLLS-ORIGINAL -->
 
 ## ( ) ROLL: dark_seed_twentyone
-    * () start the score
-    * () 4 measure tune, focus on what the hook is
+    * (done) start the score
+    * () 2 measure tune, focus on what the hook is
 
 ## ( ) ROLL: dark_seed_twentytwo
     * () start the score
-    * () 4 measure tune, focus on what the hook is
+    * () 2 measure tune, focus on what the hook is
     
 ## ( ) ROLL: dark_seed_twentythree
     * () start the score
-    * () 4 measure tune, focus on what the hook is
+    * () 2 measure tune, focus on what the hook is
     
 ## ( ) ROLL: dark_seed_twentyfour
     * () start the score
-    * () 4 measure tune, focus on what the hook is
+    * () 2 measure tune, focus on what the hook is
     
 ## ( ) ROLL: dark_seed_twentyfive
     * () start the score
-    * () 4 measure tune, focus on what the hook is
+    * () 2 measure tune, focus on what the hook is
+
+## ( ) ROLL: dark_seed_twentysix
+    * () start the score
+    * () 2 measure tune, focus on what the hook is
+    
+## ( ) ROLL: dark_seed_twentyseven
+    * () start the score
+    * () 2 measure tune, focus on what the hook is
+    
+## ( ) ROLL: dark_seed_twentyeight
+    * () start the score
+    * () 2 measure tune, focus on what the hook is
+    
+## ( ) ROLL: dark_seed_twentynine
+    * () start the score
+    * () 2 measure tune, focus on what the hook is
+    
+## ( ) ROLL: dark_seed_thirty
+    * () start the score
+    * () 4 measure tune.
 
 <!-- ROLLS-COVER -->
 
