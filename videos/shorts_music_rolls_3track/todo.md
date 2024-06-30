@@ -2,10 +2,6 @@
 
 <!-- ROLLS-ORIGINAL -->
 
-## ( ) ROLL: dark_seed_twenty
-    * () start the score
-    * () try another 2 measure tune
-
 ## ( ) ROLL: dark_seed_twentyone
     * () start the score
     * () 4 measure tune, focus on what the hook is
@@ -71,6 +67,10 @@
 
 <!-- DONE -->
 
+## ( done 06/30/2024 ) ROLL: dark_seed_twenty
+    * (done) start the score
+    * (done) try another 2 measure tune
+    
 ## ( done 06/29/2024 ) ROLL: dark_seed_nineteen
     * (done) start the score
     * (done) try another 2 measure tune
