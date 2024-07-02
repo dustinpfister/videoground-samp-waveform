@@ -3,7 +3,7 @@
 <!-- ROLLS-ORIGINAL -->
         
 ## ( ) ROLL: dark_seed_twentyfour
-    * () start the score
+    * (done) start the score
     * () 2 measure tune, focus on what the hook is
     
 ## ( ) ROLL: dark_seed_twentyfive
