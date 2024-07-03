@@ -139,9 +139,9 @@ VIDEO.init = function(sm, scene, camera){
     scene.background = new THREE.Color( 0.10, 0.10, 0.10 );
 
     // create display points
-    sud.disp_points_0 = Samp_geodisp.create_line( { y: 3, linewidth: 10, for_vertcolor: (a) => { return [1,1-a,a] } } );
-    sud.disp_points_1 = Samp_geodisp.create_line( { y: 0, linewidth: 10, for_vertcolor: (a) => { return [0,1,1-a] } } );
-    sud.disp_points_2 = Samp_geodisp.create_line( { y:-3, linewidth: 10, for_vertcolor: (a) => { return [a,a,1] } } );
+    sud.disp_points_0 = Samp_geodisp.create_line( { y: 3, linewidth: 10, for_vertcolor: (a) => { return [0,1,0] } } );
+    sud.disp_points_1 = Samp_geodisp.create_line( { y: 0, linewidth: 10, for_vertcolor: (a) => { return [0,1,0] } } );
+    sud.disp_points_2 = Samp_geodisp.create_line( { y:-3, linewidth: 10, for_vertcolor: (a) => { return [0,1,0] } } );
     
     scene.add( sud.disp_points_0, sud.disp_points_1, sud.disp_points_2 );
     
