@@ -1,9 +1,16 @@
 # music_roll todo list
 
 ## () - R1 - Parse Paramaters
-    * () parse paramaters as part of the over all parse process for line objects
-    * () param property of a line object should be an object rather than an array to help simplyfy the process of creating the final samp object used by the waveform function
+    * (done) parse paramaters as part of the over all parse process for line objects
+    
+    * () param property of a line object should be an plain object rather than an array instance
+    * () defaul key names can be p0, p1, ect
+    * () the key names for the param object can be set by way of header command
+    
+    
+    
     * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.
+    
     * () can set artist, and album keys for a song object
 
     
