@@ -108,7 +108,7 @@
             title: 'none'
         };
         while(i_ts < track_count){
-            track_states[i_ts] = [0, 0, [] ];
+            track_states[i_ts] = [0, 0, {} ];
             i_ts += 1;
         }
         const line_objects = process_raw_text(text, process_header_commands(header) )
@@ -143,7 +143,17 @@
                 // update params
                 if( a[2] ){
                     //! new R1 feature where I am parsing waveform paramaters
-                    arr_state[2] = a[2];
+                    //arr_state[2] = a[2];
+                    
+                    
+                    arr_state[2] = {};
+                    a[2].split(',').forEach((el, i) => {
+                    
+                        const key_name = 'p' + i;
+                        arr_state[2][key_name] = el;
+                    
+                    });
+         
                 }
                 
                 

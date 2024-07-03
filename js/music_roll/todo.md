@@ -2,17 +2,12 @@
 
 ## () - R1 - Parse Paramaters
     * (done) parse paramaters as part of the over all parse process for line objects
+    * (done) param property of a line object should be an plain object rather than an array instance
+    * (done) defaul key names can be p0, p1, ect
     
-    * () param property of a line object should be an plain object rather than an array instance
-    * () defaul key names can be p0, p1, ect
     * () the key names for the param object can be set by way of header command
-    
-    
-    
-    * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.
-    
     * () can set artist, and album keys for a song object
-
+    * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.
     
 ## ( done 06/18/2024 ) - R0 - Just get the core idea of this working
     * (done) work out what the format will be for setting just pitch and amplitude

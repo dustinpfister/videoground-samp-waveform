@@ -165,7 +165,11 @@ VIDEO.init = function(sm, scene, camera){
 
         sud.song_obj = Music_roll.parse( roll );
         
-        console.log(sud.song_obj);
+        
+        const line0 = sud.song_obj.line_objects[0];
+        console.log( line0[0].param );
+        console.log( line0[1].param );
+        console.log( line0[2].param );
 
         // create the main sound object using CS.create_sound
         const sound = sud.sound = CS.create_sound({
