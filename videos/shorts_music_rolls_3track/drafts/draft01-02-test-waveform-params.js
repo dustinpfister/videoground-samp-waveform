@@ -170,6 +170,9 @@ VIDEO.init = function(sm, scene, camera){
         console.log( line0[0].param );
         console.log( line0[1].param );
         console.log( line0[2].param );
+        
+        console.log(sud.song_obj);
+        
 
         // create the main sound object using CS.create_sound
         const sound = sud.sound = CS.create_sound({

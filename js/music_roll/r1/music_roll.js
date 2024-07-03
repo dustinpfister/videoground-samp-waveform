@@ -95,6 +95,10 @@
             if(command[0] === 'title'){
                 header.title = command[1];
             }
+            if(command[0].match(/track\d+/)){
+                const i_track = parseInt(command[0].match(/^[^\d]*(\d+)/)[1])
+                header['waveform' + i_track] = command[1];
+            }
         }
     };
     
