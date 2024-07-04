@@ -6,7 +6,7 @@
  
 (function(){
 
-    const REGEX_CONTINUE = /^-+/
+    const REGEX_CONTINUE = /^[-]+[-]$/;  ///^-+/
 
     const Music_roll = {};
     
@@ -87,6 +87,14 @@
         return process_raw_text(text)[0].split(';').filter(loose_empty).length;
     };
     
+    const parse_roll_value = ( str, as_int=true ) => {
+        const a = String(str).replace(/-/g, '');
+        if(as_int){
+            return parseInt(a);
+        }
+        return parseFloat(a);
+    };
+    
     const process_header_commands = (header) => {
         return (command) => {
             if(command[0] === 'lines_per_minute'){
@@ -128,13 +136,14 @@
                     let freq = 0;
                     // set by key and octive string such as c#3
                     const key_str = a[0].match(/[a-z]#?/);
-                    const oct_str = a[0].match(/[0-9]/);
-                    
+                    const oct_str = a[0].match(/[0-9]/);      
                     if(key_str && oct_str){
                         freq = notefreq_by_indices( parseInt(oct_str), array_notes.indexOf(key_str[0]) );   
                     }
+                    
+                    
                     // allow for direct input of herts values
-                    const freq_int = parseInt( parseInt(a[0]) );
+                    const freq_int = parse_roll_value( a[0], true  );
                     if(String(freq_int) != 'NaN'){
                         freq = freq_int;
                     }         
@@ -142,7 +151,7 @@
                 }
                 // update amp
                 if( !a[1].match(REGEX_CONTINUE)  ){    
-                    arr_state[1] = parseInt(a[1]);
+                    arr_state[1] = parse_roll_value( a[1], true );
                 }
                 // update params
                 if( a[2] ){
@@ -151,7 +160,14 @@
                     
                     
                     arr_state[2] = {};
+                    
+                    if(i_ts === 2){
+                        //console.log( i, i_ts, a[2]);
+                        //console.log( i, i_ts, a[2].split(',') );
+                    }
+                    
                     a[2].split(',').forEach((el, i) => {
+                    
                     
                         const key_name = 'p' + i;
                         arr_state[2][key_name] = el;

@@ -5,6 +5,8 @@
     * (done) param property of a line object should be an plain object rather than an array instance
     * (done) defaul key names can be p0, p1, ect
     
+    * () when setting frequency by way of value like -65, the result should be 65 and not 0
+    
     * () the key names for the param object can be set by way of header command
     * () can set artist, and album keys for a song object
     * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.

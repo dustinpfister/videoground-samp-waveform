@@ -1,13 +1,13 @@
 # testing out waveform params for music roll R1
 >title=params test
->lines_per_minute=480;
+>lines_per_minute=60;
 >track0=wf_tri_vamp.step_count
 >track1=wf_pulse_vduty.v_duty.duty_target
 >track2=wf_noise_vamp.vpw_start.vpw_delta.int_shift
 #
 # measure 1;
 #
---- -- --;--- -- --,--;--- -- --,--,----;
+--- -- --;--- -- --,--;-65 90 10,-0,---0;
 --- -- --;--- -- --,--;--- -- --,--,----;
 --- -- --;--- -- --,--;--- -- --,--,----;
 --- -- --;--- -- --,--;--- -- --,--,----;

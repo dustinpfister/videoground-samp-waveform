@@ -167,6 +167,7 @@ VIDEO.init = function(sm, scene, camera){
         
         
         const line0 = sud.song_obj.line_objects[0];
+        console.log(line0);
         console.log( line0[0].param );
         console.log( line0[1].param );
         console.log( line0[2].param );
