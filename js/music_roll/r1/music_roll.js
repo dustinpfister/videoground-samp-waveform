@@ -159,7 +159,7 @@
                     //arr_state[2] = a[2];
                     
                     
-                    arr_state[2] = {};
+                    //arr_state[2] = {};
                     
                     if(i_ts === 2){
                         //console.log( i, i_ts, a[2]);
@@ -170,14 +170,19 @@
                     
                     
                         const key_name = 'p' + i;
-                        arr_state[2][key_name] = el;
+                        
+                        if( !el.match(REGEX_CONTINUE) ){
+                        
+                            arr_state[2][key_name] = parse_roll_value(el, false);
+                        
+                        }
                     
                     });
          
                 }
                 
                 
-                const line_obj = { frequency: arr_state[0], amplitude: arr_state[1], param: arr_state[2], a0: a[0] };
+                const line_obj = { frequency: arr_state[0], amplitude: arr_state[1], param: Object.assign({}, arr_state[2]), a0: a[0] };
                 return line_obj;
             });
         });

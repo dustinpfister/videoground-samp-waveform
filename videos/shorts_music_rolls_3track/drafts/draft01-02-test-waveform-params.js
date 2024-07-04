@@ -101,7 +101,7 @@ VIDEO.init = function(sm, scene, camera){
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_noise_vamp.samp_default, samp);
             const a2 = Samp_alphas.sin(samp.a_note, 1, 1);
-            samp.amp = a2 * samp.amp;
+            samp.amp = samp.amp; //a2 * samp.amp;
             samp.values_per_wave = samp.vpw_start + samp.vpw_delta * samp.a_note;
             return wf_noise.waveform(samp, a_wave);
         }  
