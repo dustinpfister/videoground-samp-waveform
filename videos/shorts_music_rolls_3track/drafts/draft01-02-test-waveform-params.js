@@ -97,12 +97,13 @@ VIDEO.init = function(sm, scene, camera){
         }  
     };
     const wf_noise_vamp = {
-        samp_default: { a_note: 0, vpw_start: 20, vpw_delta: 30 },
+        //samp_default: { a_note: 0, vpw_start: 20, vpw_delta: 30 },
+        samp_default: { a_note: 0, p0: 20, p1: 0 },
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_noise_vamp.samp_default, samp);
             const a2 = Samp_alphas.sin(samp.a_note, 1, 1);
             samp.amp = samp.amp; //a2 * samp.amp;
-            samp.values_per_wave = samp.vpw_start + samp.vpw_delta * samp.a_note;
+            samp.values_per_wave = samp.p0 + samp.p1 * samp.a_note;
             return wf_noise.waveform(samp, a_wave);
         }  
     };
@@ -196,13 +197,20 @@ VIDEO.init = function(sm, scene, camera){
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
                 const array_samp = Music_roll.play(sud.song_obj, a_sound);
+                
+                if(i < 5){
+                
+                   //console.log(i, array_samp[2])
+                
+                }
+                
 
                 samp.tracks = THREE_TRACKS.tracks.map( (track, i) => {
-                    return {
+                    return Object.assign({
                         amp: array_samp[i].amplitude / 100,
                         a_note: array_samp[i].a_note,
                         freq: array_samp[i].frequency
-                    };
+                    }, array_samp[i].param );
                 });
                 
                 samp.master_amplitude = THREE_TRACKS.master_amplitude;
