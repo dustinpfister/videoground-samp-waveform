@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
 
     // the music roll file to use
-    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/dark_seed/darkseed24_twentyfour.txt' );
+    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/dark_seed/darkseed25_twentyfive.txt' );
 
 
     /********* **********
@@ -110,7 +110,7 @@ VIDEO.init = function(sm, scene, camera){
     TRACK OBJECTS
     ********** *********/
     const THREE_TRACKS = {
-        master_amplitude: 0.75,
+        master_amplitude: 0.50,
         total_mix_points: 3,
         tracks: [
             {
