@@ -1,15 +1,7 @@
 # shorts_music_rolls_3track todo list
 
 <!-- ROLLS-ORIGINAL -->
-            
-## ( ) ROLL: dark_seed_twentyfive
-    * () start the score
-    * () 2 measure tune, focus on what the hook is
-
-## ( ) ROLL: dark_seed_twentysix
-    * () start the score
-    * () 2 measure tune, focus on what the hook is
-    
+                
 ## ( ) ROLL: dark_seed_twentyseven
     * () start the score
     * () 2 measure tune, focus on what the hook is
@@ -59,17 +51,27 @@
 <!-- DRAFTS FOR NEW PLAYER FILES -->
 
 ## () DRAFT: draft01-02-test-waveform-params
-    TRACK OBJECTS:
-        * () I will want to have at least one track waveform that makes use of one or more waveform paramaters
-    MUSIC ROLLS:
-        * () work on R1 of music rolls, and get waveform paramaters working
-        * () work out a new roll that makes use of paramaters
+    * (done) I will want to have at least one track waveform that makes use of one or more waveform paramaters
+    * (done) work on R1 of music rolls, and get waveform paramaters working
+    * (done) work out a new draft roll that makes use of paramaters
+    
+    * () I should be able to use param names rather than p0, p1, ect
+    * () get roll waveform params to work with all three tracks
+    * () I shoukd be able to set fractions of a hert if I want to ( R1 fix )
 
 ## () DRAFT: draft01-03-wrapper-functions
     TRACK OBJECTS:
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 07/05/2024 ) ROLL: dark_seed_twentyfive
+    * (done) start the score
+    * (done) 2 measure tune, focus on what the hook is
+
+## ( done 07/05/2024 ) ROLL: dark_seed_twentysix
+    * (done) start the score
+    * (done) 2 measure tune, focus on what the hook is
 
 ## ( done 07/02/2024 ) ROLL: dark_seed_twentyfour
     * (done) start the score
