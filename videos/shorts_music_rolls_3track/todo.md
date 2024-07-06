@@ -1,11 +1,7 @@
 # shorts_music_rolls_3track todo list
 
 <!-- ROLLS-ORIGINAL -->
-                    
-## ( ) ROLL: dark_seed_twentynine
-    * () start the score
-    * () 2 measure tune, focus on what the hook is
-    
+                        
 ## ( ) ROLL: dark_seed_thirty
     * () start the score
     * () 3 measure tune.
@@ -56,6 +52,10 @@
         * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
 
 <!-- DONE -->
+
+## ( done 07/06/2024 ) ROLL: dark_seed_twentynine
+    * (done) start the score
+    * (done) 2 measure tune, focus on what the hook is
 
 ## ( done 07/06/2024 ) ROLL: dark_seed_twentyeight
     * (done) start the score
