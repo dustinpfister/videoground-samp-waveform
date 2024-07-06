@@ -1,22 +1,14 @@
 # shorts_music_rolls_3track todo list
 
 <!-- ROLLS-ORIGINAL -->
-                
-## ( ) ROLL: dark_seed_twentyseven
-    * () start the score
-    * () 2 measure tune, focus on what the hook is
-    
-## ( ) ROLL: dark_seed_twentyeight
-    * () start the score
-    * () 2 measure tune, focus on what the hook is
-    
+                    
 ## ( ) ROLL: dark_seed_twentynine
     * () start the score
     * () 2 measure tune, focus on what the hook is
     
 ## ( ) ROLL: dark_seed_thirty
     * () start the score
-    * () 4 measure tune.
+    * () 3 measure tune.
 
 <!-- ROLLS-COVER -->
 
@@ -65,6 +57,14 @@
 
 <!-- DONE -->
 
+## ( done 07/06/2024 ) ROLL: dark_seed_twentyeight
+    * (done) start the score
+    * (done) 2 measure tune, focus on what the hook is
+
+## ( done 07/06/2024 ) ROLL: dark_seed_twentyseven
+    * (done) start the score
+    * (done) 2 measure tune, focus on what the hook is
+    
 ## ( done 07/05/2024 ) ROLL: dark_seed_twentyfive
     * (done) start the score
     * (done) 2 measure tune, focus on what the hook is
