@@ -8,8 +8,10 @@
     * (done) new parse roll value helper function
     * (done) new regex for matching a contune \( '---' \)
     * (done) checking for continue pattern for each param
+    * (done) the key names for the param object can be set by way of header command to the song object
     
-    * () the key names for the param object can be set by way of header command
+    * () use the state of any trackN song object props to replace p0, p1, ect with key names
+    
     * () can set artist, and album keys for a song object
     * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.
     

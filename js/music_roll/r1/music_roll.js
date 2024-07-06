@@ -7,6 +7,7 @@
 (function(){
 
     const REGEX_CONTINUE = /^[-]+[-]$/;  ///^-+/
+    const REGEX_ITRACK = /^[^\d]*(\d+)/;
 
     const Music_roll = {};
     
@@ -97,15 +98,24 @@
     
     const process_header_commands = (header) => {
         return (command) => {
-            if(command[0] === 'lines_per_minute'){
-                header.lines_per_minute = parseInt( command[1] );
+            const cmd = command[0];
+            const arg = command[1];
+        
+            if(cmd === 'lines_per_minute'){
+                header.lines_per_minute = parseInt( arg );
             }
-            if(command[0] === 'title'){
+            if(cmd === 'title'){
                 header.title = command[1];
             }
-            if(command[0].match(/track\d+/)){
-                const i_track = parseInt(command[0].match(/^[^\d]*(\d+)/)[1])
-                header['waveform' + i_track] = command[1];
+            if(cmd.match(/track\d+/)){
+                const i_track = parseInt(cmd.match(REGEX_ITRACK)[1]);
+                const arr = arg.split('.');
+                header['track' + i_track] = {
+                    waveform: arr[0],
+                    keys: arr.slice(1, arr.length)
+                };
+                
+                //command[1];
             }
         }
     };
@@ -126,9 +136,6 @@
         const line_objects = process_raw_text(text, process_header_commands(header) )
         .map( ( str_line, i, arr ) => {
             const tracks = str_line.split(';').filter(loose_empty);
-            
-            //console.log(tracks)
-            
             return track_states.map( (arr_state, i_ts) => {
                 const a = tracks[i_ts].split(' ').filter(loose_empty);
                 // update freq 
@@ -140,8 +147,6 @@
                     if(key_str && oct_str){
                         freq = notefreq_by_indices( parseInt(oct_str), array_notes.indexOf(key_str[0]) );   
                     }
-                    
-                    
                     // allow for direct input of herts values
                     const freq_int = parse_roll_value( a[0], true  );
                     if(String(freq_int) != 'NaN'){
@@ -155,33 +160,13 @@
                 }
                 // update params
                 if( a[2] ){
-                    //! new R1 feature where I am parsing waveform paramaters
-                    //arr_state[2] = a[2];
-                    
-                    
-                    //arr_state[2] = {};
-                    
-                    if(i_ts === 2){
-                        //console.log( i, i_ts, a[2]);
-                        //console.log( i, i_ts, a[2].split(',') );
-                    }
-                    
                     a[2].split(',').forEach((el, i) => {
-                    
-                    
                         const key_name = 'p' + i;
-                        
                         if( !el.match(REGEX_CONTINUE) ){
-                        
                             arr_state[2][key_name] = parse_roll_value(el, false);
-                        
                         }
-                    
                     });
-         
                 }
-                
-                
                 const line_obj = { frequency: arr_state[0], amplitude: arr_state[1], param: Object.assign({}, arr_state[2]), a0: a[0] };
                 return line_obj;
             });
