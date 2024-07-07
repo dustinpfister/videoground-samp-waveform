@@ -1,5 +1,7 @@
 # testing out waveform params for music roll R1
 >title=params test
+>album=R1_drafts
+>artist=javaWeaver
 >lines_per_minute=480;
 >track0=wf_tri_vamp.step_count
 >track1=wf_pulse_vduty.v_duty.duty_target

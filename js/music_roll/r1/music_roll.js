@@ -100,15 +100,20 @@
         return (command) => {
             const cmd = command[0];
             const arg = command[1];
-        
             if(cmd === 'lines_per_minute'){
                 header.lines_per_minute = parseInt( arg );
             }
             if(cmd === 'title'){
-                header.title = command[1];
+                header.title = arg;
+            }
+            if(cmd === 'album'){
+                header.album = arg;
+            }
+            if(cmd === 'artist'){
+                header.artist = arg;
             }
             if(cmd.match(/track\d+/)){
-                const i_track = parseInt(cmd.match(REGEX_ITRACK)[1]);
+                const i_track = parseInt( cmd.match(REGEX_ITRACK)[1] );
                 const arr = arg.split('.');
                 header['track' + i_track] = {
                     waveform: arr[0],
@@ -161,13 +166,9 @@
                     a[2].split(',').forEach((el, i) => {
                         let key_name = 'p' + i;
                         const track = header['track' + i_ts];
-                        
                         if(track){
-                            
-                            key_name = track.keys[i] || key_name;
-                            
+                            key_name = track.keys[i] || key_name;       
                         }
-                        
                         if( !el.match(REGEX_CONTINUE) ){
                             arr_state[2][key_name] = parse_roll_value(el, false);
                         }

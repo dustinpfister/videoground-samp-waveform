@@ -10,9 +10,8 @@
     * (done) checking for continue pattern for each param
     * (done) the key names for the param object can be set by way of header command to the song object
     * (done) use the state of any trackN song object props to replace p0, p1, ect with key names
+    * (done) can set artist, and album keys for a song object
     
-    * () can set artist, and album keys for a song object
-    * () public funtion that can help to convert an array returned from Music_roll.play into a final samp object for a waveform function.
     
 ## ( done 06/18/2024 ) - R0 - Just get the core idea of this working
     * (done) work out what the format will be for setting just pitch and amplitude

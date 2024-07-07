@@ -167,13 +167,8 @@ VIDEO.init = function(sm, scene, camera){
         sud.song_obj = Music_roll.parse( roll );
         
         
-        const line0 = sud.song_obj.line_objects[0];
-        //console.log(line0);
-        //console.log( line0[0].param );
-        //console.log( line0[1].param );
-        //console.log( line0[2].param );
         
-        console.log(sud.song_obj.track2.keys);
+        console.log(sud.song_obj);
         
 
         // create the main sound object using CS.create_sound
@@ -197,12 +192,6 @@ VIDEO.init = function(sm, scene, camera){
             },
             for_sampset: ( samp, i, a_sound, fs, opt ) => {
                 const array_samp = Music_roll.play(sud.song_obj, a_sound);
-                
-                if(i < 5){
-                
-                   //console.log(i, array_samp[2])
-                
-                }
                 
 
                 samp.tracks = THREE_TRACKS.tracks.map( (track, i) => {
