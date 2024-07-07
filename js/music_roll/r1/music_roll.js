@@ -114,8 +114,6 @@
                     waveform: arr[0],
                     keys: arr.slice(1, arr.length)
                 };
-                
-                //command[1];
             }
         }
     };
@@ -161,7 +159,15 @@
                 // update params
                 if( a[2] ){
                     a[2].split(',').forEach((el, i) => {
-                        const key_name = 'p' + i;
+                        let key_name = 'p' + i;
+                        const track = header['track' + i_ts];
+                        
+                        if(track){
+                            
+                            key_name = track.keys[i] || key_name;
+                            
+                        }
+                        
                         if( !el.match(REGEX_CONTINUE) ){
                             arr_state[2][key_name] = parse_roll_value(el, false);
                         }
