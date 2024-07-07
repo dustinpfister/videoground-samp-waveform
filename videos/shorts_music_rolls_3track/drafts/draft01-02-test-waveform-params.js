@@ -242,11 +242,12 @@ VIDEO.render = function(sm, canvas, ctx, scene, camera, renderer){
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     ctx.font = '35px courier';
-    const album = sud.song_obj.title.split(':')[0] || '';
-    const title = sud.song_obj.title.split(':')[1] || '';
+    //const album = sud.song_obj.title.split(':')[0] || '';
+    //const title = sud.song_obj.title.split(':')[1] || '';
     
-    ctx.fillText(album.trim(), canvas.width / 2, 150);
-    ctx.fillText(title.trim(), canvas.width / 2, 200);
+    ctx.fillText(sud.song_obj.title.trim(), canvas.width / 2, 150);
+    ctx.fillText(sud.song_obj.album.trim(), canvas.width / 2, 200);
+    ctx.fillText('by ' + sud.song_obj.artist.trim(), canvas.width / 2, 250);
 
 };
 
