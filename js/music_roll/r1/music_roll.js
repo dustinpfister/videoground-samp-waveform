@@ -17,11 +17,13 @@
     };
     
     // convert letters to freq numbers in hertz
-    const array_notes = 'c,c#,d,d#,e,f,f#,g,g#,a,a#,b'.split(',');
+    const ARRAY_NOTES = 'c,c#,d,d#,e,f,f#,g,g#,a,a#,b'.split(',');
+    
+    // get note freq by scale and note indices
     const notefreq_by_indices = ( i_scale=4, i_note=5 ) => {
         const a = i_scale - 5;
         const b = i_note + 3;
-        return 440 * Math.pow(2, a + b / 12);
+        return 440 * Math.pow( 2, a + b / 12 );
     };
    
     // loop ahead function to help get d and n values for each object    
@@ -88,8 +90,9 @@
         return process_raw_text(text)[0].split(';').filter(loose_empty).length;
     };
     
-    const parse_roll_value = ( str, as_int=true ) => {
+    const parse_roll_value = ( str ) => {
         const a = String(str).replace(/-/g, '');
+        const as_int = String(str).indexOf('.') === -1 ? true : false;
         if(as_int){
             return parseInt(a);
         }
@@ -148,10 +151,10 @@
                     const key_str = a[0].match(/[a-z]#?/);
                     const oct_str = a[0].match(/[0-9]/);      
                     if(key_str && oct_str){
-                        freq = notefreq_by_indices( parseInt(oct_str), array_notes.indexOf(key_str[0]) );   
+                        freq = notefreq_by_indices( parseInt(oct_str), ARRAY_NOTES.indexOf(key_str[0]) );   
                     }
                     // allow for direct input of herts values
-                    const freq_int = parse_roll_value( a[0], true  );
+                    const freq_int = parse_roll_value( a[0] );
                     if(String(freq_int) != 'NaN'){
                         freq = freq_int;
                     }         
@@ -159,7 +162,7 @@
                 }
                 // update amp
                 if( !a[1].match(REGEX_CONTINUE)  ){    
-                    arr_state[1] = parse_roll_value( a[1], true );
+                    arr_state[1] = parse_roll_value( a[1] );
                 }
                 // update params
                 if( a[2] ){
@@ -170,7 +173,7 @@
                             key_name = track.keys[i] || key_name;       
                         }
                         if( !el.match(REGEX_CONTINUE) ){
-                            arr_state[2][key_name] = parse_roll_value(el, false);
+                            arr_state[2][key_name] = parse_roll_value(el );
                         }
                     });
                 }

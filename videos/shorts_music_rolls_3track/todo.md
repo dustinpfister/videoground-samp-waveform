@@ -67,10 +67,11 @@
     * (done) I will want to have at least one track waveform that makes use of one or more waveform paramaters
     * (done) work on R1 of music rolls, and get waveform paramaters working
     * (done) work out a new draft roll that makes use of paramaters
+    * (done) I should be able to use param names rather than p0, p1, ect
     
-    * () I should be able to use param names rather than p0, p1, ect
     * () get roll waveform params to work with all three tracks
     * () I shoukd be able to set fractions of a hert if I want to ( R1 fix )
+    
 
 ## () DRAFT: draft01-03-wrapper-functions
     TRACK OBJECTS:
