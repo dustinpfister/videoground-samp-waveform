@@ -6,9 +6,19 @@ The aim here is to have a collection of video files that have to do with wavefor
 
 Thus far I am still trying to get a good idea of what ideas I should be focusing on over others when it comes to the logic of waveform functions, as well as many other aspects of sound such as sample depth, mixing, and so forth. For my own sake as well as anyone that might have interest in what I am doing here I think I should have a main list in this read me file that I update now and then that will help with this.
 
+### [shorts 3track](https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/shorts_music_rolls_3track)
+
+There are a lot of things that I like about youtube shorts as it is a great way to get started with music I think. The main reason why I say that is becuase of the one minute time limit for shorts which means that I only have to worry about working out a few measures of music before I start to get near the end of that limit.
+
+<div align="center">
+      <a href="https://www.youtube.com/watch?v=lkd_emW1YB4">
+         <img src="https://img.youtube.com/vi/lkd_emW1YB4/0.jpg" style="width:50%;">
+      </a>
+</div>
+
 ### [nyquist_frequency](https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/nyquist_frequency)
 
-I started work on a number of video files that have to do with [nyquist\_frequency](https://en.wikipedia.org/wiki/Nyquist_frequency). 
+I started work on a number of video files that have to do with [nyquist\_frequency](https://en.wikipedia.org/wiki/Nyquist_frequency). For thouse of you not in the know, nyquist frequency is the highest psssible frequnecy that can be reached with a given sample rate without starting to get into problems that stem from having less than 2 samples per waveform cycle.
 
 ### [1bit\_waveforms](https://github.com/dustinpfister/videoground-samp-waveform/tree/master/videos/1bit_waveforms)
 
