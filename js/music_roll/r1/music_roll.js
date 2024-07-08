@@ -6,10 +6,10 @@
  
 (function(){
 
-    const REGEX_CONTINUE = /^[-]+[-]$/;
+    const REGEX_CONTINUE = /^[-]+[-]$/; 
     const REGEX_ITRACK = /^[^\d]*(\d+)/;
-    const REGEX_GETNUMBER = /[\-a-zA-Z]/g;
-    const REGEX_EOL = /\n|\r\n/;
+    const REGEX_REMOVE_DASH = /\-/g;
+    const REGEX_REMOVE_LETTER = /[a-zA-Z]/g;
 
     const Music_roll = {};
     
@@ -70,7 +70,7 @@
     
     // get track count from raw text
     const process_raw_text = (text, for_command=()=>{} ) => {
-        return text.split(REGEX_EOL)
+        return text.split(/\n|\r\n/)
         .filter( loose_empty )
         .filter( ( line ) => { // filter out comments
             if(line.trim()[0] === '#'){
@@ -92,8 +92,9 @@
         return process_raw_text(text)[0].split(';').filter(loose_empty).length;
     };
     
-    const parse_roll_value = ( str ) => {
-        const a = String(str).replace(REGEX_GETNUMBER, '');
+    const parse_roll_value = ( str, remove_letter=true ) => {
+        let a = String(str).replace(REGEX_REMOVE_DASH, '');     
+        a = remove_letter ? a.replace(/[a-z]/g, '') : a;
         const as_int = String(str).indexOf('.') === -1 ? true : false;
         if(as_int){
             return parseInt( a );
@@ -156,7 +157,7 @@
                         freq = notefreq_by_indices( parseInt(oct_str), ARRAY_NOTES.indexOf(key_str[0]) );   
                     }
                     // allow for direct input of herts values
-                    const freq_int = parse_roll_value( a[0] );
+                    const freq_int = parse_roll_value( a[0], false );
                     if(String(freq_int) != 'NaN'){
                         freq = freq_int;
                     }         
@@ -164,7 +165,7 @@
                 }
                 // update amp
                 if( !a[1].match(REGEX_CONTINUE)  ){    
-                    arr_state[1] = parse_roll_value( a[1] );
+                    arr_state[1] = parse_roll_value( a[1], true );
                 }
                 // update params
                 if( a[2] ){
@@ -175,7 +176,7 @@
                             key_name = track.keys[i] || key_name;       
                         }
                         if( !el.match(REGEX_CONTINUE) ){
-                            arr_state[2][key_name] = parse_roll_value( el );
+                            arr_state[2][key_name] = parse_roll_value( el, true );
                         }
                     });
                 }
