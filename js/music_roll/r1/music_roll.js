@@ -94,6 +94,11 @@
     };
     
     const parse_roll_value = ( str, remove_letter=true ) => {
+        // if str starts with $, then parse everything after as string
+        if(String(str)[0] === '$'){
+            return String(str).replace(/^\$/, '');
+        }
+    
         
         // should be a number value then
         let a = String(str).replace(REGEX_REMOVE_DASH, '');

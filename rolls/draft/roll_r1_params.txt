@@ -5,11 +5,11 @@
 >lines_per_minute=480;
 >track0=wf_tri_vamp.step_count
 >track1=wf_pulse_vduty.v_duty.duty_target
->track2=wf_noise_vamp.vpw_start.vpw_delta.int_shift
+>track2=wf_noise_vamp.vpw_start.vpw_delta.int_shift.str
 #
 # measure 1;
 #
---- -- --;--- -- --,--;e-1 90 -20,-80,----;
+--- -- --;--- -- --,--;e-1 90 -20,-80,---0;
 --- -- --;--- -- --,--;--- -- ---,---,----;
 --- -- --;--- -- --,--;--- -- ---,---,----;
 --- -- --;--- -- --,--;--- -- ---,---,----;
