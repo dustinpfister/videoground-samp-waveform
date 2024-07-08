@@ -96,13 +96,21 @@ VIDEO.init = function(sm, scene, camera){
             return n * samp.amp;
         }  
     };
-    const wf_noise_vamp = {
-        samp_default: { a_note: 0, vpw_start: 20, vpw_delta: 30 },
+    const wf_noise_pad = {
+        samp_default: { a_note: 0, vpw_start: 20, vpw_delta: 30, pad: true, int_shift: 0, int_delta: 0 },
         waveform: (samp, a_wave) => {
-            samp = Object.assign({}, wf_noise_vamp.samp_default, samp);
-            const a2 = Samp_alphas.sin(samp.a_note, 1, 1);
+            samp = Object.assign({}, wf_noise_pad.samp_default, samp);
+            let a2 = Samp_alphas.sin(samp.a_note, 1, 1);
+            if(samp.pad){
+               a2 = 1;
+               if(samp.a_note < 0.10 || samp.a_note > 0.90){
+                   a2 = 0;
+               }
+            
+            }
             samp.amp = a2 * samp.amp;
             samp.values_per_wave = samp.vpw_start + samp.vpw_delta * samp.a_note;
+            samp.int_shift = samp.int_shift + samp.int_delta * samp.a_note;
             return wf_noise.waveform(samp, a_wave);
         }  
     };
@@ -123,7 +131,7 @@ VIDEO.init = function(sm, scene, camera){
             },
             {
                 mix_points: 1,
-                waveform: wf_noise_vamp.waveform
+                waveform: wf_noise_pad.waveform
             }
         ]
     };
@@ -167,7 +175,9 @@ VIDEO.init = function(sm, scene, camera){
         
         
         
-        console.log(sud.song_obj.line_objects[0][2].param);
+        console.log(sud.song_obj.line_objects[47][2].param);
+        
+        console.log(sud.song_obj.line_objects.length);
         
 
         // create the main sound object using CS.create_sound

@@ -93,23 +93,19 @@
         return process_raw_text(text)[0].split(';').filter(loose_empty).length;
     };
     
-    const parse_roll_value = ( str, remove_letter=true ) => {
-    
+    const parse_roll_value = ( str, remove_letter=true ) => {    
         str = String(str);
-    
         // if str starts with $, then parse everything after as string
         if(str[0] === '$'){
             return str.replace(/^\$/, '');
         }
-        
         // if str starts with T or F then return true of false boolean
         if(str[0] === 'T'){
             return true;
         }
         if(str[0] === 'F'){
             return false;
-        }
-        
+        }        
         // should be a number value then
         let a = str.replace(REGEX_REMOVE_DASH, '');
         a = remove_letter ? a.replace(/[a-z]/g, '') : a;       
@@ -197,7 +193,10 @@
                             key_name = track.keys[i] || key_name;       
                         }
                         if( !el.match(REGEX_CONTINUE) ){
-                            arr_state[2][key_name] = parse_roll_value( el, true );
+                            if(el != '-'){
+                                arr_state[2][key_name] = parse_roll_value( el, true );
+                            }
+                            
                         }
                     });
                 }
