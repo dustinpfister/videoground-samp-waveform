@@ -94,18 +94,28 @@
     };
     
     const parse_roll_value = ( str, remove_letter=true ) => {
-        // if str starts with $, then parse everything after as string
-        if(String(str)[0] === '$'){
-            return String(str).replace(/^\$/, '');
-        }
     
+        str = String(str);
+    
+        // if str starts with $, then parse everything after as string
+        if(str[0] === '$'){
+            return str.replace(/^\$/, '');
+        }
+        
+        // if str starts with T or F then return true of false boolean
+        if(str[0] === 'T'){
+            return true;
+        }
+        if(str[0] === 'F'){
+            return false;
+        }
         
         // should be a number value then
-        let a = String(str).replace(REGEX_REMOVE_DASH, '');
+        let a = str.replace(REGEX_REMOVE_DASH, '');
         a = remove_letter ? a.replace(/[a-z]/g, '') : a;       
-        const as_int = String(str).indexOf('.') === -1 ? true : false;
+        const as_int = str.indexOf('.') === -1 ? true : false;
         
-        const n = String(str).match(REGEX_ISNEG) ? -1 : 1;
+        const n = str.match(REGEX_ISNEG) ? -1 : 1;
         
         if(as_int){
             return parseInt( a ) * n;

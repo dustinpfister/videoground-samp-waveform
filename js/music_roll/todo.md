@@ -13,7 +13,8 @@
     * (done) can set artist, and album keys for a song object   
     * (done) parse roll values: check if the value should be int or not by looking for a .
     * (done) parse roll values: use n to mark a number as negative as - is used for spacing
-    * (done) use some sort of char such as $ to declare the value as a string
+    * (done) parse roll values: use some sort of char such as $ to declare the value as a string
+    * (done) parse roll values: have a short hand for setting bool values
     
 ## ( done 06/18/2024 ) - R0 - Just get the core idea of this working
     * (done) work out what the format will be for setting just pitch and amplitude

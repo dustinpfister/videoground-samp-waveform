@@ -98,7 +98,6 @@ VIDEO.init = function(sm, scene, camera){
     };
     const wf_noise_vamp = {
         samp_default: { a_note: 0, vpw_start: 20, vpw_delta: 30 },
-        //samp_default: { a_note: 0, p0: 20, p1: 0 },
         waveform: (samp, a_wave) => {
             samp = Object.assign({}, wf_noise_vamp.samp_default, samp);
             const a2 = Samp_alphas.sin(samp.a_note, 1, 1);
