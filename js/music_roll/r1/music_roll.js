@@ -8,6 +8,7 @@
 
     const REGEX_CONTINUE = /^[-]+[-]$/;  ///^-+/
     const REGEX_ITRACK = /^[^\d]*(\d+)/;
+    const REGEX_GETNUMBER = /[\-a-zA-Z]/g;
 
     const Music_roll = {};
     
@@ -91,12 +92,12 @@
     };
     
     const parse_roll_value = ( str ) => {
-        const a = String(str).replace(/-/g, '');
+        const a = String(str).replace(REGEX_GETNUMBER, '');
         const as_int = String(str).indexOf('.') === -1 ? true : false;
         if(as_int){
-            return parseInt(a);
+            return parseInt( a );
         }
-        return parseFloat(a);
+        return parseFloat( a );
     };
     
     const process_header_commands = (header) => {
@@ -173,7 +174,7 @@
                             key_name = track.keys[i] || key_name;       
                         }
                         if( !el.match(REGEX_CONTINUE) ){
-                            arr_state[2][key_name] = parse_roll_value(el );
+                            arr_state[2][key_name] = parse_roll_value( el );
                         }
                     });
                 }
