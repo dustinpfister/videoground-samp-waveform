@@ -6,9 +6,10 @@
  
 (function(){
 
-    const REGEX_CONTINUE = /^[-]+[-]$/;  ///^-+/
+    const REGEX_CONTINUE = /^[-]+[-]$/;
     const REGEX_ITRACK = /^[^\d]*(\d+)/;
     const REGEX_GETNUMBER = /[\-a-zA-Z]/g;
+    const REGEX_EOL = /\n|\r\n/;
 
     const Music_roll = {};
     
@@ -69,7 +70,7 @@
     
     // get track count from raw text
     const process_raw_text = (text, for_command=()=>{} ) => {
-        return text.split(/\n|\r\n/)
+        return text.split(REGEX_EOL)
         .filter( loose_empty )
         .filter( ( line ) => { // filter out comments
             if(line.trim()[0] === '#'){
