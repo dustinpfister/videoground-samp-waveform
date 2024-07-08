@@ -10,6 +10,7 @@
     const REGEX_ITRACK = /^[^\d]*(\d+)/;
     const REGEX_REMOVE_DASH = /\-/g;
     const REGEX_REMOVE_LETTER = /[a-zA-Z]/g;
+    const REGEX_ISNEG= /[nN]/;
 
     const Music_roll = {};
     
@@ -93,13 +94,18 @@
     };
     
     const parse_roll_value = ( str, remove_letter=true ) => {
-        let a = String(str).replace(REGEX_REMOVE_DASH, '');     
-        a = remove_letter ? a.replace(/[a-z]/g, '') : a;
+        
+        // should be a number value then
+        let a = String(str).replace(REGEX_REMOVE_DASH, '');
+        a = remove_letter ? a.replace(/[a-z]/g, '') : a;       
         const as_int = String(str).indexOf('.') === -1 ? true : false;
+        
+        const n = String(str).match(REGEX_ISNEG) ? -1 : 1;
+        
         if(as_int){
-            return parseInt( a );
+            return parseInt( a ) * n;
         }
-        return parseFloat( a );
+        return parseFloat( a ) * n;
     };
     
     const process_header_commands = (header) => {
