@@ -28,6 +28,14 @@
         const b = i_note + 3;
         return 440 * Math.pow( 2, a + b / 12 );
     };
+    
+    // is continue pattern '-', '--', etc
+    const is_continue = (a) => {
+        if(a === '-'){
+            return true;
+        }
+        return !!a.match( REGEX_CONTINUE );
+    };
    
     // loop ahead function to help get d and n values for each object    
     const loop_ahead2 = (line_objects, line_index, track_index ) => {
@@ -35,8 +43,8 @@
         const len = line_objects.length;
         let n = 1;
         while(i < len){
-            const obj = line_objects[i][track_index]; 
-            if( !obj.a0.match( REGEX_CONTINUE ) ){
+            const obj = line_objects[i][track_index];
+            if( !is_continue(obj.a0) ){
                 return n;
             }
             n += 1;
@@ -56,8 +64,8 @@
             let i_track = 0;
             while(i_track < track_count){
                 const obj = line_objects[i_line][i_track];            
-                const a = loop_ahead2(line_objects, i_line, i_track);  
-                if( !obj.a0.match(REGEX_CONTINUE) || i_line === 0){
+                const a = loop_ahead2(line_objects, i_line, i_track);
+                if( !is_continue(obj.a0) || i_line === 0 ){
                     array_a[i_track] = obj.a0;
                     array_d[i_track] = a;
                 }
@@ -165,7 +173,7 @@
             return track_states.map( (arr_state, i_ts) => {
                 const a = tracks[i_ts].split(' ').filter(loose_empty);
                 // update freq 
-                if( !a[0].match(REGEX_CONTINUE)  ){
+                if( !is_continue( a[0] ) ){
                     let freq = 0;
                     // set by key and octive string such as c#3
                     const key_str = a[0].match(/[a-z]#?/);
@@ -181,7 +189,7 @@
                     arr_state[0] = Math.round( freq );
                 }
                 // update amp
-                if( !a[1].match(REGEX_CONTINUE)  ){    
+                if( !is_continue( a[1] ) ){
                     arr_state[1] = parse_roll_value( a[1], true );
                 }
                 // update params
@@ -192,11 +200,8 @@
                         if(track){
                             key_name = track.keys[i] || key_name;       
                         }
-                        if( !el.match(REGEX_CONTINUE) ){
-                            if(el != '-'){
-                                arr_state[2][key_name] = parse_roll_value( el, true );
-                            }
-                            
+                        if( !is_continue( el ) ){
+                            arr_state[2][key_name] = parse_roll_value( el, true );
                         }
                     });
                 }
