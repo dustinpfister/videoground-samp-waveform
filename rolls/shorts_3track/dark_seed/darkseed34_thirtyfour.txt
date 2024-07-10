@@ -4,7 +4,7 @@
 #
 #   Basic idea here is to work out a tune where I play a few notes in the tri track, then pulse, then ending in the noise track
 #
->title=dark_seed: Thirty Three
+>title=dark_seed: Thirty Four
 >lines_per_minute=480;
 #
 # measure 1;
