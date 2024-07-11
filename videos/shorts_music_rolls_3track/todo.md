@@ -3,7 +3,7 @@
 <!-- ROLLS-ORIGINAL -->
                                        
 ## ( ) ROLL: dark_seed_thirtyfive
-    * () start the score
+    * (done) start the score
     * () 10+ measure tune.
     
 ## ( ) ROLL: dark_seed_thirtysix
