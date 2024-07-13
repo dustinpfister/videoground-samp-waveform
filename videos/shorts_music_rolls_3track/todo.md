@@ -2,9 +2,10 @@
 
 <!-- ROLLS-ORIGINAL -->
                                                
-## ( ) ROLL: dark_seed_thirtyseven
-    * () start the score
-    * () 10+ measure tune.
+## ( done 07/13/24 ) ROLL: dark_seed_thirtyseven
+    * (done) start the score
+    * (done) 10+ measure tune.
+    * () work out the tri and pulse tracks
     
 ## ( ) ROLL: dark_seed_thirtyeight
     * () start the score
