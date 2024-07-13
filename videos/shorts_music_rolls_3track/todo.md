@@ -5,7 +5,8 @@
 ## ( done 07/13/24 ) ROLL: dark_seed_thirtyseven
     * (done) start the score
     * (done) 10+ measure tune.
-    * () work out the tri and pulse tracks
+    * (done) work out a pulse track
+    * () work out a tri track
     
 ## ( ) ROLL: dark_seed_thirtyeight
     * () start the score
