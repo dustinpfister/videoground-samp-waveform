@@ -3,12 +3,13 @@
 <!-- ROLLS-ORIGINAL -->
                                                    
 ## ( ) ROLL: dark_seed_thirtyeight
-    * () start the score
-    * () 10+ measure tune.
+    * (done) start the score.
+    * () try working out what the final tune will be on a measure by measure rather than track by track basis
+    * () 5+ measure tune.
     
 ## ( ) ROLL: dark_seed_thirtynine
     * () start the score
-    * () 10+ measure tune.
+    * () 5+ measure tune.
 
 <!-- ROLLS-COVER -->
 
