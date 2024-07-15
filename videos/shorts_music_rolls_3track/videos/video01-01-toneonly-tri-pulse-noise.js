@@ -11,7 +11,7 @@ VIDEO.scripts = [
     '../../../js/samp_geodisp/r0/samp_geodisp.js',
     '../../../js/samp_alphas/r0/samp_alphas.js',
     '../../../js/samp_debug/r0/samp_debug.js',
-    '../../../js/music_roll/r0/music_roll.js',
+    '../../../js/music_roll/r1/music_roll.js',
     '../../../js/export_done/r0/export_done.js'
 ];
 //-------- ----------
@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
 
     // the music roll file to use
-    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/dark_seed/darkseed38_thirtyeight.txt' );
+    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/dark_seed/darkseed39_thirtynine.txt' );
 
 
     /********* **********
@@ -204,11 +204,11 @@ VIDEO.init = function(sm, scene, camera){
                 return samp;
 
             },
-            secs: Math.ceil( sud.song_obj.total_secs )
+            secs: Math.round(sud.song_obj.total_secs)
         });
 
         // set vg sm.frameMax to frames value of sound object
-        sm.frameMax = sound.frames;
+        sm.frameMax = Math.round(sound.frames);
     
     });
     

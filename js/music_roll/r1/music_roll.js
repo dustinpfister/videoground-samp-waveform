@@ -219,6 +219,12 @@
     
     // give an song object, and a alpha value to get the current freq, amp, ect for each track
     Music_roll.play = (song, alpha=0) => {
+    
+        // alpha value sanatation
+        alpha = alpha >= 1 ? 0.99999999 : alpha;
+        alpha = alpha < 0 ? 0 : alpha;
+        alpha = parseFloat(alpha);
+    
         const line_objects = song.line_objects;
         const array_samp = [];
         const len = line_objects.length;
@@ -227,7 +233,7 @@
         const array_tracks = line_objects[i_line];
         const track_count = line_objects[0].length;
         let i_track = 0;
-        while(i_track < track_count){      
+        while(i_track < track_count){
             const obj = array_tracks[i_track];
             const a_note = (obj.n + a_line) / obj.d;
             array_samp.push( Object.assign({}, obj, { a_note: a_note } ) );

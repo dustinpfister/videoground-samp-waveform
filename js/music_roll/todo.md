@@ -17,6 +17,7 @@
     * (done) parse roll values: have a short hand for setting bool values
     * (done) fix continue bug where '-' will not result in a continue
     * (done) is continue helper function
+    * (done) see about adressing a bug that happens when lines_per_minute=560 and rounding frames rather than secs in the player file
     
 ## ( done 06/18/2024 ) - R0 - Just get the core idea of this working
     * (done) work out what the format will be for setting just pitch and amplitude

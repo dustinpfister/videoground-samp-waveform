@@ -3,6 +3,10 @@
 <!-- ROLLS-ORIGINAL -->
                                                        
 ## ( ) ROLL: dark_seed_thirtynine
+    * (done) start the score
+    * () 5+ measure tune.
+    
+## ( ) ROLL: dark_seed_fourty
     * () start the score
     * () 5+ measure tune.
 
@@ -45,7 +49,7 @@
     * (done) I should be able to use param names rather than p0, p1, ect
     
     * () get roll waveform params to work with all three tracks
-    * () I shoukd be able to set fractions of a hert if I want to ( R1 fix )
+    * () I should be able to set fractions of a hert if I want to ( R1 fix )
     
 
 ## () DRAFT: draft01-03-wrapper-functions

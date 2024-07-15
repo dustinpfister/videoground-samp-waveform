@@ -1,4 +1,4 @@
-# darkseed37_thirtyeight.txt was made for video01-01-toneonly-tri-pulse-noise - form shorts_3track
+# darkseed38_thirtyeight.txt was made for video01-01-toneonly-tri-pulse-noise - form shorts_3track
 # I was using R0 of music_roll.js for this
 # note options: 'c,c#,d,d#,e,f,f#,g,g#,a,a#,b'
 #
