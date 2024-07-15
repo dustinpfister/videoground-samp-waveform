@@ -11,7 +11,7 @@ VIDEO.scripts = [
     '../../../js/samp_geodisp/r0/samp_geodisp.js',
     '../../../js/samp_alphas/r0/samp_alphas.js',
     '../../../js/samp_debug/r0/samp_debug.js',
-    '../../../js/music_roll/r1/music_roll.js',
+    '../../../js/music_roll/r0/music_roll.js',
     '../../../js/export_done/r0/export_done.js'
 ];
 //-------- ----------

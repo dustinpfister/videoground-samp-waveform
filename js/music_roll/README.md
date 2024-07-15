@@ -32,31 +32,23 @@ c-5 1;--- -;--- -;
 
 ## Basic use case example
 
-It woulr be best to look at the source code of some of the videos that have been made thus far. However I thing I should part a quick code exmaple here also.
+It would be best to look at the source code of some of the videos that have been made thus far as a way to figure out how to get started. However I will of course write a thing or two about this here. The general idea is to one way or another get access to text that is in the music roll format that is described above in this readme. Once I have the roll text I can pass that to the parse method to get a workable song object. Once I have the song object I can use the play method of music roll to get a current array of samp objects that I can then in turn use with the waveform functions of my over all player file
 
 ```js
 
     // use the parse method to create a song object from text
     const song_obj = Music_roll.parse( song );
-
     const sound = sud.sound = CS.create_sound({
-    
         waveform: custom_waveform,
-        
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
-        
             // use the play method to get an array of samp objects for each track in the roll
             const array_samp = Music_roll.play(song_obj, a_sound);
-            
             // do somehting with the array of samp objects
             // this will depend on the state of the functions used to create
-            // sample values
-            
+            // sample values  
             return samp;
         },
-   
         // the total_secs value can be used to set the duration of the video     
-        secs: Math.ceil( song_obj.total_secs )
-        
+        secs: Math.ceil( song_obj.total_secs )   
     });
 ```
