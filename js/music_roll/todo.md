@@ -19,8 +19,11 @@
     * (done) is continue helper function
     * (done) see about adressing a bug that happens when lines_per_minute=560 and rounding frames rather than secs in the player file
     * (done) start a new test folder to have at least one common test file to use to make sure the features are working as they should be
-    * () update README to show source code of a full play file example.
+    * (done) update README to show source code of a full play file example.
+    
+    * () waveform param test file
     * () update README to show how to make use of waveform paramaters
+    * () proof read readme file
     
 ## ( done 06/18/2024 ) - R0 - Just get the core idea of this working
     * (done) work out what the format will be for setting just pitch and amplitude
