@@ -18,7 +18,7 @@
     * (done) fix continue bug where '-' will not result in a continue
     * (done) is continue helper function
     * (done) see about adressing a bug that happens when lines_per_minute=560 and rounding frames rather than secs in the player file
-    
+    * (done) start a new test folder to have at least one common test file to use to make sure the features are working as they should be
     * () update README to show source code of a full play file example.
     * () update README to show how to make use of waveform paramaters
     

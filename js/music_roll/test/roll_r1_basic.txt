@@ -1,0 +1,26 @@
+# testing out basic use of music roll R1
+>title=basic test
+>album=R1_basic
+>artist=javaWeaver
+>lines_per_minute=480;
+>track0=tri
+#
+# measure 1;
+#
+c-4 90;
+--- --;
+--- --;
+--- --;
+c-4 --;
+c-4 --;
+e-4 --;
+--- --;
+b-4 --;
+--- --;
+--- --;
+--- --;
+--- --;
+--- --;
+--- --;
+--- --;
+
