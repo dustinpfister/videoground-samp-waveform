@@ -6,12 +6,14 @@
  
 (function(){
 
+    // regex
     const REGEX_CONTINUE = /^[-]+[-]$/; 
     const REGEX_ITRACK = /^[^\d]*(\d+)/;
     const REGEX_REMOVE_DASH = /\-/g;
     const REGEX_REMOVE_LETTER = /[a-zA-Z]/g;
     const REGEX_ISNEG= /[nN]/;
 
+    // main music roll object to export
     const Music_roll = {};
     
     // loose empty string helper
@@ -153,7 +155,6 @@
             }
         }
     };
-    
     // parse plain text format into an array of line_objects
     Music_roll.parse = ( text='' ) => {
         const track_count = get_track_count(text);
@@ -216,15 +217,12 @@
             line_objects: line_objects
         }, header);
     };
-    
     // give an song object, and a alpha value to get the current freq, amp, ect for each track
     Music_roll.play = (song, alpha=0) => {
-    
         // alpha value sanatation
         alpha = alpha >= 1 ? 0.99999999 : alpha;
         alpha = alpha < 0 ? 0 : alpha;
-        alpha = parseFloat(alpha);
-    
+        alpha = parseFloat(alpha);    
         const line_objects = song.line_objects;
         const array_samp = [];
         const len = line_objects.length;
@@ -241,7 +239,6 @@
         }   
         return array_samp;
     };
-    
+    // set Music_roll to window object
     window.Music_roll = Music_roll;
-
 }());

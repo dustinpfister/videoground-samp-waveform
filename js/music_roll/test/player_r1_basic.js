@@ -1,5 +1,5 @@
-/*    draft01-02-test-waveform-params - form shorts_3track in videoground-samp-waveform
- *        
+/*    player_r1_basic.js - form js/music_roll in videoground-samp-waveform
+ *        * test and demo of basic featrues of music roll js project
  */
 VIDEO.resmode = 6;
 //-------- ----------
