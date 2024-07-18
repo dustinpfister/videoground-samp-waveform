@@ -162,7 +162,9 @@
         let i_ts = 0;
         const header = {
             lines_per_minute: 120,
-            title: 'none'
+            title: 'none',
+            album: '',
+            artist: ''
         };
         while(i_ts < track_count){
             track_states[i_ts] = [0, 0, {} ];

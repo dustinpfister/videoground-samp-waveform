@@ -39,25 +39,19 @@
 
 <!-- PLAYER FILES -->
 
+## () PLAYER: video01-01-param-noise
+    * (done) start the file based on the current state of the draft
+    * () just use the noise track for all three tracks
 
-<!-- DRAFTS FOR NEW PLAYER FILES -->
+<!-- DONE -->
 
-## () DRAFT: draft01-02-test-waveform-params
+
+## ( done 07/18/2024 ) DRAFT: draft01-02-test-waveform-params
     * (done) I will want to have at least one track waveform that makes use of one or more waveform paramaters
     * (done) work on R1 of music rolls, and get waveform paramaters working
     * (done) work out a new draft roll that makes use of paramaters
     * (done) I should be able to use param names rather than p0, p1, ect
     
-    * () get roll waveform params to work with all three tracks
-    * () I should be able to set fractions of a hert if I want to ( R1 fix )
-    
-
-## () DRAFT: draft01-03-wrapper-functions
-    TRACK OBJECTS:
-        * () I would like to try out having a main wrapper waveform that will process options that have to do with note alpha settings
-
-<!-- DONE -->
-
 ## ( done 07/18/2024 ) ROLL: dark_seed_fourtytwo
     * (done) start the score
     * (done) 5+ measure tune.
