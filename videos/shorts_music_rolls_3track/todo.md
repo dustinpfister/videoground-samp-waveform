@@ -2,7 +2,11 @@
 
 <!-- ROLLS-ORIGINAL -->
                                                       
-## ( ) ROLL: dark_seed_fourtyone
+## ( ) ROLL: dark_seed_fourtythree
+    * () start the score
+    * () 5+ measure tune.
+    
+## ( ) ROLL: dark_seed_fourtyfour
     * () start the score
     * () 5+ measure tune.
 
@@ -54,11 +58,19 @@
 
 <!-- DONE -->
 
-## ( done 07/15/2024 ) ROLL: dark_seed_thirtynine
+## ( done 07/18/2024 ) ROLL: dark_seed_fourtytwo
     * (done) start the score
     * (done) 5+ measure tune.
-    
+
+## ( done 07/18/2024 ) ROLL: dark_seed_fourtyone
+    * (done) start the score
+    * () 5+ measure tune.
+
 ## ( done 07/16/2024 ) ROLL: dark_seed_fourty
+    * (done) start the score
+    * (done) 5+ measure tune.
+
+## ( done 07/15/2024 ) ROLL: dark_seed_thirtynine
     * (done) start the score
     * (done) 5+ measure tune.
 
