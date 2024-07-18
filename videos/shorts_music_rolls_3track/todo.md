@@ -39,12 +39,12 @@
 
 <!-- PLAYER FILES -->
 
-## () PLAYER: video01-01-param-noise
-    * (done) start the file based on the current state of the draft
-    * () just use the noise track for all three tracks
 
 <!-- DONE -->
 
+## ( done 07/18/2024 ) PLAYER: video01-01-param-noise
+    * (done) start the file based on the current state of the draft
+    * (done) just use the noise track for all three tracks
 
 ## ( done 07/18/2024 ) DRAFT: draft01-02-test-waveform-params
     * (done) I will want to have at least one track waveform that makes use of one or more waveform paramaters
