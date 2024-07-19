@@ -1,14 +1,14 @@
 # shorts_music_rolls_3track todo list
 
 <!-- ROLLS-ORIGINAL -->
-                                                      
-## ( ) ROLL: dark_seed_fourtythree
-    * () start the score
-    * () 5+ measure tune.
-    
+                                                          
 ## ( ) ROLL: dark_seed_fourtyfour
     * () start the score
     * () 5+ measure tune.
+
+## () ROLL: steely_phonk01_crusty
+    * (done) start the score
+    * () figure out what the final tune should be for this
 
 <!-- ROLLS-COVER -->
 
@@ -41,6 +41,10 @@
 
 
 <!-- DONE -->
+
+## ( done 07/19/2024 ) ROLL: dark_seed_fourtythree
+    * (done) start the score
+    * (done) 5+ measure tune.
 
 ## ( done 07/18/2024 ) PLAYER: video01-01-param-noise
     * (done) start the file based on the current state of the draft
