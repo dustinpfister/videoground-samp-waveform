@@ -2,7 +2,11 @@
 
 <!-- ROLLS-ORIGINAL -->
                                                           
-## ( ) ROLL: dark_seed_fourtyfour
+## ( ) ROLL: dark_seed_fourtyfive
+    * () start the score
+    * () 5+ measure tune.
+
+## ( ) ROLL: dark_seed_fourtysix
     * () start the score
     * () 5+ measure tune.
 
@@ -41,6 +45,10 @@
 
 
 <!-- DONE -->
+
+## ( done 07/20/2024 ) ROLL: dark_seed_fourtyfour
+    * (done) start the score
+    * (done) 5+ measure tune.
 
 ## ( done 07/19/2024 ) ROLL: dark_seed_fourtythree
     * (done) start the score
