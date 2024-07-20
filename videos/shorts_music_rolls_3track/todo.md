@@ -9,10 +9,10 @@
 ## ( ) ROLL: dark_seed_fourtysix
     * () start the score
     * () 5+ measure tune.
-
-## () ROLL: steely_phonk01_crusty
-    * (done) start the score
-    * () figure out what the final tune should be for this
+    
+## () ROLL: steely_phonk02_
+    * () start the score
+    * () fingure out the name for this
 
 <!-- ROLLS-COVER -->
 
@@ -45,6 +45,10 @@
 
 
 <!-- DONE -->
+
+## ( done 07/20/2024 ) ROLL: steely_phonk01_crusty
+    * (done) start the score
+    * (done) figure out what the final tune should be for this
 
 ## ( done 07/20/2024 ) ROLL: dark_seed_fourtyfour
     * (done) start the score
