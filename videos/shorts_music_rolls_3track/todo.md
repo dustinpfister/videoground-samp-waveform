@@ -1,6 +1,6 @@
 # shorts_music_rolls_3track todo list
 
-<!-- ROLLS-ORIGINAL -->
+<!-- ROLLS-ORIGINAL 'darkseed' -->
 
 ## ( ) ROLL: dark_seed_fourtysix
     * (done) start the score
@@ -15,10 +15,15 @@
 ## ( ) ROLL: dark_seed_fourtyeight
     * () start the score
     * () 5+ measure tune.
-    
-## () ROLL: steely_phonk02_
-    * () start the score
+
+<!-- ROLLS-ORIGINAL 'steelyphonk' -->
+
+## () ROLL: steely_phonk02_hard
+    * (done) start the score
     * () fingure out the name for this
+
+## () ROLL: steely_phonk03_rigid
+    * () start the score
 
 <!-- ROLLS-COVER -->
 
