@@ -10,6 +10,14 @@
     * () start the score
     * () 5+ measure tune.
     
+## ( ) ROLL: dark_seed_fourtyseven
+    * () start the score
+    * () 5+ measure tune.
+    
+## ( ) ROLL: dark_seed_fourtyeight
+    * () start the score
+    * () 5+ measure tune.
+    
 ## () ROLL: steely_phonk02_
     * () start the score
     * () fingure out the name for this
