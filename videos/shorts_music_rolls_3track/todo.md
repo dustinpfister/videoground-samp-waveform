@@ -1,12 +1,6 @@
 # shorts_music_rolls_3track todo list
 
 <!-- ROLLS-ORIGINAL -->
-                                                          
-## ( ) ROLL: dark_seed_fourtyfive
-    * (done) start the score
-    * (done) 5+ measure tune.
-    * () work out noise track
-    * () work out tri track
 
 ## ( ) ROLL: dark_seed_fourtysix
     * (done) start the score
@@ -57,6 +51,12 @@
 
 
 <!-- DONE -->
+                                                          
+## ( done 07/21/2024 ) ROLL: dark_seed_fourtyfive
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) work out noise track
+    * (done) work out tri track
 
 ## ( done 07/20/2024 ) ROLL: steely_phonk01_crusty
     * (done) start the score
