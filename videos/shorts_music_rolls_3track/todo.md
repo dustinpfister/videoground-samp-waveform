@@ -3,12 +3,16 @@
 <!-- ROLLS-ORIGINAL -->
                                                           
 ## ( ) ROLL: dark_seed_fourtyfive
-    * () start the score
-    * () 5+ measure tune.
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * () work out noise track
+    * () work out tri track
 
 ## ( ) ROLL: dark_seed_fourtysix
-    * () start the score
-    * () 5+ measure tune.
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * () work out pulse track
+    * () work out tri track
     
 ## ( ) ROLL: dark_seed_fourtyseven
     * () start the score
