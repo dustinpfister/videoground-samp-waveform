@@ -10,6 +10,14 @@
 ## ( ) ROLL: dark_seed_fourtyeight
     * () start the score
     * () 5+ measure tune.
+    
+## ( ) ROLL: dark_seed_fourtynine
+    * () start the score
+    * () 5+ measure tune.
+    
+## ( ) ROLL: dark_seed_fifty
+    * () start the score
+    * () 5+ measure tune.
 
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
