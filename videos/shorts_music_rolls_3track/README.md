@@ -1,10 +1,10 @@
 # shorts_music_rolls_3track
 
-This project aims to be a collection of YouTube shorts all of which are composed of three tracks, no more, no less. This allows for me to work more so on my music roll code, making any needed changes with the system in place. I can also come up with new waveform functions to be used for any one of the three tracks. Another nice thing about this is keeping the duration of the music rolls under one minute as music composition can prove to be time consuming. Also speaking of music roll files I am also starting to go in a new direction that involves creating just one ‘player’ javascript file, and then creating many final videos with that same player file by making more than one external music roll file to use with it.
+This project aims to be a collection of YouTube shorts all of which are composed of three tracks, no more, no less. In some cases it might make sense to have less or more tracks, but for now at least that is something that I will do differently in other future projects. The main focus with this project is to make lots of youtube short videos in which each video is just a few measures long. While I am at it another major focus is to work on my music roll system, and what I have come to call 'player files'.
 
-## External Music Roll format
+## Making ‘player files’
 
-I might want to take a whole new approach with this project that involves just making one video JavaScript file that acts as a kind of player for more than one external music roll file. I am also thinking that a good location for these music roll files should be off of the root folder of the whole videoground-samp-waveform repo as I will likely want to reuse these roll files in other video projects such as 1bit\_music\_rolls, and 1bit_\merge_\down just to name two.
+Like MIDI my music roll files do not contain any sounds, but rather data that can be used to generate sounds. Each time I create a new player file I can redefine the logic that is used to create audio sample data from music roll files. With that said these player files contain the pure functions that are used for each track.
 
 ## Using Buffer Geometry to display sample data
 

@@ -1,5 +1,6 @@
 # shorts_music_rolls_3track todo list
 
+
 <!-- ROLLS-ORIGINAL 'darkseed' -->
 
 ## ( ) ROLL: dark_seed_fourtysix
@@ -25,9 +26,9 @@
 ## () ROLL: steely_phonk03_rigid
     * () start the score
 
-<!-- ROLLS-COVER -->
+<!-- ROLLS-COVER 'nes_covers ' -->
 
-## ( ) ROLL: nes_castlevania - level1
+## ( ) ROLL: nescover01_castlevania_level1
     * (done) base roll on cv_level1.txt - vampire_killer_1.mid
     * (done) start with measure1
     * (done) measure 2
@@ -38,19 +39,14 @@
     * () measure 7
     * () measure 8
 
-## ( ) ROLL: nes_megaman2
-    * mm2_01_
-    * mm2_02_
-    * mm2_03_woodman.txt - pull from 1bit music rolls
-    * mm2_04_bubbleman   - pull from 1bit music rolls
-    
-## ( ) ROLL: nes_castlevania - level2
+<!--
     * https://castlevaniadungeon.net/Media/midi.html
     * cv_level2.txt - stalker_3.mid
     * cv_level3.txt - wicked_child_1.mid
     * cv_level4.txt - walking_on_the_edge_1.mid
     * cv_level5.txt - heart_of_fire_1.mid
     * cv_level6.txt - out_of_time_1.mid
+-->
 
 <!-- PLAYER FILES -->
 
