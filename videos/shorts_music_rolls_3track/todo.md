@@ -23,7 +23,10 @@
 
 ## () ROLL: steely_phonk02_hard
     * (done) start the score
-    * () fingure out the name for this
+    * (done) figure out the name for this
+    * (done) measures 1 - 12 started
+    * (done) work out what to do for track2 in measure 13+
+    * () refine ending
 
 ## () ROLL: steely_phonk03_rigid
     * () start the score
