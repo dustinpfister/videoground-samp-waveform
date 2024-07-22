@@ -2,12 +2,6 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-
-## ( ) ROLL: dark_seed_fourtysix
-    * (done) start the score
-    * (done) 5+ measure tune.
-    * () work out pulse track
-    * () work out tri track
     
 ## ( ) ROLL: dark_seed_fourtyseven
     * () start the score
@@ -52,6 +46,12 @@
 
 
 <!-- DONE -->
+
+## ( done 07/22/2024 ) ROLL: dark_seed_fourtysix
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) work out pulse track
+    * (done) work out tri track
                                                           
 ## ( done 07/21/2024 ) ROLL: dark_seed_fourtyfive
     * (done) start the score
