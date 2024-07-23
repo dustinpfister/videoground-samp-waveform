@@ -22,7 +22,8 @@
     * (done) figure out the name for this
     * (done) measures 1 - 12 started
     * (done) work out what to do for track2 in measure 13+
-    * () refine ending
+    * (done) refine current ending
+    * () wrap up tune with final set or measures
 
 ## () ROLL: steely_phonk03_rigid
     * () start the score
