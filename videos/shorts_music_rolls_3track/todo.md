@@ -2,11 +2,7 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-    
-## ( ) ROLL: dark_seed_fourtyseven
-    * () start the score
-    * () 5+ measure tune.
-    
+        
 ## ( ) ROLL: dark_seed_fourtyeight
     * () start the score
     * () 5+ measure tune.
@@ -55,8 +51,21 @@
 
 <!-- PLAYER FILES -->
 
+## () PLAYER: video02-02-param-wrapper
+    * () start a new player where there is a main 'wrapper' waveform
+    * () this main wrapper waveform will parse common params for all tracks
+    * () one of the params for the wrapper is to choose what final waveform to use
+    * () I am going to want to go with objects for waveform paramss
+
+## () PLAYER: video02-03-param-lerp
+    * () start with video01-02 code
+    * () add the feature of giveing more than one waveform index and a way to lerp between them
 
 <!-- DONE -->
+
+## ( done 07/23/2024 ) ROLL: dark_seed_fourtyseven
+    * (done) start the score
+    * (done) 5+ measure tune.
 
 ## ( done 07/22/2024 ) ROLL: dark_seed_fourtysix
     * (done) start the score
@@ -82,7 +91,7 @@
     * (done) start the score
     * (done) 5+ measure tune.
 
-## ( done 07/18/2024 ) PLAYER: video01-01-param-noise
+## ( done 07/18/2024 ) PLAYER: video02-01-param-noise
     * (done) start the file based on the current state of the draft
     * (done) just use the noise track for all three tracks
 
