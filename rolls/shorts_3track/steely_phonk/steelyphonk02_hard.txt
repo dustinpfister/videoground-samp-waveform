@@ -1,4 +1,4 @@
-# steelyphonk02_hard.txt was made for video01-01-toneonly-tri-pulse-noise - form shorts_3track
+# steelyphonk02_hard.txt was made for video02-01-param-noise.js - form shorts_3track
 # I was also using R1 of music_roll for this
 #
 #     This second 'steelyphonk' tune is called 'hard' which I came up with by just selecting a word from the 

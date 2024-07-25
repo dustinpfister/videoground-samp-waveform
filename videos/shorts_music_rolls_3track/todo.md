@@ -9,16 +9,9 @@
 
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
-## () ROLL: steely_phonk02_hard
-    * (done) start the score
-    * (done) figure out the name for this
-    * (done) measures 1 - 12 started
-    * (done) work out what to do for track2 in measure 13+
-    * (done) refine current ending
-    * () wrap up tune with final set or measures
-
 ## () ROLL: steely_phonk03_rigid
     * () start the score
+    * () try out having set values per cycle for each track such as maybe 100, 45, and 15
 
 <!-- ROLLS-COVER 'nes_covers ' -->
 
@@ -55,6 +48,15 @@
     * () add the feature of giveing more than one waveform index and a way to lerp between them
 
 <!-- DONE -->
+
+
+## ( done 07/25/2024 ) ROLL: steely_phonk02_hard
+    * (done) start the score
+    * (done) figure out the name for this
+    * (done) measures 1 - 12 started
+    * (done) work out what to do for track2 in measure 13+
+    * (done) refine current ending
+    * (done) wrap up tune with final set or measures
 
 ## ( done 07/25/2024 ) ROLL: dark_seed_fourtynine
     * (done) start the score
