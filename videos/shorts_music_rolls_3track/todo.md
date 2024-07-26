@@ -2,8 +2,12 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-
-## ( ) ROLL: dark_seed_fifty
+    
+## ( ) ROLL: dark_seed_fiftyone
+    * () start the score
+    * () 5+ measure tune.
+    
+## ( ) ROLL: dark_seed_fiftytwo
     * () start the score
     * () 5+ measure tune.
 
@@ -49,6 +53,9 @@
 
 <!-- DONE -->
 
+## ( done 07/26/2024 ) ROLL: dark_seed_fifty
+    * (done) start the score
+    * (done) 5+ measure tune.
 
 ## ( done 07/25/2024 ) ROLL: steely_phonk02_hard
     * (done) start the score
