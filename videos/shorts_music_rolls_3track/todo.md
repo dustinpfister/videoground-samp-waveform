@@ -2,11 +2,7 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-    
-## ( ) ROLL: dark_seed_fiftyone
-    * () start the score
-    * () 5+ measure tune.
-    
+        
 ## ( ) ROLL: dark_seed_fiftytwo
     * () start the score
     * () 5+ measure tune.
@@ -14,7 +10,7 @@
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
 ## () ROLL: steely_phonk03_rigid
-    * () start the score
+    * (done) start the score
     * () try out having set values per cycle for each track such as maybe 100, 45, and 15
 
 <!-- ROLLS-COVER 'nes_covers ' -->
@@ -52,6 +48,10 @@
     * () add the feature of giveing more than one waveform index and a way to lerp between them
 
 <!-- DONE -->
+
+## ( done 07/27/2024 ) ROLL: dark_seed_fiftyone
+    * (done) start the score
+    * (done) 5+ measure tune.
 
 ## ( done 07/26/2024 ) ROLL: dark_seed_fifty
     * (done) start the score
