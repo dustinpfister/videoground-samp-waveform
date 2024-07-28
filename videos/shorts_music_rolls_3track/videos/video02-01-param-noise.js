@@ -1,4 +1,4 @@
-/*    draft01-02-test-waveform-params - form shorts_3track in videoground-samp-waveform
+/*    video01-02-param-noise - form shorts_3track in videoground-samp-waveform
  *        
  */
 VIDEO.resmode = 6;
