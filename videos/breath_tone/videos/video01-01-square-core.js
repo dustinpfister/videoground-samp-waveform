@@ -25,24 +25,52 @@ VIDEO.init = function(sm, scene, camera){
     // create a breath state object
     breath_mod.create = ( opt={} ) => {
         const breath = {
-           a_cycle: 0,          // alpha for the current breath cycle
            cycle_count: 2,      // number of cycles
-           i_breath_state: 0,   // breath state index ( 0=hold, 1=inhale, 2=hold, 3=exhale )
-           secs: [4,4,4,4],     // number of secs for each breath state
+           a_cycle: 0,          // alpha for the current breath cycle
+           a_state: 0,
+           i_state: 0,          // breath state index ( 0=hold, 1=inhale, 2=hold, 3=exhale )
+           secs: [4,4,4,4],     // number of secs for each breath state     
+           ratios: [0,0,0,0],
            secs_per_cycle: 0,
            total_secs: 0
         };
         breath.secs_per_cycle = breath.secs.reduce( (acc, sec) => { return acc + sec }, 0 );
         breath.total_secs = breath.secs_per_cycle * breath.cycle_count;
+        breath.ratios = breath.secs.map((secs)=>{ return secs / breath.secs_per_cycle });
         return breath;
     };
 
 
+    breath_mod.update = ( breath, alpha=0 ) => {
+        const secs = breath.total_secs * alpha;
+        
+        // alpha for the current cycle
+        breath.a_cycle = (secs % breath.secs_per_cycle ) / breath.secs_per_cycle;
+        
+        // get current breath state index
+        breath.i_state = 0;
+        breath.a_state = 0;
+        let a = 0;
+        while(breath.i_state < 3){
+           a += breath.ratios[ breath.i_state ];
+           if( breath.a_cycle < a ){
+               breath.a_state = 0; //!!! figure out a_state
+               break;
+           }
+           breath.i_state += 1;
+        }    
+        return breath;
+    };
+    
     // SCENE USER DATA OBJECT
     const sud = scene.userData;
     sud.breath = breath_mod.create();
     
-    console.log(sud.breath);
+    breath_mod.update(sud.breath, 0.48);
+    
+    console.log('i_state: ' + sud.breath.i_state);
+    console.log( sud.breath );
+    
     
     
     // CAMERA
