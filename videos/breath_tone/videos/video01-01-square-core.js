@@ -18,8 +18,32 @@ VIDEO.scripts = [
 //-------- ----------
 VIDEO.init = function(sm, scene, camera){
 
+    // BREATH
+    
+    const breath_mod = {};
+    
+    // create a breath state object
+    breath_mod.create = ( opt={} ) => {
+        const breath = {
+           a_cycle: 0,          // alpha for the current breath cycle
+           cycle_count: 2,      // number of cycles
+           i_breath_state: 0,   // breath state index ( 0=hold, 1=inhale, 2=hold, 3=exhale )
+           secs: [4,4,4,4],     // number of secs for each breath state
+           secs_per_cycle: 0,
+           total_secs: 0
+        };
+        breath.secs_per_cycle = breath.secs.reduce( (acc, sec) => { return acc + sec }, 0 );
+        breath.total_secs = breath.secs_per_cycle * breath.cycle_count;
+        return breath;
+    };
+
+
     // SCENE USER DATA OBJECT
     const sud = scene.userData;
+    sud.breath = breath_mod.create();
+    
+    console.log(sud.breath);
+    
     
     // CAMERA
     camera.fov = 30;
