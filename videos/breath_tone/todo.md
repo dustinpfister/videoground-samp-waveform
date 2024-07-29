@@ -8,7 +8,8 @@
     * (done) have a main update method for the breath
     * (done) fugure out current breath state index in update method
     * (done) figure out current 'state alpha' in update method
+    * (done) just use a pulse waveform function
+    * (done) just do box breathing ( https://www.medicalnewstoday.com/articles/321805 )
+    * (done) hold for 4, inhale for 4, hold for 4, exhale for 4
     
-    * () just use a pulse waveform function
-    * () just do box breathing ( https://www.medicalnewstoday.com/articles/321805 )
-    * () hold for 4, inhale for 4, hold for 4, exhale for 4
+    * () see about working out a way to smooth out the pitch changes

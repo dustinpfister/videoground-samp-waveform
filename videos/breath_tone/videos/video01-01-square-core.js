@@ -25,11 +25,11 @@ VIDEO.init = function(sm, scene, camera){
     // create a breath state object
     breath_mod.create = ( opt={} ) => {
         const breath = {
-           cycle_count: 1,      // number of cycles
+           cycle_count: 2,      // number of cycles
            a_cycle: 0,          // alpha for the current breath cycle
            a_state: 0,
            i_state: 0,          // breath state index ( 0=hold, 1=inhale, 2=hold, 3=exhale )
-           secs: [4,4,4,4],     // number of secs for each breath state     
+           secs: [2,4,2,7],     // number of secs for each breath state     
            ratios: [0,0,0,0],
            secs_per_cycle: 0,
            total_secs: 0
@@ -43,20 +43,16 @@ VIDEO.init = function(sm, scene, camera){
 
     breath_mod.update = ( breath, alpha=0 ) => {
         const secs = breath.total_secs * alpha;
-        
         // alpha for the current cycle
         breath.a_cycle = (secs % breath.secs_per_cycle ) / breath.secs_per_cycle;
-        
-        // get current breath state index
+        // set current breath state index, and breath alpha
         breath.i_state = 0;
         breath.a_state = 0;
         let a = 0;
         while(breath.i_state < 4){
            const a_old = a; 
            a += breath.ratios[ breath.i_state ];
-           
            breath.a_state = ( breath.a_cycle - a_old ) / (a - a_old) 
-           
            if( breath.a_cycle < a ){
                break;
            }
@@ -69,7 +65,7 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sud.breath = breath_mod.create();
     
-    
+    /*
     [0.75, 0.80, 0.99, 1.00].forEach((a)=>{
         breath_mod.update(sud.breath, a);
         console.log( 'a: ' + a );
@@ -77,7 +73,7 @@ VIDEO.init = function(sm, scene, camera){
         console.log( 'a_state: ' + sud.breath.a_state );
         console.log( '' );
     });
-    
+    */
     
     // CAMERA
     camera.fov = 30;
@@ -95,14 +91,45 @@ VIDEO.init = function(sm, scene, camera){
     // SOUND
     const sound = sud.sound = CS.create_sound({
         waveform: (samp, a_wave) => {
-            Samp_geodisp.update_point( sud.disp_points_0, samp.i, 0 );            
-            return 0
+            const duty = samp.duty === undefined ? 0.5 : samp.duty;
+            const a_cycle = samp.frequency * a_wave % 1;
+            let n = samp.amplitude * -1;
+            if(a_cycle >= duty){
+                n = samp.amplitude * 1;
+            }
+            Samp_geodisp.update_point( sud.disp_points_0, samp.i, n );            
+            return n;
         },
         for_sampset: ( samp, i, a_sound, fs, opt ) => {
+        
+        
+            breath_mod.update( sud.breath, a_sound );
+        
+            
+            const a = 64;
+            const c = 2;
+            const b = 32;
+            
+            samp.frequency = a;
+            
+            if(sud.breath.i_state === 1){        
+                samp.frequency = a + c * Math.round( b * sud.breath.a_state );
+            }
+            if(sud.breath.i_state === 2){        
+                samp.frequency = a + c * b;
+            }
+            if(sud.breath.i_state === 3){        
+                samp.frequency = (a + c * b) - c * Math.round( b * sud.breath.a_state );
+            }
+            
+            samp.amplitude = 1.00;
+            
+            
             samp.a_wave = opt.secs * a_sound % 1;
+            samp.i = i % 1470;
             return samp;
         },
-        secs: 1
+        secs: sud.breath.total_secs
     });
     sm.frameMax = sound.frames;
     
