@@ -25,7 +25,7 @@ VIDEO.init = function(sm, scene, camera){
     // create a breath state object
     breath_mod.create = ( opt={} ) => {
         const breath = {
-           cycle_count: 2,      // number of cycles
+           cycle_count: 1,      // number of cycles
            a_cycle: 0,          // alpha for the current breath cycle
            a_state: 0,
            i_state: 0,          // breath state index ( 0=hold, 1=inhale, 2=hold, 3=exhale )
@@ -51,10 +51,13 @@ VIDEO.init = function(sm, scene, camera){
         breath.i_state = 0;
         breath.a_state = 0;
         let a = 0;
-        while(breath.i_state < 3){
+        while(breath.i_state < 4){
+           const a_old = a; 
            a += breath.ratios[ breath.i_state ];
+           
+           breath.a_state = ( breath.a_cycle - a_old ) / (a - a_old) 
+           
            if( breath.a_cycle < a ){
-               breath.a_state = 0; //!!! figure out a_state
                break;
            }
            breath.i_state += 1;
@@ -66,11 +69,14 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
     sud.breath = breath_mod.create();
     
-    breath_mod.update(sud.breath, 0.48);
     
-    console.log('i_state: ' + sud.breath.i_state);
-    console.log( sud.breath );
-    
+    [0.75, 0.80, 0.99, 1.00].forEach((a)=>{
+        breath_mod.update(sud.breath, a);
+        console.log( 'a: ' + a );
+        console.log( 'i_state: ' + sud.breath.i_state );
+        console.log( 'a_state: ' + sud.breath.a_state );
+        console.log( '' );
+    });
     
     
     // CAMERA
