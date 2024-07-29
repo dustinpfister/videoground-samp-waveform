@@ -3,7 +3,12 @@
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
         
-## ( ) ROLL: dark_seed_fiftytwo
+    
+## ( ) ROLL: dark_seed_fiftythree
+    * () start the score
+    * () 5+ measure tune.
+        
+## ( ) ROLL: dark_seed_fiftyfour
     * () start the score
     * () 5+ measure tune.
 
@@ -48,6 +53,10 @@
     * () add the feature of giveing more than one waveform index and a way to lerp between them
 
 <!-- DONE -->
+
+## ( done 07/29/2024 ) ROLL: dark_seed_fiftytwo
+    * (done) start the score
+    * (done) 5+ measure tune.
 
 ## ( done 07/27/2024 ) ROLL: dark_seed_fiftyone
     * (done) start the score
