@@ -5,10 +5,18 @@
         
     
 ## ( ) ROLL: dark_seed_fiftythree
-    * () start the score
+    * (done) start the score
     * () 5+ measure tune.
         
 ## ( ) ROLL: dark_seed_fiftyfour
+    * () start the score
+    * () 5+ measure tune.
+    
+## ( ) ROLL: dark_seed_fiftyfive
+    * () start the score
+    * () 5+ measure tune.
+    
+## ( ) ROLL: dark_seed_fiftysix
     * () start the score
     * () 5+ measure tune.
 
