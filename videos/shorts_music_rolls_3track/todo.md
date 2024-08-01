@@ -25,7 +25,10 @@
 ## () ROLL: steely_phonk03_rigid
     * (done) start the score
     * (done) try out having set values per cycle for each track such as maybe 100, 45, and 15
-    * () work out some patterns for track 0
+    * (done) new track 1 patterns
+    * (done) work out some patterns for track 0
+    * () work out final details with track 1, maybe just repeat what is all ready there?
+
 
 <!-- ROLLS-COVER 'nes_covers ' -->
 
