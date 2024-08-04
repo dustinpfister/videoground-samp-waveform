@@ -23,7 +23,10 @@
 
 ## ( ) ROLL: steely_phonk04_forced
     * (done) start the score
-    * () new pattern for track2
+    * (done) new pattern for track2
+    * () do not go to g-2 for the high notes on track2, but maybe still higher than g-1.
+    * () start somehting for track0
+    * () start somehting for track1
 
 <!-- ROLLS-COVER 'nes_covers ' -->
 
