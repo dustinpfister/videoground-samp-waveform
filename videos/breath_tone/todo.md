@@ -1,10 +1,12 @@
 # breath_tone todo
 
-## () - video01-02-square-mix
-    * (done) try starting a new system where more than one tone is played at the same time, and then mixed
+## () - video02-01-lerp-pulse-tri
     * () see about adjusting duty
     * () see about using a whole other waveform
 
+## () - video01-02-square-mix
+    * (done) try starting a new system where more than one tone is played at the same time, and then mixed
+    
 ## ( done 08/05/2023 ) video01-01-square-core
     * (done) start the video file as a clean, basic start point based on video02-01-param-noise
     * (done) use the same geometry project for creating a line for the waveform
