@@ -2,22 +2,46 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-            
-## ( ) ROLL: dark_seed_fiftythree
-    * (done) start the score
-    * () 5+ measure tune.
-        
-## ( ) ROLL: dark_seed_fiftyfour
-    * () start the score
-    * () 5+ measure tune.
-    
-## ( ) ROLL: dark_seed_fiftyfive
-    * () start the score
-    * () 5+ measure tune.
-    
+                
 ## ( ) ROLL: dark_seed_fiftysix
     * () start the score
     * () 5+ measure tune.
+    * () finish by 08/06
+    
+## ( ) ROLL: dark_seed_fiftyseven
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/06
+    
+## ( ) ROLL: dark_seed_fiftyeight
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/07    
+    
+## ( ) ROLL: dark_seed_fiftynine
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/07
+    
+## ( ) ROLL: dark_seed_sixty
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/08
+
+## ( ) ROLL: dark_seed_sixtyone
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/08
+    
+## ( ) ROLL: dark_seed_sixtytwo
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/09
+    
+## ( ) ROLL: dark_seed_sixtythree
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/09
 
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
@@ -64,13 +88,24 @@
 
 <!-- DONE -->
 
+## ( done 08/05/2024 ) ROLL: dark_seed_fiftyfive
+    * (done) start the score
+    * (done) 5+ measure tune.
 
+## ( done 08/05/2024 ) ROLL: dark_seed_fiftyfour
+    * (done) start the score
+    * (done) 5+ measure tune.
+    
 ## ( done 08/02/2024 ) ROLL: steely_phonk03_rigid
     * (done) start the score
     * (done) try out having set values per cycle for each track such as maybe 100, 45, and 15
     * (done) new track 1 patterns
     * (done) work out some patterns for track 0
     * (done) work out final details with track 1, maybe just repeat what is all ready there?
+
+## ( done 07/31/2024 ) ROLL: dark_seed_fiftythree
+    * (done) start the score
+    * (done) 5+ measure tune.
 
 ## ( done 07/29/2024 ) ROLL: dark_seed_fiftytwo
     * (done) start the score
