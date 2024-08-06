@@ -2,12 +2,7 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-                
-## ( ) ROLL: dark_seed_fiftysix
-    * () start the score
-    * () 5+ measure tune.
-    * () finish by 08/06
-    
+                    
 ## ( ) ROLL: dark_seed_fiftyseven
     * () start the score
     * () 5+ measure tune.
@@ -87,6 +82,11 @@
     * () add the feature of giveing more than one waveform index and a way to lerp between them
 
 <!-- DONE -->
+
+## ( done 08/06/2024 ) ROLL: dark_seed_fiftysix
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) finish by 08/06
 
 ## ( done 08/05/2024 ) ROLL: dark_seed_fiftyfive
     * (done) start the score
