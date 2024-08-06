@@ -1,0 +1,28 @@
+# darkseed57_fiftyseven.txt was made for video01-01-toneonly-tri-pulse-noise - form shorts_3track
+# I was using R0 of music_roll.js for this
+# note options: 'c,c#,d,d#,e,f,f#,g,g#,a,a#,b'
+#
+#    
+#
+>title=dark_seed: Fifty Seven
+>lines_per_minute=480;
+#
+# measure 1;
+#
+--- 50;--- 50;--- 50;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+--- --;--- --;--- --;
+
