@@ -4,7 +4,7 @@
 <!-- ROLLS-ORIGINAL 'darkseed' -->
                             
 ## ( ) ROLL: dark_seed_fiftynine
-    * () start the score
+    * (done) start the score
     * () 5+ measure tune.
     * () finish by 08/07
     
