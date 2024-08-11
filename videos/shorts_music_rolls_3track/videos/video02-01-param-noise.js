@@ -22,7 +22,7 @@ VIDEO.init = function(sm, scene, camera){
     const sud = scene.userData;
 
     // the music roll file to use
-    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/steely_phonk/steelyphonk04_forced.txt' );
+    const URI_ROLL = videoAPI.pathJoin( sm.filePath, '../../../rolls/shorts_3track/steely_phonk/steelyphonk05_power.txt' );
 
 
     const wf = {};

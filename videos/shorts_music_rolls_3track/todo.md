@@ -2,11 +2,6 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-## ( ) ROLL: dark_seed_sixtytwo
-    * (done) start the score
-    * () 5+ measure tune.
-    * () finish by 08/09
-    
 ## ( ) ROLL: dark_seed_sixtythree
     * () start the score
     * () 5+ measure tune.
@@ -25,12 +20,9 @@
 
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
-## ( ) ROLL: steely_phonk04_forced
+## ( ) ROLL: steely_phonk05_power
     * (done) start the score
-    * (done) new pattern for track2
-    * () do not go to g-2 for the high notes on track2, but maybe still higher than g-1.
-    * () start somehting for track0
-    * () start somehting for track1
+    * () work out what track 0 will be for this
 
 <!-- ROLLS-COVER 'nes_covers ' -->
 
@@ -67,6 +59,18 @@
     * () add the feature of giveing more than one waveform index and a way to lerp between them
 
 <!-- DONE -->
+## ( done 08/10/24 ) ROLL: steely_phonk04_forced
+    * (done) start the score
+    * (done) new pattern for track2
+    * (done) do not go to g-2 for the high notes on track2, but maybe still higher than g-1.
+    * (done) start somehting for track0
+    * (done) start somehting for track1
+    
+## ( done 08/10/2024 ) ROLL: dark_seed_sixtytwo
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) finish by 08/09
+    
 ## ( done 08/08/2024 ) ROLL: dark_seed_sixtyone
     * (done) start the score
     * (done) 5+ measure tune.
