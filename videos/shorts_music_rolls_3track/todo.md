@@ -28,7 +28,9 @@
 
 ## ( ) ROLL: steely_phonk05_power
     * (done) start the score
-    * () work out what track 0 will be for this
+    * (done) work out what track 0 will be for this
+    * () work out what track 1 and 2 will be for this
+    * () have parts where we just do each track alone for a while
 
 <!-- ROLLS-COVER 'nes_covers ' -->
 
