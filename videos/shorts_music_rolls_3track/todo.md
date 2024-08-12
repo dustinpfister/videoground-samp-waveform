@@ -2,21 +2,27 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-## ( ) ROLL: dark_seed_sixtythree
-    * () start the score
-    * () 5+ measure tune.
-    * () finish by 08/09
     
 ## ( ) ROLL: dark_seed_sixtyfour
     * () start the score
     * () 5+ measure tune.
-    * () finish by 08/10
-    
+    * () finish by 08/13
     
 ## ( ) ROLL: dark_seed_sixtyfive
     * () start the score
     * () 5+ measure tune.
-    * () finish by 08/10
+    * () finish by 08/14
+
+## ( ) ROLL: dark_seed_sixtysix
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/15
+
+## ( ) ROLL: dark_seed_sixtyseven
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/16
+
 
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
@@ -59,6 +65,11 @@
     * () add the feature of giveing more than one waveform index and a way to lerp between them
 
 <!-- DONE -->
+## ( done 08/12/24 ) ROLL: dark_seed_sixtythree
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) finish by 08/12
+
 ## ( done 08/10/24 ) ROLL: steely_phonk04_forced
     * (done) start the score
     * (done) new pattern for track2
