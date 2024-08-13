@@ -3,8 +3,8 @@
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
     
-## ( ) ROLL: dark_seed_sixtyfour
-    * () start the score
+## (  ) ROLL: dark_seed_sixtyfour
+    * (done) start the score
     * () 5+ measure tune.
     * () finish by 08/13
     
