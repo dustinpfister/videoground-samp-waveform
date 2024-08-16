@@ -2,12 +2,7 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-    
-## ( ) ROLL: dark_seed_sixtyseven
-    * () start the score
-    * () 5+ measure tune.
-    * () finish by 08/16
-    
+       
 ## ( ) ROLL: dark_seed_sixtyeight
     * () start the score
     * () 5+ measure tune.
@@ -68,6 +63,11 @@
 
 <!-- DONE -->
 
+## ( done 08/16/2024 ) ROLL: dark_seed_sixtyseven
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) finish by 08/16
+
 ## ( done 08/15/2024 ) ROLL: dark_seed_sixtysix
     * (done) start the score
     * (done) 5+ measure tune.
@@ -83,12 +83,12 @@
     * (done) 5+ measure tune.
     * (done) finish by 08/13
     
-## ( done 08/12/24 ) ROLL: dark_seed_sixtythree
+## ( done 08/12/2024 ) ROLL: dark_seed_sixtythree
     * (done) start the score
     * (done) 5+ measure tune.
     * (done) finish by 08/12
 
-## ( done 08/10/24 ) ROLL: steely_phonk04_forced
+## ( done 08/10/2024 ) ROLL: steely_phonk04_forced
     * (done) start the score
     * (done) new pattern for track2
     * (done) do not go to g-2 for the high notes on track2, but maybe still higher than g-1.
@@ -236,7 +236,7 @@
     * (done) try working out what the final tune will be on a measure by measure rather than track by track basis
     * (done) 5+ measure tune.
 
-## ( done 07/14/24 ) ROLL: dark_seed_thirtyseven
+## ( done 07/14/2024 ) ROLL: dark_seed_thirtyseven
     * (done) start the score
     * (done) 10+ measure tune.
     * (done) work out a tri track
@@ -345,7 +345,7 @@
     * (done) start the score
     * (done) try one of the tunes that I wrote down
 
-## ( done 06/24/2023 ) ROLL: dark_seed_nine
+## ( done 06/24/2024 ) ROLL: dark_seed_nine
     * (done) start the score
     * (done) work out a tune that is 32 lines per measure, and 960 lines per minute
 
