@@ -5,7 +5,7 @@
        
         
 ## ( ) ROLL: dark_seed_sixtynine
-    * () start the score
+    * (done) start the score
     * () 5+ measure tune.
     * () finish by 08/17
     
