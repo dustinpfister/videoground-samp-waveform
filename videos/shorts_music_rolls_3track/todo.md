@@ -2,18 +2,21 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-       
-        
-## ( ) ROLL: dark_seed_sixtynine
-    * (done) start the score
-    * () 5+ measure tune.
-    * () finish by 08/17
-    
+              
 ## ( ) ROLL: dark_seed_seventy
     * () start the score
     * () 5+ measure tune.
     * () finish by 08/17
 
+## ( ) ROLL: dark_seed_seventyone
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/21
+
+## ( ) ROLL: dark_seed_seventytwo
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/21
 
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
@@ -59,6 +62,11 @@
 
 <!-- DONE -->
 
+## ( done 08/20/24 ) ROLL: dark_seed_sixtynine
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) finish by 08/17
+    
 ## ( done 08/17/2024 ) ROLL: dark_seed_sixtyeight
     * (done) start the score
     * (done) 5+ measure tune.
