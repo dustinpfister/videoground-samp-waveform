@@ -4,24 +4,24 @@
 <!-- ROLLS-ORIGINAL 'darkseed' -->
               
 ## ( ) ROLL: dark_seed_seventyone
-    * () start the score
+    * (done) start the score
     * () 5+ measure tune.
-    * () finish by 08/21
+    * () finish by 08/23
 
 ## ( ) ROLL: dark_seed_seventytwo
     * () start the score
     * () 5+ measure tune.
-    * () finish by 08/21
+    * () finish by 08/24
     
 ## ( ) ROLL: dark_seed_seventythree
     * () start the score
     * () 5+ measure tune.
-    * () finish by 08/22
+    * () finish by 08/24
 
 ## ( ) ROLL: dark_seed_seventyfour
     * () start the score
     * () 5+ measure tune.
-    * () finish by 08/22
+    * () finish by 08/25
 
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
