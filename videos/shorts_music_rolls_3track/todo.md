@@ -3,15 +3,40 @@
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
               
-## ( ) ROLL: dark_seed_seventythree
-    * () start the score
-    * () 5+ measure tune.
-    * () finish by 08/24
-
 ## ( ) ROLL: dark_seed_seventyfour
     * () start the score
     * () 5+ measure tune.
     * () finish by 08/25
+
+## ( ) ROLL: dark_seed_seventyfive
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/26
+    
+## ( ) ROLL: dark_seed_seventysix
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/27
+    
+## ( ) ROLL: dark_seed_seventyseven
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/28
+    
+## ( ) ROLL: dark_seed_seventyeight
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/29
+    
+## ( ) ROLL: dark_seed_seventynine
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 08/30
+        
+## ( ) ROLL: dark_seed_eighty
+    * () start the score
+    * () 5+ measure tune.
+    * () finish by 09/01
 
 <!-- ROLLS-ORIGINAL 'steelyphonk' -->
 
@@ -56,6 +81,11 @@
     * () add the feature of giveing more than one waveform index and a way to lerp between them
 
 <!-- DONE -->
+
+## ( done 08/25/24 ) ROLL: dark_seed_seventythree
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) finish by 08/24
 
 ## ( done 08/24/2024 ) ROLL: dark_seed_seventytwo
     * (done) start the score
