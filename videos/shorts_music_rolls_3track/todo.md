@@ -2,12 +2,7 @@
 
 
 <!-- ROLLS-ORIGINAL 'darkseed' -->
-                      
-## ( ) ROLL: dark_seed_seventyseven
-    * (done) start the score
-    * () 5+ measure tune.
-    * () finish by 08/28
-    
+                          
 ## ( ) ROLL: dark_seed_seventyeight
     * () start the score
     * () 5+ measure tune.
@@ -67,7 +62,12 @@
 
 <!-- DONE -->
 
-## ( done 08/28/24 ) ROLL: dark_seed_seventysix
+## ( done 08/29/2024 ) ROLL: dark_seed_seventyseven
+    * (done) start the score
+    * (done) 5+ measure tune.
+    * (done) finish by 08/28
+
+## ( done 08/28/2024 ) ROLL: dark_seed_seventysix
     * (done) start the score
     * (done) 5+ measure tune.
     * (done) finish by 08/27
